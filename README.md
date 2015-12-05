@@ -1,2 +1,2 @@
 # ARIA
-Source of miscellaneous 
+Source of miscellaneous files regarding my senior project. 
