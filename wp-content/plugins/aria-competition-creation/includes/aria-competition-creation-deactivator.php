@@ -3,7 +3,9 @@
 /**
  * Fired during plugin deactivation.
  *
- * This class defines all code necessary to run during the plugin's deactivation. 
+ * This class defines all code necessary to run during the plugin's deactivation.
+ * An important aspect of this code is that it does not contain any uninstall
+ * functionality.  
  *
  * @package aria-competition-creation
  * @subpackage aria-competition-creation/includes
