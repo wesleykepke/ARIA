@@ -12,12 +12,12 @@
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain: aria-competition-creation
  * Domain Path: /languages 
+ *
+ * @package aria-competition-creation
  */
 
-// if the WordPress constant for the location of functions, classes, and core
-// content is not defined, then this file is not being called by WordPress
+// if not called by WordPress, discontinue
 if (!defined('WPINC')) {
-	// discontinue processing
 	die(); 
 }
 
