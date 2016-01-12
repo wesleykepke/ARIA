@@ -33,7 +33,11 @@ function aria_check_GF() {
 function aria_activation_func() {
 	if (!aria_check_GF()) {
 		add_action('admin-notices', 'aria_check_GF'); 
-		do_action('admin-notices'); 	
+		do_action('admin-notices');
+		die();  	
+	}
+	else {
+		echo "dmsakdnsa";
 	}
 }
 
