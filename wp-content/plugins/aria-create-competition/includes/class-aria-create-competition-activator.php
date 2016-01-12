@@ -33,6 +33,12 @@ class ARIA_Create_Competition_Activator {
 	 */
 	public static function activate() {
 		// check if GravityForms is installed
-		
+		require_once(ABSPATH . 'wp-admin/includes/plugin.php');
+		if (!is_plugin_active('gravityforms/gravityforms.php')) {
+			// possibly display some sort of error message here so user knows whats up?
+			die(); // may replace
+		}
+
+		//  check 
 	}
 }
