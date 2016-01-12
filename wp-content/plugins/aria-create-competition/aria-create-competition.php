@@ -55,7 +55,7 @@ register_deactivation_hook( __FILE__, 'deactivate_aria_create_competition' );
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-aria_create_competition.php';
+require plugin_dir_path( __FILE__ ) . 'includes/class-aria-create-competition.php';
 
 /**
  * Begins execution of the plugin.
