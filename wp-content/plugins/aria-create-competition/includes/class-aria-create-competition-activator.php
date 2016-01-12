@@ -36,7 +36,13 @@ class ARIA_Create_Competition_Activator {
 		require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 		if (!is_plugin_active('gravityforms/gravityforms.php')) {
 			// possibly display some sort of error message here so user knows whats up?
-			die(); // may replace
+
+			// adding js alert
+			echo '<script language="javascript">';
+			echo 'alert("You must have the Gravity Forms plugin enabled to create competitions.")';
+			echo '</script>'; 
+
+			//die(); // may replace
 		}
 
 		//  check 
