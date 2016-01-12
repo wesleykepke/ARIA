@@ -38,11 +38,13 @@ class ARIA_Create_Competition_Activator {
 			// possibly display some sort of error message here so user knows whats up?
 
 			// adding js alert
+			/*
 			echo '<script language="javascript">';
 			echo 'alert("You must have the Gravity Forms plugin enabled to create competitions.")';
 			echo '</script>'; 
+			*/
 
-			//die(); // may replace
+			die(); // may replace
 		}
 
 		//  check 
