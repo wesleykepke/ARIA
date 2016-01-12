@@ -61,9 +61,19 @@ class ARIA_Create_Competition_Activator {
 	 * @return    void
 	 */
 	private function aria_admin_error_notice() {
+		?>
+		<div class="error notice">
+		<p><?php _e('You must have the Gravity Forms plugin enabled to create competitions.
+						Please enable GravityForms and reactivate plugin.'); ?></p>
+		</div>
+		<?php
+	}
+
+	/*
+	private function aria_admin_error_notice() {
 		$class = "error"; // displays error msg with white background and red left border
 		$message = "You must have the Gravity Forms plugin enabled to create competitions.";
-		$message .= " Please enable GravityForms and reactivate plugin.";
+		$message .= " ";
 		echo "<div class=\" $class \"><h5> $message </h5></div>"; 
-	}
+	} */
 }
