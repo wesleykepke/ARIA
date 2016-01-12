@@ -61,6 +61,7 @@ class ARIA_Create_Competition_Activator {
 	 * @return    void
 	 */
 	public function aria_admin_error_notice() {
+		echo "trying to display error msg";
 		?>
 		<div class="error notice">
 		<p><?php _e('You must have the Gravity Forms plugin enabled to create competitions.
