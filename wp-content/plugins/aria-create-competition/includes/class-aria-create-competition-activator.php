@@ -36,18 +36,15 @@ class ARIA_Create_Competition_Activator {
 		require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 		if (!is_plugin_active('gravityforms/gravityforms.php')) {
 			// inform user that GravityForms must be activated
-			add_action('init', array( &$this, 'aria_create_competition_activator_hooks')); 
+			add_action('init', array( &$this, 'aria_admin_error_notice'));
+			die;  
 		}
 
 		//  check 
 	}
 
-	public function aria_create_competition_activator_hooks() {
-		add_action('admin-notices', array( &$this, 'aria_admin_error_notice')); 
-	}
-
 	/**
-	 * Presents an error to the festival chairman if GravityForms is not enabled. 
+	 * Presents an error to the festival chairman if Gravity Forms is not enabled. 
 	 *
 	 * @since     1.0.2
 	 * @return    void
@@ -55,17 +52,11 @@ class ARIA_Create_Competition_Activator {
 	private function aria_admin_error_notice() {
 		?>
 		<div class="error notice">
-		<p><?php _e('You must have the Gravity Forms plugin enabled to create competitions.
-						Please enable GravityForms and reactivate plugin.'); ?></p>
+			<p>
+				<?php _e('You must have the Gravity Forms plugin enabled to create competitions.
+						Please enable GravityForms and reactivate plugin.'); ?>
+			</p>
 		</div>
 		<?php
 	}
-
-	/*
-	private function aria_admin_error_notice() {
-		$class = "error"; // displays error msg with white background and red left border
-		$message = "You must have the Gravity Forms plugin enabled to create competitions.";
-		$message .= " ";
-		echo "<div class=\" $class \"><h5> $message </h5></div>"; 
-	} */
 }
