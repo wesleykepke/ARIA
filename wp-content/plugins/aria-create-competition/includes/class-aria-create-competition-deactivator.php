@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Fired during plugin deactivation
+ * Fired during plugin deactivation.
  *
- * @link       http://example.com
+ * @link       http://aria.cse.unr.edu
  * @since      1.0.0
  *
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
+ * @package    aria-create-competition
+ * @subpackage aria-create-competition/includes
  */
 
 /**
@@ -16,21 +16,21 @@
  * This class defines all code necessary to run during the plugin's deactivation.
  *
  * @since      1.0.0
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
- * @author     Your Name <email@example.com>
+ * @package    aria-create-competition
+ * @subpackage aria-create-competition/includes
+ * @author     KREW (Kyle, Renee, Ernest, and Wes)
  */
-class Plugin_Name_Deactivator {
+class ARIA_Create_Competition_Deactivator {
 
 	/**
-	 * Short Description. (use period)
+	 * Function that performs all processing that occurs during plugin deactivation.
 	 *
-	 * Long Description.
+	 * This function is called by WordPress during plugin deactivation and performs
+	 * ??? I don't know yet ???
 	 *
 	 * @since    1.0.0
 	 */
 	public static function deactivate() {
-
+		
 	}
-
 }

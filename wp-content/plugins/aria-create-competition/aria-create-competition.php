@@ -1,27 +1,28 @@
 <?php
 
 /**
- * The plugin bootstrap file
+ * The plugin bootstrap file. 
  *
  * This file is read by WordPress to generate the plugin information in the plugin
  * admin area. This file also includes all of the dependencies used by the plugin,
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              http://example.com
+ * @link              http://aria.cse.unr.edu
  * @since             1.0.0
- * @package           Plugin_Name
+ * @package           aria-create-competition
  *
  * @wordpress-plugin
- * Plugin Name:       WordPress Plugin Boilerplate
- * Plugin URI:        http://example.com/plugin-name-uri/
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Plugin Name:       ARIA Create Competition
+ * Plugin URI:        http://aria.cse.unr.edu
+ * Description:       This plugin allows the festival chairman to create a new
+ *                    music competition.  				
  * Version:           1.0.0
- * Author:            Your Name or Your Company
- * Author URI:        http://example.com/
+ * Author:            KREW (Kyle, Renee, Ernest, and Wes)
+ * Author URI:        http://aria.cse.unr.edu
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       plugin-name
+ * Text Domain:       aria-create-competition
  * Domain Path:       /languages
  */
 
@@ -32,30 +33,30 @@ if ( ! defined( 'WPINC' ) ) {
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-plugin-name-activator.php
+ * This action is documented in includes/class-aria_create_competition-activator.php
  */
-function activate_plugin_name() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name-activator.php';
-	Plugin_Name_Activator::activate();
+function activate_aria_create_competition() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-aria_create_competition-activator.php';
+	ARIA_Create_Competition_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-plugin-name-deactivator.php
+ * This action is documented in includes/class-aria_create_competition-deactivator.php
  */
-function deactivate_plugin_name() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name-deactivator.php';
-	Plugin_Name_Deactivator::deactivate();
+function deactivate_aria_create_competition() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-aria_create_competition-deactivator.php';
+	ARIA_Create_Competition_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_plugin_name' );
-register_deactivation_hook( __FILE__, 'deactivate_plugin_name' );
+register_activation_hook( __FILE__, 'activate_aria_create_competition' );
+register_deactivation_hook( __FILE__, 'deactivate_aria_create_competition' );
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name.php';
+require plugin_dir_path( __FILE__ ) . 'includes/class-aria_create_competition.php';
 
 /**
  * Begins execution of the plugin.
@@ -68,8 +69,8 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name.php';
  */
 function run_plugin_name() {
 
-	$plugin = new Plugin_Name();
+	$plugin = new ARIA_Create_Competition();
 	$plugin->run();
 
 }
-run_plugin_name();
+run_aria_create_competition();
