@@ -52,6 +52,7 @@ register_activation_hook( __FILE__, 'activate_aria_create_competition' );
 register_deactivation_hook( __FILE__, 'deactivate_aria_create_competition' );
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 if (!is_plugin_active('gravityforms/gravityforms.php')) {
 	add_action('admin-notices', 'aria_admin_error_notice'); 
 }
