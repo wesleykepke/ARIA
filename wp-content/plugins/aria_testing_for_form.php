@@ -44,6 +44,8 @@ function aria_activation_func() {
 
       $field->label = "Choices";
 
+      $competition_creation_form['fields'][] = $field;
+
       $result = GFAPI::add_form($competition_creation_form);
     }
   }
