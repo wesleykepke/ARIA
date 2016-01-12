@@ -37,7 +37,7 @@ class ARIA_Create_Competition_Activator {
 		if (!is_plugin_active('gravityforms/gravityforms.php')) {
 			// possibly display some sort of error message here so user knows whats up?
 
-			add_action('admin-notices', array( &$this, 'aria_admin_error_notice')); 
+			//add_action('admin-notices', array( &$this, 'aria_admin_error_notice')); 
 
 			// adding js alert - doesn't work.. 
 			/*
