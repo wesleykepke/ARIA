@@ -1,4 +1,4 @@
-# ARIA Create Competition Plugin
+#ARIA Create Competition Plugin
 
 This is a customized WordPress plugin developed to help allow the fesrtival chairman to create music competitions.
 
