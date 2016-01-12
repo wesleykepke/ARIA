@@ -34,7 +34,7 @@ function aria_check_GF() {
 
 function aria_activation_func() {
 	require_once(ABSPATH . 'wp-admin/includes/plugin.php');
-	if (is_plugin_active('gravityforms/gravityforms.php')) {
+	if (!is_plugin_active('gravityforms/gravityforms.php')) {
 		add_action('admin-notices', 'aria_add_admin_notice'); 
 		do_action('admin-notices');
 		die();  	
