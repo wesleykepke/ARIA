@@ -9,7 +9,7 @@
  * that starts the plugin.
  *
  * @link              http://aria.cse.unr.edu
- * @since             1.0.2
+ * @since             1.0.0
  * @package           aria-create-competition
  *
  * @wordpress-plugin
