@@ -37,6 +37,7 @@ class ARIA_Create_Competition_Activator {
 		if (!is_plugin_active('gravityforms/gravityforms.php')) {
 			// inform user that GravityForms must be activated
 			add_action('admin_notices', array( &$this, 'aria_admin_error_notice_gf'));
+			do_action('admin_notices'); 
 			die;  
 		}
 
@@ -54,8 +55,8 @@ class ARIA_Create_Competition_Activator {
 		<div class="error notice">
 			<p>
 				<?php 
-					_e('You must have the Gravity Forms plugin enabled to create competitions.
-						Please enable GravityForms and reactivate plugin.'); 
+					_e('ARIA: Testing for Gravity Forms was not acivated; 
+						please activate the Gravity Forms plugin.'); 
 				?>
 			</p>
 		</div>
