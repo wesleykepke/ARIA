@@ -51,6 +51,21 @@ function deactivate_aria_create_competition() {
 register_activation_hook( __FILE__, 'activate_aria_create_competition' );
 register_deactivation_hook( __FILE__, 'deactivate_aria_create_competition' );
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+if (!is_plugin_active('gravityforms/gravityforms.php')) {
+	add_action('admin-notices', 'aria_admin_error_notice'); 
+}
+
+function aria_admin_error_notice() {
+	?>
+	<div class="error notice">
+	<p><?php _e('You must have the Gravity Forms plugin enabled to create competitions.
+					Please enable GravityForms and reactivate plugin.'); ?></p>
+	</div>
+	<?php
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
