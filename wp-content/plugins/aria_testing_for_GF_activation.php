@@ -36,12 +36,12 @@ function aria_activation_func() {
 	require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 	if (is_plugin_active('gravityforms/gravityforms.php')) {  	
 		add_action('admin_init', 'aria_add_admin_notice_success');
-		do_action('admin_notices');
-		//exit();   
+		do_action('admin_init');
+		exit();   
 	}
 	else {
-		add_action('admin_notices', 'aria_add_admin_notice_error');
-		do_action('admin_notices');  
+		add_action('admin_init', 'aria_add_admin_notice_error');
+		do_action('admin_init');  
 	}
 }
 
