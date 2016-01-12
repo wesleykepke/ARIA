@@ -41,6 +41,7 @@ function aria_activation_func() {
 	else {
 		add_action('admin-notices', 'aria_add_admin_notice_error'); 
 		do_action('admin-notices');
+		die(); 
 	}
 }
 
