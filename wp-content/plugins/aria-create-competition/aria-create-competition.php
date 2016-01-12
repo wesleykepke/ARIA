@@ -35,7 +35,7 @@ if ( ! defined( 'WPINC' ) ) {
  * This action is documented in includes/class-aria_create_competition-activator.php
  */
 function activate_aria_create_competition() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-aria_create_competition-activator.php';
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-aria-create-competition-activator.php';
 	ARIA_Create_Competition_Activator::activate();
 }
 
@@ -44,7 +44,7 @@ function activate_aria_create_competition() {
  * This action is documented in includes/class-aria_create_competition-deactivator.php
  */
 function deactivate_aria_create_competition() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-aria_create_competition-deactivator.php';
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-aria-create-competition-deactivator.php';
 	ARIA_Create_Competition_Deactivator::deactivate();
 }
 
