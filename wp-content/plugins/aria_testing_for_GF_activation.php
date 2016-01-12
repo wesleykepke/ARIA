@@ -22,7 +22,9 @@ function aria_check_GF() {
 
 require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 if (!is_plugin_active('gravityforms/gravityforms.php')) {
+	//die(); 
 	add_action('admin-notices', 'aria_check_GF'); 
+	do_action('admin-notices'); 
 }
 
 ?>
