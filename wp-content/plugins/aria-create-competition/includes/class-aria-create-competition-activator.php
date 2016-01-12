@@ -39,6 +39,8 @@ class ARIA_Create_Competition_Activator {
 
 			//add_action('admin-notices', array( &$this, 'aria_admin_error_notice')); 
 
+			echo '<p>GF not enabled!</p>';
+
 			// adding js alert - doesn't work.. 
 			/*
 			echo '<script language="javascript">';
