@@ -36,10 +36,14 @@ class ARIA_Create_Competition_Activator {
 		require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 		if (!is_plugin_active('gravityforms/gravityforms.php')) {
 			// inform user that GravityForms must be activated
-			add_action('init', array( &$this, 'aria_admin_error_notice')); 
+			add_action('init', array( &$this, 'aria_create_competition_activator_hooks')); 
 		}
 
 		//  check 
+	}
+
+	public function aria_create_competition_activator_hooks() {
+		add_action('admin-notices', array( &$this, 'aria_admin_error_notice')); 
 	}
 
 	/**
@@ -48,7 +52,7 @@ class ARIA_Create_Competition_Activator {
 	 * @since     1.0.2
 	 * @return    void
 	 */
-	public function aria_admin_error_notice() {
+	private function aria_admin_error_notice() {
 		?>
 		<div class="error notice">
 		<p><?php _e('You must have the Gravity Forms plugin enabled to create competitions.
