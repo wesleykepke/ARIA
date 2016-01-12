@@ -8,38 +8,33 @@ Version: 1.2
 Author URI: http://wkepke.com
 */
 
-class CreationFormTester {
-  static private $form_index = -1;
+function aria_activation_func() {
+  require_once(ABSPATH . 'wp-admin/includes/plugin.php');
+  if (is_plugin_active('gravityforms/gravityforms.php')) {  
+    // Get all forms from gravity forms
+    $forms = GFAPI::get_forms();
 
-  function aria_activation_func() {
-    require_once(ABSPATH . 'wp-admin/includes/plugin.php');
-    if (is_plugin_active('gravityforms/gravityforms.php')) {  
-      // Get all forms from gravity forms
-      $forms = GFAPI::get_forms();
+    // Set the form index of the Competition Creation Form.
+    $index = -1;
 
-      // Set the form index of the Competition Creation Form.
-      $index = -1;
-
-      // Loop th rough each form to see if the form was previously created.
-      foreach ($forms as $form) {
-        if($form['title'] == "Competition Creation Form") {
-          $index =  $form['id'];
-          self::form_index = $form['id'];
-        }
-      }
-
-      if ($index == -1) {
-        $competition_creation_form = array();
-
-        $competition_creation_form['title'] = "Competition Creation Form";
-        $competition_creation_form['description'] = "This is a form used by ARIA in order to create music competitions.";
-        $competition_creation_form['labelPlacement'] = "left_label";
-        $competition_creation_form['descriptionPlacement'] = "above";
-        $competition_creation_form['fields'] = array();
-
-        $result = GFAPI::add_form($competition_creation_form);
+    // Loop th rough each form to see if the form was previously created.
+    foreach ($forms as $form) {
+      if($form['title'] == "Competition Creation Form") {
+        $index =  $form['id'];
       }
     }
-  }
 
-};
+    if ($index == -1) {
+      $competition_creation_form = array();
+
+      $competition_creation_form['title'] = "Competition Creation Form";
+      $competition_creation_form['description'] = "This is a form used by ARIA in order to create music competitions.";
+      $competition_creation_form['labelPlacement'] = "left_label";
+      $competition_creation_form['descriptionPlacement'] = "above";
+      $competition_creation_form['fields'] = array();
+
+      $result = GFAPI::add_form($competition_creation_form);g
+    }
+  }
+}
+register_activation_hook(__FILE__, 'aria_activation_func'); 
