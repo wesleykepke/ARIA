@@ -20,7 +20,7 @@ function aria_add_admin_notice() {
 	<?php
 }
 
-function aria_check_GF() : bool {
+function aria_check_GF() {
 	require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 	if (is_plugin_active('gravityforms/gravityforms.php')) {
 		return true; 	
