@@ -44,9 +44,9 @@ function aria_activation_func() {
 */
 
 function aria_add_admin_notice_error() {
-	echo '<div class="updated>
+	echo '<div class="error">
 			<p>ARIA: Testing for Gravity Forms was not acivated; 
-			please activate the Gravity Forms plugin</p>
+			please activate the Gravity Forms plugin.</p>
 			</div>';  
 }
 
