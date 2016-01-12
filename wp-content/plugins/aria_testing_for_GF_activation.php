@@ -8,13 +8,12 @@ Version: 1.2
 Author URI: http://wkepke.com
 */
 
-/*
 function aria_add_admin_notice_success() {
 	?>
 	<div class="updated notice">
 		<p>
 			<?php
-			_e('ARIA: Testing for Gravity Forms plugin has been successfully activated. '); 
+			_e('ARIA: Testing for Gravity Forms plugin has been successfully activated.'); 
 			?>
 		</p>
 	</div>
@@ -23,10 +22,10 @@ function aria_add_admin_notice_success() {
 
 function aria_add_admin_notice_error() {
 	?>
-	<div class="update-nag notice">
+	<div class="error notice">
 		<p>
 			<?php
-			_e('ARIA: Testing for Gravity Forms was not acivated; please activate the Gravity Forms plugin'); 
+			_e('ARIA: Testing for Gravity Forms was not acivated; please activate the Gravity Forms plugin.'); 
 			?>
 		</p>
 	</div>
@@ -35,14 +34,19 @@ function aria_add_admin_notice_error() {
 
 function aria_activation_func() {
 	require_once(ABSPATH . 'wp-admin/includes/plugin.php');
-	if (!is_plugin_active('gravityforms/gravityforms.php')) {  	
-		add_action('admin-notices', 'aria_add_admin_notice_error'); 
-		//do_action('admin-notices');
-		//die(); 
+	if (is_plugin_active('gravityforms/gravityforms.php')) {  	
+		add_action('admin_init', 'aria_add_admin_notice_success');
+		do_action('admin_init');
+		exit();   
+	}
+	else {
+		add_action('admin_init', 'aria_add_admin_notice_error');
+		do_action('admin_init');  
 	}
 }
-*/
 
+
+/*
 function aria_add_admin_notice_error() {
 	echo '<div class="error">
 			<p>ARIA: Testing for Gravity Forms was not acivated; 
@@ -53,11 +57,12 @@ function aria_add_admin_notice_error() {
 function aria_activation_func() {
 	require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 	if (!is_plugin_active('gravityforms/gravityforms.php')) {  	
-		add_action('admin-notices', 'aria_add_admin_notice_error'); 
+		add_action('admin_notices', 'aria_add_admin_notice_error'); 
 		//do_action('admin-notices');
 		//die(); 
 	}
 }
+*/
 
 register_activation_hook(__FILE__, 'aria_activation_func'); 
 
