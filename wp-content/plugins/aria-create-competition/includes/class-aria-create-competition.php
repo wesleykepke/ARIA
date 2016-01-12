@@ -153,7 +153,6 @@ class ARIA_Create_Competition {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-		$this->loader->add_action( 'admin_notices', $plugin_admin, 'aria_admin_error_notice', 5, 0 );
 
 	}
 
@@ -211,18 +210,5 @@ class ARIA_Create_Competition {
 	 */
 	public function get_version() {
 		return $this->version;
-	}
-
-	/**
-	 * Presents an error to the festival chairman if GravityForms is not enabled. 
-	 *
-	 * @since     1.0.2
-	 * @return    void
-	 */
-	private function aria_admin_error_notice() {
-		$class = "error"; // displays error msg with white background and red left border
-		$message = "You must have the Gravity Forms plugin enabled to create competitions.";
-		$message .= " Please enable GravityForms and reactivate plugin.";
-		echo "<div class=\" $class \"><h5> $message </h5></div>"; 
 	}
 }
