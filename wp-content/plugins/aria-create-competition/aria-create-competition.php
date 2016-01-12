@@ -66,7 +66,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-aria-create-competition.ph
  *
  * @since    1.0.0
  */
-function run_plugin_name() {
+function run_aria_create_competition() {
 
 	$plugin = new ARIA_Create_Competition();
 	$plugin->run();
