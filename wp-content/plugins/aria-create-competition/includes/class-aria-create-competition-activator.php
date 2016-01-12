@@ -37,14 +37,14 @@ class ARIA_Create_Competition_Activator {
 		if (!is_plugin_active('gravityforms/gravityforms.php')) {
 			// possibly display some sort of error message here so user knows whats up?
 
-			//add_action('admin-notices', 'aria_admin_error_notice'); 
+			add_action('admin-notices', array( &$this, 'aria_admin_error_notice')); 
 
-			// adding js alert
-			
+			// adding js alert - doesn't work.. 
+			/*
 			echo '<script language="javascript">';
 			echo 'alert("You must have the Gravity Forms plugin enabled to create competitions.")';
 			echo '</script>'; 
-			
+			*/
 
 			//die(); // may replace
 
@@ -60,8 +60,7 @@ class ARIA_Create_Competition_Activator {
 	 * @since     1.0.2
 	 * @return    void
 	 */
-	public function aria_admin_error_notice() {
-		echo "trying to display error msg";
+	private function aria_admin_error_notice() {
 		?>
 		<div class="error notice">
 		<p><?php _e('You must have the Gravity Forms plugin enabled to create competitions.
