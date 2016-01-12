@@ -32,25 +32,11 @@ class ARIA_Create_Competition_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
-		// check if GravityForms is installed
+		// check if GravityForms is activated
 		require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 		if (!is_plugin_active('gravityforms/gravityforms.php')) {
-			// possibly display some sort of error message here so user knows whats up?
-
-			//add_action('admin-notices', array( &$this, 'aria_admin_error_notice')); 
-
-			echo '<p>GF not enabled!</p>';
-
-			// adding js alert - doesn't work.. 
-			/*
-			echo '<script language="javascript">';
-			echo 'alert("You must have the Gravity Forms plugin enabled to create competitions.")';
-			echo '</script>'; 
-			*/
-
-			//die(); // may replace
-
-
+			// inform user that GravityForms must be activated
+			add_action('init', array( &$this, 'aria_admin_error_notice')); 
 		}
 
 		//  check 
