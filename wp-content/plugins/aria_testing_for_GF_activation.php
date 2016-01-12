@@ -8,7 +8,7 @@ Version: 1.2
 Author URI: http://wkepke.com
 */
 
-/*
+
 function aria_add_admin_notice_success() {
 	?>
 	<div class="updated notice">
@@ -35,19 +35,17 @@ function aria_add_admin_notice_error() {
 
 function aria_activation_func() {
 	require_once(ABSPATH . 'wp-admin/includes/plugin.php');
-	if (is_plugin_active('gravityforms/gravityforms.php')) {  	
-		add_action('admin_init', 'aria_add_admin_notice_success');
-		do_action('admin_init');
+	if (!is_plugin_active('gravityforms/gravityforms.php')) {  	
+		add_action('admin_notices', 'aria_add_admin_notice_error');
+		//do_action('admin_init');
 		exit();   
 	}
-	else {
-		add_action('admin_init', 'aria_add_admin_notice_error');
-		do_action('admin_init');  
-	}
 }
-*/
 
 
+
+/*
+this works all the time
 add_action('admin_notices', 'aria_add_admin_notice_error'); 
 function aria_add_admin_notice_error() {
 	if (!is_plugin_active('gravityforms/gravityforms.php')) { 
@@ -57,7 +55,7 @@ function aria_add_admin_notice_error() {
 				</div>';  
 		}
 }
-
+*/
 
 /*
 function aria_activation_func() {
