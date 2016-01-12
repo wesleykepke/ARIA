@@ -33,7 +33,7 @@ function aria_add_admin_notice_error() {
 	<?php
 }
 
-function aria_activation_func() {
+function aria_activation_func_GF() {
 	require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 	if (!is_plugin_active('gravityforms/gravityforms.php')) {  	
 		add_action('admin_notices', 'aria_add_admin_notice_error');
@@ -67,5 +67,5 @@ function aria_activation_func() {
 	}
 }
 */
-register_activation_hook(__FILE__, 'aria_activation_func'); 
+register_activation_hook(__FILE__, 'aria_activation_func_GF'); 
 ?>
