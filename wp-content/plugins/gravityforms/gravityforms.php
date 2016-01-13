@@ -298,23 +298,23 @@ class GFForms {
 
 	public static function deactivation_hook() {
 		/**
-		 * This code was added by Wes on Jan. 13, 2016.
+		 * This code was added on Jan. 13, 2016.
+		 *
+		 * @author Wes
 		 */
-		//$tempGFFormsObj = new GFForms; 
 		add_action('update_option_active_plugins', array('GFForms', 'aria_delete_plugins')); 
 		do_action('update_option_active_plugins'); 
-		//unset($tempGFFormsObj); 
 
 		// gravity forms source code.. 
 		GFCache::flush( true );
 	}
 
 	/**
-	 * This code was added by Wes on Jan. 13, 2016. 
+	 * This code was added on Jan. 13, 2016. 
 	 *
 	 * This code will make sure that all ARIA plugins that depend on Gravity Forms will 
 	 * become inactive when Gravity Forms is deactivated in the WordPress dashboard. All
-	 * ARIA plugins that need to be deactivated can be added to the index array (without keys)
+	 * ARIA plugins that need to be deactivated can be added to the indexed array (without keys)
 	 * below ($ARIA_plugins_to_deactivate).  
 	 *
 	 * @author Wes 
