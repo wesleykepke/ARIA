@@ -37,7 +37,7 @@ class ARIA_Create_Competition_Activator {
 		if (!is_plugin_active('gravityforms/gravityforms.php')) {
 			// inform user that GravityForms must be activated
 			add_action('admin_notices', array( &$this, 'aria_admin_error_notice_gf'));
-			do_action('admin_notices'); 
+			//do_action('admin_notices'); 
 			die;  
 		}
 
@@ -50,7 +50,7 @@ class ARIA_Create_Competition_Activator {
 	 * @since     1.0.2
 	 * @return    void
 	 */
-	private function aria_admin_error_notice_gf() {
+	function aria_admin_error_notice_gf() {
 		?>
 		<div class="error notice">
 			<p>
