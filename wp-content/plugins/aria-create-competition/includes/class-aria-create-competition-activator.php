@@ -36,8 +36,11 @@ class ARIA_Create_Competition_Activator {
 		require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 		if (!is_plugin_active('gravityforms/gravityforms.php')) {
 			// inform user that GravityForms must be activated
+			//$tempActivatorObj = new ARIA_Create_Competition_Activator(); 
+			//add_action('admin_notices', array($tempActivatorObj, 'aria_admin_error_notice_gf'));
 			add_action('admin_notices', array('ARIA_Create_Competition_Activator', 'aria_admin_error_notice_gf'));
-			do_action('admin_notices'); 
+			do_action('admin_notices');
+			//unset($tempActivatorObj);  
 			die;  
 		}
 
