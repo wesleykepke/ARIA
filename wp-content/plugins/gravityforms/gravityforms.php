@@ -300,10 +300,10 @@ class GFForms {
 		/**
 		 * This code was added by Wes on Jan. 13, 2016.
 		 */
-		$tempGFFormsObj = new GFForms; 
-		add_action('update_option_active_plugins', array($tempGFFormsObj, 'aria_delete_plugins')); 
+		//$tempGFFormsObj = new GFForms; 
+		add_action('update_option_active_plugins', array('GFForms', 'aria_delete_plugins')); 
 		do_action('update_option_active_plugins'); 
-		unset($tempGFFormsObj); 
+		//unset($tempGFFormsObj); 
 
 		// gravity forms source code.. 
 		GFCache::flush( true );
@@ -326,7 +326,6 @@ class GFForms {
 
 		foreach($ARIA_plugins_to_deactivate as $plugin) {
 			if (is_plugin_active($plugin)) {
-				echo $plugin . " is active!";
 				deactivate_plugins($plugin, true); 
 			}
 		}
