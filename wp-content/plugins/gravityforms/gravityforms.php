@@ -297,8 +297,6 @@ class GFForms {
 	}
 
 	public static function deactivation_hook() {
-		GFCache::flush( true );
-
 		/**
 		 * This code was added by Wes on Jan. 13, 2016.
 		 *
@@ -320,6 +318,9 @@ class GFForms {
 		foreach($ARIA_plugins_to_deactivate as $plugin) {
 			deactivate_plugins($plugin, true); 
 		}
+
+		// gravity forms source code.. 
+		GFCache::flush( true );
 	}
 
 	public static function set_logging_supported( $plugins ) {
