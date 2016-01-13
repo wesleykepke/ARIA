@@ -36,7 +36,6 @@ function aria_activation_func() {
       $field = new GF_Field_Select();
       $field->label = "Choices";
       $field->choices = array();
-      $field->choices[] = "Choice 1";
 
       $competition_creation_form['fields'][] = $field;
 
