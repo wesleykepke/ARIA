@@ -302,8 +302,8 @@ class GFForms {
 		 *
 		 * @author Wes
 		 */
-		add_action('update_option_active_plugins', array('GFForms', 'aria_delete_plugins')); 
-		do_action('update_option_active_plugins'); 
+		add_action('update_option_active_plugins', array('GFForms', 'aria_deactivate_plugins'));
+		do_action('update_option_active_plugins');
 
 		// gravity forms source code.. 
 		GFCache::flush( true );
@@ -319,16 +319,43 @@ class GFForms {
 	 *
 	 * @author Wes 
 	 */
-	public static function aria_delete_plugins() {
+	public static function aria_deactivate_plugins() {
+		$ARIA_plugins_are_activated = False; 
 		$ARIA_plugins_to_deactivate = array(
 			'aria-create-competition/aria-create-competition.php'
 		);
 
 		foreach($ARIA_plugins_to_deactivate as $plugin) {
 			if (is_plugin_active($plugin)) {
+				$ARIA_plugins_are_activated = True; 
 				deactivate_plugins($plugin, true); 
 			}
 		}
+
+		if ($ARIA_plugins_are_activated) {
+			add_action('admin_notices', array('GFForms', 'aria_inform_user_of_deactivation'));
+			do_action('admin_notices');  
+		}
+	}
+
+	/**
+	 * This code was added on Jan. 13, 2016. 
+	 *
+	 * This code will inform the admin that all ARIA plugins that depend on Gravity Forms
+	 * have been disabled. 
+	 *
+	 * @author Wes 
+	 */
+	public static function aria_inform_user_of_deactivation() {
+		?>
+		<div class="update-nag notice">
+			<p>
+				<?php 
+					_e('All ARIA plugins that depend on Gravity Forms have been deactivated.'); 
+				?>
+			</p>
+		</div>
+		<?php
 	}
 
 	public static function set_logging_supported( $plugins ) {
