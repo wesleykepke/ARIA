@@ -314,7 +314,7 @@ class GFForms {
 
 		foreach($ARIA_plugins_to_deactivate as $plugin) {
 			if (is_plugin_active($plugin)) {
-				echo $plugin . " is active!"
+				echo $plugin . " is active!";
 				deactivate_plugins($plugin, true); 
 			}
 		}
