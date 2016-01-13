@@ -319,7 +319,7 @@ class GFForms {
 			}
 		}
 
-		wp_die('Deactivated all ARIA plugins that depend on Gravity Forms.'); 
+		//wp_die('Deactivated all ARIA plugins that depend on Gravity Forms.'); 
 
 		// gravity forms source code.. 
 		GFCache::flush( true );
