@@ -37,6 +37,13 @@ function aria_activation_func() {
       $field->label = "Choices";
       $field->choices = array();
 
+      $choice_one = array();
+      $choice_one['text'] = "Choice 1";
+      $choice_one['value'] = "1";
+      $choice_one['isSelected'] = true;
+
+      $field->choices[] = choice_one;
+
       $competition_creation_form['fields'][] = $field;
 
       $result = GFAPI::add_form($competition_creation_form);
