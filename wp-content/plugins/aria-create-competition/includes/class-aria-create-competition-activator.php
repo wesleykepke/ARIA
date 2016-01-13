@@ -36,9 +36,10 @@ class ARIA_Create_Competition_Activator {
 		require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 		if (!is_plugin_active('gravityforms/gravityforms.php')) {
 			// inform user that GravityForms must be activated
-			$tempClass = new ARIA_Create_Competition_Activator(); 
-			add_action('admin_notices', array($tempClass, 'aria_admin_error_notice_gf'));
-			do_action('admin_notices'); 
+			$tempActivatorObj = new ARIA_Create_Competition_Activator(); 
+			add_action('admin_notices', array($tempActivatorObj, 'aria_admin_error_notice_gf'));
+			do_action('admin_notices');
+			unset($tempActivatorObj);  
 			die;  
 		}
 
@@ -56,8 +57,8 @@ class ARIA_Create_Competition_Activator {
 		<div class="error notice">
 			<p>
 				<?php 
-					_e('ARIA: Testing for Gravity Forms was not acivated; 
-						please activate the Gravity Forms plugin.'); 
+					_e('The plugin \'ARIA: Testing for Gravity Forms\' was not acivated; 
+						please activate the \'Gravity Forms\' plugin.'); 
 				?>
 			</p>
 		</div>

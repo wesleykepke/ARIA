@@ -16,7 +16,7 @@
  * Plugin Name:       ARIA Create Competition
  * Plugin URI:        http://aria.cse.unr.edu
  * Description:       This plugin allows the festival chairman to create a new music competition.  				
- * Version:           1.0.4
+ * Version:           1.0.5
  * Author:            KREW (Kyle, Renee, Ernest, and Wes)
  * Author URI:        http://aria.cse.unr.edu
  * License:           GPL-2.0+
