@@ -37,6 +37,7 @@ function aria_activation_func() {
       $field->label = "Choices";
       $choices = $field->choices;
       $choices[0]['text'] = "Choice 1";
+      $choices[1]['text'] = "Choice 2";
 
       $field->choices = $choices;
 
