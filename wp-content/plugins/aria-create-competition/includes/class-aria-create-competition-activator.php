@@ -57,7 +57,7 @@ class ARIA_Create_Competition_Activator {
 		<div class="error notice">
 			<p>
 				<?php 
-					_e('The plugin \'ARIA: Testing for Gravity Forms\' was not acivated; 
+					_e('The plugin \'ARIA: Create Competition\' was not acivated; 
 						please activate the \'Gravity Forms\' plugin.'); 
 				?>
 			</p>
