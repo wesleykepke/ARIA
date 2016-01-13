@@ -13,7 +13,7 @@
  * @package           aria-create-competition
  *
  * @wordpress-plugin
- * Plugin Name:       ARIA Create Competition
+ * Plugin Name:       ARIA: Create Competition
  * Plugin URI:        http://aria.cse.unr.edu
  * Description:       This plugin allows the festival chairman to create a new music competition.  				
  * Version:           1.0.5
