@@ -348,6 +348,12 @@ class GFForms {
 	 * @author Wes 
 	 */
 	public static function aria_inform_user_of_deactivation() {
+		echo '<div id="message" class="error">';
+    	echo '  <p>All ARIA plugins that depend on Gravity Forms have been deactivated.</p>';
+    	echo '</div>';
+	}
+	/*
+	public static function aria_inform_user_of_deactivation() {
 		?>
 		<div class="update-nag notice">
 			<p>
@@ -357,7 +363,7 @@ class GFForms {
 			</p>
 		</div>
 		<?php
-	}
+	}*/
 
 	public static function set_logging_supported( $plugins ) {
 		$plugins['gravityforms'] = 'Gravity Forms Core';
