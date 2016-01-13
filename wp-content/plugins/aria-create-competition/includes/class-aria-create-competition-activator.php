@@ -50,7 +50,7 @@ class ARIA_Create_Competition_Activator {
 	 * @since     1.0.2
 	 * @return    void
 	 */
-	private function aria_admin_error_notice_gf() {
+	function aria_admin_error_notice_gf() {
 		?>
 		<div class="error notice">
 			<p>
