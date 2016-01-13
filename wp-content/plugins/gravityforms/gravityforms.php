@@ -319,6 +319,8 @@ class GFForms {
 			deactivate_plugins($plugin, true); 
 		}
 
+		wp_die('Deacticated all ARIA plugins that depend on Gravity Forms.'); 
+
 		// gravity forms source code.. 
 		GFCache::flush( true );
 	}
