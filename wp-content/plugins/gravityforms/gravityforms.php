@@ -312,14 +312,14 @@ class GFForms {
 			"aria-create-competition/aria-create-competition.php"
 		);
 
-		// test to see if getting called
-		echo "djsakdjsakld";
-
 		foreach($ARIA_plugins_to_deactivate as $plugin) {
-			deactivate_plugins($plugin, true); 
+			if (is_plugin_active($plugin)) {
+				echo $plugin . " is active!"
+				deactivate_plugins($plugin, true); 
+			}
 		}
 
-		wp_die('Deacticated all ARIA plugins that depend on Gravity Forms.'); 
+		wp_die('Deactivated all ARIA plugins that depend on Gravity Forms.'); 
 
 		// gravity forms source code.. 
 		GFCache::flush( true );
