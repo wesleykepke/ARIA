@@ -335,7 +335,7 @@ class GFForms {
 		if ($ARIA_plugins_are_activated) {
 			add_action('admin_notices', array('GFForms', 'aria_inform_user_of_deactivation'));
 			do_action('admin_notices');
-			die;  
+			//die;  
 		}
 	}
 
