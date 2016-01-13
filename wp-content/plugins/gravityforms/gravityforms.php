@@ -309,10 +309,17 @@ class GFForms {
 		 *
 		 * @author Wes
 		 */
+		
 		$ARIA_plugins_to_deactivate = array(
 			"aria-create-competition/aria-create-competition.php"
 		);
-		deactivate_plugins($ARIA_plugins_to_deactivate);  
+
+		// test to see if getting called
+		echo "djsakdjsakld";
+
+		foreach($ARIA_plugins_to_deactivate as $plugin) {
+			deactivate_plugins($plugin, true); 
+		}
 	}
 
 	public static function set_logging_supported( $plugins ) {
