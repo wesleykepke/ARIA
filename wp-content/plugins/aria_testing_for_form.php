@@ -33,7 +33,12 @@ function aria_activation_func() {
       $competition_creation_form['descriptionPlacement'] = "above";
       $competition_creation_form['fields'] = array();
 
-      $competition_creation_form['fields'][] = new GF_Field_Select();
+      $field = new GF_Field_Select();
+      $field->label = "Choices";
+      $field->choices = array();
+      $field->choices[] = "Choice 1";
+
+      $competition_creation_form['fields'][] = $field;
 
       $result = GFAPI::add_form($competition_creation_form);
     }
