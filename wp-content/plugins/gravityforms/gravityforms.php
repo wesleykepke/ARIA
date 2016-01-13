@@ -298,6 +298,21 @@ class GFForms {
 
 	public static function deactivation_hook() {
 		GFCache::flush( true );
+
+		/**
+		 * This code was added by Wes on Jan. 13, 2016.
+		 *
+		 * This code will make sure that all ARIA plugins that depend on Gravity Forms will 
+		 * become inactive when Gravity Forms is deactivated in the WordPress dashboard. All
+		 * ARIA plugins that need to be deactivated can be added to the index array (without keys)
+		 * below ($ARIA_plugins_to_deactivate). 
+		 *
+		 * @author Wes
+		 */
+		$ARIA_plugins_to_deactivate = array(
+			"aria-create-competition/aria-create-competition.php"
+		);
+		deactivate_plugins($ARIA_plugins_to_deactivate);  
 	}
 
 	public static function set_logging_supported( $plugins ) {
