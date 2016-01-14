@@ -334,15 +334,23 @@ class GFForms {
 
 		if ($ARIA_plugins_are_activated) {
 			if (is_admin()) { // definitely reaches this point
+				add_action('load-plugins.php', 
+					function() {
+						add_filter('gettext', 'aria_inform_user_of_deactivation', 99, 2); 
+					}
+				); 
+
+
 				/*
 				$text_to_be_filtered = array(
 					'Plugin <strong>deactivated</strong>.',
 					'Selected plugins <strong>deactivated</strong>.'
 				); */
 
-				add_filter('gettext', array('GFForms', 'aria_inform_user_of_deactivation'), 5, 0); 
-				apply_filters('gettext', 'Plugin <strong>deactivated</strong>.');
-				exit; 
+				
+				//add_filter('gettext', array('GFForms', 'aria_inform_user_of_deactivation'), 5, 0); 
+				//apply_filters('gettext', 'Plugin <strong>deactivated</strong>.');
+				//exit; 
 				//echo 'past the gettext filter';
 				//die; 
 			} 
@@ -357,22 +365,24 @@ class GFForms {
 	 *
 	 * @author Wes 
 	 */
-	public static function aria_inform_user_of_deactivation() {
-		//$new_text_to_display = '<p>All ARIA plugins that depend on Gravity Forms have been deactivated.</p>';
+	public static function aria_inform_user_of_deactivation($translated_text, $untranslated_text) {
+		$old_text = array(
+			'Plugin <strong>deactivated</strong>.',
+			'Selected plugins <strong>deactivated</strong>.'
+		); 
 
-		/*
+		$new_text = 'All ARIA plugins that depend on Gravity Forms have been deactivated.';
+
 		if (in_array($untranslated_text, $old, true)) {
-			$translated_text = $new;
-			echo 'in array!';
-			die;  
+			$translated_text = $new_text;
+			remove_filter(current_filter(), __FUNCTION__, 99);
+			exit('Evaluated to if.');  
 		}
 		else {
-			$translated_text = "else statement!";
-			echo $translated_text;
-			die; 
-		} */
+			exit('In the else statement..'); 
+		}
 
-		return '<p>All ARIA plugins that depend on Gravity Forms have been deactivated.</p>';
+		return $translated_text;
 	}
 
 	/*
