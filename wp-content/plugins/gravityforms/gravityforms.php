@@ -334,12 +334,12 @@ class GFForms {
 
 		if ($ARIA_plugins_are_activated) {
 			if (is_admin()) { // definitely reaches this point
-				add_action('load-plugins.php', 
+				add_action('in_admin_header', 
 					function() {
 						add_filter('gettext', 'aria_inform_user_of_deactivation', 99, 2); 
 					}
 				); 
-				do_action('load-plugins.php');
+				do_action('in_admin_header');
 
 
 				/*
