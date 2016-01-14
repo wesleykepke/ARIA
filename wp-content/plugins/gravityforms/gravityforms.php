@@ -340,7 +340,7 @@ class GFForms {
 					}
 				); 
 				do_action('load-plugins.php');
-				die;
+
 
 				/*
 				$text_to_be_filtered = array(
@@ -377,10 +377,10 @@ class GFForms {
 		if (in_array($untranslated_text, $old, true)) {
 			$translated_text = $new_text;
 			remove_filter(current_filter(), __FUNCTION__, 99);
-			exit('Evaluated to if.');  
+			die('Evaluated to if.');  
 		}
 		else {
-			exit('In the else statement..'); 
+			die('In the else statement..'); 
 		}
 
 		return $translated_text;
