@@ -333,9 +333,16 @@ class GFForms {
 		}
 
 		if ($ARIA_plugins_are_activated) {
-			if (is_admin()) { // definitely reaches this point 
+			if (is_admin()) { // definitely reaches this point
+				/*
+				$old = array(
+					'Plugin <strong>deactivated</strong>.',
+					'Selected plugins <strong>deactivated</strong>.'
+				); */
+
 				add_filter('gettext', array(&$this, 'aria_inform_user_of_deactivation'), 5, 3); 
-				echo 'past the gettext filter';
+				apply_filters('gettext', 'Plugin <strong>deactivated</strong>.'); 
+				//echo 'past the gettext filter';
 				//die; 
 			} 
 		}
