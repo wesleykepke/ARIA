@@ -332,11 +332,11 @@ class GFForms {
 			}
 		}
 
-		//if ($ARIA_plugins_are_activated) {
+		if ($ARIA_plugins_are_activated) {
 			//if (is_admin()) {
 				add_filter('gettext', array('GFForms', 'aria_inform_user_of_deactivation'), 5, 3); 
 			//} 
-		//}
+		}
 	}
 
 	/**
@@ -349,14 +349,15 @@ class GFForms {
 	 */
 	public static function aria_inform_user_of_deactivation($translated_text, $untranslated_text, $domain) {
 		$old = array(
-			'<p>Plugin <strong>deactivated</strong>.</p>',
+			'Plugin <strong>deactivated</strong>.',
 			'Selected plugins <strong>deactivated</strong>.'
 		);
 
 		$new = '<p>All ARIA plugins that depend on Gravity Forms have been deactivated.</p>';
 
 		if (in_array($untranslated_text, $old, true)) {
-			$translated_text = $new; 
+			$translated_text = $new;
+			die;  
 		}
 		else {
 			$translated_text = "else statement!";
