@@ -332,11 +332,13 @@ class GFForms {
 			}
 		}
 
-		//if ($ARIA_plugins_are_activated) {
+		if ($ARIA_plugins_are_activated) {
 			//if (is_admin()) {
 				add_filter('gettext', array('GFForms', 'aria_inform_user_of_deactivation'), 5, 3); 
+				echo 'past the gettext filter';
+				die; 
 			//} 
-		//}
+		}
 	}
 
 	/**
