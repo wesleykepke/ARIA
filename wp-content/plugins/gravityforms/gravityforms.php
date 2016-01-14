@@ -340,6 +340,7 @@ class GFForms {
 					}
 				); 
 				do_action('in_admin_header');
+				die;
 
 
 				/*
