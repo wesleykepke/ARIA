@@ -341,7 +341,8 @@ class GFForms {
 				); */
 
 				add_filter('gettext', array(&$this, 'aria_inform_user_of_deactivation'), 5, 3); 
-				apply_filters('gettext', 'Plugin <strong>deactivated</strong>.'); 
+				apply_filters('gettext', 'Plugin <strong>deactivated</strong>.');
+				exit; 
 				//echo 'past the gettext filter';
 				//die; 
 			} 
