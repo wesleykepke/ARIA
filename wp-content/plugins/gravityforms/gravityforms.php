@@ -349,11 +349,11 @@ class GFForms {
 	 */
 	public static function aria_inform_user_of_deactivation($translated_text, $untranslated_text, $domain) {
 		$old = array(
-			'Plugin <strong>deactivated</strong>.',
+			'<p>Plugin <strong>deactivated</strong>.</p>',
 			'Selected plugins <strong>deactivated</strong>.'
 		);
 
-		$new = 'All ARIA plugins that depend on Gravity Forms have been deactivated.';
+		$new = '<p>All ARIA plugins that depend on Gravity Forms have been deactivated.</p>';
 
 		if (in_array($untranslated_text, $old, true)) {
 			$translated_text = $new; 
