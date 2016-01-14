@@ -357,10 +357,13 @@ class GFForms {
 
 		if (in_array($untranslated_text, $old, true)) {
 			$translated_text = $new;
+			echo 'in array!';
 			die;  
 		}
 		else {
 			$translated_text = "else statement!";
+			echo $translated_text;
+			die; 
 		}
 
 		return $translated_text;
