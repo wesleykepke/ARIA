@@ -340,6 +340,7 @@ class GFForms {
 					}
 				); 
 				do_action('load-plugins.php');
+				die;
 
 				/*
 				$text_to_be_filtered = array(
