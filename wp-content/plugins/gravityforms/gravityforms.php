@@ -339,7 +339,7 @@ class GFForms {
 						add_filter('gettext', 'aria_inform_user_of_deactivation', 99, 2); 
 					}
 				); 
-
+				do_action('load-plugins.php');
 
 				/*
 				$text_to_be_filtered = array(
