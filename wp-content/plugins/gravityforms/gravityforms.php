@@ -340,7 +340,7 @@ class GFForms {
 					'Selected plugins <strong>deactivated</strong>.'
 				); */
 
-				add_filter('gettext', array(&$this, 'aria_inform_user_of_deactivation'), 5, 3); 
+				add_filter('gettext', array('GFForms', 'aria_inform_user_of_deactivation'), 5, 3); 
 				apply_filters('gettext', 'Plugin <strong>deactivated</strong>.');
 				exit; 
 				//echo 'past the gettext filter';
