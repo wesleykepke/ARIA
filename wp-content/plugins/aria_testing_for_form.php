@@ -24,6 +24,7 @@ function aria_activation_func() {
       }
     }
 
+    // form does not exist; create new form 
     if ($index == -1) {
       $competition_creation_form = array();
 
@@ -44,7 +45,31 @@ function aria_activation_func() {
       $competition_creation_form['fields'][] = $field;
 
       $result = GFAPI::add_form($competition_creation_form);
+
+      echo 'field does not exist';
+      die; 
     }
+
+    // form exists; dynamically populate droptown 
+    else {
+      add_filter('gform_field_value_Choices', 'aria_dynamically_populate_teachers');
+      //echo 'create competition form exits, made it through filter';
+      //die;
+      $index = 0;  
+      foreach( $form['fields'] as $field ) {
+        echo 'Field #' . $index . ': ' . $field->type. '<br/>';
+        $index++; 
+        die;  
+      } 
+    }
+
   }
 }
+
+function aria_dynamically_populate_teachers($value) {
+  $teachers = "harris";  
+  //$teachers = array('harris', 'leverington', 'sengupta', 'dascalu');
+  return $teachers;  
+}
+
 register_activation_hook(__FILE__, 'aria_activation_func'); 
