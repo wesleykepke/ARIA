@@ -23,6 +23,7 @@
  * @package WordPress
  * @subpackage Twenty_Fifteen
  * @since Twenty Fifteen 1.0
+tice: Undefined index: button in /var/www/html/wp-content/plugins/gravityforms/form_display.php on line 1010
  */
 
 /**
@@ -54,6 +55,7 @@ if ( ! function_exists( 'twentyfifteen_setup' ) ) :
 function twentyfifteen_setup() {
 
 	/*
+tice: Undefined index: button in /var/www/html/wp-content/plugins/gravityforms/form_display.php on line 1010
 	 * Make theme available for translation.
 	 * Translations can be filed in the /languages/ directory.
 	 * If you're building a theme based on twentyfifteen, use a find and replace
@@ -147,7 +149,7 @@ if ( ! function_exists( 'twentyfifteen_fonts_url' ) ) :
  *
  * @since Twenty Fifteen 1.0
  *
- * @return string Google fonts URL for the theme.
+ * @return string Google fonts URL for the theme. Notice: Undefined index: button in /var/www/html/wp-content/plugins/gravityforms/form_display.php on line 1010
  */
 function twentyfifteen_fonts_url() {
 	$fonts_url = '';
@@ -341,7 +343,7 @@ add_filter( 'get_search_form', 'twentyfifteen_search_form_modify' );
 require get_template_directory() . '/inc/custom-header.php';
 
 /**
- * Custom template tags for this theme.
+ * Custom template tags for this theme. Notice: Undefined index: button in /var/www/html/wp-content/plugins/gravityforms/form_display.php on line 1010
  *
  * @since Twenty Fifteen 1.0
  */
@@ -353,3 +355,54 @@ require get_template_directory() . '/inc/template-tags.php';
  * @since Twenty Fifteen 1.0
  */
 require get_template_directory() . '/inc/customizer.php';
+
+/**
+ * Added by Wes on Jan. 15, 2016.
+ *
+ * @author Wes
+ */
+function aria_populate_teacher_dropdown() {
+	// get all forms 
+	$all_forms = GFAPI::get_forms(); 
+	$create_competition_form_index = -1; 
+	foreach( $all_forms as $form ) {
+		// search for form titled "Create Competition Form" and acquire form ID
+		if ( $form['title'] == "Create Competition Form" ) {
+			$create_competition_form_index = $form['id']; 
+		}
+	}
+
+	if ($create_competition_form_index != -1) {
+		echo 'Found Create Competition Form w/ index #' . $create_competition_form_index . '</br>';
+		die;
+
+		add_filter( 'gform_pre_render_14', 'populate_posts' );
+		add_filter( 'gform_pre_validation_14', 'populate_posts' );
+		add_filter( 'gform_pre_submission_filter_14', 'populate_posts' );
+		add_filter( 'gform_admin_pre_render_14', 'populate_posts' );
+		
+
+		/*
+		add_filter( 'gform_pre_render_' . $create_competition_form_index, 'populate_posts' );
+		add_filter( 'gform_pre_validation_' . $create_competition_form_index, 'populate_posts' );
+		add_filter( 'gform_pre_submission_filter_' . $create_competition_form_index, 'populate_posts' );
+		add_filter( 'gform_admin_pre_render_' . $create_competition_form_index, 'populate_posts' );*/
+	}
+}
+
+function populate_posts( $form ) {
+	foreach ( $form['fields'] as &$field ) {
+		// add checking to ensure that only appropriate fields are modified
+			// not sure what checking yet though Notice: Undefined index: button in /var/www/html/wp-content/plugins/gravityforms/form_display.php on line 1010
+
+		$choices = array(
+			'text' => 'fred', 'value' => 'harris',
+			'text' => 'michael', 'value' => 'leverington',
+			'text' => 'sergiu', 'value' => 'dascalu',
+			'text' => 'shamik', 'value' => 'sengupta',
+		);
+		
+		$field->choices = $choices; 
+		$field->placeholder = 'Select a CS teacher'; 		
+	}
+}

@@ -38,7 +38,7 @@ function aria_activation_func() {
       $field->label = "Choices";
       $choices = $field->choices;
       $choices[0]['text'] = "Choice 1";
-      $choices[1]['text'] = "Choice 2";
+      $choices[1]['text'] = "Choice 420";
 
       $field->choices = $choices;
 
@@ -46,8 +46,6 @@ function aria_activation_func() {
 
       $result = GFAPI::add_form($competition_creation_form);
 
-      echo 'field does not exist';
-      die; 
     }
 
     // form exists; dynamically populate droptown 
@@ -55,11 +53,16 @@ function aria_activation_func() {
       add_filter('gform_field_value_Choices', 'aria_dynamically_populate_teachers');
       //echo 'create competition form exits, made it through filter';
       //die;
+      $competition_creation_form = GFAPI::get_form(14); 
+      //echo 'Competition Title: ' . $competition_creation_form['title'] . '</br>';
+      //echo 'First field label: ' . $competition_creation_form['fields'][0]->label . '</br>';
+       
+
       $index = 0;  
       foreach( $form['fields'] as $field ) {
-        echo 'Field #' . $index . ': ' . $field->type. '<br/>';
+        //echo 'Field #' . $index . ': ' . $field->type. '<br/>';
         $index++; 
-        die;  
+        //die;  
       } 
     }
 

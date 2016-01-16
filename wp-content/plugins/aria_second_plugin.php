@@ -2,7 +2,7 @@
 /*
 Plugin Name: Aria Second Plugin
 Plugin URI: http://google.com
-Description: Adds a super sweet footer to your WordPress page. Now with a settings menu. 
+Description: Adds a super sweet footer to your WordPress page. Testing queries from form. 
 Author: Renee and Kyle
 Version: 1.0
 Author URI: http://wkepke.com
