@@ -59,105 +59,105 @@ class GF_Form {
     if ( ! is_null($this->id) ) {
       $form["id"] = $this->id;
     }
-    // if ( ! is_null($title) ) {
-    //   $form["title"] = $title;
-    // }
-    // if ( ! is_null($description) ) {
-    //   $form["description"] = $description;
-    // }
-    // if ( ! is_null($labelPlacement) ) {
-    //   $form["labelPlacement"] = $labelPlacement;
-    // }
-    // if ( ! is_null($descriptionPlacement) ) {
-    //   $form["descriptionPlacement"] = $descriptionPlacement;
-    // }
-    // if ( ! is_null($fields) ) {
-    //   $form["fields"] = $fields;
-    // }
-    // if ( ! is_null($useCurrentUserAsAuthor) ) {
-    //   $form["useCurrentUserAsAuthor"] = $useCurrentUserAsAuthor;
-    // }
-    // if ( ! is_null($postAuthor) ) {
-    //   $form["postAuthor"] = $postAuthor;
-    // }
-    // if ( ! is_null($postCategory) ) {
-    //   $form["postCategory"] = $postCategory;
-    // }
-    // if ( ! is_null($postContentTemplate) ) {
-    //   $form["postContentTemplate"] = $postContentTemplate;
-    // }
-    // if ( ! is_null($postContentTemplateEnabled) ) {
-    //   $form["postContentTemplateEnabled"] = $postContentTemplateEnabled;
-    // }
-    // if ( ! is_null($postFormat) ) {
-    //   $form["postFormat"] = $postFormat;
-    // }
-    // if ( ! is_null($postTitleTemplate) ) {
-    //   $form["postTitleTemplate"] = $postTitleTemplate;
-    // }
-    // if ( ! is_null($postTitleTemplateEnabled) ) {
-    //   $form["postTitleTemplateEnabled"] = $postTitleTemplateEnabled;
-    // }
-    // if ( ! is_null($confirmation) ) {
-    //   $form["confirmation"] = $confirmation;
-    // }
-    // if ( ! is_null($notifications) ) {
-    //   $form["notifications"] = $notifications;
-    // }
-    // if ( ! is_null($button) ) {
-    //   $form["button"] = $button;
-    // }
-    // if ( ! is_null($cssClass) ) {
-    //   $form["cssClass"] = $cssClass;
-    // }
-    // if ( ! is_null($enableAnimation) ) {
-    //   $form["enableAnimation"] = $enableAnimation;
-    // }
-    // if ( ! is_null($enableHoneypot) ) {
-    //   $form["enableHoneypot"] = $enableHoneypot;
-    // }
-    // if ( ! is_null($limitEntries) ) {
-    //   $form["limitEntries"] = $limitEntries;
-    // }
-    // if ( ! is_null($limitEntriesCount) ) {
-    //   $form["limitEntriesCount"] = $limitEntriesCount;
-    // }
-    // if ( ! is_null($limitEntriesMessage) ) {
-    //   $form["limitEntriesMessage"] = $limitEntriesMessage;
-    // }
-    // if ( ! is_null($scheduleForm) ) {
-    //   $form["scheduleForm"] = $scheduleForm;
-    // }
-    // if ( ! is_null($scheduleStart) ) {
-    //   $form["scheduleStart"] = $scheduleStart;
-    // }
-    // if ( ! is_null($scheduleStartHour) ) {
-    //   $form["scheduleStartHour"] = $scheduleStartHour;
-    // }
-    // if ( ! is_null($scheduleStartMinute) ) {
-    //   $form["scheduleStartMinute"] = $scheduleStartMinute;
-    // }
-    // if ( ! is_null($scheduleStartAmpm) ) {
-    //   $form["scheduleStartAmpm"] = $scheduleStartAmpm;
-    // }
-    // if ( ! is_null($scheduleEnd) ) {
-    //   $form["scheduleEnd"] = $scheduleEnd;
-    // }
-    // if ( ! is_null($scheduleEndHour) ) {
-    //   $form["scheduleEndHour"] = $scheduleEndHour;
-    // }
-    // if ( ! is_null($scheduleEndMinute) ) {
-    //   $form["scheduleEndMinute"] = $scheduleEndMinute;
-    // }
-    // if ( ! is_null($scheduleEndAmpm) ) {
-    //   $form["scheduleEndAmpm"] = $scheduleEndAmpm;
-    // }
-    // if ( ! is_null($scheduleMessage) ) {
-    //   $form["scheduleMessage"] = $scheduleMessage;
-    // }
-    // if ( ! is_null($schedulePendingMessage) ) {
-    //   $form["schedulePendingMessage"] = $schedulePendingMessage;
-    // }
+    if ( ! is_null($this->title) ) {
+      $form["title"] = $this->title;
+    }
+    if ( ! is_null($this->description) ) {
+      $form["description"] = $this->description;
+    }
+    if ( ! is_null($this->labelPlacement) ) {
+      $form["labelPlacement"] = $this->labelPlacement;
+    }
+    if ( ! is_null($this->descriptionPlacement) ) {
+      $form["descriptionPlacement"] = $this->descriptionPlacement;
+    }
+    if ( ! is_null($this->fields) ) {
+      $form["fields"] = $this->fields;
+    }
+    if ( ! is_null($this->useCurrentUserAsAuthor) ) {
+      $form["useCurrentUserAsAuthor"] = $this->useCurrentUserAsAuthor;
+    }
+    if ( ! is_null($this->postAuthor) ) {
+      $form["postAuthor"] = $this->postAuthor;
+    }
+    if ( ! is_null($this->postCategory) ) {
+      $form["postCategory"] = $this->postCategory;
+    }
+    if ( ! is_null($this->postContentTemplate) ) {
+      $form["postContentTemplate"] = $this->postContentTemplate;
+    }
+    if ( ! is_null($this->postContentTemplateEnabled) ) {
+      $form["postContentTemplateEnabled"] = $this->postContentTemplateEnabled;
+    }
+    if ( ! is_null($this->postFormat) ) {
+      $form["postFormat"] = $this->postFormat;
+    }
+    if ( ! is_null($this->postTitleTemplate) ) {
+      $form["postTitleTemplate"] = $this->postTitleTemplate;
+    }
+    if ( ! is_null($this->postTitleTemplateEnabled) ) {
+      $form["postTitleTemplateEnabled"] = $this->postTitleTemplateEnabled;
+    }
+    if ( ! is_null($this->confirmation) ) {
+      $form["confirmation"] = $this->confirmation;
+    }
+    if ( ! is_null($this->notifications) ) {
+      $form["notifications"] = $this->notifications;
+    }
+    if ( ! is_null($this->button) ) {
+      $form["button"] = $this->button;
+    }
+    if ( ! is_null($this->cssClass) ) {
+      $form["cssClass"] = $this->cssClass;
+    }
+    if ( ! is_null($this->enableAnimation) ) {
+      $form["enableAnimation"] = $this->enableAnimation;
+    }
+    if ( ! is_null($this->enableHoneypot) ) {
+      $form["enableHoneypot"] = $this->enableHoneypot;
+    }
+    if ( ! is_null($this->limitEntries) ) {
+      $form["limitEntries"] = $this->limitEntries;
+    }
+    if ( ! is_null($this->limitEntriesCount) ) {
+      $form["limitEntriesCount"] = $this->limitEntriesCount;
+    }
+    if ( ! is_null($this->limitEntriesMessage) ) {
+      $form["limitEntriesMessage"] = $this->limitEntriesMessage;
+    }
+    if ( ! is_null($this->scheduleForm) ) {
+      $form["scheduleForm"] = $this->scheduleForm;
+    }
+    if ( ! is_null($this->scheduleStart) ) {
+      $form["scheduleStart"] = $this->scheduleStart;
+    }
+    if ( ! is_null($this->scheduleStartHour) ) {
+      $form["scheduleStartHour"] = $this->scheduleStartHour;
+    }
+    if ( ! is_null($this->scheduleStartMinute) ) {
+      $form["scheduleStartMinute"] = $this->scheduleStartMinute;
+    }
+    if ( ! is_null($this->scheduleStartAmpm) ) {
+      $form["scheduleStartAmpm"] = $this->scheduleStartAmpm;
+    }
+    if ( ! is_null($this->scheduleEnd) ) {
+      $form["scheduleEnd"] = $this->scheduleEnd;
+    }
+    if ( ! is_null($this->scheduleEndHour) ) {
+      $form["scheduleEndHour"] = $this->scheduleEndHour;
+    }
+    if ( ! is_null($this->scheduleEndMinute) ) {
+      $form["scheduleEndMinute"] = $this->scheduleEndMinute;
+    }
+    if ( ! is_null($this->scheduleEndAmpm) ) {
+      $form["scheduleEndAmpm"] = $this->scheduleEndAmpm;
+    }
+    if ( ! is_null($this->scheduleMessage) ) {
+      $form["scheduleMessage"] = $this->scheduleMessage;
+    }
+    if ( ! is_null($this->schedulePendingMessage) ) {
+      $form["schedulePendingMessage"] = $this->schedulePendingMessage;
+    }
 
     return $form;
   }
