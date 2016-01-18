@@ -56,9 +56,9 @@ class GF_Form {
   public function createFormArray() {
     $form = array();
 
-    // if ( ! is_null($id) ) {
-    //   $form["id"] = $id;
-    // }
+    if ( ! is_null($id) ) {
+      $form["id"] = $id;
+    }
     // if ( ! is_null($title) ) {
     //   $form["title"] = $title;
     // }
