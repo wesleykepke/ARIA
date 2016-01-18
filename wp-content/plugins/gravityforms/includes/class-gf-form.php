@@ -11,7 +11,7 @@ class GF_Form {
   public $description = null;
   public $labelPlacement = null;
   public $descriptionPlacement = null;
-  public $fields = null;
+  public $fields = array();
 
   // Post Related Properties
   public $useCurrentUserAsAuthor = null;
@@ -24,7 +24,7 @@ class GF_Form {
   public $postTitleTemplateEnabled = null;
 
   // Form Submission
-  public $confirmation = null;
+  public $confirmation = array();
   public $notifications = null;
 
   // Advanced Properties
@@ -50,114 +50,112 @@ class GF_Form {
   public function __construct($title, $description) {
     $this->title = $title;
     $this->description = $description;
-    $this->fields = array();
-    $this->confirmation = array();
     $this->button = array("type" => "text", "text" => "submit");
   }
 
   public function createFormArray() {
     $form = array();
 
-    if ($id != null) {
+    if ( ! is_null($id) ) {
       $form["id"] = $id;
     }
-    if ($title != null) {
+    if ( ! is_null($title) ) {
       $form["title"] = $title;
     }
-    if ($description != null) {
+    if ( ! is_null($description) ) {
       $form["description"] = $description;
     }
-    if ($labelPlacement != null) {
+    if ( ! is_null($labelPlacement) ) {
       $form["labelPlacement"] = $labelPlacement;
     }
-    if ($descriptionPlacement != null) {
+    if ( ! is_null($descriptionPlacement) ) {
       $form["descriptionPlacement"] = $descriptionPlacement;
     }
-    if ($fields != null) {
+    if ( ! is_null($fields) ) {
       $form["fields"] = $fields;
     }
-    if ($useCurrentUserAsAuthor != null) {
+    if ( ! is_null($useCurrentUserAsAuthor) ) {
       $form["useCurrentUserAsAuthor"] = $useCurrentUserAsAuthor;
     }
-    if ($postAuthor != null) {
+    if ( ! is_null($postAuthor) ) {
       $form["postAuthor"] = $postAuthor;
     }
-    if ($postCategory != null) {
+    if ( ! is_null($postCategory) ) {
       $form["postCategory"] = $postCategory;
     }
-    if ($postContentTemplate != null) {
+    if ( ! is_null($postContentTemplate) ) {
       $form["postContentTemplate"] = $postContentTemplate;
     }
-    if ($postContentTemplateEnabled != null) {
+    if ( ! is_null($postContentTemplateEnabled) ) {
       $form["postContentTemplateEnabled"] = $postContentTemplateEnabled;
     }
-    if ($postFormat != null) {
+    if ( ! is_null($postFormat) ) {
       $form["postFormat"] = $postFormat;
     }
-    if ($postTitleTemplate != null) {
+    if ( ! is_null($postTitleTemplate) ) {
       $form["postTitleTemplate"] = $postTitleTemplate;
     }
-    if ($postTitleTemplateEnabled != null) {
+    if ( ! is_null($postTitleTemplateEnabled) ) {
       $form["postTitleTemplateEnabled"] = $postTitleTemplateEnabled;
     }
-    if ($confirmation != null) {
+    if ( ! is_null($confirmation) ) {
       $form["confirmation"] = $confirmation;
     }
-    if ($notifications != null) {
+    if ( ! is_null($notifications) ) {
       $form["notifications"] = $notifications;
     }
-    if ($button != null) {
+    if ( ! is_null($button) ) {
       $form["button"] = $button;
     }
-    if ($cssClass != null) {
+    if ( ! is_null($cssClass) ) {
       $form["cssClass"] = $cssClass;
     }
-    if ($enableAnimation != null) {
+    if ( ! is_null($enableAnimation) ) {
       $form["enableAnimation"] = $enableAnimation;
     }
-    if ($enableHoneypot != null) {
+    if ( ! is_null($enableHoneypot) ) {
       $form["enableHoneypot"] = $enableHoneypot;
     }
-    if ($limitEntries != null) {
+    if ( ! is_null($limitEntries) ) {
       $form["limitEntries"] = $limitEntries;
     }
-    if ($limitEntriesCount != null) {
+    if ( ! is_null($limitEntriesCount) ) {
       $form["limitEntriesCount"] = $limitEntriesCount;
     }
-    if ($limitEntriesMessage != null) {
+    if ( ! is_null($limitEntriesMessage) ) {
       $form["limitEntriesMessage"] = $limitEntriesMessage;
     }
-    if ($scheduleForm != null) {
+    if ( ! is_null($scheduleForm) ) {
       $form["scheduleForm"] = $scheduleForm;
     }
-    if ($scheduleStart != null) {
+    if ( ! is_null($scheduleStart) ) {
       $form["scheduleStart"] = $scheduleStart;
     }
-    if ($scheduleStartHour != null) {
+    if ( ! is_null($scheduleStartHour) ) {
       $form["scheduleStartHour"] = $scheduleStartHour;
     }
-    if ($scheduleStartMinute != null) {
+    if ( ! is_null($scheduleStartMinute) ) {
       $form["scheduleStartMinute"] = $scheduleStartMinute;
     }
-    if ($scheduleStartAmpm != null) {
+    if ( ! is_null($scheduleStartAmpm) ) {
       $form["scheduleStartAmpm"] = $scheduleStartAmpm;
     }
-    if ($scheduleEnd != null) {
+    if ( ! is_null($scheduleEnd) ) {
       $form["scheduleEnd"] = $scheduleEnd;
     }
-    if ($scheduleEndHour != null) {
+    if ( ! is_null($scheduleEndHour) ) {
       $form["scheduleEndHour"] = $scheduleEndHour;
     }
-    if ($scheduleEndMinute != null) {
+    if ( ! is_null($scheduleEndMinute) ) {
       $form["scheduleEndMinute"] = $scheduleEndMinute;
     }
-    if ($scheduleEndAmpm != null) {
+    if ( ! is_null($scheduleEndAmpm) ) {
       $form["scheduleEndAmpm"] = $scheduleEndAmpm;
     }
-    if ($scheduleMessage != null) {
+    if ( ! is_null($scheduleMessage) ) {
       $form["scheduleMessage"] = $scheduleMessage;
     }
-    if ($schedulePendingMessage != null) {
+    if ( ! is_null($schedulePendingMessage) ) {
       $form["schedulePendingMessage"] = $schedulePendingMessage;
     }
 
