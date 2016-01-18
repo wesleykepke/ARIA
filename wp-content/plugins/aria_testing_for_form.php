@@ -39,7 +39,8 @@ function aria_activation_func() {
 
       // $competition_creation_form->fields[] = $field;
 
-      $result = GFAPI::add_form($competition_creation_form->createFormArray());
+      $form = $competition_creation_form->createFormArray();
+      // $result = GFAPI::add_form();
     }
 
     // form exists; dynamically populate droptown 
