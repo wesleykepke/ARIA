@@ -15,8 +15,6 @@ function aria_activation_func() {
     $forms = GFAPI::get_forms();
 
 
-    echo(json_encode(GFAPI::get_form(15)));
-    die();
 
     // Set the form index of the Competition Creation Form.
     $index = -1;
@@ -31,21 +29,9 @@ function aria_activation_func() {
     // form does not exist; create new form 
     if ($index == -1) {
       $competition_creation_form = new GF_Form("Competition Creation Form", "This shows that a form has been created");
-      $competition_creation_form->fields = array();
-
-      $field = new GF_Field_Select();
-      $field->label = "Choices";
-      $choices = $field->choices;
-      $choices[0]['text'] = "Choice 1";
-      $choices[0]['value'] = "1";
-      $choices[1]['text'] = "Choice 420";
-      $choices[1]['value'] = "420";
-
-      $field->choices = $choices;
-
-      $competition_creation_form->fields[] = $field;
-
       $result = GFAPI::add_form($competition_creation_form->createFormArray());
+      echo(json_encode(GFAPI::get_form($result)));
+      die();
     }
 
     // form exists; dynamically populate droptown 
