@@ -9,8 +9,8 @@ class GF_Form {
   public $id = null;
   public $title = null;
   public $description = null;
-  public $labelPlacement = null;
-  public $descriptionPlacement = null;
+  public $labelPlacement = "top_label";
+  public $descriptionPlacement = "below";
   public $fields = array();
 
   // Post Related Properties
