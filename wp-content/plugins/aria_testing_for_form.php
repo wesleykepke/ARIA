@@ -26,20 +26,20 @@ function aria_activation_func() {
 
     // form does not exist; create new form 
     if ($index == -1) {
-      $competition_creation_form = new GF_Form("Form Created", "This shows that a form has been created");
-      $competition_creation_form->fields = array();
+      $competition_creation_form = new GF_Form("Competition Creation Form", "This shows that a form has been created");
+      // $competition_creation_form->fields = array();
 
-      $field = new GF_Field_Select();
-      $field->label = "Choices";
-      $choices = $field->choices;
-      $choices[0]['text'] = "Choice 1";
-      $choices[1]['text'] = "Choice 420";
+      // $field = new GF_Field_Select();
+      // $field->label = "Choices";
+      // $choices = $field->choices;
+      // $choices[0]['text'] = "Choice 1";
+      // $choices[1]['text'] = "Choice 420";
 
-      $field->choices = $choices;
+      // $field->choices = $choices;
 
-      $competition_creation_form->fields[] = $field;
+      // $competition_creation_form->fields[] = $field;
 
-      $result = GFAPI::add_form($competition_creation_form->createFormArray());
+      // $result = GFAPI::add_form($competition_creation_form->createFormArray());
     }
 
     // form exists; dynamically populate droptown 
