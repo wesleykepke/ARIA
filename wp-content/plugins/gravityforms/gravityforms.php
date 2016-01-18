@@ -82,6 +82,7 @@ require_once( plugin_dir_path( __FILE__ ) . 'common.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'forms_model.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'widget.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'includes/api.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/class-gf-form.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'includes/webapi/webapi.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'includes/fields/class-gf-fields.php' );
 
