@@ -32,7 +32,7 @@ function aria_activation_func() {
       $first_name_field->label = "First name: ";
       $first_name_field->id = 1;
       $first_name_field->isRequired = true;
-      $first_name_field->size = medium;
+      $first_name_field->size = 'medium';
 
       $competition_creation_form['fields'][] = $first_name_field;
 
