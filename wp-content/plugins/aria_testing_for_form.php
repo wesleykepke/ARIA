@@ -76,7 +76,7 @@ function aria_activation_func() {
       $level_one_baroque_field->id = 4;
       $level_one_baroque_field->isRequired = true;
       $level_one_baroque_field->size = 'medium';
-      $level_one_baroque->placeholder = "Select a Song";
+      $level_one_baroque_field->placeholder = "Select a Song";
 
 
       $competition_creation_form->fields[] = $first_name_field;
