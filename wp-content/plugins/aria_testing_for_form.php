@@ -14,6 +14,9 @@ function aria_activation_func() {
     // Get all forms from gravity forms
     $forms = GFAPI::get_forms();
 
+    echo(json_encode($forms[15]));
+    die();
+
     // Set the form index of the Competition Creation Form.
     $index = -1;
 
