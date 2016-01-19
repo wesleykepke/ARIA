@@ -28,15 +28,58 @@ function aria_activation_func() {
     if ($index == -1) {
       $competition_creation_form = new GF_Form("Test Registration Form", "This shows that a form has been created");
       
+      // First Name Field
       $first_name_field = new GF_Field_Text();
-      $first_name_field->label = "First name: ";
+      $first_name_field->label = "Name: ";
       $first_name_field->id = 1;
       $first_name_field->isRequired = true;
       $first_name_field->size = 'medium';
 
+      // Teacher Field
+      $teacher_field = new GF_Field_Select();
+      $teacher_field->label = "Teacher: ";
+      $teacher_field->id = 2;
+      $teacher_field->isRequired = true;
+      $teacher_field->size = 'medium';
+
+      // Level field
+      $level_field = new GF_Field_Select();
+      $level_field->label = "Level: ";
+      $level_field->id = 3;
+      $level_field->isRequired = true;
+      $level_field->size = 'medium';
+
+      // Period field
+      $period_field = new GF_Field_Select();
+      $period_field->label = "Period: ";
+      $period_field->id = 4;
+      $period_field->isRequired = true;
+      $period_field->size = 'medium';
+
+      // Songs
+      $song_field = new GF_Field_Select();
+      $song_field->label = "Song: ";
+      $song_field->id = 5;
+      $song_field->isRequired = true;
+      $song_field->size = 'medium';
+
       $competition_creation_form->fields[] = $first_name_field;
+      $competition_creation_form->fields[] = $teacher_field;
+      $competition_creation_form->fields[] = $level_field;
+      $competition_creation_form->fields[] = $period_field;
+      $competition_creation_form->fields[] = $song_field;
 
       $result = GFAPI::add_form($competition_creation_form->createFormArray());
+    
+      require(ABSPATH . 'wp-content/plugins/aria_second_plugin.php');
+
+      add_filter( 'gform_pre_render_' . $result, 'aria_populate_posts', 3 );
+      add_filter( 'gform_pre_validation_' . $result, 'aria_populate_posts' );
+      add_filter( 'gform_pre_submission_filter_' . $result, 'aria_populate_posts' );
+      add_filter( 'gform_admin_pre_render_' . $result, 'aria_populate_posts' );
+ 
+      add_filter( 'gform_pre_render_' . $result, 'aria_modify_logic', 2 );
+
     }
 
     // form exists; dynamically populate droptown 
