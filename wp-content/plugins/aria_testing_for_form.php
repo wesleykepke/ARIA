@@ -49,12 +49,26 @@ function aria_activation_func() {
       $level_field->isRequired = true;
       $level_field->size = 'medium';
 
+      $level_field->choices = array(
+        array('text' => "One", 'value' => "One", 'isSelected' => true),
+        array('text' => "Two", 'value' => "Two", 'isSelected' => false),
+        array('text' => "Three", 'value' => "Three", 'isSelected' => false)
+      )
+
       // Period field
       $period_field = new GF_Field_Select();
       $period_field->label = "Period: ";
       $period_field->id = 4;
       $period_field->isRequired = true;
       $period_field->size = 'medium';
+      $period_field->placeholder = "Select Period...";
+
+      $period_field->choices = array(
+        array('text' => "Baroque", 'value' => "One", 'isSelected' => false),
+        array('text' => "Classical", 'value' => "Two", 'isSelected' => false),
+        array('text' => "Contemporary", 'value' => "Three", 'isSelected' => false)
+        array('text' => "Romantic", 'value' => "Four", 'isSelected' => false)
+      )
 
       // Songs
       $song_field = new GF_Field_Select();
@@ -62,6 +76,8 @@ function aria_activation_func() {
       $song_field->id = 5;
       $song_field->isRequired = true;
       $song_field->size = 'medium';
+      $period_field->placeholder = "Select a Song";
+
 
       $competition_creation_form->fields[] = $first_name_field;
       $competition_creation_form->fields[] = $teacher_field;
