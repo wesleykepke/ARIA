@@ -30,21 +30,21 @@ function aria_activation_func() {
       
       // First Name Field
       $first_name_field = new GF_Field_Text();
-      $first_name_field->label = "Name: ";
+      $first_name_field->label = "First Name";
       $first_name_field->id = 1;
       $first_name_field->isRequired = true;
       $first_name_field->size = 'medium';
 
       // Teacher Field
       $teacher_field = new GF_Field_Select();
-      $teacher_field->label = "Teacher: ";
+      $teacher_field->label = "Teacher";
       $teacher_field->id = 2;
       $teacher_field->isRequired = true;
       $teacher_field->size = 'medium';
 
       // Level field
       $level_field = new GF_Field_Select();
-      $level_field->label = "Level: ";
+      $level_field->label = "Level";
       $level_field->id = 3;
       $level_field->isRequired = true;
       $level_field->size = 'medium';
@@ -57,8 +57,8 @@ function aria_activation_func() {
 
       // Period field
       $period_field = new GF_Field_Select();
-      $period_field->label = "Period: ";
-      $period_field->id = 4;
+      $period_field->label = "Period";
+      $period_field->id = 6;
       $period_field->isRequired = true;
       $period_field->size = 'medium';
       $period_field->placeholder = "Select Period...";
@@ -71,19 +71,19 @@ function aria_activation_func() {
       );
 
       // Songs
-      $song_field = new GF_Field_Select();
-      $song_field->label = "Song: ";
-      $song_field->id = 5;
-      $song_field->isRequired = true;
-      $song_field->size = 'medium';
-      $period_field->placeholder = "Select a Song";
+      $level_one_baroque_field = new GF_Field_Select();
+      $level_one_baroque_field->label = "Level One Baroque";
+      $level_one_baroque_field->id = 4;
+      $level_one_baroque_field->isRequired = true;
+      $level_one_baroque_field->size = 'medium';
+      $level_one_baroque->placeholder = "Select a Song";
 
 
       $competition_creation_form->fields[] = $first_name_field;
       $competition_creation_form->fields[] = $teacher_field;
       $competition_creation_form->fields[] = $level_field;
       $competition_creation_form->fields[] = $period_field;
-      $competition_creation_form->fields[] = $song_field;
+      $competition_creation_form->fields[] = $level_one_baroque_field;
 
       $result = GFAPI::add_form($competition_creation_form->createFormArray());
     
