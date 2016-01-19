@@ -71,7 +71,7 @@ function aria_activation_func() {
 
       $result = GFAPI::add_form($competition_creation_form->createFormArray());
     
-      // require(ABSPATH . 'wp-content/plugins/aria_second_plugin.php');
+      require(ABSPATH . 'wp-content/plugins/aria_second_plugin.php');
 
       // add_filter( 'gform_pre_render_' . $result, 'aria_populate_posts', 3 );
       // add_filter( 'gform_pre_validation_' . $result, 'aria_populate_posts' );
