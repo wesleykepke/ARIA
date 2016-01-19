@@ -66,7 +66,7 @@ function aria_activation_func() {
       $period_field->choices = array(
         array('text' => "Baroque", 'value' => "One", 'isSelected' => false),
         array('text' => "Classical", 'value' => "Two", 'isSelected' => false),
-        array('text' => "Contemporary", 'value' => "Three", 'isSelected' => false)
+        array('text' => "Contemporary", 'value' => "Three", 'isSelected' => false),
         array('text' => "Romantic", 'value' => "Four", 'isSelected' => false)
       );
 
