@@ -64,10 +64,10 @@ function aria_activation_func() {
       $period_field->placeholder = "Select Period...";
 
       $period_field->choices = array(
-        array('text' => "Baroque", 'value' => "One", 'isSelected' => false),
-        array('text' => "Classical", 'value' => "Two", 'isSelected' => false),
-        array('text' => "Contemporary", 'value' => "Three", 'isSelected' => false),
-        array('text' => "Romantic", 'value' => "Four", 'isSelected' => false)
+        array('text' => "Baroque", 'value' => "Baroque", 'isSelected' => false),
+        array('text' => "Classical", 'value' => "Classical", 'isSelected' => false),
+        array('text' => "Contemporary", 'value' => "Contemporary", 'isSelected' => false),
+        array('text' => "Romantic", 'value' => "Romantic", 'isSelected' => false)
       );
 
       // Songs
@@ -78,7 +78,6 @@ function aria_activation_func() {
       $level_one_baroque_field->size = 'medium';
       $level_one_baroque_field->placeholder = "Select a Song";
 
-
       $competition_creation_form->fields[] = $first_name_field;
       $competition_creation_form->fields[] = $teacher_field;
       $competition_creation_form->fields[] = $level_field;
@@ -86,7 +85,7 @@ function aria_activation_func() {
       $competition_creation_form->fields[] = $level_one_baroque_field;
 
       $result = GFAPI::add_form($competition_creation_form->createFormArray());
-    
+      
       add_filter( 'gform_pre_render_' . $result, 'aria_populate_posts', 3 );
       add_filter( 'gform_pre_validation_' . $result, 'aria_populate_posts' );
       add_filter( 'gform_pre_submission_filter_' . $result, 'aria_populate_posts' );
@@ -98,7 +97,6 @@ function aria_activation_func() {
 
     // form exists; dynamically populate droptown 
     else {
-      add_filter('gform_field_value_Choices', 'aria_dynamically_populate_teachers');
       //echo 'create competition form exits, made it through filter';
       //die;
       $competition_creation_form = GFAPI::get_form(14); 

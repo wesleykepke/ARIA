@@ -145,6 +145,8 @@ function aria_populate_posts( $form ) {
 
 function aria_modify_logic( $form ) {
 
+  echo '<h1> ARIA MODIFY LOGIC </h1>';
+
 	$form['description'] = 'conditional last';
 	// create array of periods
 	$periods = array( 'Baroque', 'Classical', 'Contemporary', 'Romantic' );
