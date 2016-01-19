@@ -14,22 +14,28 @@ function aria_activation_func() {
     // Get all forms from gravity forms
     $forms = GFAPI::get_forms();
 
-    echo(json_encode(GFAPI::get_form(15)));
-    die();
-
     // Set the form index of the Competition Creation Form.
     $index = -1;
 
     // Loop th rough each form to see if the form was previously created.
     foreach ($forms as $form) {
-      if($form['title'] == "Competition Creation Form") {
+      if($form['title'] == "Test Registration Form") {
         $index =  $form['id'];
       }
     }
 
     // form does not exist; create new form 
     if ($index == -1) {
-      $competition_creation_form = new GF_Form("Competition Creation Form", "This shows that a form has been created");
+      $competition_creation_form = new GF_Form("Test Registration Form", "This shows that a form has been created");
+      
+      $first_name_field = new GF_Field_Text();
+      $first_name_field->label = "First name: ";
+      $first_name_field->id = 1;
+      $first_name_field->isRequired = true;
+      $first_name_field->size = medium;
+
+      $competition_creation_form['fields'][] = $first_name_field;
+
       $result = GFAPI::add_form($competition_creation_form->createFormArray());
     }
 
