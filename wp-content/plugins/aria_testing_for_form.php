@@ -53,7 +53,7 @@ function aria_activation_func() {
         array('text' => "One", 'value' => "One", 'isSelected' => true),
         array('text' => "Two", 'value' => "Two", 'isSelected' => false),
         array('text' => "Three", 'value' => "Three", 'isSelected' => false)
-      )
+      );
 
       // Period field
       $period_field = new GF_Field_Select();
@@ -68,7 +68,7 @@ function aria_activation_func() {
         array('text' => "Classical", 'value' => "Two", 'isSelected' => false),
         array('text' => "Contemporary", 'value' => "Three", 'isSelected' => false)
         array('text' => "Romantic", 'value' => "Four", 'isSelected' => false)
-      )
+      );
 
       // Songs
       $song_field = new GF_Field_Select();
