@@ -34,7 +34,7 @@ function aria_activation_func() {
       $first_name_field->isRequired = true;
       $first_name_field->size = 'medium';
 
-      $competition_creation_form['fields'][] = $first_name_field;
+      $competition_creation_form->fields[] = $first_name_field;
 
       $result = GFAPI::add_form($competition_creation_form->createFormArray());
     }
