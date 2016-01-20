@@ -2,19 +2,59 @@
 /*
 Plugin Name: Aria First Plugin
 Plugin URI: http://google.com
-Description: Adds a super sweet footer to your WordPress page. Now with a settings menu. 
+Description: Testing email functionality. 
 Author: Wes
-Version: 2.0
+Version: 3.0
 Author URI: http://wkepke.com
 */
 
-function aria_first_plugin() {
-	$random_number = mt_rand(0, 55); 
-	echo '<h1 id="aria_first_plugin_css">This is a SUPER sweet footer that generated the random number: ' . $random_number. ' (from the range 0-55).</h1>';
+
+function aria_add_activation() {
+
+$new_entry = array(
+	"Level" => "420",
+	"Period" => "Baroque",
+	"Song Name" => "Symphony #420",
+	"Composer" => "Bach"
+); 
+
+var_dump($new_entry);
+die; 
+
+
+$success = array();
+
+$success = GFAPI::add_entries($new_entry, 17); 
 }
 
-add_action('wp_footer', 'aria_first_plugin', 6); 
+register_activation_hook(__FILE__, "aria_add_activation"); 
 
+
+/*
+if ($success == WP_Error) {
+	die("Didn't work"); 
+}
+*/
+
+
+/*
+
+wp_mail works (01/19/2016)
+
+function aria_first_plugin() {
+	$random_number = mt_rand(0, 55); 
+	//echo '<h1 id="aria_first_plugin_css">This is a SUPER sweet footer that generated the random number: ' . $random_number. ' (from the range 0-55).</h1>';
+	$message = "This is a SUPER sweet footer that generated the random number: " . $random_number . " (from the range 0-55).";
+	$to = "wesleykepke@nevada.unr.edu";
+	$subject = "NNMTA teacher registration";
+	if (!wp_mail($to, $subject, $message)) {
+		die("Email not sent correctly"); 
+	}
+}
+
+add_action('admin_notices', 'aria_first_plugin', 6);  
+*/
+/*
 function aria_first_plugin_css() {
 	// check if language flows from right to left
 	$x = is_rtl() ? 'left' : 'right';
@@ -32,52 +72,6 @@ function aria_first_plugin_css() {
 }
 
 add_action('wp_footer', 'aria_first_plugin_css'); 
-
-add_action('admin_menu', 'aria_first_plugin_menu'); 
-
-function aria_first_plugin_menu() {
-	// adding a menu
-	add_menu_page('My Plugin Settings', 
-			'Plugin Settings',
-			'administrator',
-			'my-plugin-settings',
-			'aria_first_plugin_settings_page',
-			'dashicons-admin-generic'); 
-}
-
-function aria_first_plugin_settings_page() {
-?>
-	<div class="wrap">
-	<h2>ARIA Developer Details</h2>
-
-	<form method="post" action="options.php">
-    		<?php settings_fields( 'my-plugin-settings-group' ); ?>
-    		<?php do_settings_sections( 'my-plugin-settings-group' ); ?>
-    		<table class="form-table">
-        	
-			<tr valign="top">
-        		<th scope="row">ARIA Developer Name</th>
-        		<td><input type="text" name="aria_developer_name" value="<?php echo esc_attr( get_option('aria_developer_name') ); ?>" /></td>
-        		</tr>
-       
-       		 	<tr valign="top">
-        		<th scope="row">ARIA Developer Email</th>
-        		<td><input type="text" name="aria_developer_email" value="<?php echo esc_attr( get_option('aria_developer_email') ); ?>" /></td>
-        		</tr>
-		</table>
-    
-   	 	<?php submit_button(); ?>
-
-	</form>
-	</div>
-<?php
-}
-
-add_action('admin_init', 'my_plugin_settings');
-
-function my_plugin_settings() {
-	register_setting('my-plugin-settings-group', 'aria_developer_name');
-	register_setting('my-plugin-settings-group', 'aria_developer_email');  
-} 
+*/
 
 ?>
