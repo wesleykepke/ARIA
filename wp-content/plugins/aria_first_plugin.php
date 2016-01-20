@@ -11,20 +11,62 @@ Author URI: http://wkepke.com
 
 function aria_add_activation() {
 
-$new_entry = array(
-	"Level" => "420",
+$new_entry = array(); 
+
+$new_entry[] = array(
+	"Level" => "Level One",
 	"Period" => "Baroque",
 	"Song Name" => "Symphony #420",
 	"Composer" => "Bach"
 ); 
 
-var_dump($new_entry);
-die; 
+
+//print_r($new_entry);
+//die; 
 
 
+/*
 $success = array();
 
 $success = GFAPI::add_entries($new_entry, 17); 
+
+if (is_wp_error($success)) {
+	die($success->get_error_message()); 
+}
+
+else {
+	foreach($success as $id) {
+		echo "New entry number is: " . $id;
+	}
+	die; 
+}
+*/
+
+
+// search for the newly created entry
+$search_criteria = array();
+$search_criteria['field_filters'][] = array('key' => "Level", 'value' => "Level One"); 
+$search_criteria['field_filters'][] = array('key' => "Period", 'value' => "Baroque"); 
+$search_criteria['field_filters'][] = array('key' => "Song Name", 'value' => "Symphony #420"); 
+$search_criteria['field_filters'][] = array('key' => "Composer", 'value' => "Bach"); 
+
+//$entries = GFAPI::get_entries(17, $search_criteria); 
+$entries = GFAPI::get_entries(17); 
+
+if (is_wp_error($entries)) {
+	die($entries->get_error_message());
+}
+else {
+	echo "There are " . count($entries) . " entries in form #17. </br>";
+
+	foreach($entries as $entry) {
+		//if ($entry["Song Name"] == "Symphony #420") {
+			echo "Matching entry has id: " . $entry["id"] . "</br>"; 
+		//}
+	}
+	die("???");
+}
+
 }
 
 register_activation_hook(__FILE__, "aria_add_activation"); 
