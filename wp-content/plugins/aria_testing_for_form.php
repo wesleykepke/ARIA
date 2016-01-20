@@ -80,13 +80,13 @@ function aria_create_competition_form() {
     $teacher_registration_end_date_field->id = 7;
     $teacher_registration_end_date_field->isRequired = true;
 
-    $competition_creation_form.fields[] = $competition_name_field;
-    $competition_creation_form.fields[] = $competition_date_field;
-    $competition_creation_form.fields[] = $competition_location_field;
-    $competition_creation_form.fields[] = $student_registration_start_date_field;
-    $competition_creation_form.fields[] = $student_registration_end_date_field;
-    $competition_creation_form.fields[] = $teacher_registration_start_date_field;
-    $competition_creation_form.fields[] = $teacher_registration_end_date_field;
+    $competition_creation_form->fields[] = $competition_name_field;
+    $competition_creation_form->fields[] = $competition_date_field;
+    $competition_creation_form->fields[] = $competition_location_field;
+    $competition_creation_form->fields[] = $student_registration_start_date_field;
+    $competition_creation_form->fields[] = $student_registration_end_date_field;
+    $competition_creation_form->fields[] = $teacher_registration_start_date_field;
+    $competition_creation_form->fields[] = $teacher_registration_end_date_field;
 
     $result = GFAPI::add_form($competition_creation_form->createFormArray());
   }
