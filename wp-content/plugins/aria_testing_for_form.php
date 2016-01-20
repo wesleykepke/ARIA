@@ -20,7 +20,7 @@ function aria_activation_func() {
 
     // Loop through each form to see if the form was previously created.
     foreach ($forms as $form) {
-      if($form['title'] == $competition_creation_form_title) {
+      if($form['title'] == "ARIA: Create a Competition") {
         $index =  $form['id'];
       }
     }
@@ -36,7 +36,7 @@ register_activation_hook(__FILE__, 'aria_activation_func');
 
 function aria_create_competition_form() {
   $competition_creation_form 
-      = new GF_Form($competition_creation_form_title, "");
+      = new GF_Form("ARIA: Create a Competition", "");
   
   // Name Field
   $competition_name_field = new GF_Field_Text();
