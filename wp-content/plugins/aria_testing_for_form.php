@@ -86,7 +86,6 @@ function aria_activation_func() {
 
       $result = GFAPI::add_form($competition_creation_form->createFormArray());
 
-      echo( $result );
 
       // add_filter( 'gform_pre_render_' . $result, 'aria_populate_posts', 3 );
       // add_filter( 'gform_pre_validation_' . $result, 'aria_populate_posts' );
