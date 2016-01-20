@@ -15,7 +15,7 @@ function aria_activation_func() {
     $forms = GFAPI::get_forms();
 
     echo (encode_json(GFAPI::get_form(35)));
-    die()
+    die();
 
     // Set the form index of the Competition Creation Form.
     $competition_creation_form_title = "ARIA: Create a Competition";
