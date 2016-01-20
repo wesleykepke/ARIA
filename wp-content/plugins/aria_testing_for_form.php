@@ -35,59 +35,58 @@ register_activation_hook(__FILE__, 'aria_activation_func');
 
 
 function aria_create_competition_form() {
-    $competition_creation_form 
-        = new GF_Form($competition_creation_form_title, "");
-    
-    // Name Field
-    $competition_name_field = new GF_Field_Text();
-    $competition_name_field->label = "Name of Competition";
-    $competition_name_field->id = 1;
-    $competition_name_field->isRequired = true;
+  $competition_creation_form 
+      = new GF_Form($competition_creation_form_title, "");
+  
+  // Name Field
+  $competition_name_field = new GF_Field_Text();
+  $competition_name_field->label = "Name of Competition";
+  $competition_name_field->id = 1;
+  $competition_name_field->isRequired = true;
 
-    // Date of the competition
-    $competition_date_field = new GF_Field_Date();
-    $competition_date_field->label = "Date of Competition";
-    $competition_date_field->id = 2;
-    $competition_date_field->isRequired = true;
+  // Date of the competition
+  $competition_date_field = new GF_Field_Date();
+  $competition_date_field->label = "Date of Competition";
+  $competition_date_field->id = 2;
+  $competition_date_field->isRequired = true;
 
-    // Location
-    $competition_location_field = new GF_Field_Address();
-    $competition_location_field->label = "Location of Competition";
-    $competition_location_field->id = 3;
-    $competition_location_field->isRequired = true;
+  // Location
+  $competition_location_field = new GF_Field_Address();
+  $competition_location_field->label = "Location of Competition";
+  $competition_location_field->id = 3;
+  $competition_location_field->isRequired = true;
 
-    // Student Registration start date
-    $student_registration_start_date_field = new GF_Field_Date();
-    $student_registration_start_date_field->label = "Student Registration Start Date";
-    $student_registration_start_date_field->id = 4;
-    $student_registration_start_date_field->isRequired = true;
+  // Student Registration start date
+  $student_registration_start_date_field = new GF_Field_Date();
+  $student_registration_start_date_field->label = "Student Registration Start Date";
+  $student_registration_start_date_field->id = 4;
+  $student_registration_start_date_field->isRequired = true;
 
-    // Student Registration deadline
-    $student_registration_end_date_field = new GF_Field_Date();
-    $student_registration_end_date_field->label = "Student Registration End Date";
-    $student_registration_end_date_field->id = 5;
-    $student_registration_end_date_field->isRequired = true;
+  // Student Registration deadline
+  $student_registration_end_date_field = new GF_Field_Date();
+  $student_registration_end_date_field->label = "Student Registration End Date";
+  $student_registration_end_date_field->id = 5;
+  $student_registration_end_date_field->isRequired = true;
 
-    // Teacher Registration start date
-    $teacher_registration_start_date_field = new GF_Field_Date();
-    $teacher_registration_start_date_field->label = "Teacher Registration Start Date";
-    $teacher_registration_start_date_field->id = 6;
-    $teacher_registration_start_date_field->isRequired = true;
+  // Teacher Registration start date
+  $teacher_registration_start_date_field = new GF_Field_Date();
+  $teacher_registration_start_date_field->label = "Teacher Registration Start Date";
+  $teacher_registration_start_date_field->id = 6;
+  $teacher_registration_start_date_field->isRequired = true;
 
-    // Teacher Registration deadline
-    $teacher_registration_end_date_field = new GF_Field_Date();
-    $teacher_registration_end_date_field->label = "Teacher Registration Start Date";
-    $teacher_registration_end_date_field->id = 7;
-    $teacher_registration_end_date_field->isRequired = true;
+  // Teacher Registration deadline
+  $teacher_registration_end_date_field = new GF_Field_Date();
+  $teacher_registration_end_date_field->label = "Teacher Registration Start Date";
+  $teacher_registration_end_date_field->id = 7;
+  $teacher_registration_end_date_field->isRequired = true;
 
-    $competition_creation_form->fields[] = $competition_name_field;
-    $competition_creation_form->fields[] = $competition_date_field;
-    $competition_creation_form->fields[] = $competition_location_field;
-    $competition_creation_form->fields[] = $student_registration_start_date_field;
-    $competition_creation_form->fields[] = $student_registration_end_date_field;
-    $competition_creation_form->fields[] = $teacher_registration_start_date_field;
-    $competition_creation_form->fields[] = $teacher_registration_end_date_field;
+  $competition_creation_form->fields[] = $competition_name_field;
+  $competition_creation_form->fields[] = $competition_date_field;
+  $competition_creation_form->fields[] = $competition_location_field;
+  $competition_creation_form->fields[] = $student_registration_start_date_field;
+  $competition_creation_form->fields[] = $student_registration_end_date_field;
+  $competition_creation_form->fields[] = $teacher_registration_start_date_field;
+  $competition_creation_form->fields[] = $teacher_registration_end_date_field;
 
-    $result = GFAPI::add_form($competition_creation_form->createFormArray());
-  }
+  $result = GFAPI::add_form($competition_creation_form->createFormArray());
 }
