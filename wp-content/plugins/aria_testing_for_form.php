@@ -85,9 +85,6 @@ function aria_activation_func() {
       $competition_creation_form->fields[] = $level_one_baroque_field;
 
       $result = GFAPI::add_form($competition_creation_form->createFormArray());
-      
-      echo '<h1>' . $result . '</h1>';
-      die();
 
       add_filter( 'gform_pre_render_' . $result, 'aria_populate_posts', 3 );
       add_filter( 'gform_pre_validation_' . $result, 'aria_populate_posts' );
