@@ -86,12 +86,12 @@ function aria_activation_func() {
 
       $result = GFAPI::add_form($competition_creation_form->createFormArray());
 
-      add_filter( 'gform_pre_render_' . $result, 'aria_populate_posts', 3 );
-      add_filter( 'gform_pre_validation_' . $result, 'aria_populate_posts' );
-      add_filter( 'gform_pre_submission_filter_' . $result, 'aria_populate_posts' );
-      add_filter( 'gform_admin_pre_render_' . $result, 'aria_populate_posts' );
+      // add_filter( 'gform_pre_render_' . $result, 'aria_populate_posts', 3 );
+      // add_filter( 'gform_pre_validation_' . $result, 'aria_populate_posts' );
+      // add_filter( 'gform_pre_submission_filter_' . $result, 'aria_populate_posts' );
+      // add_filter( 'gform_admin_pre_render_' . $result, 'aria_populate_posts' );
  
-      add_filter( 'gform_pre_render_' . $result, 'aria_modify_logic', 2 );
+      // add_filter( 'gform_pre_render_' . $result, 'aria_modify_logic', 2 );
 
     }
 
