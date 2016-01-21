@@ -29,8 +29,7 @@ function aria_activation_func() {
     if ($index == -1) {
       $result = aria_create_competition_form();
 
-      echo "THE FORM ID: ".$result;
-      die();
+      echo( '<script> alert('. $result '); </script');
     }
   }
 }
