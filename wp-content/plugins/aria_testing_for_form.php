@@ -28,7 +28,7 @@ function aria_activation_func() {
     // form does not exist; create new form 
     if ($index == -1) {
       $result = aria_create_competition_form();
-      die("This is the result: " . $result);
+      wp_die("This is the result: " . $result);
     }
   }
 }
