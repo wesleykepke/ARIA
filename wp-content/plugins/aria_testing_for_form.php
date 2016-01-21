@@ -99,5 +99,6 @@ function aria_create_competition( $entry, $form ) {
   $competition_student_form 
       = new GF_Form( rgar($entry, '1') . " Student Registration", "");
   $result = GFAPI::add_form($competition_student_form->createFormArray());
+  wp_die($result);
 }
 
