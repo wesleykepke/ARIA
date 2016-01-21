@@ -97,10 +97,10 @@ function aria_create_competition_form() {
 
 function aria_create_competition( $entry, $form ) {
   $competition_student_form 
-      = new new GF_Form(" Student Registration", "");
+      = new GF_Form( rgar($entry, '1') . " Student Registration", "");
   $result = GFAPI::add_form($competition_student_form->createFormArray());
 
   echo "Done";
-  die();
+  die()
 }
 
