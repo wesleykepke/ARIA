@@ -27,7 +27,10 @@ function aria_activation_func() {
 
     // form does not exist; create new form 
     if ($index == -1) {
-      aria_create_competition_form();
+      $result = aria_create_competition_form();
+
+      echo "THE FORM ID: ".$result;
+      die();
     }
   }
 }
@@ -89,10 +92,9 @@ function aria_create_competition_form() {
   $competition_creation_form->fields[] = $teacher_registration_end_date_field;
 
   $result = GFAPI::add_form($competition_creation_form->createFormArray());
-
-  echo "<h1>The result of add_form is: ".$result."</h1>";
-  die();
   add_action( 'gform_after_submission_' . $result, 'aria_create_competition', 10, 2);
+
+  return $result;
 }
 
 function aria_create_competition( $entry, $form ) {
