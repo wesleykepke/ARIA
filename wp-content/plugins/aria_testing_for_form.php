@@ -101,6 +101,6 @@ function aria_create_competition( $entry, $form ) {
   $result = GFAPI::add_form($competition_student_form->createFormArray());
 
   echo "Done";
-  die()
+  die();
 }
 
