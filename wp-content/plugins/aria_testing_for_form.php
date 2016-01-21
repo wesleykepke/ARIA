@@ -90,7 +90,7 @@ function aria_create_competition_form() {
 
   $result = GFAPI::add_form($competition_creation_form->createFormArray());
 
-  echo "The result of add_form is: ".$result;
+  echo "<h1>The result of add_form is: ".$result."</h1>";
   die();
   add_action( 'gform_after_submission_' . $result, 'aria_create_competition', 10, 2);
 }
