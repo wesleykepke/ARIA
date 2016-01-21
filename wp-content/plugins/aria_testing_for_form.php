@@ -48,37 +48,37 @@ function aria_create_competition_form() {
   $competition_date_field = new GF_Field_Date();
   $competition_date_field->label = "Date of Competition";
   $competition_date_field->id = 2;
-  $competition_date_field->isRequired = true;
+  $competition_date_field->isRequired = false;
 
   // Location
   $competition_location_field = new GF_Field_Address();
   $competition_location_field->label = "Location of Competition";
   $competition_location_field->id = 3;
-  $competition_location_field->isRequired = true;
+  $competition_location_field->isRequired = false;
 
   // Student Registration start date
   $student_registration_start_date_field = new GF_Field_Date();
   $student_registration_start_date_field->label = "Student Registration Start Date";
   $student_registration_start_date_field->id = 4;
-  $student_registration_start_date_field->isRequired = true;
+  $student_registration_start_date_field->isRequired = false;
 
   // Student Registration deadline
   $student_registration_end_date_field = new GF_Field_Date();
   $student_registration_end_date_field->label = "Student Registration End Date";
   $student_registration_end_date_field->id = 5;
-  $student_registration_end_date_field->isRequired = true;
+  $student_registration_end_date_field->isRequired = false;
 
   // Teacher Registration start date
   $teacher_registration_start_date_field = new GF_Field_Date();
   $teacher_registration_start_date_field->label = "Teacher Registration Start Date";
   $teacher_registration_start_date_field->id = 6;
-  $teacher_registration_start_date_field->isRequired = true;
+  $teacher_registration_start_date_field->isRequired = false;
 
   // Teacher Registration deadline
   $teacher_registration_end_date_field = new GF_Field_Date();
   $teacher_registration_end_date_field->label = "Teacher Registration Start Date";
   $teacher_registration_end_date_field->id = 7;
-  $teacher_registration_end_date_field->isRequired = true;
+  $teacher_registration_end_date_field->isRequired = false;
 
   $competition_creation_form->fields[] = $competition_name_field;
   $competition_creation_form->fields[] = $competition_date_field;
