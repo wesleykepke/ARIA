@@ -52,6 +52,8 @@ function aria_create_competition_form() {
   $competition_date_field->id = 2;
   $competition_date_field->isRequired = false;
   $competition_date_field->calendarIconType = 'calendar';
+  $competition_date_field->dateType = 'datepicker';
+
 
   // Location
   $competition_location_field = new GF_Field_Address();
@@ -65,6 +67,7 @@ function aria_create_competition_form() {
   $student_registration_start_date_field->id = 4;
   $student_registration_start_date_field->isRequired = false;
   $student_registration_start_date_field->calendarIconType = 'calendar';
+  $student_registration_start_date_field->dateType = 'datepicker';
 
 
   // Student Registration deadline
@@ -73,6 +76,7 @@ function aria_create_competition_form() {
   $student_registration_end_date_field->id = 5;
   $student_registration_end_date_field->isRequired = false;
   $student_registration_end_date_field->calendarIconType = 'calendar';
+  $student_registration_end_date_field->dateType = 'datepicker';
 
 
   // Teacher Registration start date
@@ -81,6 +85,7 @@ function aria_create_competition_form() {
   $teacher_registration_start_date_field->id = 6;
   $teacher_registration_start_date_field->isRequired = false;
   $teacher_registration_start_date_field->calendarIconType = 'calendar';
+  $teacher_registration_start_date_field->dateType = 'datepicker';
 
 
   // Teacher Registration deadline
@@ -89,6 +94,7 @@ function aria_create_competition_form() {
   $teacher_registration_end_date_field->id = 7;
   $teacher_registration_end_date_field->isRequired = false;
   $teacher_registration_end_date_field->calendarIconType = 'calendar';
+  $teacher_registration_end_date_field->dateType = 'datepicker';
 
 
   $competition_creation_form->fields[] = $competition_name_field;
