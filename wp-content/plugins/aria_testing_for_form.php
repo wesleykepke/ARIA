@@ -53,11 +53,11 @@ function aria_create_competition_form() {
   $competition_date_field->dateType = 'datepicker';
 
 
-  // Location
-  $competition_location_field = new GF_Field_Address();
-  $competition_location_field->label = "Location of Competition";
-  $competition_location_field->id = 3;
-  $competition_location_field->isRequired = false;
+  // // Location
+  // $competition_location_field = new GF_Field_Address();
+  // $competition_location_field->label = "Location of Competition";
+  // $competition_location_field->id = 3;
+  // $competition_location_field->isRequired = false;
 
   // Student Registration start date
   $student_registration_start_date_field = new GF_Field_Date();
@@ -97,7 +97,7 @@ function aria_create_competition_form() {
 
   $competition_creation_form->fields[] = $competition_name_field;
   $competition_creation_form->fields[] = $competition_date_field;
-  $competition_creation_form->fields[] = $competition_location_field;
+  // $competition_creation_form->fields[] = $competition_location_field;
   $competition_creation_form->fields[] = $student_registration_start_date_field;
   $competition_creation_form->fields[] = $student_registration_end_date_field;
   $competition_creation_form->fields[] = $teacher_registration_start_date_field;
