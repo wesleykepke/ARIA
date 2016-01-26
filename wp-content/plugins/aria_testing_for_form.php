@@ -59,27 +59,8 @@ function aria_create_competition_form() {
   $competition_location_field->label = "Location of Competition";
   $competition_location_field->id = 3;
   $competition_location_field->isRequired = false;
-  $competition_location_field->inputs = array(
-    array("id" => "{$competition_location_field->id}.1",
-          "label" => "Street Address",
-          "name" => ""),
-    array("id" => "{$competition_location_field->id}.2",
-          "label" => "Address Line 2",
-          "name" => ""),
-    array("id" => "{$competition_location_field->id}.3",
-          "label" => "City",
-          "name" => ""),
-    array("id" => "{$competition_location_field->id}.4",
-          "label" => "State \/ Province",
-          "name" => ""),
-    array("id" => "{$competition_location_field->id}.5",
-          "label" => "ZIP \/ Postal Code",
-          "name" => ""),
-    array("id" => "{$competition_location_field->id}.6",
-          "label" => "Country",
-          "name" => ""),
-  );
-
+  $competition_location_field = aria_add_default_address_inputs($competition_location_field);
+  
   // Student Registration start date
   $student_registration_start_date_field = new GF_Field_Date();
   $student_registration_start_date_field->label = "Student Registration Start Date";
@@ -147,4 +128,28 @@ function aria_create_competition( $entry, $form ) {
   $result = GFAPI::add_form($competition_student_form->createFormArray());
 }
 
+function aria_add_default_address_inputs($field) {
+  $field->inputs = array(
+    array("id" => "{$field->id}.1",
+          "label" => "Street Address",
+          "name" => ""),
+    array("id" => "{$field->id}.2",
+          "label" => "Address Line 2",
+          "name" => ""),
+    array("id" => "{$field->id}.3",
+          "label" => "City",
+          "name" => ""),
+    array("id" => "{$field->id}.4",
+          "label" => "State \/ Province",
+          "name" => ""),
+    array("id" => "{$field->id}.5",
+          "label" => "ZIP \/ Postal Code",
+          "name" => ""),
+    array("id" => "{$field->id}.6",
+          "label" => "Country",
+          "name" => ""),
+  );
+
+  return $field;
+}
 
