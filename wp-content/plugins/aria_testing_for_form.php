@@ -106,7 +106,16 @@ function aria_create_competition_form() {
   $result = GFAPI::add_form($competition_creation_form->createFormArray());
   add_action( 'gform_after_submission_' . $result, 'aria_create_competition', 10, 2);
 
-  wp_die(json_encode(GFAPI::get_form(intval($result))));
+  $added_competition_creation_form = GFAPI::get_form(intval($result));\
+  for ($added_competition_creation_form['confirmations'] as $key => $value) {
+    $added_competition_creation_form['confirmations'][$key]['message'] 
+      = "Thanks for contacting us! We will get in touch with you shortly.";
+    $added_competition_creation_form['confirmations'][$key]['type'] = "message";
+    break;
+  }
+
+  GFAPI::update_form($added_competition_creation_form);
+
   return $result;
 }
 
