@@ -11,6 +11,8 @@ Author URI: http://wkepke.com
 function aria_activation_func() {
   require_once(ABSPATH . 'wp-admin/includes/plugin.php');
   if (is_plugin_active('gravityforms/gravityforms.php')) {  
+    wp_die(json_encode(GFAPI::get_form(67)));
+
     // Get all forms from gravity forms
     $forms = GFAPI::get_forms();
 
