@@ -106,8 +106,9 @@ function aria_create_competition_form() {
   $competition_creation_form->fields[] = $teacher_registration_end_date_field;
 
   $result = GFAPI::add_form($competition_creation_form->createFormArray());
-  add_action( 'gform_after_submission_' . $result, 'aria_create_competition', 10, 2);
 
+  // This is done after the form has been added so that the initial confirmation
+  // hash has been added to the object.
   $added_competition_creation_form = GFAPI::get_form(intval($result));
   foreach ($added_competition_creation_form['confirmations'] as $key => $value) {
     $added_competition_creation_form['confirmations'][$key]['message'] 
@@ -115,18 +116,13 @@ function aria_create_competition_form() {
     $added_competition_creation_form['confirmations'][$key]['type'] = "message";
     break;
   }
-
   GFAPI::update_form($added_competition_creation_form);
+
+  add_create_competition_action($result);
 
   return $result;
 }
 
-function aria_create_competition( $entry, $form ) {
-  wp_die("HERE");
-  $competition_student_form 
-      = new GF_Form( "Student Registration", "");
-  $result = GFAPI::add_form($competition_student_form->createFormArray());
-}
 
 function aria_add_default_address_inputs($field) {
   $field->inputs = array(
