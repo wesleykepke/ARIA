@@ -121,10 +121,11 @@ function aria_create_competition_form() {
   }
   GFAPI::update_form($added_competition_creation_form);
 
-  add_action("gform_after_submission_78", "aria_create_competition", 10, 2);
+
 
   return $result;
 }
+add_action("gform_after_submission_78", "aria_create_competition", 10, 2);
 
 function aria_create_competition( $entry, $form ) {
   $competition_student_form 
