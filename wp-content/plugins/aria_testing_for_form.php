@@ -121,7 +121,7 @@ class Aria {
     }
     GFAPI::update_form($added_competition_creation_form);
 
-    add_action("gform_after_submission_{$result}", array($this, "aria_create_competition"), 10, 2);
+    add_action("gform_after_submission_{$result}", array(get_called_class(), "aria_create_competition"), 10, 2);
 
     return $result;
   }
