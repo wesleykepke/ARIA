@@ -33,7 +33,7 @@ class Aria {
 
       // form does not exist; create new form 
       if ($index == -1) {
-        $result = aria_create_competition_form();
+        $result = Aria::aria_create_competition_form();
       }
     }
   }
@@ -62,7 +62,7 @@ class Aria {
     $competition_location_field->label = "Location of Competition";
     $competition_location_field->id = 3;
     $competition_location_field->isRequired = false;
-    $competition_location_field = aria_add_default_address_inputs($competition_location_field);
+    $competition_location_field = Aria::aria_add_default_address_inputs($competition_location_field);
     
     // Student Registration start date
     $student_registration_start_date_field = new GF_Field_Date();
