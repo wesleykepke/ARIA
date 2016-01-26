@@ -121,13 +121,12 @@ function aria_create_competition_form() {
   }
   GFAPI::update_form($added_competition_creation_form);
 
-  add_action("gform_after_submission_76", "aria_create_competition", 10, 2);
+  add_action("gform_after_submission_78", "aria_create_competition", 10, 2);
 
   return $result;
 }
 
 function aria_create_competition( $entry, $form ) {
-  wp_die("HERE");
   $competition_student_form 
       = new GF_Form( "Student Registration", "");
   $result = GFAPI::add_form($competition_student_form->createFormArray());
