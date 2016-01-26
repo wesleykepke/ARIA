@@ -106,7 +106,7 @@ function aria_create_competition_form() {
   $competition_creation_form->fields[] = $teacher_registration_end_date_field;
 
   $result = GFAPI::add_form($competition_creation_form->createFormArray());
-  add_action( "gform_after_submission_{$result}", 'aria_create_competition', 10, 2);
+  add_action( "gform_after_submission", 'aria_create_competition', 10, 2);
 
   // This is done after the form has been added so that the initial confirmation
   // hash has been added to the object.
