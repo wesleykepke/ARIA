@@ -106,17 +106,17 @@ function aria_create_competition_form() {
   $competition_creation_form->fields[] = $teacher_registration_end_date_field;
 
   $result = GFAPI::add_form($competition_creation_form->createFormArray());
-  // add_action( 'gform_after_submission_' . $result, 'aria_create_competition', 10, 2);
+  add_action( 'gform_after_submission_' . $result, 'aria_create_competition', 10, 2);
 
-  // $added_competition_creation_form = GFAPI::get_form(intval($result));
-  // // foreach ($added_competition_creation_form['confirmations'] as $key => $value) {
-  // //   $added_competition_creation_form['confirmations'][$key]['message'] 
-  // //     = "Thanks for contacting us! We will get in touch with you shortly.";
-  // //   $added_competition_creation_form['confirmations'][$key]['type'] = "message";
-  // //   break;
-  // // }
+  $added_competition_creation_form = GFAPI::get_form(intval($result));
+  foreach ($added_competition_creation_form['confirmations'] as $key => $value) {
+    $added_competition_creation_form['confirmations'][$key]['message'] 
+      = "Thanks for contacting us! We will get in touch with you shortly.";
+    $added_competition_creation_form['confirmations'][$key]['type'] = "message";
+    break;
+  }
 
-  // GFAPI::update_form($added_competition_creation_form);
+  GFAPI::update_form($added_competition_creation_form);
 
   return $result;
 }
