@@ -106,6 +106,7 @@ function aria_create_competition_form() {
   $result = GFAPI::add_form($competition_creation_form->createFormArray());
   add_action( 'gform_after_submission_' . $result, 'aria_create_competition', 10, 2);
 
+  wp_die(json_encode(GFAPI::get_form(intval($result))));
   return $result;
 }
 
