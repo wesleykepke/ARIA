@@ -9,7 +9,7 @@ Author URI: http://wkepke.com
 */
 
 
-register_activation_hook(__FILE__, 'aria_activation_func'); 
+register_activation_hook(__FILE__, array('Aria','aria_activation_func')); 
 
 class Aria {
 
