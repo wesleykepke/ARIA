@@ -356,15 +356,3 @@ require get_template_directory() . '/inc/template-tags.php';
  */
 require get_template_directory() . '/inc/customizer.php';
 
-function add_create_competition_action($form_id){
-  add_action( "gform_after_submission_{$form_id}", 'aria_create_competition', 10, 2);
-}
-
-function aria_create_competition( $entry, $form ) {
-  wp_die("HERE");
-  $competition_student_form 
-      = new GF_Form( "Student Registration", "");
-  $result = GFAPI::add_form($competition_student_form->createFormArray());
-}
-
-
