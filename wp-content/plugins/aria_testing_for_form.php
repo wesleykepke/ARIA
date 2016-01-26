@@ -107,6 +107,7 @@ function aria_create_competition_form() {
 
   $result = GFAPI::add_form($competition_creation_form->createFormArray());
   add_action( 'gform_after_submission_' . $result, 'aria_create_competition', 10, 2);
+  wp_die('gform_after_submission_' . $result);
 
   $added_competition_creation_form = GFAPI::get_form(intval($result));
   foreach ($added_competition_creation_form['confirmations'] as $key => $value) {
