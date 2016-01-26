@@ -11,7 +11,6 @@ Author URI: http://wkepke.com
 function aria_activation_func() {
   require_once(ABSPATH . 'wp-admin/includes/plugin.php');
   if (is_plugin_active('gravityforms/gravityforms.php')) {  
-    wp_die(json_encode(GFAPI::get_form(67)));
 
     // Get all forms from gravity forms
     $forms = GFAPI::get_forms();
@@ -60,7 +59,26 @@ function aria_create_competition_form() {
   $competition_location_field->label = "Location of Competition";
   $competition_location_field->id = 3;
   $competition_location_field->isRequired = false;
-  $competition_location_field->inputs = "";
+  $competition_location_field->inputs = array(
+    array("id" => "{$competition_location_field->id}.1",
+          "label" => "Street Address",
+          "name" => ""),
+    array("id" => "{$competition_location_field->id}.2",
+          "label" => "Address Line 2",
+          "name" => ""),
+    array("id" => "{$competition_location_field->id}.3",
+          "label" => "City",
+          "name" => ""),
+    array("id" => "{$competition_location_field->id}.4",
+          "label" => "State \/ Province",
+          "name" => ""),
+    array("id" => "{$competition_location_field->id}.5",
+          "label" => "ZIP \/ Postal Code",
+          "name" => ""),
+    array("id" => "{$competition_location_field->id}.6",
+          "label" => "Country",
+          "name" => ""),
+  );
 
   // Student Registration start date
   $student_registration_start_date_field = new GF_Field_Date();
