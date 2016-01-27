@@ -9,7 +9,6 @@ Author URI: http://wkepke.com
 */
 
 
-add_action("gform_after_submission", array('Aria', "aria_create_competition"), 10, 2);
 register_activation_hook(__FILE__, array('Aria','aria_activation_func')); 
 
 class Aria {
@@ -36,8 +35,6 @@ class Aria {
       // form does not exist; create new form 
       if ($index == -1) {
         $result = self::aria_create_competition_form();
-        wp_die(self::$competition_creation_form_id);
-
       }
     }
   }
@@ -166,5 +163,6 @@ class Aria {
   }
 
 };
+add_action("gform_after_submission", array('Aria', "aria_create_competition"), 10, 2);
 
 
