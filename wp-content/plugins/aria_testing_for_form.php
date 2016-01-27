@@ -124,8 +124,8 @@ class Aria {
     }
     GFAPI::update_form($added_competition_creation_form);
 
-    wp_die(self::$competition_creation_form_id
-    
+    self::$competition_creation_form_id = intval($result);
+
     return $result;
   }
 
