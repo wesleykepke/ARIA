@@ -10,8 +10,10 @@ Author URI: http://wkepke.com
 
 
 register_activation_hook(__FILE__, array('Aria','aria_activation_func')); 
+add_action("gform_after_submission", array('Aria', "aria_create_competition"), 10, 2);
 
 class Aria {
+  public static $competition_creation_form_id = -1;
 
   public static function aria_activation_func() {
     require_once(ABSPATH . 'wp-admin/includes/plugin.php');
@@ -121,15 +123,15 @@ class Aria {
     }
     GFAPI::update_form($added_competition_creation_form);
 
-    add_action("gform_after_submission_{$result}", array(get_called_class(), "aria_create_competition"), 10, 2);
-
     return $result;
   }
 
   public static function aria_create_competition( $entry, $form ) {
-    $competition_student_form 
+    if ($form['id'] == $Aria::competition_creation_form_id) {
+      $competition_student_form 
         = new GF_Form( "Student Registration", "");
-    $result = GFAPI::add_form($competition_student_form->createFormArray());
+      $result = GFAPI::add_form($competition_student_form->createFormArray());
+    }
   }
 
   public static function aria_add_default_address_inputs($field) {
