@@ -9,8 +9,8 @@ Author URI: http://wkepke.com
 */
 
 
-register_activation_hook(__FILE__, array('Aria','aria_activation_func')); 
 add_action("gform_after_submission", array('Aria', "aria_create_competition"), 10, 2);
+register_activation_hook(__FILE__, array('Aria','aria_activation_func')); 
 
 class Aria {
   public static $competition_creation_form_id = -1;
@@ -36,6 +36,8 @@ class Aria {
       // form does not exist; create new form 
       if ($index == -1) {
         $result = self::aria_create_competition_form();
+        wp_die(self::$competition_creation_form_id);
+
       }
     }
   }
@@ -111,6 +113,7 @@ class Aria {
     $competition_creation_form->fields[] = $teacher_registration_end_date_field;
 
     $result = GFAPI::add_form($competition_creation_form->createFormArray());
+
     self::$competition_creation_form_id = intval($result);
 
 
@@ -163,3 +166,5 @@ class Aria {
   }
 
 };
+
+
