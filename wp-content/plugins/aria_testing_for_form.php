@@ -127,7 +127,7 @@ class Aria {
   }
 
   public static function aria_create_competition( $entry, $form ) {
-    if ($form['id'] == $Aria::competition_creation_form_id) {
+    if ($form['id'] == Aria::$competition_creation_form_id) {
       $competition_student_form 
         = new GF_Form( "Student Registration", "");
       $result = GFAPI::add_form($competition_student_form->createFormArray());
