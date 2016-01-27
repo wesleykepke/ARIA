@@ -111,6 +111,7 @@ class Aria {
     $competition_creation_form->fields[] = $teacher_registration_end_date_field;
 
     $result = GFAPI::add_form($competition_creation_form->createFormArray());
+    wp_die(intval($result));
     Aria::$competition_creation_form_id = intval($result);
 
     // This is done after the form has been added so that the initial confirmation
