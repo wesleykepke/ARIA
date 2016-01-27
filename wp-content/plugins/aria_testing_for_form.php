@@ -11,7 +11,7 @@ Author URI: http://wkepke.com
 
 
 class Aria {
-  public static $competition_creation_form_id = -1;
+  public $competition_creation_form_id = -1;
 
   public function aria_activation_func() {
     require_once(ABSPATH . 'wp-admin/includes/plugin.php');
@@ -110,8 +110,6 @@ class Aria {
 
     $result = GFAPI::add_form($competition_creation_form->createFormArray());
 
-    $this->competition_creation_form_id = intval($result);
-
     // This is done after the form has been added so that the initial confirmation
     // hash has been added to the object.
     $added_competition_creation_form = GFAPI::get_form(intval($result));
@@ -121,6 +119,7 @@ class Aria {
       $added_competition_creation_form['confirmations'][$key]['type'] = "message";
       break;
     }
+
     GFAPI::update_form($added_competition_creation_form);
 
     $this->competition_creation_form_id = intval($result);
