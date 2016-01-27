@@ -111,6 +111,7 @@ class Aria {
     $competition_creation_form->fields[] = $teacher_registration_end_date_field;
 
     $result = GFAPI::add_form($competition_creation_form->createFormArray());
+    Aria::$competition_creation_form_id = intval($result);
 
     // This is done after the form has been added so that the initial confirmation
     // hash has been added to the object.
@@ -127,6 +128,7 @@ class Aria {
   }
 
   public static function aria_create_competition( $entry, $form ) {
+    wp_die(Aria::$competition_creation_form_id);
     if ($form['id'] == Aria::$competition_creation_form_id) {
       $competition_student_form 
         = new GF_Form( "Student Registration", "");
