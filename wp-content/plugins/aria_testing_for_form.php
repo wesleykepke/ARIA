@@ -11,9 +11,9 @@ Author URI: http://wkepke.com
 
 
 class Aria {
-  public $competition_creation_form_id = -1;
+  public static $competition_creation_form_id = -1;
 
-  public function aria_activation_func() {
+  public static function aria_activation_func() {
     require_once(ABSPATH . 'wp-admin/includes/plugin.php');
     if (is_plugin_active('gravityforms/gravityforms.php')) {  
 
@@ -33,12 +33,12 @@ class Aria {
 
       // form does not exist; create new form 
       if ($index == -1) {
-        $result = $this->aria_create_competition_form();
+        $result = self::aria_create_competition_form();
       }
     }
   }
 
-  public function aria_create_competition_form() {
+  public static function aria_create_competition_form() {
     $competition_creation_form 
         = new GF_Form("ARIA: Create a Competition", "");
     
@@ -62,7 +62,7 @@ class Aria {
     $competition_location_field->label = "Location of Competition";
     $competition_location_field->id = 3;
     $competition_location_field->isRequired = false;
-    $competition_location_field = $this->aria_add_default_address_inputs($competition_location_field);
+    $competition_location_field = self::aria_add_default_address_inputs($competition_location_field);
     
     // Student Registration start date
     $student_registration_start_date_field = new GF_Field_Date();
@@ -110,6 +110,8 @@ class Aria {
 
     $result = GFAPI::add_form($competition_creation_form->createFormArray());
 
+    self::$competition_creation_form_id = intval($result);
+
     // This is done after the form has been added so that the initial confirmation
     // hash has been added to the object.
     $added_competition_creation_form = GFAPI::get_form(intval($result));
@@ -119,24 +121,23 @@ class Aria {
       $added_competition_creation_form['confirmations'][$key]['type'] = "message";
       break;
     }
-
     GFAPI::update_form($added_competition_creation_form);
 
-    $this->competition_creation_form_id = intval($result);
+    self::$competition_creation_form_id = intval($result);
 
     return $result;
   }
 
-  public function aria_create_competition( $entry, $form ) {
-    wp_die($this->competition_creation_form_id);
-    if ($form['id'] == $this->competition_creation_form_id) {
+  public static function aria_create_competition( $entry, $form ) {
+    wp_die(self::$competition_creation_form_id);
+    if ($form['id'] == self::$competition_creation_form_id) {
       $competition_student_form 
         = new GF_Form( "Student Registration", "");
       $result = GFAPI::add_form($competition_student_form->createFormArray());
     }
   }
 
-  public function aria_add_default_address_inputs($field) {
+  public static function aria_add_default_address_inputs($field) {
     $field->inputs = array(
       array("id" => "{$field->id}.1",
             "label" => "Street Address",
@@ -165,6 +166,6 @@ class Aria {
 
 $aria_instance = new Aria;
 register_activation_hook(__FILE__, array(&$aria_instance,'aria_activation_func')); 
-add_action("gform_after_submission", array(&$aria_instance, "aria_create_competition"), 10, 2);
+add_action("gform_after_submission", array('Aria', "aria_create_competition"), 10, 2);
 
 
