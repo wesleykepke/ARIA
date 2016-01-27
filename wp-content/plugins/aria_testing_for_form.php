@@ -35,7 +35,7 @@ class Aria {
 
       // form does not exist; create new form 
       if ($index == -1) {
-        $result = Aria::aria_create_competition_form();
+        $result = self::aria_create_competition_form();
       }
     }
   }
@@ -64,7 +64,7 @@ class Aria {
     $competition_location_field->label = "Location of Competition";
     $competition_location_field->id = 3;
     $competition_location_field->isRequired = false;
-    $competition_location_field = Aria::aria_add_default_address_inputs($competition_location_field);
+    $competition_location_field = self::aria_add_default_address_inputs($competition_location_field);
     
     // Student Registration start date
     $student_registration_start_date_field = new GF_Field_Date();
@@ -111,9 +111,8 @@ class Aria {
     $competition_creation_form->fields[] = $teacher_registration_end_date_field;
 
     $result = GFAPI::add_form($competition_creation_form->createFormArray());
-    Aria::$competition_creation_form_id = intval($result);
-    wp_die(Aria::$competition_creation_form_id);
-    
+    self::$competition_creation_form_id = intval($result);
+
 
     // This is done after the form has been added so that the initial confirmation
     // hash has been added to the object.
@@ -130,8 +129,8 @@ class Aria {
   }
 
   public static function aria_create_competition( $entry, $form ) {
-    wp_die(Aria::$competition_creation_form_id);
-    if ($form['id'] == Aria::$competition_creation_form_id) {
+    wp_die(self::$competition_creation_form_id);
+    if ($form['id'] == self::$competition_creation_form_id) {
       $competition_student_form 
         = new GF_Form( "Student Registration", "");
       $result = GFAPI::add_form($competition_student_form->createFormArray());
