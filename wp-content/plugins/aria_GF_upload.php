@@ -34,4 +34,12 @@ function aria_modify_upload($path_info, $form_id){
 
 add_filter( 'gform_upload_path', 'aria_modify_upload', 10, 2 );
 
+function aria_test_prepop( $value, $field, $name ){
+	//echo print_r($name);
+	//die;
+	return 'prepop worked';
+}
+
+//add_filter( 'gform_field_value_TestPP', 'aria_test_prepop', 10, 3 );
+
 ?>

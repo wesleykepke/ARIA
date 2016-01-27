@@ -103,10 +103,6 @@ function aria_populate_posts( $form ) {
 	           continue;
         }
 
-        // you can add additional parameters here to alter the posts that are retrieved
-        // more info: [http://codex.wordpress.org/Template_Tags/get_posts](http://codex.wordpress.org/Template_Tags/get_posts)
-        //$posts = get_posts( 'numberposts=-1&post_status=publish' );
-
         $choices = array();
 	$search_criteria = array(
     		'status'        => 'active',
