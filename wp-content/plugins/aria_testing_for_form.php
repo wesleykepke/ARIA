@@ -112,7 +112,6 @@ class Aria {
     $result = GFAPI::add_form($competition_creation_form->createFormArray());
 
     self::$competition_creation_form_id = intval($result);
-    wp_die(self::$competition_creation_form_id);
 
     // This is done after the form has been added so that the initial confirmation
     // hash has been added to the object.
@@ -125,6 +124,8 @@ class Aria {
     }
     GFAPI::update_form($added_competition_creation_form);
 
+    wp_die(self::$competition_creation_form_id
+    
     return $result;
   }
 
