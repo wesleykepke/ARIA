@@ -203,7 +203,7 @@ class Aria {
     $alternate_theory_field->isRequired = false;
     $alternate_theory_field->choices = array(
       array('text' => 'Alternate theory exam completed', 'value' => 'Alternate theory exam completed', 'isSelected' => false)
-    }
+    );
     $teacher_form->fields[] = $alternate_theory_field;
 
     $competition_format_field = new GF_Field_Radio();
