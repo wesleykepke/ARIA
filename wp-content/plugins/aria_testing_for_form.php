@@ -146,7 +146,7 @@ class Aria {
     $field_id = 1;
 
     $teacher_name_field = new GF_Field_Name();
-    $teacher_name_field->label = "Name"
+    $teacher_name_field->label = "Name";
     $teacher_name_field->id = $field_id++;
     $teacher_name_field->isRequired = true;
     $teacher_form->fields[] = $teacher_name_field;
