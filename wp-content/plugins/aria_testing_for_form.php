@@ -17,6 +17,8 @@ class Aria {
     require_once(ABSPATH . 'wp-admin/includes/plugin.php');
     if (is_plugin_active('gravityforms/gravityforms.php')) {  
 
+      aria_create_teacher_form("Sample Created");
+
       // Get all forms from gravity forms
       $forms = GFAPI::get_forms();
 
@@ -126,6 +128,98 @@ class Aria {
     self::$competition_creation_form_id = intval($result);
 
     return $result;
+  }
+
+  public static function aria_initialize_confirmation($form_id) {
+    $added_competition_creation_form = GFAPI::get_form(intval($form_id));
+    foreach ($added_competition_creation_form['confirmations'] as $key => $value) {
+      $added_competition_creation_form['confirmations'][$key]['message'] 
+        = "Thanks for contacting us! We will get in touch with you shortly.";
+      $added_competition_creation_form['confirmations'][$key]['type'] = "message";
+      break;
+    }
+    GFAPI::update_form($added_competition_creation_form);
+  }
+
+  public static function aria_create_teacher_form( $competition_name ) {
+    $teacher_form = new GF_Form("{$competition_name} Teacher Registration", "");
+    $field_id = 1;
+
+    $teacher_name_field = new GF_Field_Name();
+    $teacher_name_field->label = "Name"
+    $teacher_name_field->id = $field_id++;
+    $teacher_name_field->isRequired = true;
+    $teacher_form->fields[] = $teacher_name_field;
+
+    $teacher_email_field = new GF_Field_Email();
+    $teacher_email_field->label = "Email";
+    $teacher_email_field->id = $field_id++;
+    $teacher_email_field->isRequired = true;
+    $teacher_form->fields[] = $teacher_email_field;
+
+    $teacher_phone_field = new GF_Field_Phone();
+    $teacher_phone_field->label = "Phone";
+    $teacher_phone_field->id = $field_id++;
+    $teacher_phone_field->isRequired = true;
+    $teacher_form->fields[] = $teacher_phone_field;
+
+    $volunteer_preference_field = new GF_Field_Checkbox();
+    $volunteer_preference_field->label = "Volunteer Preference";
+    $volunteer_preference_field->id = $field_id++;
+    $volunteer_preference_field->isRequired = true;
+    $volunteer_preference_field->choices = array(
+      array('text' => 'Section Proctor', 'value' => 'Section Proctor', 'isSelected' => false),
+      array('text' => 'Posting Results', 'value' => 'Posting Results', 'isSelected' => false),
+      array('text' => 'Information Table', 'value' => 'Information Table', 'isSelected' => false),
+      array('text' => 'Greeting and Assisting with Locating Rooms', 'value' => 'Greeting', 'isSelected' => false),
+      array('text' => 'Hospitality (managing food in judges rooms)', 'value' => 'Hospitality', 'isSelected' => false)
+    );
+    $teacher_form->fields[] = $volunteer_preference_field;
+
+    $volunteer_time_field = new GF_Field_Checkbox();
+    $volunteer_time_field->label = "Times Available for Volunteering";
+    $volunteer_time_field->id = $field_id++;
+    $volunteer_time_field->isRequired = false;
+    $teacher_form->fields[] = $volunteer_time_field;
+
+    $student_name_field = new GF_Field_Name();
+    $student_name_field->label = "Student Name";
+    $student_name_field->id = $field_id++;
+    $student_name_field->isRequired = true;
+    $teacher_form->fields[] = $student_name_field;
+
+    $student_theory_score = new GF_Field_Number();
+    $student_theory_score->label = "Theory Score (percentage)";
+    $student_theory_score->id = $field_id++;
+    $student_theory_score->isRequired = false;
+    $student_theory_score->numberFormat = "decimal_dot";
+    $student_theory_score->rangeMin = 0;
+    $student_theory_score->rangeMax = 100;
+    $teacher_form->fields[] = $student_theory_score;
+
+    $alternate_theory_field = new GF_Field_Checkbox();
+    $alternate_theory_field->label = "Check if alternate theory exam was completed.";
+    $alternate_theory_field->id = $field_id++;
+    $alternate_theory_field->isRequired = false;
+    $alternate_theory_field->choices = array(
+      array('text' => 'Alternate theory exam completed', 'value' => 'Alternate theory exam completed', 'isSelected' => false)
+    }
+    $teacher_form->fields[] = $alternate_theory_field;
+
+    $competition_format_field = new GF_Field_Radio();
+    $competition_format_field->label = "Format of Cometition";
+    $competition_format_field->id = $field_id++;
+    $competition_format_field->isRequired = false;
+    $teacher_form->fields[] = $competition_format_field;
+
+    $timing_of_pieces_field = new GF_Field_Number();
+    $timing_of_pieces_field->label = "Timing of pieces (minutes)";
+    $timing_of_pieces_field->id = $field_id++;
+    $timing_of_pieces_field->isRequired = false;
+    $teacher_form->fields[] = $timing_of_pieces_field;
+
+    $result = GFAPI::add_form($teacher_form->createFormArray());
+    aria_initialize_confirmation($result);
   }
 
   public static function aria_create_competition( $entry, $form ) {
