@@ -174,6 +174,9 @@ class Aria {
       array('text' => 'Greeting and Assisting with Locating Rooms', 'value' => 'Greeting', 'isSelected' => false),
       array('text' => 'Hospitality (managing food in judges rooms)', 'value' => 'Hospitality', 'isSelected' => false)
     );
+    $volunteer_preference_field->description = "Please check 1 time slot if you"
+    " have 1-3 students competing, 2 time slots if you have 4-6 students"
+    " competing, and 3 time slots if you have more than 6 students competing.";
     $teacher_form->fields[] = $volunteer_preference_field;
 
     $volunteer_time_field = new GF_Field_Checkbox();
@@ -207,15 +210,21 @@ class Aria {
     $teacher_form->fields[] = $alternate_theory_field;
 
     $competition_format_field = new GF_Field_Radio();
-    $competition_format_field->label = "Format of Cometition";
+    $competition_format_field->label = "Format of Competition";
     $competition_format_field->id = $field_id++;
     $competition_format_field->isRequired = false;
+    $competition_format_field->choices = $volunteer_preference_field->choices = array(
+      array('text' => 'Traditional', 'value' => 'Traditional', 'isSelected' => false),
+      array('text' => 'Competitive', 'value' => 'Competitive', 'isSelected' => false),
+      array('text' => 'Master Class (if upper level)', 'value' => 'Master Class', 'isSelected' => false)
+    );
     $teacher_form->fields[] = $competition_format_field;
 
     $timing_of_pieces_field = new GF_Field_Number();
     $timing_of_pieces_field->label = "Timing of pieces (minutes)";
     $timing_of_pieces_field->id = $field_id++;
     $timing_of_pieces_field->isRequired = false;
+    $timing_of_pieces_field->numberFormat = "decimal_dot";
     $teacher_form->fields[] = $timing_of_pieces_field;
 
     $result = GFAPI::add_form($teacher_form->createFormArray());
