@@ -219,7 +219,7 @@ class Aria {
     $teacher_form->fields[] = $timing_of_pieces_field;
 
     $result = GFAPI::add_form($teacher_form->createFormArray());
-    aria_initialize_confirmation($result);
+    self::aria_initialize_confirmation($result);
   }
 
   public static function aria_create_competition( $entry, $form ) {
