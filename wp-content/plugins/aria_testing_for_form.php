@@ -175,8 +175,8 @@ class Aria {
       array('text' => 'Hospitality (managing food in judges rooms)', 'value' => 'Hospitality', 'isSelected' => false)
     );
     $volunteer_preference_field->description = "Please check 1 time slot if you"
-    " have 1-3 students competing, 2 time slots if you have 4-6 students"
-    " competing, and 3 time slots if you have more than 6 students competing.";
+    ." have 1-3 students competing, 2 time slots if you have 4-6 students"
+    ." competing, and 3 time slots if you have more than 6 students competing.";
     $teacher_form->fields[] = $volunteer_preference_field;
 
     $volunteer_time_field = new GF_Field_Checkbox();
