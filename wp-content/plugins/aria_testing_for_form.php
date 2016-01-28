@@ -17,7 +17,7 @@ class Aria {
     require_once(ABSPATH . 'wp-admin/includes/plugin.php');
     if (is_plugin_active('gravityforms/gravityforms.php')) {  
 
-      aria_create_teacher_form("Sample Created");
+      self::aria_create_teacher_form("Sample Created");
 
       // Get all forms from gravity forms
       $forms = GFAPI::get_forms();
