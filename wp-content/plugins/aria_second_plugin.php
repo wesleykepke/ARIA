@@ -8,11 +8,12 @@ Version: 2.1
 Author URI: http://wkepke.com
 */
 
-function aria_second_init(){
-	wp_enqueue_script('jquery');
-	
+add_action( 'init', 'aria_add_script' );
+
+function aria_add_script(){
+	wp_enqueue_script( 'jquery' );
+	wp_enqueue_script( 'aria', '/wp-content/plugins/aria1.js' );
 }
-add_action('init', 'aria_second_init');
 
 function aria_second_plugin() {
 	$random_number = mt_rand(100, 200); 
@@ -205,12 +206,3 @@ function aria_modify_logic( $form ) {
 	return $form;
 }
 ?>
-<script type="text/javascript">
-	jQuery(document).ready(function($) {
-		function getInput(){
-			var model=$('#input_2').val();
-			alert(model);
-		}
-
-	});
-</script>
