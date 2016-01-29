@@ -41,7 +41,8 @@
         //      }
 */
 			$( document ).ajaxError(function() {
- 			$( ".log" ).text( "Triggered ajaxError handler." );
+// 			$( ".log" ).text( "Triggered ajaxError handler." );
+			alert("error");
 			});
 
 			$.get( "http://aria.cse.unr.edu/wp-content/plugins/test.html" );
