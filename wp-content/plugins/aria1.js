@@ -45,6 +45,7 @@
 					alert( "Load was performed." );
 				});
 			}
+			alert( "made it" );
         });	
 
 
