@@ -270,7 +270,7 @@ class Aria {
 
 register_activation_hook(__FILE__, array('Aria','aria_activation_func')); 
 
-public static function aria_create_competition_form() {
+function aria_create_competition_form() {
   $competition_creation_form 
       = new GF_Form("ARIA: Create a Competition", "");
   
