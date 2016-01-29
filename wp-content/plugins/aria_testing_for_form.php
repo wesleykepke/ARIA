@@ -317,7 +317,7 @@ class Aria {
     " be guaranteed.";
     $compliance_field->choices = array(
       array('text' => 'I have read and agree with the following statement:', 'value' => 'Agree', 'isSelected' => false),
-    )
+    );
     $student_form->fields[] = $compliance_field;
 
     $result = GFAPI::add_form($student_form->createFormArray());
