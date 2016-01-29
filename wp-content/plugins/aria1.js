@@ -44,7 +44,7 @@
 						$( ".result" ).html( data );
 						alert( "Load was performed." );
 					}
-			});
+			);
         });	
 
 
