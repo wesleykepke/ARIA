@@ -37,96 +37,9 @@ class Aria {
 
       // form does not exist; create new form 
       if ($index == -1) {
-        $result = self::aria_create_competition_form();
+        $result = aria_create_competition_form();
       }
     }
-  }
-
-  public static function aria_create_competition_form() {
-    $competition_creation_form 
-        = new GF_Form("ARIA: Create a Competition", "");
-    
-    // Name Field
-    $competition_name_field = new GF_Field_Text();
-    $competition_name_field->label = "Name of Competition";
-    $competition_name_field->id = 1;
-    $competition_name_field->isRequired = true;
-
-    // Date of the competition
-    $competition_date_field = new GF_Field_Date();
-    $competition_date_field->label = "Date of Competition";
-    $competition_date_field->id = 2;
-    $competition_date_field->isRequired = false;
-    $competition_date_field->calendarIconType = 'calendar';
-    $competition_date_field->dateType = 'datepicker';
-
-    // Location
-    $competition_location_field = new GF_Field_Address();
-    $competition_location_field->label = "Location of Competition";
-    $competition_location_field->id = 3;
-    $competition_location_field->isRequired = false;
-    $competition_location_field = self::aria_add_default_address_inputs($competition_location_field);
-    
-    // Student Registration start date
-    $student_registration_start_date_field = new GF_Field_Date();
-    $student_registration_start_date_field->label = "Student Registration Start Date";
-    $student_registration_start_date_field->id = 4;
-    $student_registration_start_date_field->isRequired = false;
-    $student_registration_start_date_field->calendarIconType = 'calendar';
-    $student_registration_start_date_field->dateType = 'datepicker';
-
-    // Student Registration deadline
-    $student_registration_end_date_field = new GF_Field_Date();
-    $student_registration_end_date_field->label = "Student Registration End Date";
-    $student_registration_end_date_field->id = 5;
-    $student_registration_end_date_field->isRequired = false;
-    $student_registration_end_date_field->calendarIconType = 'calendar';
-    $student_registration_end_date_field->dateType = 'datepicker';
-
-    // Teacher Registration start date
-    $teacher_registration_start_date_field = new GF_Field_Date();
-    $teacher_registration_start_date_field->label = "Teacher Registration Start Date";
-    $teacher_registration_start_date_field->id = 6;
-    $teacher_registration_start_date_field->isRequired = false;
-    $teacher_registration_start_date_field->calendarIconType = 'calendar';
-    $teacher_registration_start_date_field->dateType = 'datepicker';
-
-    // Teacher Registration deadline
-    $teacher_registration_end_date_field = new GF_Field_Date();
-    $teacher_registration_end_date_field->label = "Teacher Registration Start Date";
-    $teacher_registration_end_date_field->id = 7;
-    $teacher_registration_end_date_field->isRequired = false;
-    $teacher_registration_end_date_field->calendarIconType = 'calendar';
-    $teacher_registration_end_date_field->dateType = 'datepicker';
-
-    $competition_creation_form->fields[] = $competition_name_field;
-    $competition_creation_form->fields[] = $competition_date_field;
-    $competition_creation_form->fields[] = $competition_location_field;
-    $competition_creation_form->fields[] = $student_registration_start_date_field;
-    $competition_creation_form->fields[] = $student_registration_end_date_field;
-    $competition_creation_form->fields[] = $teacher_registration_start_date_field;
-    $competition_creation_form->fields[] = $teacher_registration_end_date_field;
-
-    $result = GFAPI::add_form($competition_creation_form->createFormArray());
-    global $new_form_id;
-    $new_form_id = $result; 
-
-    //static::$competition_creation_form_id = intval($result);
-
-    // This is done after the form has been added so that the initial confirmation
-    // hash has been added to the object.
-    $added_competition_creation_form = GFAPI::get_form(intval($result));
-    foreach ($added_competition_creation_form['confirmations'] as $key => $value) {
-      $added_competition_creation_form['confirmations'][$key]['message'] 
-        = "Thanks for contacting us! We will get in touch with you shortly.";
-      $added_competition_creation_form['confirmations'][$key]['type'] = "message";
-      break;
-    }
-    GFAPI::update_form($added_competition_creation_form);
-
-    //static::$competition_creation_form_id = intval($result);
-
-    return $result;
   }
 
   public static function aria_initialize_confirmation($form_id) {
@@ -356,6 +269,93 @@ class Aria {
 };
 
 register_activation_hook(__FILE__, array('Aria','aria_activation_func')); 
+
+public static function aria_create_competition_form() {
+  $competition_creation_form 
+      = new GF_Form("ARIA: Create a Competition", "");
+  
+  // Name Field
+  $competition_name_field = new GF_Field_Text();
+  $competition_name_field->label = "Name of Competition";
+  $competition_name_field->id = 1;
+  $competition_name_field->isRequired = true;
+
+  // Date of the competition
+  $competition_date_field = new GF_Field_Date();
+  $competition_date_field->label = "Date of Competition";
+  $competition_date_field->id = 2;
+  $competition_date_field->isRequired = false;
+  $competition_date_field->calendarIconType = 'calendar';
+  $competition_date_field->dateType = 'datepicker';
+
+  // Location
+  $competition_location_field = new GF_Field_Address();
+  $competition_location_field->label = "Location of Competition";
+  $competition_location_field->id = 3;
+  $competition_location_field->isRequired = false;
+  $competition_location_field = self::aria_add_default_address_inputs($competition_location_field);
+  
+  // Student Registration start date
+  $student_registration_start_date_field = new GF_Field_Date();
+  $student_registration_start_date_field->label = "Student Registration Start Date";
+  $student_registration_start_date_field->id = 4;
+  $student_registration_start_date_field->isRequired = false;
+  $student_registration_start_date_field->calendarIconType = 'calendar';
+  $student_registration_start_date_field->dateType = 'datepicker';
+
+  // Student Registration deadline
+  $student_registration_end_date_field = new GF_Field_Date();
+  $student_registration_end_date_field->label = "Student Registration End Date";
+  $student_registration_end_date_field->id = 5;
+  $student_registration_end_date_field->isRequired = false;
+  $student_registration_end_date_field->calendarIconType = 'calendar';
+  $student_registration_end_date_field->dateType = 'datepicker';
+
+  // Teacher Registration start date
+  $teacher_registration_start_date_field = new GF_Field_Date();
+  $teacher_registration_start_date_field->label = "Teacher Registration Start Date";
+  $teacher_registration_start_date_field->id = 6;
+  $teacher_registration_start_date_field->isRequired = false;
+  $teacher_registration_start_date_field->calendarIconType = 'calendar';
+  $teacher_registration_start_date_field->dateType = 'datepicker';
+
+  // Teacher Registration deadline
+  $teacher_registration_end_date_field = new GF_Field_Date();
+  $teacher_registration_end_date_field->label = "Teacher Registration Start Date";
+  $teacher_registration_end_date_field->id = 7;
+  $teacher_registration_end_date_field->isRequired = false;
+  $teacher_registration_end_date_field->calendarIconType = 'calendar';
+  $teacher_registration_end_date_field->dateType = 'datepicker';
+
+  $competition_creation_form->fields[] = $competition_name_field;
+  $competition_creation_form->fields[] = $competition_date_field;
+  $competition_creation_form->fields[] = $competition_location_field;
+  $competition_creation_form->fields[] = $student_registration_start_date_field;
+  $competition_creation_form->fields[] = $student_registration_end_date_field;
+  $competition_creation_form->fields[] = $teacher_registration_start_date_field;
+  $competition_creation_form->fields[] = $teacher_registration_end_date_field;
+
+  $result = GFAPI::add_form($competition_creation_form->createFormArray());
+  global $new_form_id;
+  $new_form_id = $result; 
+
+  //static::$competition_creation_form_id = intval($result);
+
+  // This is done after the form has been added so that the initial confirmation
+  // hash has been added to the object.
+  $added_competition_creation_form = GFAPI::get_form(intval($result));
+  foreach ($added_competition_creation_form['confirmations'] as $key => $value) {
+    $added_competition_creation_form['confirmations'][$key]['message'] 
+      = "Thanks for contacting us! We will get in touch with you shortly.";
+    $added_competition_creation_form['confirmations'][$key]['type'] = "message";
+    break;
+  }
+  GFAPI::update_form($added_competition_creation_form);
+
+  //static::$competition_creation_form_id = intval($result);
+
+  return $result;
+}
 
 function aria_create_competition($entry, $form ) {
    // wp_die(self::$competition_creation_form_id);
