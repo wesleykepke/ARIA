@@ -8,8 +8,6 @@ Version: 1.2
 Author URI: http://wkepke.com
 */
 
-
-
 class Aria {
   public static $competition_creation_form_id = -1;
 
@@ -18,6 +16,7 @@ class Aria {
     if (is_plugin_active('gravityforms/gravityforms.php')) {  
 
       self::aria_create_teacher_form("Sample Created");
+      self::aria_create_student_form("Sample Created");
 
       // Get all forms from gravity forms
       $forms = GFAPI::get_forms();
@@ -231,13 +230,101 @@ class Aria {
     self::aria_initialize_confirmation($result);
   }
 
+  public static function aria_create_student_form() {
+    $student_form = new GF_Form("{$competition_name} Student  Registration", "");
+    $field_id = 1;
+
+    $parent_name_field = new GF_Field_Name();
+    $parent_name_field->label = "Parent Name";
+    $parent_name_field->id = $field_id++;
+    $parent_name_field->isRequired = true;
+    $parent_form->fields[] = $parent_name_field;
+
+    $parent_email_field = new GF_Field_Email();
+    $parent_email_field->label = "Parent's Email";
+    $parent_email_field->id = $field_id++;
+    $parent_email_field->isRequired = true;
+    $student_form->fields[] = $parent_email_field;
+
+    $student_name_field = new GF_Field_Name();
+    $student_name_field->label = "Student Name";
+    $student_name_field->description = "Please capitalize your child's first ".
+    "and last names and double check the spelling.  The way you type the name ".
+    "here is the way it will appear on all awards and in the Command ".
+    "Performance program.";
+    $student_name_field->id = $field_id++;
+    $student_name_field->isRequired = true;
+    $student_form->fields[] = $student_name_field;
+
+    $student_birthday_date_field = new GF_Field_Date();
+    $student_birthday_date_field->label = "Student Birthday";
+    $student_birthday_date_field->id = $field_id++;
+    $student_birthday_date_field->isRequired = true;
+    $student_birthday_date_field->calendarIconType = 'calendar';
+    $student_birthday_date_field->dateType = 'datepicker';
+    $student_form->fields[] = $student_birthday_date_field;
+
+    $piano_teachers_field = new GF_Field_Select();
+    $piano_teachers_field->label = "Piano Teacher's Name";
+    $piano_teachers_field->id = $field_id++;
+    $piano_teachers_field->isRequired = false;
+    $piano_teachers_field->description = "TBD";
+    $student_form->fields[] = $student_birthday_date_field;
+
+    $teacher_missing_field = new GF_Field_Text();
+    $teacher_missing_field->label = "If your teacher's name is not listed, ".
+    "enter name below.";
+    $teacher_missing_field->id = $field_id++;
+    $teacher_missing_field->isRequired = false;
+    $student_form->fields[] = $teacher_missing_field;
+
+    $available_times = new GF_Field_Checkbox();
+    $available_times->label = "Available Festival Days (check all available times)";
+    $available_times->id = $field_id++;
+    $available_times->isRequired = true;
+    $available_times->description = "There is no guarantee that scheduling ".
+    "requests will be honored.";
+    $available_times->choices = array(
+      array('text' => 'Saturday', 'value' => 'Saturday', 'isSelected' => false),
+      array('text' => 'Sunday', 'value' => 'Sunday', 'isSelected' => false)
+    );
+    $student_form->fields[] = $available_times;
+
+    $command_times = new GF_Field_Checkbox();
+    $command_times->label = "Preferred Command Performance Time (check all available times)";
+    $command_times->id = $field_id++;
+    $command_times->isRequired = true;
+    $command_times->description = "Please check the Command Performance time ".
+    "that you prefer in the event that your child receives a superior rating.";
+    $command_times->choices = array(
+      array('text' => 'Thursday 5:30', 'value' => 'Saturday', 'isSelected' => false),
+      array('text' => 'Thursday 7:30', 'value' => 'Sunday', 'isSelected' => false)
+    );
+    $student_form->fields[] = $available_times;
+
+    $compliance_field = new GF_Field_checkbox();
+    $compliance_field->label = "Compliance Statement";
+    $compliance_field->id = $field_id++;
+    $compliance_field->isRequired = true;
+    $compliance_field->description = "As a parent, I understand and agree to ".
+    "comply with all rules, regulations, and amendments as stated in the ".
+    "Festival syllabus. I am in full compliance with the laws regarding ".
+    "photocopies and can provide verification of authentication of any legally ".
+    "printed music. I understand that adjudicator decisions are final and ".
+    "will not be contested. I know that small children may not remain in the ".
+    "room during performances of non-family members. I understand that ".
+    "requests for specific days/times will be scheduled if possible but cannot".
+    " be guaranteed.";
+    $compliance_field->choices = array(
+      array('text' => 'I have read and agree with the following statement:', 'value' => 'Agree', 'isSelected' => false),
+    )
+
+    $result = GFAPI::add_form($teacher_form->createFormArray());
+    self::aria_initialize_confirmation($result);
+  }
+
   public static function aria_create_competition( $entry, $form ) {
-    wp_die(self::$competition_creation_form_id);
-    if ($form['id'] == self::$competition_creation_form_id) {
-      $competition_student_form 
-        = new GF_Form( "Student Registration", "");
-      $result = GFAPI::add_form($competition_student_form->createFormArray());
-    }
+
   }
 
   public static function aria_add_default_address_inputs($field) {
@@ -269,6 +356,5 @@ class Aria {
 
 $aria_instance = new Aria;
 register_activation_hook(__FILE__, array(&$aria_instance,'aria_activation_func')); 
-add_action("gform_after_submission", array('Aria', "aria_create_competition"), 10, 2);
 
 
