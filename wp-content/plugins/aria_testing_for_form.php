@@ -231,7 +231,7 @@ class Aria {
   }
 
   public static function aria_create_student_form() {
-    $student_form = new GF_Form("{$competition_name} Student  Registration", "");
+    $student_form = new GF_Form("{$competition_name} Student Registration", "");
     $field_id = 1;
 
     $parent_name_field = new GF_Field_Name();
@@ -318,11 +318,12 @@ class Aria {
     $compliance_field->choices = array(
       array('text' => 'I have read and agree with the following statement:', 'value' => 'Agree', 'isSelected' => false),
     )
+    $student_form->fields[] = $compliance_field;
 
-    $result = GFAPI::add_form($teacher_form->createFormArray());
+    $result = GFAPI::add_form($student_form->createFormArray());
     self::aria_initialize_confirmation($result);
   }
-  
+
   public static function aria_add_default_address_inputs($field) {
     $field->inputs = array(
       array("id" => "{$field->id}.1",
