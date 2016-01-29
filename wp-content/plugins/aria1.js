@@ -6,7 +6,7 @@
 	//		$('#input_2').live("change", function() {
 	//			alert("in function");
 	//			alert("You chose " + $('#input_2').val());
-	
+/*	
 			function CalculateSig(stringToSign, privateKey){
                                 var hash = CryptoJS.HmacSHA1(stringToSign, privateKey);
                                 var base64 = hash.toString(CryptoJS.enc.Base64);
@@ -39,4 +39,20 @@
                                 );
                         });
         //      }
+*/
+			$.get( "test.html", function(data) {
+						$( ".result" ).html( data );
+						alert( "Load was performed." );
+					}
+			})
         });	
+
+
+
+
+
+
+
+
+
+
