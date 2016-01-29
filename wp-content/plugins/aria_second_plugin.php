@@ -8,6 +8,12 @@ Version: 2.1
 Author URI: http://wkepke.com
 */
 
+add_action( 'init', 'aria_add_script' );
+
+function aria_add_script(){
+	wp_enqueue_script( 'jquery' );
+	wp_enqueue_script( 'aria', '/wp-content/plugins/aria1.js' );
+}
 
 function aria_second_plugin() {
 	$random_number = mt_rand(100, 200); 
@@ -133,6 +139,18 @@ function aria_populate_posts( $form ) {
     
 	$form['description'] = 'populate last';
 	}
+
+/*
+	$option = isset($_POST['input_2']) ? $_POST['input_2'] : false;
+	if( $option ){
+
+       		echo '<h1 id="aria_second_plugin_css">'. $option .'</h1>';
+	}
+	else{
+       		echo '<h1 id="aria_second_plugin_css">task option required</h1>';
+
+	}
+*/
 
 	//$form['description'] = 'modified';
 	return $form;

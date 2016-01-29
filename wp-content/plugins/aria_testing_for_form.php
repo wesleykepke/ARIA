@@ -1,15 +1,18 @@
 <?php
 /*
-Plugin Name: Aria: Testing if form exists
+Plugin Name: Aria: Testing For Form
 Plugin URI: http://google.com
 Description: Checks to see if the Gravity Forms plugin is enabled.  
 Author: Wes
-Version: 1.2
+Version: 2.2
 Author URI: http://wkepke.com
 */
 
+global $new_form_id;
+$new_form_id = -100;
+
 class Aria {
-  public static $competition_creation_form_id = -1;
+  //public static $competition_creation_form_id = -1;
 
   public static function aria_activation_func() {
     require_once(ABSPATH . 'wp-admin/includes/plugin.php');
@@ -57,7 +60,6 @@ class Aria {
     $competition_date_field->calendarIconType = 'calendar';
     $competition_date_field->dateType = 'datepicker';
 
-
     // Location
     $competition_location_field = new GF_Field_Address();
     $competition_location_field->label = "Location of Competition";
@@ -73,7 +75,6 @@ class Aria {
     $student_registration_start_date_field->calendarIconType = 'calendar';
     $student_registration_start_date_field->dateType = 'datepicker';
 
-
     // Student Registration deadline
     $student_registration_end_date_field = new GF_Field_Date();
     $student_registration_end_date_field->label = "Student Registration End Date";
@@ -81,7 +82,6 @@ class Aria {
     $student_registration_end_date_field->isRequired = false;
     $student_registration_end_date_field->calendarIconType = 'calendar';
     $student_registration_end_date_field->dateType = 'datepicker';
-
 
     // Teacher Registration start date
     $teacher_registration_start_date_field = new GF_Field_Date();
@@ -91,7 +91,6 @@ class Aria {
     $teacher_registration_start_date_field->calendarIconType = 'calendar';
     $teacher_registration_start_date_field->dateType = 'datepicker';
 
-
     // Teacher Registration deadline
     $teacher_registration_end_date_field = new GF_Field_Date();
     $teacher_registration_end_date_field->label = "Teacher Registration Start Date";
@@ -99,7 +98,6 @@ class Aria {
     $teacher_registration_end_date_field->isRequired = false;
     $teacher_registration_end_date_field->calendarIconType = 'calendar';
     $teacher_registration_end_date_field->dateType = 'datepicker';
-
 
     $competition_creation_form->fields[] = $competition_name_field;
     $competition_creation_form->fields[] = $competition_date_field;
@@ -110,8 +108,10 @@ class Aria {
     $competition_creation_form->fields[] = $teacher_registration_end_date_field;
 
     $result = GFAPI::add_form($competition_creation_form->createFormArray());
+    global $new_form_id;
+    $new_form_id = $result; 
 
-    self::$competition_creation_form_id = intval($result);
+    //static::$competition_creation_form_id = intval($result);
 
     // This is done after the form has been added so that the initial confirmation
     // hash has been added to the object.
@@ -124,7 +124,7 @@ class Aria {
     }
     GFAPI::update_form($added_competition_creation_form);
 
-    self::$competition_creation_form_id = intval($result);
+    //static::$competition_creation_form_id = intval($result);
 
     return $result;
   }
@@ -322,11 +322,7 @@ class Aria {
     $result = GFAPI::add_form($teacher_form->createFormArray());
     self::aria_initialize_confirmation($result);
   }
-
-  public static function aria_create_competition( $entry, $form ) {
-
-  }
-
+  
   public static function aria_add_default_address_inputs($field) {
     $field->inputs = array(
       array("id" => "{$field->id}.1",
@@ -352,9 +348,56 @@ class Aria {
     return $field;
   }
 
+  public static function aria_get_comp_id() {
+    return static::$competition_creation_form_id; 
+  }
+
 };
 
 $aria_instance = new Aria;
 register_activation_hook(__FILE__, array(&$aria_instance,'aria_activation_func')); 
+function aria_create_competition($entry, $form ) {
+   // wp_die(self::$competition_creation_form_id);
+    //echo self::$competition_creation_form_id . "<br>"; 
+
+    global $new_form_id;
+
+    if ($form['id'] == $new_form_id) {
+    //if ($form['id'] == $form_id) {
+      $competition_student_form 
+        = new GF_Form( "Student Registration", "");
+      $result = GFAPI::add_form($competition_student_form->createFormArray());
+    }
+    else {
+      echo "form's id: " . $form['id'] . "<br>";
+      echo "global form id: " . $new_form_id;
+      die; 
+    } 
+}
 
 
+function wes_ernst_func() {
+//  echo "No functions called: " . Aria::aria_get_comp_id() . "</br>";
+  Aria::aria_activation_func(); 
+  //echo "Aria::aria_activation_func() called: " . Aria::aria_get_comp_id() . "<br>";
+  //Aria::aria_create_competition_form();  
+  //echo "Aria::aria_create_competition_form(): " . Aria::aria_get_comp_id() . "<br>";
+  //Aria::aria_create_competition(); 
+  //echo "Aria::aria_create_competition(): " . Aria::aria_get_comp_id() . "<br>";
+  //die("End of wes_ernst_func: " . Aria::aria_get_comp_id());  
+  //die;
+}
+
+
+register_activation_hook(__FILE__, "wes_ernst_func"); 
+add_action('gform_after_submission', 'aria_create_competition', 10, 2);
+
+//wp_die("Form id: " . $global_form_id);
+
+//add_action("gform_after_submission_" . $global_form_id, "Aria::aria_create_competition", 10, 2);
+//add_action("gform_after_submission_138", "Aria::aria_create_competition", 10, 2);
+
+/*
+register_activation_hook(__FILE__, array(&$aria_instance,'aria_activation_func')); 
+add_action("gform_after_submission", array('Aria', "aria_create_competition"), 10, 2);
+*/
