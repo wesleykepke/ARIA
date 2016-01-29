@@ -17,7 +17,6 @@ class Aria {
   public static function aria_activation_func() {
     require_once(ABSPATH . 'wp-admin/includes/plugin.php');
     if (is_plugin_active('gravityforms/gravityforms.php')) {  
-      wp_die("HERE");
 
       self::aria_create_teacher_form("Sample Created");
       self::aria_create_student_form("Sample Created");
