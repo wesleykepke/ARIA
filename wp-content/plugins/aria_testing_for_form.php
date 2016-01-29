@@ -356,8 +356,8 @@ class Aria {
 
 };
 
-$aria_instance = new Aria;
-register_activation_hook(__FILE__, array(&$aria_instance,'aria_activation_func')); 
+register_activation_hook(__FILE__, 'Aria::aria_activation_func'); 
+
 function aria_create_competition($entry, $form ) {
    // wp_die(self::$competition_creation_form_id);
     //echo self::$competition_creation_form_id . "<br>"; 
@@ -377,21 +377,6 @@ function aria_create_competition($entry, $form ) {
     } 
 }
 
-
-function wes_ernst_func() {
-//  echo "No functions called: " . Aria::aria_get_comp_id() . "</br>";
-  Aria::aria_activation_func(); 
-  //echo "Aria::aria_activation_func() called: " . Aria::aria_get_comp_id() . "<br>";
-  //Aria::aria_create_competition_form();  
-  //echo "Aria::aria_create_competition_form(): " . Aria::aria_get_comp_id() . "<br>";
-  //Aria::aria_create_competition(); 
-  //echo "Aria::aria_create_competition(): " . Aria::aria_get_comp_id() . "<br>";
-  //die("End of wes_ernst_func: " . Aria::aria_get_comp_id());  
-  //die;
-}
-
-
-register_activation_hook(__FILE__, "wes_ernst_func"); 
 add_action('gform_after_submission', 'aria_create_competition', 10, 2);
 
 //wp_die("Form id: " . $global_form_id);
