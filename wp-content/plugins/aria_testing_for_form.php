@@ -356,7 +356,7 @@ class Aria {
 
 };
 
-register_activation_hook(__FILE__, 'aria_activation_func'); 
+register_activation_hook(__FILE__, array('Aria','aria_activation_func')); 
 
 function aria_create_competition($entry, $form ) {
    // wp_die(self::$competition_creation_form_id);
