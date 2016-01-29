@@ -40,11 +40,13 @@
                         });
         //      }
 */
-			$.get( "test.html", function(data) {
-					$( ".result" ).html( data );
+			$.get( "test.html" );
+
+			/*function(data) {
+					//$( ".result" ).html( data );
 					alert( "Load was performed." );
 				});
-			}
+			}*/
 			alert( "made it" );
         });	
 
