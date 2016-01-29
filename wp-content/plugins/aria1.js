@@ -40,18 +40,20 @@
                         });
         //      }
 */
+/*
 			$( document ).ajaxError(function() {
-// 			$( ".log" ).text( "Triggered ajaxError handler." );
-			alert("error");
+				$( ".log" ).text( "Triggered ajaxError handler." );
+				alert("error");
 			});
 			alert( "before" );
 			$.get( "http://aria.cse.unr.edu/wp-content/plugins/test.html" );
 
-			/*function(data) {
-					//$( ".result" ).html( data );
-					alert( "Load was performed." );
-				});
-			}*/
+			function(data) {
+						//$( ".result" ).html( data );
+						alert( "Load was performed." );
+					});
+			}
+*/
 			alert( "made it" );
 			}
         });	
