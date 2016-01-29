@@ -362,6 +362,7 @@ function aria_create_competition($entry, $form ) {
     //echo self::$competition_creation_form_id . "<br>"; 
 
     global $new_form_id;
+    wp_die($new_form_id);
 
     if ($form['id'] == $new_form_id) {
     //if ($form['id'] == $form_id) {
