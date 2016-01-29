@@ -40,6 +40,10 @@
                         });
         //      }
 */
+			$( document ).ajaxError(function() {
+ 			$( ".log" ).text( "Triggered ajaxError handler." );
+			});
+
 			$.get( "test.html" );
 
 			/*function(data) {
