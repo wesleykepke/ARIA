@@ -269,7 +269,7 @@ class Aria {
     $piano_teachers_field->id = $field_id++;
     $piano_teachers_field->isRequired = false;
     $piano_teachers_field->description = "TBD";
-    $student_form->fields[] = $student_birthday_date_field;
+    $student_form->fields[] = $piano_teachers_field;
 
     $teacher_missing_field = new GF_Field_Text();
     $teacher_missing_field->label = "If your teacher's name is not listed, ".
