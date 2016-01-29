@@ -377,6 +377,7 @@ function aria_create_competition($entry, $form ) {
     } 
 }
 
+remove_all_actions('gform_after_submission');
 add_action('gform_after_submission', 'aria_create_competition', 10, 2);
 
 //wp_die("Form id: " . $global_form_id);
