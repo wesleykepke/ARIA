@@ -8,7 +8,7 @@ Version: 2.2
 Author URI: http://wkepke.com
 */
 
-global $new_form_id;
+$new_form_id;
 $new_form_id = -100;
 
 function aria_activation_func() {
@@ -259,7 +259,6 @@ function aria_add_default_address_inputs($field) {
   return $field;
 }
 
-register_activation_hook(__FILE__, 'aria_activation_func'); 
 
 function aria_create_competition_form() {
   $competition_creation_form 
@@ -368,7 +367,7 @@ function aria_create_competition($entry, $form ) {
     } 
 }
 
-remove_all_actions('gform_after_submission');
+register_activation_hook(__FILE__, 'aria_activation_func'); 
 add_action('gform_after_submission', 'aria_create_competition', 10, 2);
 
 //wp_die("Form id: " . $global_form_id);
