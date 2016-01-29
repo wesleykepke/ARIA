@@ -230,7 +230,7 @@ class Aria {
     self::aria_initialize_confirmation($result);
   }
 
-  public static function aria_create_student_form() {
+  public static function aria_create_student_form( $competition_name ) {
     $student_form = new GF_Form("{$competition_name} Student Registration", "");
     $field_id = 1;
 
