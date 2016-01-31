@@ -2,23 +2,12 @@
 /*
 Plugin Name: Aria: Create Competition (Wes)
 Plugin URI: http://google.com
-<<<<<<< HEAD
-Description: Testing email functionality. 
-=======
 Description: This plugin will allow the festival chairman to create a competition. 
->>>>>>> 68161998df38b6f826a4dc16ac91815577458f70
 Author: KREW (Kyle, Renee, Ernest, and Wes)
 Version: 1.0.0
 Author URI: http://google.com
 */
 
-<<<<<<< HEAD
-/** 
- * This function will find the ID of the form used to upload songs to the database.
- *
- * This function will iterate through all of the active form objects and return the 
- * ID of the form that is used to upload music to the database.
-=======
 /**
  * This is a global variable used to store the form ID of the create competition form.  
  */
@@ -29,40 +18,11 @@ global $competition_form_id = NULL;
  *
  * This function is responsible for creating a new music competition. More specifically, this 
  * function will check to see if 
->>>>>>> 68161998df38b6f826a4dc16ac91815577458f70
  *
  * @since 1.0.0
  * @author KREW 
  */
 function aria_create_competition_activation() {
-<<<<<<< HEAD
-  require_once(ABSPATH . 'wp-admin/includes/plugin.php');
-  if (is_plugin_active('gravityforms/gravityforms.php')) {  
-
-    self::aria_create_teacher_form("Sample Created");
-    self::aria_create_student_form("Sample Created");
-
-    // Get all forms from gravity forms
-    $forms = GFAPI::get_forms();
-
-    // Set the form index of the Competition Creation Form.
-    $competition_creation_form_title = "ARIA: Create a Competition";
-    $index = -1;
-
-    // Loop through each form to see if the form was previously created.
-    foreach ($forms as $form) {
-      if ($form['title'] == "ARIA: Create a Competition") {
-        $index =  $form['id'];
-      }
-    }
-
-    // form does not exist; create new form 
-    if ($index == -1) {
-       $result = self::aria_create_competition_form();
-    }
-  }
-}
-=======
 	require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 	if (is_plugin_active('gravityforms/gravityforms.php')) {  
 
@@ -253,4 +213,3 @@ function aria_create_competition($entry, $form ) {
 // register with the correct hooks
 register_activation_hook(__FILE__, 'aria_create_competition_activation');
 add_action('gform_after_submission_' . strval($competition_form_id), 'aria_create_competition', 10, 2); 
->>>>>>> 68161998df38b6f826a4dc16ac91815577458f70
