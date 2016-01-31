@@ -53,7 +53,8 @@ function aria_create_competition_activation() {
 
 		// Assign the correct ID for the new form 
 		global $competition_form_id;
-		$competition_form_id = $index;   
+		$competition_form_id = $index;  
+		wp_die("ARIA: Create a Competition (form id): " . $competition_form_id);  
 	}
 }
 
@@ -197,7 +198,7 @@ function aria_add_default_address_inputs($field) {
 function aria_create_competition($entry, $form ) {
 	global $competition_form_id;
 
-	if (isset($competition_form_id) && $form['id'] === $competition_form_id;) {
+	if (isset($competition_form_id) && $form['id'] === $competition_form_id) {
 		wp_die("They match! Creating new music competition.");
 		/*
 		Aria::aria_create_student_form();
@@ -211,6 +212,11 @@ function aria_create_competition($entry, $form ) {
 	} 
 }
 
+function aria_get_create_competition_form_id() {
+
+}
+
 // register with the correct hooks
 register_activation_hook(__FILE__, 'aria_create_competition_activation');
-add_action('gform_after_submission_' . strval($competition_form_id), 'aria_create_competition', 10, 2); 
+wp_die("Global scope (ARIA Create a Competition (form id): " . strval($competition_form_id)); 
+//add_action('gform_after_submission_' . strval($competition_form_id), 'aria_create_competition', 10, 2); 
