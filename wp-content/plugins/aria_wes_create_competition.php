@@ -8,12 +8,6 @@ Version: 1.0.0
 Author URI: http://google.com
 */
 
-/**
- * This is a global variable used to store the form ID of the create competition form.  
- */
-global $competition_form_id;
-$competition_form_id = NULL;
-
 /** 
  * This function will run on the activation of this plugin. 
  *
@@ -35,26 +29,13 @@ function aria_create_competition_activation() {
 		// Get all forms from gravity forms
 		$forms = GFAPI::get_forms();
 
-		// Set the form index of the Competition Creation Form
-		$competition_creation_form_title = "ARIA: Create a Competition";
-		$index = -1;
-
-		// Loop through each form to see if the form was previously created
-		foreach ($forms as $form) {
-			if ($form['title'] == "ARIA: Create a Competition") {
-				$index =  $form['id'];
-			}
-		}
+		// See if the form for creating competitions exists
+		$create_competition_form_id = aria_get_create_competition_form_id();
 
 		// Form does not exist; create new form 
-		if ($index === -1) {
-		 	$index = aria_create_competition_form();
+		if ($create_competition_form_id === -1) {
+			aria_create_competition_form();
 		}
-
-		// Assign the correct ID for the new form 
-		global $competition_form_id;
-		$competition_form_id = $index;  
-		wp_die("ARIA: Create a Competition (form id): " . $competition_form_id);  
 	}
 }
 
@@ -196,9 +177,7 @@ function aria_add_default_address_inputs($field) {
  * @author KREW 
  */
 function aria_create_competition($entry, $form ) {
-	global $competition_form_id;
-
-	if (isset($competition_form_id) && $form['id'] === $competition_form_id) {
+	if ($form['id'] === aria_get_create_competition_form_id()) {
 		wp_die("They match! Creating new music competition.");
 		/*
 		Aria::aria_create_student_form();
@@ -233,14 +212,12 @@ function aria_get_create_competition_form_id() {
   }
 
   if (!isset($create_competition_form_id)) {
-    wp_die('Form ' . $upload_form_name . ' does not exist. Please create it and try again.');
+    $create_competition_form_id = -1;
   }
 
-  wp_die("Create competition form id: " . $create_competition_form_id); 
   return $create_competition_form_id; 
 }
 
 // register with the correct hooks
 register_activation_hook(__FILE__, 'aria_create_competition_activation');
-wp_die("Global scope (ARIA Create a Competition (form id): " . strval(aria_get_create_competition_form_id())); 
-//add_action('gform_after_submission_' . strval($competition_form_id), 'aria_create_competition', 10, 2); 
+add_action('gform_after_submission_' . strval(aria_get_create_competition_form_id()), 'aria_create_competition', 10, 2); 
