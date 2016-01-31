@@ -212,11 +212,34 @@ function aria_create_competition($entry, $form ) {
 	} 
 }
 
+/** 
+ * This function will find the ID of the form used to create music competitions. 
+ *
+ * This function will iterate through all of the active form objects and return the 
+ * ID of the form that is used to create music competitions. 
+ *
+ * @since 1.0.0
+ * @author KREW 
+ */
 function aria_get_create_competition_form_id() {
+  $create_competition_form_name = 'ARIA: Create a Competition';
+  $create_competition_form_id = NULL;
+  $all_active_forms = GFAPI::get_forms(); 
 
+  foreach ($all_active_forms as $form) {
+    if ($form['title'] === $create_competition_form_name) {
+      $create_competition_form_id = $form['id']; 
+    }
+  }
+
+  if (!isset($create_competition_form_id)) {
+    wp_die('Form ' . $upload_form_name . ' does not exist. Please create it and try again.');
+  }
+
+  return $create_competition_form_id; 
 }
 
 // register with the correct hooks
 register_activation_hook(__FILE__, 'aria_create_competition_activation');
-wp_die("Global scope (ARIA Create a Competition (form id): " . strval($competition_form_id)); 
+wp_die("Global scope (ARIA Create a Competition (form id): " . strval(aria_get_create_competition_form_id())); 
 //add_action('gform_after_submission_' . strval($competition_form_id), 'aria_create_competition', 10, 2); 
