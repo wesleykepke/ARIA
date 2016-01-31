@@ -11,7 +11,8 @@ Author URI: http://google.com
 /**
  * This is a global variable used to store the form ID of the create competition form.  
  */
-global $competition_form_id = NULL;
+global $competition_form_id;
+$competition_form_id = NULL;
 
 /** 
  * This function will run on the activation of this plugin. 
@@ -196,7 +197,7 @@ function aria_add_default_address_inputs($field) {
 function aria_create_competition($entry, $form ) {
 	global $competition_form_id;
 
-	if ($form['id'] === $competition_form_id;) {
+	if (isset($competition_form_id) && $form['id'] === $competition_form_id;) {
 		wp_die("They match! Creating new music competition.");
 		/*
 		Aria::aria_create_student_form();
