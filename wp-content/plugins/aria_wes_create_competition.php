@@ -210,6 +210,6 @@ function aria_create_competition($entry, $form ) {
 	} 
 }
 
-// register with the correct hookds
+// register with the correct hooks
 register_activation_hook(__FILE__, 'aria_create_competition_activation');
 add_action('gform_after_submission_' . strval($competition_form_id), 'aria_create_competition', 10, 2); 
