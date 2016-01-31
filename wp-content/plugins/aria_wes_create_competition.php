@@ -236,6 +236,7 @@ function aria_get_create_competition_form_id() {
     wp_die('Form ' . $upload_form_name . ' does not exist. Please create it and try again.');
   }
 
+  wp_die("Create competition form id: " . $create_competition_form_id); 
   return $create_competition_form_id; 
 }
 
