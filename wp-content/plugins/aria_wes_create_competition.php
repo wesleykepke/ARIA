@@ -429,10 +429,10 @@ function aria_add_default_address_inputs($field) {
  * @since 1.0.0
  * @author KREW 
  */
-function aria_create_competition($entry, $form ) {
+function aria_create_competition($entry, $form) {
 	if ($form['id'] === aria_get_create_competition_form_id()) {
-		aria_create_student_form();
-		aria_create_teacher_form(); 
+		aria_create_student_form("Wes");
+		aria_create_teacher_form("Wes"); 
 	}
 	else {
 		wp_die('No form currently exists that allows the festival chairman to create a new music competition');
