@@ -54,6 +54,7 @@ function aria_second_plugin_css() {
 }
 
 add_action('wp_footer', 'aria_second_plugin_css'); 
+//add_action('the_post', 'aria_populate_posts');
 
 function aria_find_form_ids() {
 
@@ -73,7 +74,7 @@ function aria_find_form_ids() {
         add_filter( 'gform_pre_submission_filter_' . $id, 'aria_populate_posts' );
         add_filter( 'gform_admin_pre_render_' . $id, 'aria_populate_posts' );
  
-	add_filter( 'gform_pre_render_' . $id, 'aria_modify_logic', 2 );
+//DISABLING	add_filter( 'gform_pre_render_' . $id, 'aria_modify_logic', 2 );
         //add_filter( 'gform_pre_validation_' . $id, 'aria_modify_logic', 2 );
         //add_filter( 'gform_pre_submission_filter_' . $id, 'aria_modify_logic', 2 );
         //add_filter( 'gform_admin_pre_render_' . $id, 'aria_modify_logic', 2 );
@@ -102,7 +103,7 @@ aria_find_form_ids();
 
 
 /* Populates drop down options dynamically from song form */
-function aria_populate_posts( $form ) {
+/*function aria_populate_posts( $form ) {
 
     foreach ( $form['fields'] as &$field ) {
 
@@ -142,7 +143,7 @@ function aria_populate_posts( $form ) {
 	$form['description'] = 'populate last';
 	}
 
-/*
+
 	$option = isset($_POST['input_2']) ? $_POST['input_2'] : false;
 	if( $option ){
 
@@ -152,13 +153,13 @@ function aria_populate_posts( $form ) {
        		echo '<h1 id="aria_second_plugin_css">task option required</h1>';
 
 	}
-*/
+
 
 	//$form['description'] = 'modified';
 	return $form;
 }
 
-
+*/
 function aria_modify_logic( $form ) {
 
   echo '<h1> ARIA MODIFY LOGIC </h1>';
