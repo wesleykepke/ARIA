@@ -83,6 +83,7 @@ function aria_get_music_csv_file_path($entry, $form) {
 	foreach ($form['fields'] as $field) {
 		if ($field['label'] === $music_csv_field_name) {
 			$music_csv_field_id = $field['id'];
+			wp_die("Music CSV file id is: " . $music_csv_field_id);
 		}
 	}
 
@@ -92,7 +93,7 @@ function aria_get_music_csv_file_path($entry, $form) {
 
 	// parse the url and obtain the file path for the csv file 
 	$csv_file_url = $entry[strval($music_csv_field_id)];
-	$csv_file__url_atomic_strings = explode('/', $csv_file_url);
+	$csv_file_url_atomic_strings = explode('/', $csv_file_url);
 	$csv_full_file_path = '/var/www/html/wp-content/uploads/testpath/'; // this may need to change
 	$csv_full_file_path .= $csv_file_url_atomic_strings[count($csv_file_url_atomic_strings) - 1];
 	return $csv_full_file_path; 
