@@ -4,7 +4,7 @@ Plugin Name: Aria: Add NNMTA Music
 Plugin URI: http://google.com
 Description: This plugin will allow the frstival chairman to upload songs to the NNMTA music database.  
 Author: KREW (Kyle, Renee, Ernest, and Wes)
-Version: 1.0.0
+Version: 2.0.0
 Author URI: http://google.com
 */
 
@@ -18,21 +18,21 @@ Author URI: http://google.com
  * @author KREW 
  */
 function aria_get_song_upload_form_id() {
-  $upload_form_name = 'Modify Song List';
-  $upload_form_name_id = NULL;
-  $all_active_forms = GFAPI::get_forms(); 
+	$upload_form_name = 'Modify Song List';
+	$upload_form_name_id = NULL;
+	$all_active_forms = GFAPI::get_forms(); 
 
-  foreach ($all_active_forms as $form) {
-    if ($form['title'] === $upload_form_name) {
-      $upload_form_name_id = $form['id']; 
-    }
-  }
+	foreach ($all_active_forms as $form) {
+		if ($form['title'] === $upload_form_name) {
+			$upload_form_name_id = $form['id']; 
+		}
+	}
 
-  if (!isset($upload_form_name_id)) {
-    wp_die('Form ' . $upload_form_name . ' does not exist. Please create it and try again.');
-  }
+	if (!isset($upload_form_name_id)) {
+		wp_die('Form ' . $upload_form_name . ' does not exist. Please create it and try again.');
+	}
 
-  return $upload_form_name_id; 
+ 	return $upload_form_name_id; 
 }
 
 /** 
@@ -45,25 +45,25 @@ function aria_get_song_upload_form_id() {
  * @author KREW 
  */
 function aria_get_nnmta_database_form_id() {
-  $nnmta_music_database_form_name = 'NNMTA Music Database';
-  $nnmta_music_database_form_id = NULL;
-  $all_active_forms = GFAPI::get_forms(); 
+	$nnmta_music_database_form_name = 'NNMTA Music Database';
+	$nnmta_music_database_form_id = NULL;
+	$all_active_forms = GFAPI::get_forms(); 
 
-  foreach ($all_active_forms as $form) {
-    if ($form['title'] === $nnmta_music_database_form_name) {
-      $nnmta_music_database_form_id = $form['id']; 
-    }
-  }
+	foreach ($all_active_forms as $form) {
+		if ($form['title'] === $nnmta_music_database_form_name) {
+			$nnmta_music_database_form_id = $form['id']; 
+		}
+	}
 
-  if (!isset($nnmta_music_database_form_id)) {
-    wp_die('Form ' . $nnmta_music_database_form_name . ' does not exist. Please create it and try again.');
-  }
+	if (!isset($nnmta_music_database_form_id)) {
+		wp_die('Form ' . $nnmta_music_database_form_name . ' does not exist. Please create it and try again.');
+	}
 
-  return $nnmta_music_database_form_id; 
+	return $nnmta_music_database_form_id; 
 }
 
 /** 
- * This function will find the file path of the csv file that the user has uploaded. 
+ * This function will find the file path of the csv music file that the user has uploaded. 
  *
  * This function will extract the name of the csv file that the user has uploaded 
  * using the form that was specified in the 'aria_get_song_upload_form_id' function. 
@@ -76,13 +76,26 @@ function aria_get_nnmta_database_form_id() {
  * @since 1.0.0
  * @author KREW 
  */
-function aria_get_csv_song_file_path($entry, $form) {
-  $aria_csv_field_id = 4;
-  $aria_csv_name = $entry[strval($aria_csv_field_id)];
-  $aria_csv_atomic_strings = explode('/', $aria_csv_name);
-  $aria_csv_full_file_path = '/var/www/html/wp-content/uploads/testpath/'; // this may need to change
-  $aria_csv_full_file_path .= $aria_csv_atomic_strings[count($aria_csv_atomic_strings) - 1];
-  return $aria_csv_full_file_path; 
+function aria_get_music_csv_file_path($entry, $form) {
+	// find the field entry used to upload the csv file
+	$music_csv_field_name = 'CSV File';
+	$music_csv_field_id = NULL; 
+	foreach ($form['fields'] as $field) {
+		if ($field['label'] === $music_csv_field_name) {
+			$music_csv_field_id = $field['id'];
+		}
+	}
+
+	if (!isset($music_csv_field_id)) {
+		wp_die('Form named \'' . $form['title'] . '\'does not have the field named \'' . $music_csv_field_name . '\''); 
+	}
+
+	// parse the url and obtain the file path for the csv file 
+	$csv_file_url = $entry[strval($music_csv_field_id)];
+	$csv_file__url_atomic_strings = explode('/', $csv_file_url);
+	$csv_full_file_path = '/var/www/html/wp-content/uploads/testpath/'; // this may need to change
+	$csv_full_file_path .= $csv_file_url_atomic_strings[count($csv_file_url_atomic_strings) - 1];
+	return $csv_full_file_path; 
 }
 
 /**
@@ -98,51 +111,77 @@ function aria_get_csv_song_file_path($entry, $form) {
  * @author KREW 
  */
 function aria_add_music_from_csv($entry, $form) {
-  $num_song_elements_no_image = 5;
-  $num_song_elements_with_image = 6;  
+	$num_song_elements_no_image = 5;
+	$num_song_elements_with_image = 6;  
 
-  // locate the full path of the csv file 
-  $csv_music_file = aria_get_csv_song_file_path($entry, $form); 
+	// locate the full path of the csv file 
+	$csv_music_file = aria_get_music_csv_file_path($entry, $form); 
 
-  // parse csv file and add all music data to an array 
-  $all_songs = array();
-  if (($file_ptr = fopen($csv_music_file, "r")) !== FALSE) {
-    while (($single_song_data = fgetcsv($file_ptr, 1000, ",")) !== FALSE) {
-      
-      //print_r($aria_single_song_data);
-      //wp_die(); 
+	// parse csv file and add all music data to an array 
+	$all_songs = array();
+	if (($file_ptr = fopen($csv_music_file, "r")) !== FALSE) {
+		// remove all data that is already in the database
+		aria_remove_all_music_from_nnmta_database();
 
-      if (count($single_song_data) === $num_song_elements_no_image) { // no image 
-        $all_songs[] = array (
-          '1' => $single_song_data[0],
-          '2' => $single_song_data[1],
-          '3' => $single_song_data[2],
-          '4' => $single_song_data[3],
-          '5' => $single_song_data[4],
-        );
-      }
-      elseif (count($single_song_data) === $num_song_elements_with_image) { // image
-        /* 
-        $all_songs[] = array (
-          '1' => $single_song_data[0],
-          '2' => $single_song_data[1],
-          '3' => $single_song_data[2],
-          '4' => $single_song_data[3],
-          '5' => $single_song_data[4],
-          '6' => $single_song_data[5],
-        ); */ 
-      }
-    }
-  }
-  
-  // add all song data from array into the database 
-  $new_song_ids = GFAPI::add_entries($all_songs, aria_get_nnmta_database_form_id());
-  if (is_wp_error($new_song_ids)) {
-    wp_die($new_song_ids->get_error_message());
-  }   
-	
-  // remove filename from upload folder	
-  unlink($csv_music_file); 
+		// add new music  
+		while (($single_song_data = fgetcsv($file_ptr, 1000, ",")) !== FALSE) {
+			// no image 
+			if (count($single_song_data) === $num_song_elements_no_image) { 
+				$all_songs[] = array (
+					'1' => $single_song_data[0],
+					'2' => $single_song_data[1],
+					'3' => $single_song_data[2],
+					'4' => $single_song_data[3],
+					'5' => $single_song_data[4],
+				);
+			}
+
+			// image
+			elseif (count($single_song_data) === $num_song_elements_with_image) {
+				/* 
+				$all_songs[] = array (
+					'1' => $single_song_data[0],
+					'2' => $single_song_data[1],
+					'3' => $single_song_data[2],
+					'4' => $single_song_data[3],
+					'5' => $single_song_data[4],
+					'6' => $single_song_data[5],
+				); */ 
+			}
+		}
+	}
+
+	// add all song data from array into the database 
+	$new_song_ids = GFAPI::add_entries($all_songs, aria_get_nnmta_database_form_id());
+	if (is_wp_error($new_song_ids)) {
+		wp_die($new_song_ids->get_error_message());
+	}   
+
+	// remove filename from upload folder	
+	unlink($csv_music_file); 
+}
+
+/**
+ * This function will remove all of the music from the NNMTA music database. 
+ *
+ * This function was created to support the scenario when the festival chariman needs
+ * to update the music in the NNMTA music database. In order to do this, all of the existing
+ * data is removed from the database prior to adding all of the new data. This ensures
+ * that the new data is added appropriately without accidentally adding old, possibly
+ * unwanted music data.  
+ *
+ * @since 2.0.0
+ * @author KREW 
+ */
+function aria_remove_all_music_from_nnmta_database() {
+	$nnmta_music_database_form_id = aria_get_nnmta_database_form_id(); 
+	$all_songs = GFAPI::get_entries($nnmta_music_database_form_id);
+	foreach ($all_songs as $song) {
+		$deleted_song = GFAPI::delete_entry($song['id']);
+		if (is_wp_error($deleted_song)) {
+			wp_die($deleted_song->get_error_message()); 
+		} 
+	}  
 }
 
 // register with the correct form
