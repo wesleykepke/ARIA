@@ -71,7 +71,8 @@
                         stringToSign = public_key + ":" + method + ":" + route + ":" + future_unixtime;
 
                         sig = CalculateSig( stringToSign, private_key );
-                        url = "http://aria.cse.unr.edu/gravityformsapi/" + route + "/?api_key=" + public_key;
+                        url = "http://aria.cse.unr.edu/gravityformsapi/" + route;
+			url += "/?api_key=" + public_key;
 			url += "&signature=" + sig + "&expires=" + future_unixtime;
 	//		ajax_url = "/wp/gravityformsapi/" + route + "?api_key=" + public_key;
 	//		ajax_url += "&signature=" + sig + "&expires=" + future_unixtime;
@@ -92,6 +93,7 @@
 					{key: 'operator', value: 'is'}, 
 					{key: 'value', value: input }]];
 		*/
+			//NOTE: key in search is just field ID not formID.fieldID
 			var search = {
 					field_filters : [
 						{key: '5',
@@ -102,7 +104,8 @@
 					mode : 'any'
 				}
 			var searchJSON = JSON.stringify( search );
-			url += '&search=' + searchJSON;// + '?paging[page_size]=200';
+			//NOTE: paging requires &
+			url += '&paging[page_size]=200' + '&search=' + searchJSON;// + '?paging[page_size]=200';
 			$.get( url,  function( result ){
 				var str = JSON.stringify( result );
 				var parsed = JSON.parse(str);
