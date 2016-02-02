@@ -50,31 +50,57 @@ function aria_initialize_confirmation($form_id) {
   GFAPI::update_form($added_competition_creation_form);
 }
 
+function aria_teacher_form_id_array() = {
+  arr = new array();
+
+  // CAUTION, This array is used as a source of truth. Changing these values may
+  // result in catastrophic failure. If you do not want to feel the bern, 
+  // consult an aria developer before making changes to this portion of code.
+  arr['name'] = 1;
+  arr['email'] = 2;
+  arr['phone'] = 3;
+  arr['volunteer_preference'] = 4;
+  arr['volunteer_time'] = 5;
+  arr['student_name'] = 6;
+  arr['song_1_period'] = 7;
+  arr['song_1_composer'] = 8;
+  arr['song_1_selection'] = 9;
+  arr['song_2_period'] = 10;
+  arr['song_2_composer'] = 11;
+  arr['song_2_selection'] = 12;
+  arr['theory_score'] = 13;
+  arr['alternate_theory'] = 14;
+  arr['competition_format'] = 15;
+  arr['timing_of_pieces'] = 16;
+
+  return arr;
+}
+
 function aria_create_teacher_form( $competition_name ) {
   $teacher_form = new GF_Form("{$competition_name} Teacher Registration", "");
-  $field_id = 1;
+  $field_id_arr = aria_teacher_form_id_array();
 
   $teacher_name_field = new GF_Field_Name();
   $teacher_name_field->label = "Name";
-  $teacher_name_field->id = $field_id++;
+  $teacher_name_field->id = field_id_arr['name'];
   $teacher_name_field->isRequired = true;
   $teacher_form->fields[] = $teacher_name_field;
 
   $teacher_email_field = new GF_Field_Email();
   $teacher_email_field->label = "Email";
-  $teacher_email_field->id = $field_id++;
+  $teacher_email_field->id = field_id_arr['email'];
   $teacher_email_field->isRequired = true;
   $teacher_form->fields[] = $teacher_email_field;
 
   $teacher_phone_field = new GF_Field_Phone();
   $teacher_phone_field->label = "Phone";
-  $teacher_phone_field->id = $field_id++;
+  $teacher_phone_field->id = field_id_arr['phone'];
   $teacher_phone_field->isRequired = true;
   $teacher_form->fields[] = $teacher_phone_field;
 
   $volunteer_preference_field = new GF_Field_Checkbox();
   $volunteer_preference_field->label = "Volunteer Preference";
-  $volunteer_preference_field->id = $field_id++;
+  $volunteer_preference_field->id = field_id_arr['volunteer_preference'];
   $volunteer_preference_field->isRequired = true;
   $volunteer_preference_field->choices = array(
     array('text' => 'Section Proctor', 'value' => 'Section Proctor', 'isSelected' => false),
@@ -90,55 +116,55 @@ function aria_create_teacher_form( $competition_name ) {
 
   $volunteer_time_field = new GF_Field_Checkbox();
   $volunteer_time_field->label = "Times Available for Volunteering";
-  $volunteer_time_field->id = $field_id++;
+  $volunteer_time_field->id = field_id_arr['volunteer_time'];
   $volunteer_time_field->isRequired = false;
   $teacher_form->fields[] = $volunteer_time_field;
 
   $student_name_field = new GF_Field_Name();
   $student_name_field->label = "Student Name";
-  $student_name_field->id = $field_id++;
+  $student_name_field->id = field_id_arr['student_name'];
   $student_name_field->isRequired = true;
   $teacher_form->fields[] = $student_name_field;
 
   $song_one_period_field = new GF_Field_Select();
   $song_one_period_field->label = "Song 1 Period";
-  $song_one_period_field->id = $field_id++;
+  $song_one_period_field->id = field_id_arr['song_1_period'];
   $song_one_period_field->isRequired = true;
   $teacher->form->fields[] = $song_one_period_field;
 
   $song_one_composer_field = new GF_Field_Select();
   $song_one_composer_field->label = "Song 1 Composer";
-  $song_one_composer_field->id = $field_id++;
+  $song_one_composer_field->id = field_id_arr['song_1_composer'];
   $song_one_composer_field->isRequired = true;
   $teacher->form->fields[] = $song_one_composer_field;
 
   $song_one_selection_field = new GF_Field_Select();
   $song_one_selection_field->label = "Song 1 Selection";
-  $song_one_selection_field->id = $field_id++;
+  $song_one_selection_field->id = field_id_arr['song_1_selection'];
   $song_one_selection_field->isRequired = true;
   $teacher->form->fields[] = $song_one_selection_field;
 
   $song_two_period_field = new GF_Field_Select();
   $song_two_period_field->label = "Song 2 Period";
-  $song_two_period_field->id = $field_id++;
+  $song_two_period_field->id = field_id_arr['song_2_period'];
   $song_two_period_field->isRequired = true;
   $teacher->form->fields[] = $song_two_period_field;
 
   $song_two_composer_field = new GF_Field_Select();
   $song_two_composer_field->label = "Song 2 Composer";
-  $song_two_composer_field->id = $field_id++;
+  $song_two_composer_field->id = field_id_arr['song_2_composer'];
   $song_two_composer_field->isRequired = true;
   $teacher->form->fields[] = $song_two_composer_field;
 
   $song_two_selection_field = new GF_Field_Select();
   $song_two_selection_field->label = "Song 2 Selection";
-  $song_two_selection_field->id = $field_id++;
+  $song_two_selection_field->id = field_id_arr['song_2_selection'];
   $song_two_selection_field->isRequired = true;
   $teacher->form->fields[] = $song_two_selection_field;
 
   $student_theory_score = new GF_Field_Number();
   $student_theory_score->label = "Theory Score (percentage)";
-  $student_theory_score->id = $field_id++;
+  $student_theory_score->id = field_id_arr['theory_score'];
   $student_theory_score->isRequired = false;
   $student_theory_score->numberFormat = "decimal_dot";
   $student_theory_score->rangeMin = 0;
@@ -147,7 +173,7 @@ function aria_create_teacher_form( $competition_name ) {
 
   $alternate_theory_field = new GF_Field_Checkbox();
   $alternate_theory_field->label = "Check if alternate theory exam was completed.";
-  $alternate_theory_field->id = $field_id++;
+  $alternate_theory_field->id = field_id_arr['alternate_theory'];
   $alternate_theory_field->isRequired = false;
   $alternate_theory_field->choices = array(
     array('text' => 'Alternate theory exam completed', 'value' => 'Alternate theory exam completed', 'isSelected' => false)
@@ -156,7 +182,7 @@ function aria_create_teacher_form( $competition_name ) {
 
   $competition_format_field = new GF_Field_Radio();
   $competition_format_field->label = "Format of Competition";
-  $competition_format_field->id = $field_id++;
+  $competition_format_field->id = field_id_arr['competition_format'];
   $competition_format_field->isRequired = false;
   $competition_format_field->choices = $volunteer_preference_field->choices = array(
     array('text' => 'Traditional', 'value' => 'Traditional', 'isSelected' => false),
@@ -167,7 +193,7 @@ function aria_create_teacher_form( $competition_name ) {
 
   $timing_of_pieces_field = new GF_Field_Number();
   $timing_of_pieces_field->label = "Timing of pieces (minutes)";
-  $timing_of_pieces_field->id = $field_id++;
+  $timing_of_pieces_field->id = field_id_arr['timing_of_pieces'];
   $timing_of_pieces_field->isRequired = false;
   $timing_of_pieces_field->numberFormat = "decimal_dot";
   $teacher_form->fields[] = $timing_of_pieces_field;
