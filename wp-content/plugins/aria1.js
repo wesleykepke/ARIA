@@ -116,6 +116,7 @@
 			var searchJSON = JSON.stringify( search );
 			//NOTE: paging requires &
 			url += '&paging[page_size]=200' + '&search=' + searchJSON;// + '?paging[page_size]=200';
+			url += '&sorting[key]=3&sorting[direction]=ASC';
 			$.get( url,  function( result ){
 				var str = JSON.stringify( result );
 				var parsed = JSON.parse(str);
@@ -128,9 +129,14 @@
 					});//alert(result["response"]);
 				*/
 				var html = '';
+				var option;
 				result['response']['entries'].forEach( function(entry){
+					option = entry['3'];
+					if( html.indexOf( option ) == -1)
+					{
 						html += '<option value="' + entry['3'] + '">' + entry['3'] + '</option>';
-					});
+					}
+				});	
 				$('#input_15_4').empty();
 				$('#input_15_4').append(html);
 				});
