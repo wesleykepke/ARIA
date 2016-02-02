@@ -100,6 +100,42 @@ function aria_create_teacher_form( $competition_name ) {
   $student_name_field->isRequired = true;
   $teacher_form->fields[] = $student_name_field;
 
+  $song_one_period_field = new GF_Field_Select();
+  $song_one_period_field->label = "Song 1 Period";
+  $song_one_period_field->id = $field_id++;
+  $song_one_period_field->isRequired = true;
+  $teacher->form->fields[] = $song_one_period_field;
+
+  $song_one_composer_field = new GF_Field_Select();
+  $song_one_composer_field->label = "Song 1 Composer";
+  $song_one_composer_field->id = $field_id++;
+  $song_one_composer_field->isRequired = true;
+  $teacher->form->fields[] = $song_one_composer_field;
+
+  $song_one_selection_field = new GF_Field_Select();
+  $song_one_selection_field->label = "Song 1 Selection";
+  $song_one_selection_field->id = $field_id++;
+  $song_one_selection_field->isRequired = true;
+  $teacher->form->fields[] = $song_one_selection_field;
+
+  $song_two_period_field = new GF_Field_Select();
+  $song_two_period_field->label = "Song 2 Period";
+  $song_two_period_field->id = $field_id++;
+  $song_two_period_field->isRequired = true;
+  $teacher->form->fields[] = $song_two_period_field;
+
+  $song_two_composer_field = new GF_Field_Select();
+  $song_two_composer_field->label = "Song 2 Composer";
+  $song_two_composer_field->id = $field_id++;
+  $song_two_composer_field->isRequired = true;
+  $teacher->form->fields[] = $song_two_composer_field;
+
+  $song_two_selection_field = new GF_Field_Select();
+  $song_two_selection_field->label = "Song 2 Selection";
+  $song_two_selection_field->id = $field_id++;
+  $song_two_selection_field->isRequired = true;
+  $teacher->form->fields[] = $song_two_selection_field;
+
   $student_theory_score = new GF_Field_Number();
   $student_theory_score->label = "Theory Score (percentage)";
   $student_theory_score->id = $field_id++;
