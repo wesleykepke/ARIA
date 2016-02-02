@@ -51,29 +51,27 @@ function aria_initialize_confirmation($form_id) {
 }
 
 function aria_teacher_field_id_array() {
-  arr = new array();
-
   // CAUTION, This array is used as a source of truth. Changing these values may
   // result in catastrophic failure. If you do not want to feel the bern, 
   // consult an aria developer before making changes to this portion of code.
-  arr['name'] = 1;
-  arr['email'] = 2;
-  arr['phone'] = 3;
-  arr['volunteer_preference'] = 4;
-  arr['volunteer_time'] = 5;
-  arr['student_name'] = 6;
-  arr['song_1_period'] = 7;
-  arr['song_1_composer'] = 8;
-  arr['song_1_selection'] = 9;
-  arr['song_2_period'] = 10;
-  arr['song_2_composer'] = 11;
-  arr['song_2_selection'] = 12;
-  arr['theory_score'] = 13;
-  arr['alternate_theory'] = 14;
-  arr['competition_format'] = 15;
-  arr['timing_of_pieces'] = 16;
-
-  return arr;
+  return array(
+  'name' => 1,
+  'email' => 2,
+  'phone' => 3,
+  'volunteer_preference' => 4,
+  'volunteer_time' => 5,
+  'student_name' => 6,
+  'song_1_period' => 7,
+  'song_1_composer' => 8,
+  'song_1_selection' => 9,
+  'song_2_period' => 10,
+  'song_2_composer' => 11,
+  'song_2_selection' => 12,
+  'theory_score' => 13,
+  'alternate_theory' => 14,
+  'competition_format' => 15,
+  'timing_of_pieces' => 16
+  );
 }
 
 function aria_create_teacher_form( $competition_name ) {
@@ -203,22 +201,35 @@ function aria_create_teacher_form( $competition_name ) {
 }
 
 function aria_student_field_id_array() {
-
+  // CAUTION, This array is used as a source of truth. Changing these values may
+  // result in catastrophic failure. If you do not want to feel the bern, 
+  // consult an aria developer before making changes to this portion of code.
+   return array(
+    'parent_name' => 1,
+    'parent_email' => 2,
+    'student_name' => 3,
+    'student_birthday' => 4,
+    'teacher_name' => 5,
+    'not_listed_teacher_name' => 6,
+    'available_festival_days' => 7,
+    'preferred_command_performance' => 8,
+    'compliance_statement' => 9
+  );
 }
 
 function aria_create_student_form( $competition_name ) {
   $student_form = new GF_Form("{$competition_name} Student Registration", "");
-  $field_id = 1;
+  $field_id_array = aria_student_field_id_array();
 
   $parent_name_field = new GF_Field_Name();
   $parent_name_field->label = "Parent Name";
-  $parent_name_field->id = $field_id++;
+  $parent_name_field->id = $field_id_array['parent_name'];
   $parent_name_field->isRequired = true;
   $parent_form->fields[] = $parent_name_field;
 
   $parent_email_field = new GF_Field_Email();
   $parent_email_field->label = "Parent's Email";
-  $parent_email_field->id = $field_id++;
+  $parent_email_field->id = $field_id_array['parent_email'];
   $parent_email_field->isRequired = true;
   $student_form->fields[] = $parent_email_field;
 
@@ -228,13 +239,13 @@ function aria_create_student_form( $competition_name ) {
   "and last names and double check the spelling.  The way you type the name ".
   "here is the way it will appear on all awards and in the Command ".
   "Performance program.";
-  $student_name_field->id = $field_id++;
+  $student_name_field->id = $field_id_array['student_name'];
   $student_name_field->isRequired = true;
   $student_form->fields[] = $student_name_field;
 
   $student_birthday_date_field = new GF_Field_Date();
   $student_birthday_date_field->label = "Student Birthday";
-  $student_birthday_date_field->id = $field_id++;
+  $student_birthday_date_field->id = $field_id_array['student_birthday'];
   $student_birthday_date_field->isRequired = true;
   $student_birthday_date_field->calendarIconType = 'calendar';
   $student_birthday_date_field->dateType = 'datepicker';
@@ -242,7 +253,7 @@ function aria_create_student_form( $competition_name ) {
 
   $piano_teachers_field = new GF_Field_Select();
   $piano_teachers_field->label = "Piano Teacher's Name";
-  $piano_teachers_field->id = $field_id++;
+  $piano_teachers_field->id = $field_id_array['teacher_name'];
   $piano_teachers_field->isRequired = false;
   $piano_teachers_field->description = "TBD";
   $student_form->fields[] = $piano_teachers_field;
@@ -250,13 +261,13 @@ function aria_create_student_form( $competition_name ) {
   $teacher_missing_field = new GF_Field_Text();
   $teacher_missing_field->label = "If your teacher's name is not listed, ".
   "enter name below.";
-  $teacher_missing_field->id = $field_id++;
+  $teacher_missing_field->id = $field_id_array['not_listed_teacher_name'];
   $teacher_missing_field->isRequired = false;
   $student_form->fields[] = $teacher_missing_field;
 
   $available_times = new GF_Field_Checkbox();
   $available_times->label = "Available Festival Days (check all available times)";
-  $available_times->id = $field_id++;
+  $available_times->id = $field_id_array['available_festival_days'];
   $available_times->isRequired = true;
   $available_times->description = "There is no guarantee that scheduling ".
   "requests will be honored.";
@@ -268,7 +279,7 @@ function aria_create_student_form( $competition_name ) {
 
   $command_times = new GF_Field_Checkbox();
   $command_times->label = "Preferred Command Performance Time (check all available times)";
-  $command_times->id = $field_id++;
+  $command_times->id = $field_id_array['preferred_command_performance'];
   $command_times->isRequired = true;
   $command_times->description = "Please check the Command Performance time ".
   "that you prefer in the event that your child receives a superior rating.";
@@ -280,7 +291,7 @@ function aria_create_student_form( $competition_name ) {
 
   $compliance_field = new GF_Field_checkbox();
   $compliance_field->label = "Compliance Statement";
-  $compliance_field->id = $field_id++;
+  $compliance_field->id = $field_id_array['compliance_statement'];
   $compliance_field->isRequired = true;
   $compliance_field->description = "As a parent, I understand and agree to ".
   "comply with all rules, regulations, and amendments as stated in the ".
