@@ -69,11 +69,11 @@ function aria_find_form_ids() {
     } 	
 
     foreach ( $form_index_holder as $id ) {
-        add_filter( 'gform_pre_render_' . $id, 'aria_populate_posts', 3 );
+/*DISABLING        add_filter( 'gform_pre_render_' . $id, 'aria_populate_posts', 3 );
         add_filter( 'gform_pre_validation_' . $id, 'aria_populate_posts' );
         add_filter( 'gform_pre_submission_filter_' . $id, 'aria_populate_posts' );
         add_filter( 'gform_admin_pre_render_' . $id, 'aria_populate_posts' );
- 
+ */
 //DISABLING	add_filter( 'gform_pre_render_' . $id, 'aria_modify_logic', 2 );
         //add_filter( 'gform_pre_validation_' . $id, 'aria_modify_logic', 2 );
         //add_filter( 'gform_pre_submission_filter_' . $id, 'aria_modify_logic', 2 );
@@ -81,22 +81,9 @@ function aria_find_form_ids() {
      
     }
 
-/*
-add_filter( 'gform_pre_render_15', 'aria_populate_posts' );
-add_filter( 'gform_pre_validation_15', 'aria_populate_posts' );
-add_filter( 'gform_pre_submission_filter_15', 'aria_populate_posts' );
-add_filter( 'gform_admin_pre_render_15', 'aria_populate_posts' );
-*/
-
 }
 
-/*
-add_filter( 'gform_pre_render_15', 'aria_populate_posts' );
-add_filter( 'gform_pre_validation_15', 'aria_populate_posts' );
-add_filter( 'gform_pre_submission_filter_15', 'aria_populate_posts' );
-add_filter( 'gform_admin_pre_render_15', 'aria_populate_posts' );
-*/
-   
+  
 // find all form ids and hook onto the filter
 aria_find_form_ids(); 
 
@@ -108,7 +95,6 @@ aria_find_form_ids();
     foreach ( $form['fields'] as &$field ) {
 
         if ( $field['id'] != 4 ){//|| strpos( $field->cssClass, 'populate-posts' ) === false ) {
-       //	echo '<h1 id="aria_second_plugin_css">not field 4: field' . $field['id']. '</h1>';
 	           continue;
         }
 

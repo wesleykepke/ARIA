@@ -1,5 +1,9 @@
 	jQuery(document).ready(function($) {
 		function getInput(){
+			var stLevel;
+			$('#input_15_3').live("change", function() {
+				stLevel = $('#input_15_3').val();	
+			});
 			$('#input_15_6').live("change", function() {
 	//			alert("You chose " + $('#input_15_3').val());
 				var periodStr = $('#input_15_6').val();
@@ -17,7 +21,7 @@
 					periodInt = '4';
 				} 
 				alert("You chose " + periodStr + ": " + periodInt);
-				testGet( periodInt );
+				testGet( periodInt, stLevel );
 			});
 		}
 		getInput();
@@ -53,7 +57,7 @@
 		
 
 
-		function testGet(input){
+		function testGet(input, stLevel){
 
 			//$.get( "http://aria.cse.unr.edu/wp-content/plugins/test.html" );
 
@@ -98,10 +102,16 @@
 					field_filters : [
 						{key: '5',
 						operator: 'is',
-						value: input }
+						value: input 
+						},
+						{
+						key: '4',
+						operator: 'is',
+						value: stLevel
+						}
 					],
 
-					mode : 'any'
+					mode : 'all'
 				}
 			var searchJSON = JSON.stringify( search );
 			//NOTE: paging requires &
@@ -117,6 +127,12 @@
 						}
 					});//alert(result["response"]);
 				*/
+				var html = '';
+				result['response']['entries'].forEach( function(entry){
+						html += '<option value="' + entry['3'] + '">' + entry['3'] + '</option>';
+					});
+				$('#input_15_4').empty();
+				$('#input_15_4').append(html);
 				});
 
 		}// end of testGet function
