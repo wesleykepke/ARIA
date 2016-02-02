@@ -83,12 +83,12 @@ function aria_get_music_csv_file_path($entry, $form) {
 	foreach ($form['fields'] as $field) {
 		if ($field['label'] === $music_csv_field_name) {
 			$music_csv_field_id = $field['id'];
-			wp_die("Music CSV file id is: " . $music_csv_field_id);
 		}
 	}
 
 	if (!isset($music_csv_field_id)) {
-		wp_die('Form named \'' . $form['title'] . '\'does not have the field named \'' . $music_csv_field_name . '\''); 
+		wp_die('Form named \'' . $form['title'] . '\' does not have a field named \'' . $music_csv_field_name . '\'. 
+			Please create this field and try uploading music again.'); 
 	}
 
 	// parse the url and obtain the file path for the csv file 
@@ -122,7 +122,7 @@ function aria_add_music_from_csv($entry, $form) {
 	$all_songs = array();
 	if (($file_ptr = fopen($csv_music_file, "r")) !== FALSE) {
 		// remove all data that is already in the database
-		aria_remove_all_music_from_nnmta_database();
+		//aria_remove_all_music_from_nnmta_database();
 
 		// add new music  
 		while (($single_song_data = fgetcsv($file_ptr, 1000, ",")) !== FALSE) {
@@ -158,8 +158,10 @@ function aria_add_music_from_csv($entry, $form) {
 		wp_die($new_song_ids->get_error_message());
 	}   
 
-	// remove filename from upload folder	
+	// remove filename from upload folder
+	//print_r($all_songs);	
 	unlink($csv_music_file); 
+	unset($all_songs); 
 }
 
 /**
@@ -175,14 +177,29 @@ function aria_add_music_from_csv($entry, $form) {
  * @author KREW 
  */
 function aria_remove_all_music_from_nnmta_database() {
-	$nnmta_music_database_form_id = aria_get_nnmta_database_form_id(); 
-	$all_songs = GFAPI::get_entries($nnmta_music_database_form_id);
+	$nnmta_music_database_form_id = aria_get_nnmta_database_form_id();
+	$index = 0; 
+	$total_count = GFAPI::count_entries($nnmta_music_database_form_id);
+
+	while ($index < $total_count) {
+		$twenty_songs = GFAPI::get_entries($nnmta_music_database_form_id);
+		for ($song_on_page = 0; $song_on_page < 20; $song_on_page++) {
+			$deleted_song = GFAPI::delete_entry($twenty_songs[$song_on_page]['id']);
+			if (is_wp_error($deleted_song)) {
+				wp_die($deleted_song->get_error_message()); 
+			} 
+		}
+		$index += 20;  
+	}
+
+/*
 	foreach ($all_songs as $song) {
 		$deleted_song = GFAPI::delete_entry($song['id']);
 		if (is_wp_error($deleted_song)) {
 			wp_die($deleted_song->get_error_message()); 
 		} 
-	}  
+	} 
+*/ 
 }
 
 // register with the correct form
