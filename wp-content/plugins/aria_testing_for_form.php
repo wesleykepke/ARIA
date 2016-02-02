@@ -50,7 +50,7 @@ function aria_initialize_confirmation($form_id) {
   GFAPI::update_form($added_competition_creation_form);
 }
 
-function aria_teacher_field_id_array() = {
+function aria_teacher_field_id_array() {
   arr = new array();
 
   // CAUTION, This array is used as a source of truth. Changing these values may
@@ -202,7 +202,9 @@ function aria_create_teacher_form( $competition_name ) {
   aria_initialize_confirmation($result);
 }
 
-function aria_
+function aria_student_field_id_array() {
+
+}
 
 function aria_create_student_form( $competition_name ) {
   $student_form = new GF_Form("{$competition_name} Student Registration", "");
