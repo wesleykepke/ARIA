@@ -10,7 +10,10 @@ Author URI: http://wkepke.com
 
 
 function test_query_params($entry, $form) {  
-  wp_die(get_query_var('herp'));
+  $param_val = get_query_var('herp', -1);
+  if ($param_val != -1) {
+    wp_die($param_val);
+  }
 }
 add_action('gform_after_submission', 'test_query_params', 10, 2);
 
