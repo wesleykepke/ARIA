@@ -81,25 +81,25 @@ function aria_create_teacher_form( $competition_name ) {
 
   $teacher_name_field = new GF_Field_Name();
   $teacher_name_field->label = "Name";
-  $teacher_name_field->id = field_id_arr['name'];
+  $teacher_name_field->id = $field_id_arr['name'];
   $teacher_name_field->isRequired = true;
   $teacher_form->fields[] = $teacher_name_field;
 
   $teacher_email_field = new GF_Field_Email();
   $teacher_email_field->label = "Email";
-  $teacher_email_field->id = field_id_arr['email'];
+  $teacher_email_field->id = $field_id_arr['email'];
   $teacher_email_field->isRequired = true;
   $teacher_form->fields[] = $teacher_email_field;
 
   $teacher_phone_field = new GF_Field_Phone();
   $teacher_phone_field->label = "Phone";
-  $teacher_phone_field->id = field_id_arr['phone'];
+  $teacher_phone_field->id = $field_id_arr['phone'];
   $teacher_phone_field->isRequired = true;
   $teacher_form->fields[] = $teacher_phone_field;
 
   $volunteer_preference_field = new GF_Field_Checkbox();
   $volunteer_preference_field->label = "Volunteer Preference";
-  $volunteer_preference_field->id = field_id_arr['volunteer_preference'];
+  $volunteer_preference_field->id = $field_id_arr['volunteer_preference'];
   $volunteer_preference_field->isRequired = true;
   $volunteer_preference_field->choices = array(
     array('text' => 'Section Proctor', 'value' => 'Section Proctor', 'isSelected' => false),
@@ -115,55 +115,55 @@ function aria_create_teacher_form( $competition_name ) {
 
   $volunteer_time_field = new GF_Field_Checkbox();
   $volunteer_time_field->label = "Times Available for Volunteering";
-  $volunteer_time_field->id = field_id_arr['volunteer_time'];
+  $volunteer_time_field->id = $field_id_arr['volunteer_time'];
   $volunteer_time_field->isRequired = false;
   $teacher_form->fields[] = $volunteer_time_field;
 
   $student_name_field = new GF_Field_Name();
   $student_name_field->label = "Student Name";
-  $student_name_field->id = field_id_arr['student_name'];
+  $student_name_field->id = $field_id_arr['student_name'];
   $student_name_field->isRequired = true;
   $teacher_form->fields[] = $student_name_field;
 
   $song_one_period_field = new GF_Field_Select();
   $song_one_period_field->label = "Song 1 Period";
-  $song_one_period_field->id = field_id_arr['song_1_period'];
+  $song_one_period_field->id = $field_id_arr['song_1_period'];
   $song_one_period_field->isRequired = true;
   $teacher->form->fields[] = $song_one_period_field;
 
   $song_one_composer_field = new GF_Field_Select();
   $song_one_composer_field->label = "Song 1 Composer";
-  $song_one_composer_field->id = field_id_arr['song_1_composer'];
+  $song_one_composer_field->id = $field_id_arr['song_1_composer'];
   $song_one_composer_field->isRequired = true;
   $teacher->form->fields[] = $song_one_composer_field;
 
   $song_one_selection_field = new GF_Field_Select();
   $song_one_selection_field->label = "Song 1 Selection";
-  $song_one_selection_field->id = field_id_arr['song_1_selection'];
+  $song_one_selection_field->id = $field_id_arr['song_1_selection'];
   $song_one_selection_field->isRequired = true;
   $teacher->form->fields[] = $song_one_selection_field;
 
   $song_two_period_field = new GF_Field_Select();
   $song_two_period_field->label = "Song 2 Period";
-  $song_two_period_field->id = field_id_arr['song_2_period'];
+  $song_two_period_field->id = $field_id_arr['song_2_period'];
   $song_two_period_field->isRequired = true;
   $teacher->form->fields[] = $song_two_period_field;
 
   $song_two_composer_field = new GF_Field_Select();
   $song_two_composer_field->label = "Song 2 Composer";
-  $song_two_composer_field->id = field_id_arr['song_2_composer'];
+  $song_two_composer_field->id = $field_id_arr['song_2_composer'];
   $song_two_composer_field->isRequired = true;
   $teacher->form->fields[] = $song_two_composer_field;
 
   $song_two_selection_field = new GF_Field_Select();
   $song_two_selection_field->label = "Song 2 Selection";
-  $song_two_selection_field->id = field_id_arr['song_2_selection'];
+  $song_two_selection_field->id = $field_id_arr['song_2_selection'];
   $song_two_selection_field->isRequired = true;
   $teacher->form->fields[] = $song_two_selection_field;
 
   $student_theory_score = new GF_Field_Number();
   $student_theory_score->label = "Theory Score (percentage)";
-  $student_theory_score->id = field_id_arr['theory_score'];
+  $student_theory_score->id = $field_id_arr['theory_score'];
   $student_theory_score->isRequired = false;
   $student_theory_score->numberFormat = "decimal_dot";
   $student_theory_score->rangeMin = 0;
@@ -172,7 +172,7 @@ function aria_create_teacher_form( $competition_name ) {
 
   $alternate_theory_field = new GF_Field_Checkbox();
   $alternate_theory_field->label = "Check if alternate theory exam was completed.";
-  $alternate_theory_field->id = field_id_arr['alternate_theory'];
+  $alternate_theory_field->id = $field_id_arr['alternate_theory'];
   $alternate_theory_field->isRequired = false;
   $alternate_theory_field->choices = array(
     array('text' => 'Alternate theory exam completed', 'value' => 'Alternate theory exam completed', 'isSelected' => false)
@@ -181,7 +181,7 @@ function aria_create_teacher_form( $competition_name ) {
 
   $competition_format_field = new GF_Field_Radio();
   $competition_format_field->label = "Format of Competition";
-  $competition_format_field->id = field_id_arr['competition_format'];
+  $competition_format_field->id = $field_id_arr['competition_format'];
   $competition_format_field->isRequired = false;
   $competition_format_field->choices = $volunteer_preference_field->choices = array(
     array('text' => 'Traditional', 'value' => 'Traditional', 'isSelected' => false),
@@ -192,7 +192,7 @@ function aria_create_teacher_form( $competition_name ) {
 
   $timing_of_pieces_field = new GF_Field_Number();
   $timing_of_pieces_field->label = "Timing of pieces (minutes)";
-  $timing_of_pieces_field->id = field_id_arr['timing_of_pieces'];
+  $timing_of_pieces_field->id = $field_id_arr['timing_of_pieces'];
   $timing_of_pieces_field->isRequired = false;
   $timing_of_pieces_field->numberFormat = "decimal_dot";
   $teacher_form->fields[] = $timing_of_pieces_field;
@@ -360,13 +360,13 @@ function aria_create_competition_form() {
   // Name Field
   $competition_name_field = new GF_Field_Text();
   $competition_name_field->label = "Name of Competition";
-  $competition_name_field->id = field_id_array['competition_name'];
+  $competition_name_field->id = $field_id_array['competition_name'];
   $competition_name_field->isRequired = true;
 
   // Start Date of the competition
   $competition_start_date_field = new GF_Field_Date();
   $competition_start_date_field->label = "Date of Competition";
-  $competition_start_date_field->id = field_id_array['competition_start_date'];
+  $competition_start_date_field->id = $field_id_array['competition_start_date'];
   $competition_start_date_field->isRequired = false;
   $competition_start_date_field->calendarIconType = 'calendar';
   $competition_start_date_field->dateType = 'datepicker';
@@ -374,7 +374,7 @@ function aria_create_competition_form() {
   // End Date of the competition
   $competition_end_date_field = new GF_Field_Date();
   $competition_end_date_field->label = "Date of Competition";
-  $competition_end_date_field->id = field_id_array['competition_end_date'];
+  $competition_end_date_field->id = $field_id_array['competition_end_date'];
   $competition_end_date_field->isRequired = false;
   $competition_end_date_field->calendarIconType = 'calendar';
   $competition_end_date_field->dateType = 'datepicker';
@@ -382,14 +382,14 @@ function aria_create_competition_form() {
   // Location
   $competition_location_field = new GF_Field_Address();
   $competition_location_field->label = "Location of Competition";
-  $competition_location_field->id = field_id_array['competition_location'];
+  $competition_location_field->id = $field_id_array['competition_location'];
   $competition_location_field->isRequired = false;
   $competition_location_field = aria_add_default_address_inputs($competition_location_field);
   
   // Student Registration start date
   $student_registration_start_date_field = new GF_Field_Date();
   $student_registration_start_date_field->label = "Student Registration Start Date";
-  $student_registration_start_date_field->id = field_id_array['student_registration_start_date'];
+  $student_registration_start_date_field->id = $field_id_array['student_registration_start_date'];
   $student_registration_start_date_field->isRequired = false;
   $student_registration_start_date_field->calendarIconType = 'calendar';
   $student_registration_start_date_field->dateType = 'datepicker';
@@ -397,7 +397,7 @@ function aria_create_competition_form() {
   // Student Registration deadline
   $student_registration_end_date_field = new GF_Field_Date();
   $student_registration_end_date_field->label = "Student Registration End Date";
-  $student_registration_end_date_field->id = field_id_array['student_registration_end_date'];
+  $student_registration_end_date_field->id = $field_id_array['student_registration_end_date'];
   $student_registration_end_date_field->isRequired = false;
   $student_registration_end_date_field->calendarIconType = 'calendar';
   $student_registration_end_date_field->dateType = 'datepicker';
@@ -405,7 +405,7 @@ function aria_create_competition_form() {
   // Teacher Registration start date
   $teacher_registration_start_date_field = new GF_Field_Date();
   $teacher_registration_start_date_field->label = "Teacher Registration Start Date";
-  $teacher_registration_start_date_field->id = field_id_array['teacher_registration_start_date'];
+  $teacher_registration_start_date_field->id = $field_id_array['teacher_registration_start_date'];
   $teacher_registration_start_date_field->isRequired = false;
   $teacher_registration_start_date_field->calendarIconType = 'calendar';
   $teacher_registration_start_date_field->dateType = 'datepicker';
@@ -413,7 +413,7 @@ function aria_create_competition_form() {
   // Teacher Registration deadline
   $teacher_registration_end_date_field = new GF_Field_Date();
   $teacher_registration_end_date_field->label = "Teacher Registration End Date";
-  $teacher_registration_end_date_field->id = field_id_array['teacher_registration_end_date'];
+  $teacher_registration_end_date_field->id = $field_id_array['teacher_registration_end_date'];
   $teacher_registration_end_date_field->isRequired = false;
   $teacher_registration_end_date_field->calendarIconType = 'calendar';
   $teacher_registration_end_date_field->dateType = 'datepicker';
