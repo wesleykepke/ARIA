@@ -3,22 +3,32 @@ jQuery(document).ready(function($) {
 	var musicFormID = '184';
 
 	// Get field IDs - Combine these into one function?
-	var levelID = getLevelFieldID();
-	var periodID = getPeriodID();
-	var composerID = getComposerID();
-	var nameID = getNameID();
+	// From current form
+	var levelField = '3';//= getLevelFieldID();
+	var periodField1 = '6';
+	var periodField2;
+	var compField1 = '4';
+	var compField2;
+	var songField1 = '7';
+	var songField2;
+
+	// From music data
+	var dataLevelField = '4';
+	var dataPeriodField = '5'; // = getPeriodID();
+	var dataCompField = '3';// getComposerID();
+	var dataSongField = '2';//getNameID();
 
 	// Hard coded
-	levelID = '4';
+/*	levelID = '4';
 	periodID = '5';
 	composerID = '3';
-	nameID = '2';
+	nameID = '2';*/
 
 	// Get student level
-	var level = $('#input_15_3').val();	
+	var level = '1';//$('#input_15_3').val();	
 
 	// Get song entries from level
-	getMusic( musicFormID, level, levelID);
+	var music = getMusic( musicFormID, level, dataLevelField);
 
 	// Song 1
 
@@ -85,9 +95,10 @@ jQuery(document).ready(function($) {
 		//NOTE: max page size?
 		url += '&paging[page_size]=300' + '&search=' + searchJSON;
 		url += '&sorting[key]=3&sorting[direction]=ASC';
+		var resultMusic;
 
 		$.get( url,  function( result ){
-			var html = '';
+/*			var html = '';
 			var option;
 			// Populate with composers
 			result['response']['entries'].forEach( function(entry){
@@ -100,9 +111,11 @@ jQuery(document).ready(function($) {
 
 			// Clear options and append new options
 			$('#input_15_4').empty();
-			$('#input_15_4').append(html);
+			$('#input_15_4').append(html);*/
+			resultMusic = result;
 		});
 
+		return resultMusic;
 	}// end of getMusic function
 
 
@@ -125,4 +138,9 @@ jQuery(document).ready(function($) {
 	        return returnedValue;
 	}// end of getLevelFieldID
 
+	function CalculateSig(stringToSign, privateKey){
+		var hash = CryptoJS.HmacSHA1(stringToSign, privateKey);
+		var base64 = hash.toString(CryptoJS.enc.Base64);
+		return encodeURIComponent(base64);
+	}// end of CalcSig
 });
