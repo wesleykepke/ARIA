@@ -8,6 +8,16 @@ Version: 2.2
 Author URI: http://wkepke.com
 */
 
+function my_page_template_redirect()
+{
+    if( is_page( 'competition-creation-tester' ) && get_query_var('stop', -1) != -1)
+    {
+        wp_redirect( home_url() );
+        exit();
+    }
+}
+add_action( 'template_redirect', 'my_page_template_redirect' );
+
 function test_query_params($entry, $form) {  
   $param_val = get_query_var('herp', -1);
   if ($param_val != -1) {
