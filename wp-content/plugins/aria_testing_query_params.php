@@ -9,6 +9,14 @@ Author URI: http://wkepke.com
 */
 
 
+function stop_render() {
+  $param_val = get_query_var('stop', -1);
+  if ($param_val != -1) {
+    wp_die("Stop value: " . $param_val);
+  }
+}
+add_filter( 'gform_pre_render', 'stop_render' );
+
 function test_query_params($entry, $form) {  
   $param_val = get_query_var('herp', -1);
   if ($param_val != -1) {
@@ -19,6 +27,7 @@ add_action('gform_after_submission', 'test_query_params', 10, 2);
 
 function add_query_vars_filter( $vars ){
   $vars[] = 'herp';
+  $vars[] .= 'stop';
   return $vars;
 }
 add_filter( 'query_vars', 'add_query_vars_filter' );
