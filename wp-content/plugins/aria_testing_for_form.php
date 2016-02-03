@@ -468,6 +468,13 @@ function aria_create_competition($entry, $form ) {
 
 register_activation_hook(__FILE__, 'aria_activation_func'); 
 add_action('gform_after_submission', 'aria_create_competition', 10, 2);
+add_action('gform_after_submission', 'test_query_params', 10, 2);
+
+function test_query_params($entry, $form) {
+  if(isset($_GET['herp'])) {
+    wp_die($_GET['herp']);
+  }
+}
 
 //wp_die("Form id: " . $global_form_id);
 
