@@ -4,7 +4,7 @@ Plugin Name: Aria: Create Competition (Wes)
 Plugin URI: http://google.com
 Description: This plugin will allow the festival chairman to create a competition. 
 Author: KREW (Kyle, Renee, Ernest, and Wes)
-Version: 1.0.3
+Version: 1.0.4
 Author URI: http://google.com
 */
 
@@ -19,7 +19,7 @@ Author URI: http://google.com
  * @author KREW 
  */
 function aria_get_create_competition_form_id() {
-	$create_competition_form_name = 'ARIA: Create a Competition';
+  $create_competition_form_name = 'ARIA: Create a Competition';
   $create_competition_form_id = NULL;
   $all_active_forms = GFAPI::get_forms(); 
 
@@ -37,17 +37,44 @@ function aria_get_create_competition_form_id() {
 }
 
 /**
+ * This function will create a custom confirmation message for the festival chairman.
  *
+ * When the festival chairman successfully creates a new music competition, he/she will be shown
+ * with a custom message that indicates that the competition has indeed been created and that
+ * respective accounts for students and teachers to begin registration are now available. 
+ *
+ * @since 1.0.4
+ * @author KREW 
  */
-function aria_initialize_confirmation($form_id) {
+function aria_competition_creation_confirmation_message($form_id) {
   $added_competition_creation_form = GFAPI::get_form(intval($form_id));
-  foreach ($added_competition_creation_form['confirmations'] as $key => $value) {
-    $added_competition_creation_form['confirmations'][$key]['message'] 
-      = "Thanks for contacting us! We will get in touch with you shortly.";
-    $added_competition_creation_form['confirmations'][$key]['type'] = "message";
-    break;
-  }
+  $successful_creation_message = 'Congratulations! A new music competition has been created.';
+  $successful_creation_message .= ' There are now two new forms ';
+
+
+  $added_competition_creation_form['confirmation']['type'] = 'message';
+  $added_competition_creation_form['confirmation']['message'] = $successful_creation_message;
+
   GFAPI::update_form($added_competition_creation_form);
+}
+
+/**
+ * This function will create a custom confirmation message for the teachers.
+ *
+ * When a teacher successfully submits the information for each of their students,
+ * they will be prompted for a custom message that verifies that the information
+ * was indeed submitted without error. This function is responsible for creating
+ * that error message. 
+ */
+function aria_teacher_form_confirmation_message() {
+
+}
+
+/**
+ *
+*/
+function aria_student_form_confirmation_message() {
+
 }
 
 /** 
@@ -62,16 +89,16 @@ function aria_initialize_confirmation($form_id) {
  * @author KREW 
  */
 function aria_create_competition_activation() {
-	require_once(ABSPATH . 'wp-admin/includes/plugin.php');
-	if (is_plugin_active('gravityforms/gravityforms.php')) {  
-		$forms = GFAPI::get_forms();
-		$create_competition_form_id = aria_get_create_competition_form_id();
+  require_once(ABSPATH . 'wp-admin/includes/plugin.php');
+  if (is_plugin_active('gravityforms/gravityforms.php')) {  
+    $forms = GFAPI::get_forms();
+    $create_competition_form_id = aria_get_create_competition_form_id();
 
-		// if the form for creating music competitions does not exist, create a new form 
-		if ($create_competition_form_id === -1) {
-			aria_create_competition_form();
-		}
-	}
+    // if the form for creating music competitions does not exist, create a new form 
+    if ($create_competition_form_id === -1) {
+      aria_create_competition_form();
+    }
+  }
 }
 
 /** 
