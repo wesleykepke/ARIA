@@ -480,8 +480,9 @@ add_action('gform_after_submission', 'aria_create_competition', 10, 2);
 add_action('gform_after_submission', 'test_query_params', 10, 2);
 
 function test_query_params($entry, $form) {
-  if(isset($_GET['herp'])) {
-    wp_die($_GET['herp']);
+  $query_val = get_query_var( 'herp', -1 );
+  if ($query_val != -1) {
+    wp_die($query_val);
   }
 }
 
