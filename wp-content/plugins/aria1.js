@@ -24,8 +24,9 @@
 				testGet( periodInt, stLevel );
 			});
 		}
-		getInput();
-		
+		//getInput();
+		testPost();
+
 		function CalculateSig(stringToSign, privateKey){
 			var hash = CryptoJS.HmacSHA1(stringToSign, privateKey);
 			var base64 = hash.toString(CryptoJS.enc.Base64);
@@ -34,17 +35,16 @@
 
 		function testPost(){
 
-                        var d = new Date,
-                        expiration = 3600,
-                        unixtime = parseInt( d.getTime() / 1000 ),
-                        future_unixtime = expiration + unixtime,
-                        //nnmta_public_key = "0035d1a323",
+            var d = new Date,
+            expiration = 3600,
+            unixtime = parseInt( d.getTime() / 1000 ),
+            future_unixtime = expiration + unixtime,
+            //nnmta_public_key = "0035d1a323",
 			//nnmta_private_key = "f2d4546aab2c06a",
 			public_key = "1ff591984b",
-                        private_key = "c4efb4676e0d6a6",
-                        route = "forms/2/entries";
-			$.post( "http://aria.cse.unr.edu/wp-content/plugins/aria_dynamic.php", {name: 'Successeded'} );
-			
+            private_key = "c4efb4676e0d6a6",
+            route = "forms/2/entries";
+			//$.post( "http://aria.cse.unr.edu/wp-content/plugins/aria_dynamic.php", {name: 'Successeded'} );
 			/*$.ajax({
 				url: 'http://aria.cse.unr.edu/wp-content/plugins/aria_dynamic.php',
 				type: 'POST',
@@ -52,6 +52,19 @@
 				data: ({'name': 145})
 			});
 			*/
+			dataString = 'song_1_period'; 
+
+	       $.ajax({
+	            type: "POST",
+	            url: "http://aria.cse.unr.edu/wp-content/plugins/aria_dynamic.php",
+	            data: {data : dataString}, 
+	            cache: false,
+
+	            success: function(result) { //just add the result as argument in success anonymous function
+	                var returnedvalue = result;
+	                alert(returnedvalue);
+	            }
+	        });
 
 		}
 		
