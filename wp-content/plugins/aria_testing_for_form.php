@@ -54,7 +54,7 @@ function aria_teacher_field_id_array() {
   // CAUTION, This array is used as a source of truth. Changing these values may
   // result in catastrophic failure. If you do not want to feel the bern, 
   // consult an aria developer before making changes to this portion of code.
-  return array(
+  return new array(
   'name' => 1,
   'email' => 2,
   'phone' => 3,
@@ -204,7 +204,7 @@ function aria_student_field_id_array() {
   // CAUTION, This array is used as a source of truth. Changing these values may
   // result in catastrophic failure. If you do not want to feel the bern, 
   // consult an aria developer before making changes to this portion of code.
-   return array(
+   return new array(
     'parent_name' => 1,
     'parent_email' => 2,
     'student_name' => 3,
@@ -337,7 +337,7 @@ function aria_add_default_address_inputs($field) {
 }
 
 function aria_create_competition_field_id_array() {
-  return array(
+  return new array(
     'competition_name' => 1,
     'competition_start_date' => 2,
     'competition_location' => 3,
