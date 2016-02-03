@@ -1,14 +1,6 @@
 <?php
-/*
-Plugin Name: Aria Dynamic Population
-Plugin URI: http://google.com
-Description: Testing dynamic population with form 
-Author: Renee
-Version: 1.0
-Author URI: http://google.com
-*/
-function aria_populate_posts( $form ) {
-return $form;
-}
-
+require_once('aria_testing_for_form.php'); 
+$arr = aria_teacher_field_id_array();
+$data = $arr[$_POST['data']];
+echo $data;
 ?>
