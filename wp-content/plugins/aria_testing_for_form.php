@@ -70,7 +70,8 @@ function aria_teacher_field_id_array() {
   'theory_score' => 13,
   'alternate_theory' => 14,
   'competition_format' => 15,
-  'timing_of_pieces' => 16
+  'timing_of_pieces' => 16,
+  'student_level' => 17
   );
   return $arr;
 }
@@ -124,6 +125,12 @@ function aria_create_teacher_form( $competition_name ) {
   $student_name_field->id = $field_id_arr['student_name'];
   $student_name_field->isRequired = true;
   $teacher_form->fields[] = $student_name_field;
+
+  $student_level_field = new GF_Field_Select();
+  $student_level_field->label = 'Student Level';
+  $student_level_field->id = $field_id_arr['student_level'];
+  $student_level_field->isRequired = true;
+  $teacher->form->fields[] = $student_level_field;
 
   $song_one_period_field = new GF_Field_Select();
   $song_one_period_field->label = "Song 1 Period";
