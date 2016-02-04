@@ -29,8 +29,7 @@ jQuery(document).ready(function($) {
 	var level = '1';//$('#input_15_3').val();	
 
 	// Get song entries from level
-		var resultMusic;
-	getMusic( musicFormID, level, dataLevelField);
+	var music = getMusic( musicFormID, level, dataLevelField);
 
 	// Song 1
 
@@ -39,7 +38,6 @@ jQuery(document).ready(function($) {
 		var valPeriod1;
 			$(inputPeriod1).live("change", function() {
 				valPeriod1 = $(inputPeriod1).val();	
-				alert( typeof(music));
 
 				// (Re)load composers
 				loadComposers(music, valPeriod1);
@@ -105,10 +103,27 @@ jQuery(document).ready(function($) {
 		url += '&paging[page_size]=300' + '&search=' + searchJSON;
 		url += '&sorting[key]=3&sorting[direction]=ASC';
 
+/*		var resultMusic = "";
 		$.get( url,  function( result ){
-			resultMusic = result['response']['entries'];
-		}, 'json');
-			alert(typeof(resultMusic));
+			Object.assign(resultMusic, result['response']['entries']);
+			//resultMusic = result['response']['entries'];
+			alert("inside music" + typeof(resultMusic));
+		}, 'json');*/
+
+		var returnedValue;
+		var test;
+			$.ajax({
+	            type: "GET",
+	            url: url,
+	            async: false,
+
+	            success: function(result) {
+	                test = result['response']['entries'];
+	            }
+	        }).then( function(){
+	        		returnedValue = test;
+	        });
+		return returnedValue;
 	}// end of getMusic function
 
 
@@ -141,10 +156,23 @@ jQuery(document).ready(function($) {
 		var inputComposer = '#input_' + currFormID + '_' + compField1;// !!Need to change from hard coded
 		var html = '';
 
+		if( period == 'Baroque'){
+			periodInt = '1';
+		}
+		else if( period == 'Classical'){
+			periodInt = '2';
+		}
+		else if( period == 'Romantic'){
+			periodInt = '3';
+		}
+		else if( period == 'Contemporary'){
+			periodInt = '4';
+		} 
 		// Populate with composers
 		musicData.forEach( function(entry){
 			var composer = entry[dataCompField];
-			if( entry[dataPeriodField] == period && html.indexOf( composer ) == -1 )
+
+			if( entry[dataPeriodField] == periodInt && html.indexOf( composer ) == -1 )
 			{
 				html += '<option value="' + composer + '">' + composer + '</option>';
 			}
