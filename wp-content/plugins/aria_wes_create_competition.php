@@ -4,7 +4,7 @@ Plugin Name: Aria: Create Competition (Wes)
 Plugin URI: http://google.com
 Description: This plugin will allow the festival chairman to create a competition. 
 Author: KREW (Kyle, Renee, Ernest, and Wes)
-Version: 1.0.4
+Version: 1.0.5
 Author URI: http://google.com
 */
 
@@ -139,6 +139,15 @@ function aria_create_competition_form() {
   $competition_creation_form->fields[] = $teacher_registration_start_date_field;
   $competition_creation_form->fields[] = $teacher_registration_end_date_field;
 
+  // custom submission message to let the festival chairman know the creation was
+  // a success
+  $successful_submission_message = 'Congratulations! A new music competition has been created.';
+  $successful_submission_message .= ' There are now two new forms for students and teacher to use';
+  $successful_submission_message .= ' for registration. The name for each new form is prepended with';
+  $successful_submission_message .= ' the name of the new music competition previously created.'; 
+  $competition_creation_form->confirmation['type'] = 'message';
+  $competition_creation_form->confirmation['message'] = $successful_submission_message;
+
   // add the new form to the festival chairman's dashboard 
   $new_form_id = GFAPI::add_form($competition_creation_form->createFormArray());
 
@@ -153,12 +162,20 @@ function aria_create_competition_form() {
   this is done after the form has been added so that the initial confirmation 
   hash has been added to the object
   */
+  /*
   $added_competition_creation_form = GFAPI::get_form(intval($new_form_id));
+  if (is_wp_error($added_competition_creation_form_id)) {
+    wp_die($added_competition_creation_form->get_error_message());
+  }
+
+  $added_competition_creation_form->confirmation['type'] = 'message';
   $successful_submission_message = 'Congratulations! A new music competition has been created.';
   $successful_submission_message .= ' There are now two new forms for students and teacher to use';
   $successful_submission_message .= ' for registration. The name for each new form is prepended with';
   $successful_submission_message .= ' the name of the new music competition previously created.';
+  $added_competition_creation_form->confirmation['message'] = $successful_submission_message; 
   GFAPI::update_form($added_competition_creation_form);
+  */
 }
 
 /** 
@@ -175,7 +192,7 @@ function aria_teacher_field_id_array() {
   // CAUTION, This array is used as a source of truth. Changing these values may
   // result in catastrophic failure. If you do not want to feel the bern, 
   // consult an aria developer before making changes to this portion of code.
-  $arr = array(
+  return array(
     'name' => 1,
     'email' => 2,
     'phone' => 3,
@@ -193,7 +210,6 @@ function aria_teacher_field_id_array() {
     'competition_format' => 15,
     'timing_of_pieces' => 16
   );
-  return $arr;
 }
 
 /** 
@@ -379,7 +395,7 @@ function aria_student_field_id_array() {
   // CAUTION, This array is used as a source of truth. Changing these values may
   // result in catastrophic failure. If you do not want to feel the bern, 
   // consult an aria developer before making changes to this portion of code.
-   $arr = array(
+  return array(
     'parent_name' => 1,
     'parent_email' => 2,
     'student_name' => 3,
@@ -390,7 +406,6 @@ function aria_student_field_id_array() {
     'preferred_command_performance' => 8,
     'compliance_statement' => 9
   );
-  return arr;
 }
 
 
@@ -521,7 +536,7 @@ function aria_create_student_form( $competition_name ) {
   $added_student_form = GFAPI::get_form(intval($new_form_id));
   $successful_submission_message = 'Congratulations! You have just successfully registered';
   $successful_submission_message .= ' your child.';
-  GFAPI::update_form($added_teacher_form);
+  GFAPI::update_form($added_student_form);
 }
 
 /** 
@@ -575,13 +590,48 @@ function aria_add_default_address_inputs($field) {
  * @author KREW 
  */
 function aria_create_competition($entry, $form) {
+  // get the meta information obtained via creating a competition 
+  $field_mapping = aria_get_competition_entry_meta(); 
+
+  // make sure the create competition form is calling this function
   if ($form['id'] === aria_get_create_competition_form_id()) {
-		aria_create_student_form($entry['Name of Competition']);
-		aria_create_teacher_form($entry['Name of Competition']); 
+		//aria_create_student_form($entry[$field_mapping['Name of Competition']]);
+		//aria_create_teacher_form($entry[$field_mapping['Name of Competition']]);
 	}
 	else {
 		wp_die('No form currently exists that allows the festival chairman to create a new music competition');
 	} 
+}
+
+/**
+ * This function will return an associative array with entry meta data for the competition form.
+ *
+ * Every time an entry is submitted using the form for creating a competition, the submission
+ * is an Entry object, which is an associative array that has a plethora of information. Also
+ * included inside the Entry object is the infomation that was input by the user. This function
+ * simply returns an associative array that can be used by other functions to offset into the
+ * Entry object's user data, because otherwise, the offset all involves magic integers that
+ * are otherwise not very descriptive. 
+ *
+ * @since 1.0.5
+ * @author KREW
+ */
+function aria_get_competition_entry_meta() {
+  return array(
+    'Name of Competition' => 1,
+    'Date of Competition' => 2,
+    'Location of Competition' => 3,
+    'Street Address' => 3.1,
+    'Address Line 2' => 3.2,
+    'City' => 3.3,
+    'State / Province / Region' => 3.4,
+    'Zip / Postal Code' => 3.5,
+    'Country' => 3.6,
+    'Student Registration Start Date' => 10,
+    'Student Registration End Date' => 11,
+    'Teacher Registration Start Date' => 12,
+    'Teacher Registration Start Date' => 13 
+  );
 }
 
 // register with the correct hooks
