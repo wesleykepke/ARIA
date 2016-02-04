@@ -1,6 +1,7 @@
 jQuery(document).ready(function($) {
 	// Get music form ID - Need to make this dynamic
 	var musicFormID = '184';
+	var currFormID = '15';
 
 	// Get field IDs - Combine these into one function?
 	// From current form
@@ -28,15 +29,23 @@ jQuery(document).ready(function($) {
 	var level = '1';//$('#input_15_3').val();	
 
 	// Get song entries from level
-	var music = getMusic( musicFormID, level, dataLevelField);
+		var resultMusic;
+	getMusic( musicFormID, level, dataLevelField);
 
 	// Song 1
 
 		// If period changes
+		var inputPeriod1 = '#input_' + currFormID + '_' + periodField1;
+		var valPeriod1;
+			$(inputPeriod1).live("change", function() {
+				valPeriod1 = $(inputPeriod1).val();	
+				alert( typeof(music));
 
-			// (Re)load composers
+				// (Re)load composers
+				loadComposers(music, valPeriod1);
 
 			// Clear songs
+			});
 
 		// If composer changes
 
@@ -95,27 +104,11 @@ jQuery(document).ready(function($) {
 		//NOTE: max page size?
 		url += '&paging[page_size]=300' + '&search=' + searchJSON;
 		url += '&sorting[key]=3&sorting[direction]=ASC';
-		var resultMusic;
 
 		$.get( url,  function( result ){
-/*			var html = '';
-			var option;
-			// Populate with composers
-			result['response']['entries'].forEach( function(entry){
-				var composer = entry[composerID];
-				if( html.indexOf( composer ) == -1 && entry[levelID] == level && )
-				{
-					html += '<option value="' + composer + '">' + composer + '</option>';
-				}
-			});	
-
-			// Clear options and append new options
-			$('#input_15_4').empty();
-			$('#input_15_4').append(html);*/
-			resultMusic = result;
-		});
-
-		return resultMusic;
+			resultMusic = result['response']['entries'];
+		}, 'json');
+			alert(typeof(resultMusic));
 	}// end of getMusic function
 
 
@@ -143,4 +136,22 @@ jQuery(document).ready(function($) {
 		var base64 = hash.toString(CryptoJS.enc.Base64);
 		return encodeURIComponent(base64);
 	}// end of CalcSig
+
+	function loadComposers(musicData, period){
+		var inputComposer = '#input_' + currFormID + '_' + compField1;// !!Need to change from hard coded
+		var html = '';
+
+		// Populate with composers
+		musicData.forEach( function(entry){
+			var composer = entry[dataCompField];
+			if( entry[dataPeriodField] == period && html.indexOf( composer ) == -1 )
+			{
+				html += '<option value="' + composer + '">' + composer + '</option>';
+			}
+		});	
+
+		// Clear options and append new options
+		$(inputComposer).empty();
+		$(inputComposer).append(html);
+	}// end of loadComposers
 });
