@@ -590,9 +590,6 @@ function aria_add_default_address_inputs($field) {
  * @author KREW 
  */
 function aria_create_competition($entry, $form) {
-  // get the meta information obtained via creating a competition 
-  $field_mapping = aria_get_competition_entry_meta(); 
-
   // make sure the create competition form is calling this function
   if ($form['id'] === aria_get_create_competition_form_id()) {
 		//aria_create_student_form($entry[$field_mapping['Name of Competition']]);
@@ -601,6 +598,34 @@ function aria_create_competition($entry, $form) {
 	else {
 		wp_die('No form currently exists that allows the festival chairman to create a new music competition');
 	} 
+}
+
+/**
+ * Trying to rename confirmation message. 
+ */
+function aria_update_create_competition_validation($entry, $form) {
+  // get the meta information obtained via creating a competition 
+  $field_mapping = aria_get_competition_entry_meta(); 
+  $student_registration_form_name = $entry[$field_mapping['Name of Competition']];
+  $student_registration_form_name .= ' Student Registration';
+  $teacher_registration_form_name = $entry[$field_mapping['Name of Competition']];
+  $teacher_registration_form_name .= ' Teacher Registration';
+
+  // generate the successful submission message 
+  $create_competition_form_id = aria_get_create_competition_form_id();
+  $create_competition_form = GFAPI::get_form($create_competition_form_id); 
+  $successful_submission_message = 'Congratulations! A new music competition has been created.';
+  $successful_submission_message = 'There are now two new forms titled \'$student_registration_form_name\'';
+  $successful_submission_message = 'and \'$teacher_registration_form_name\' that students and teachers can';
+  $successful_submission_message = '(respectively) use to register.';
+  $create_competition_form['confirmation']['type'] = 'message';
+  $create_competition_form['confirmation']['message'] = $successful_submission_message;  
+  
+  // update the competition creation form
+  $result = GFAPI::update_form($create_competition_form);
+  if (is_wp_error($result)) {
+    wp_die('Could not update the competition creation form to have a custom message');
+  }
 }
 
 /**
@@ -636,4 +661,5 @@ function aria_get_competition_entry_meta() {
 
 // register with the correct hooks
 register_activation_hook(__FILE__, 'aria_create_competition_activation');
+add_action('gform_pre_submission_'. strval(aria_get_create_competition_form_id()), 'aria_update_create_competition_validation', 10, 2);
 add_action('gform_after_submission_' . strval(aria_get_create_competition_form_id()), 'aria_create_competition', 10, 2); 
