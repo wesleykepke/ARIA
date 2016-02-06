@@ -2,30 +2,30 @@
 /*
 Plugin Name: Aria: Create Competition (Wes)
 Plugin URI: http://google.com
-Description: This plugin will allow the festival chairman to create a competition. 
+Description: This plugin will allow the festival chairman to create a competition.
 Author: KREW (Kyle, Renee, Ernest, and Wes)
 Version: 1.0.5
 Author URI: http://google.com
 */
 
-/** 
- * This function will find the ID of the form used to create music competitions. 
+/**
+ * This function will find the ID of the form used to create music competitions.
  *
- * This function will iterate through all of the active form objects and return the 
+ * This function will iterate through all of the active form objects and return the
  * ID of the form that is used to create music competitions. If no music competition exists,
- * the function will return -1. 
+ * the function will return -1.
  *
  * @since 1.0.0
- * @author KREW 
+ * @author KREW
  */
 function aria_get_create_competition_form_id() {
   $create_competition_form_name = 'ARIA: Create a Competition';
   $create_competition_form_id = NULL;
-  $all_active_forms = GFAPI::get_forms(); 
+  $all_active_forms = GFAPI::get_forms();
 
   foreach ($all_active_forms as $form) {
     if ($form['title'] === $create_competition_form_name) {
-      $create_competition_form_id = $form['id']; 
+      $create_competition_form_id = $form['id'];
     }
   }
 
@@ -33,27 +33,27 @@ function aria_get_create_competition_form_id() {
     $create_competition_form_id = -1;
   }
 
-  return $create_competition_form_id; 
+  return $create_competition_form_id;
 }
 
-/** 
- * This function will run on the activation of this plugin. 
+/**
+ * This function will run on the activation of this plugin.
  *
  * This function is responsible for performing all necessary actions when activated. For
- * example, this function will check to see if a form already exists for creating new 
+ * example, this function will check to see if a form already exists for creating new
  * music competitions. If no such form exists, this function will create a new form
- * designed specifically for creating new music competitions. 
+ * designed specifically for creating new music competitions.
  *
  * @since 1.0.0
- * @author KREW 
+ * @author KREW
  */
 function aria_create_competition_activation() {
   require_once(ABSPATH . 'wp-admin/includes/plugin.php');
-  if (is_plugin_active('gravityforms/gravityforms.php')) {  
+  if (is_plugin_active('gravityforms/gravityforms.php')) {
     $forms = GFAPI::get_forms();
     $create_competition_form_id = aria_get_create_competition_form_id();
 
-    // if the form for creating music competitions does not exist, create a new form 
+    // if the form for creating music competitions does not exist, create a new form
     if ($create_competition_form_id === -1) {
       aria_create_competition_form();
     }
@@ -61,23 +61,23 @@ function aria_create_competition_activation() {
   else {
     $error_message = 'Error: The Gravity Forms plugin is not active. Please activate';
     $error_message .= ' the Gravity Forms plugin and reactivate this plugin.';
-    wp_die($error_message); 
+    wp_die($error_message);
   }
 }
 
-/** 
- * This function will create a new form for creating music competitions. 
+/**
+ * This function will create a new form for creating music competitions.
  *
  * This function is responsible for creating and adding all of the associated fields
- * that are necessary for the festival chairman to create new music competitions. 
+ * that are necessary for the festival chairman to create new music competitions.
  *
  * @since 1.0.0
- * @author KREW 
+ * @author KREW
  */
 function aria_create_competition_form() {
   $competition_creation_form = new GF_Form("ARIA: Create a Competition", "");
-    
-  // name 
+
+  // name
   $competition_name_field = new GF_Field_Text();
   $competition_name_field->label = "Name of Competition";
   $competition_name_field->id = 1;
@@ -97,7 +97,7 @@ function aria_create_competition_form() {
   $competition_location_field->id = 3;
   $competition_location_field->isRequired = false;
   $competition_location_field = aria_add_default_address_inputs($competition_location_field);
-    
+
   // student registration start date
   $student_registration_start_date_field = new GF_Field_Date();
   $student_registration_start_date_field->label = "Student Registration Start Date";
@@ -144,11 +144,11 @@ function aria_create_competition_form() {
   $successful_submission_message = 'Congratulations! A new music competition has been created.';
   $successful_submission_message .= ' There are now two new forms for students and teacher to use';
   $successful_submission_message .= ' for registration. The name for each new form is prepended with';
-  $successful_submission_message .= ' the name of the new music competition previously created.'; 
+  $successful_submission_message .= ' the name of the new music competition previously created.';
   $competition_creation_form->confirmation['type'] = 'message';
   $competition_creation_form->confirmation['message'] = $successful_submission_message;
 
-  // add the new form to the festival chairman's dashboard 
+  // add the new form to the festival chairman's dashboard
   $new_form_id = GFAPI::add_form($competition_creation_form->createFormArray());
 
   // Make sure the new form was added without error
@@ -159,7 +159,7 @@ function aria_create_competition_form() {
   /*
   add a customized confirmation message
 
-  this is done after the form has been added so that the initial confirmation 
+  this is done after the form has been added so that the initial confirmation
   hash has been added to the object
   */
   /*
@@ -173,24 +173,24 @@ function aria_create_competition_form() {
   $successful_submission_message .= ' There are now two new forms for students and teacher to use';
   $successful_submission_message .= ' for registration. The name for each new form is prepended with';
   $successful_submission_message .= ' the name of the new music competition previously created.';
-  $added_competition_creation_form->confirmation['message'] = $successful_submission_message; 
+  $added_competition_creation_form->confirmation['message'] = $successful_submission_message;
   GFAPI::update_form($added_competition_creation_form);
   */
 }
 
-/** 
- * This function defines an associative array used in the teacher form. 
+/**
+ * This function defines an associative array used in the teacher form.
  *
  * This function returns an array that maps all of the names of the fields in the teacher form
  * to a unique integer so that they can be referenced. Moreover, this array helps prevent the case
- * where the names of these fields are modified from the dashboard. 
- * 
+ * where the names of these fields are modified from the dashboard.
+ *
  * @since 1.0.4
- * @author KREW 
+ * @author KREW
  */
 function aria_teacher_field_id_array() {
   // CAUTION, This array is used as a source of truth. Changing these values may
-  // result in catastrophic failure. If you do not want to feel the bern, 
+  // result in catastrophic failure. If you do not want to feel the bern,
   // consult an aria developer before making changes to this portion of code.
   return array(
     'name' => 1,
@@ -212,16 +212,16 @@ function aria_teacher_field_id_array() {
   );
 }
 
-/** 
- * This function will create a new form for the teachers to use to register student information. 
+/**
+ * This function will create a new form for the teachers to use to register student information.
  *
  * This function is responsible for creating and adding all of the associated fields
- * that are necessary for music teachers to enter data about their students that are competing. 
+ * that are necessary for music teachers to enter data about their students that are competing.
  *
  * @param   String    $competition_name   The name of the newly created music competition
  *
  * @since 1.0.0
- * @author KREW 
+ * @author KREW
  */
 function aria_create_teacher_form($competition_name) {
   $teacher_form = new GF_Form("{$competition_name} Teacher Registration", "");
@@ -234,7 +234,7 @@ function aria_create_teacher_form($competition_name) {
   $teacher_name_field->isRequired = true;
   $teacher_form->fields[] = $teacher_name_field;
 
-  // teacher email 
+  // teacher email
   $teacher_email_field = new GF_Field_Email();
   $teacher_email_field->label = "Email";
   $teacher_email_field->id = $field_id_arr['email'];
@@ -265,21 +265,21 @@ function aria_create_teacher_form($competition_name) {
   ." competing, and 3 time slots if you have more than 6 students competing.";
   $teacher_form->fields[] = $volunteer_preference_field;
 
-  // volunteer time 
+  // volunteer time
   $volunteer_time_field = new GF_Field_Checkbox();
   $volunteer_time_field->label = "Times Available for Volunteering";
   $volunteer_time_field->id = $field_id_arr['volunteer_time'];
   $volunteer_time_field->isRequired = false;
   $teacher_form->fields[] = $volunteer_time_field;
 
-  // student name 
+  // student name
   $student_name_field = new GF_Field_Name();
   $student_name_field->label = "Student Name";
   $student_name_field->id = $field_id_arr['student_name'];
   $student_name_field->isRequired = true;
   $teacher_form->fields[] = $student_name_field;
 
-  // student's first song period 
+  // student's first song period
   $song_one_period_field = new GF_Field_Select();
   $song_one_period_field->label = "Song 1 Period";
   $song_one_period_field->id = $field_id_arr['song_1_period'];
@@ -300,7 +300,7 @@ function aria_create_teacher_form($competition_name) {
   $song_one_selection_field->isRequired = true;
   $teacher->form->fields[] = $song_one_selection_field;
 
-  // student's second song period 
+  // student's second song period
   $song_two_period_field = new GF_Field_Select();
   $song_two_period_field->label = "Song 2 Period";
   $song_two_period_field->id = $field_id_arr['song_2_period'];
@@ -331,7 +331,7 @@ function aria_create_teacher_form($competition_name) {
   $student_theory_score->rangeMax = 100;
   $teacher_form->fields[] = $student_theory_score;
 
-  // student's alternate theory 
+  // student's alternate theory
   $alternate_theory_field = new GF_Field_Checkbox();
   $alternate_theory_field->label = "Check if alternate theory exam was completed.";
   $alternate_theory_field->id = $field_id_arr['alternate_theory'];
@@ -353,7 +353,7 @@ function aria_create_teacher_form($competition_name) {
   );
   $teacher_form->fields[] = $competition_format_field;
 
-  // timing field 
+  // timing field
   $timing_of_pieces_field = new GF_Field_Number();
   $timing_of_pieces_field->label = "Timing of pieces (minutes)";
   $timing_of_pieces_field->id = $field_id_arr['timing_of_pieces'];
@@ -361,7 +361,7 @@ function aria_create_teacher_form($competition_name) {
   $timing_of_pieces_field->numberFormat = "decimal_dot";
   $teacher_form->fields[] = $timing_of_pieces_field;
 
-  // add the new form to the festival chairman's dashboard 
+  // add the new form to the festival chairman's dashboard
   $new_form_id = GFAPI::add_form($teacher_form->createFormArray());
 
   // make sure the new form was added without error
@@ -372,7 +372,7 @@ function aria_create_teacher_form($competition_name) {
   /*
   add a customized confirmation message
 
-  this is done after the form has been added so that the initial confirmation 
+  this is done after the form has been added so that the initial confirmation
   hash has been added to the object
   */
   $added_teacher_form = GFAPI::get_form(intval($new_form_id));
@@ -381,19 +381,19 @@ function aria_create_teacher_form($competition_name) {
   GFAPI::update_form($added_teacher_form);
 }
 
-/** 
- * This function defines an associative array used in the student form. 
+/**
+ * This function defines an associative array used in the student form.
  *
  * This function returns an array that maps all of the names of the fields in the student form
  * to a unique integer so that they can be referenced. Moreover, this array helps prevent the case
- * where the names of these fields are modified from the dashboard. 
- * 
+ * where the names of these fields are modified from the dashboard.
+ *
  * @since 1.0.4
- * @author KREW 
+ * @author KREW
  */
 function aria_student_field_id_array() {
   // CAUTION, This array is used as a source of truth. Changing these values may
-  // result in catastrophic failure. If you do not want to feel the bern, 
+  // result in catastrophic failure. If you do not want to feel the bern,
   // consult an aria developer before making changes to this portion of code.
   return array(
     'parent_name' => 1,
@@ -409,22 +409,22 @@ function aria_student_field_id_array() {
 }
 
 
-/** 
- * This function will create a new form for the students to use to register personal information. 
+/**
+ * This function will create a new form for the students to use to register personal information.
  *
  * This function is responsible for creating and adding all of the associated fields
- * that are necessary for students to enter data about their upcoming music competition.  
+ * that are necessary for students to enter data about their upcoming music competition.
  *
  * @param   String    $competition_name   The name of the newly created music competition
  *
  * @since 1.0.0
- * @author KREW 
+ * @author KREW
  */
 function aria_create_student_form( $competition_name ) {
   $student_form = new GF_Form("{$competition_name} Student Registration", "");
   $field_id_array = aria_student_field_id_array();
 
-  // parent name 
+  // parent name
   $parent_name_field = new GF_Field_Name();
   $parent_name_field->label = "Parent Name";
   $parent_name_field->id = $field_id_array['parent_name'];
@@ -438,7 +438,7 @@ function aria_create_student_form( $competition_name ) {
   $parent_email_field->isRequired = true;
   $student_form->fields[] = $parent_email_field;
 
-  // student name 
+  // student name
   $student_name_field = new GF_Field_Name();
   $student_name_field->label = "Student Name";
   $student_name_field->description = "Please capitalize your child's first ".
@@ -449,7 +449,7 @@ function aria_create_student_form( $competition_name ) {
   $student_name_field->isRequired = true;
   $student_form->fields[] = $student_name_field;
 
-  // student birthday 
+  // student birthday
   $student_birthday_date_field = new GF_Field_Date();
   $student_birthday_date_field->label = "Student Birthday";
   $student_birthday_date_field->id = $field_id_array['student_birthday'];
@@ -458,7 +458,7 @@ function aria_create_student_form( $competition_name ) {
   $student_birthday_date_field->dateType = 'datepicker';
   $student_form->fields[] = $student_birthday_date_field;
 
-  // student's piano teacher 
+  // student's piano teacher
   $piano_teachers_field = new GF_Field_Select();
   $piano_teachers_field->label = "Piano Teacher's Name";
   $piano_teachers_field->id = $field_id_array['teacher_name'];
@@ -474,7 +474,7 @@ function aria_create_student_form( $competition_name ) {
   $teacher_missing_field->isRequired = false;
   $student_form->fields[] = $teacher_missing_field;
 
-  // student's available times to compete 
+  // student's available times to compete
   $available_times = new GF_Field_Checkbox();
   $available_times->label = "Available Festival Days (check all available times)";
   $available_times->id = $field_id_array['available_festival_days'];
@@ -500,7 +500,7 @@ function aria_create_student_form( $competition_name ) {
   );
   $student_form->fields[] = $available_times;
 
-  // the compliance field for parents 
+  // the compliance field for parents
   $compliance_field = new GF_Field_checkbox();
   $compliance_field->label = "Compliance Statement";
   $compliance_field->id = $field_id_array['compliance_statement'];
@@ -519,7 +519,7 @@ function aria_create_student_form( $competition_name ) {
   );
   $student_form->fields[] = $compliance_field;
 
-	// add the new form to the festival chairman's dashboard 
+	// add the new form to the festival chairman's dashboard
 	$new_form_id = GFAPI::add_form($student_form->createFormArray());
 
 	// make sure the new form was added without error
@@ -530,7 +530,7 @@ function aria_create_student_form( $competition_name ) {
   /*
   add a customized confirmation message
 
-  this is done after the form has been added so that the initial confirmation 
+  this is done after the form has been added so that the initial confirmation
   hash has been added to the object
   */
   $added_student_form = GFAPI::get_form(intval($new_form_id));
@@ -539,16 +539,16 @@ function aria_create_student_form( $competition_name ) {
   GFAPI::update_form($added_student_form);
 }
 
-/** 
- * This function is responsible for adding some default address field values. 
+/**
+ * This function is responsible for adding some default address field values.
  *
  * This function is used to pre-populate the address fields of a gravity form with some
- * generic, default values. 
+ * generic, default values.
  *
- * @param Field Object  $field    The name of field used for addressing 
+ * @param Field Object  $field    The name of field used for addressing
  *
  * @since 1.0.0
- * @author KREW 
+ * @author KREW
  */
 function aria_add_default_address_inputs($field) {
 	$field->inputs = array(
@@ -575,8 +575,8 @@ function aria_add_default_address_inputs($field) {
 	return $field;
 }
 
-/** 
- * This function will create new registration forms for students and parents. 
+/**
+ * This function will create new registration forms for students and parents.
  *
  * This function is responsible for creating new registration forms for both students
  * and parents. This function will only create new registration forms for students and
@@ -584,10 +584,10 @@ function aria_add_default_address_inputs($field) {
  * competitions.
  *
  * @param Entry Object  $entry  The entry that was just submitted
- * @param Form Object   $form   The form used to submit entries  
+ * @param Form Object   $form   The form used to submit entries
  *
  * @since 1.0.0
- * @author KREW 
+ * @author KREW
  */
 function aria_create_competition($entry, $form) {
   // make sure the create competition form is calling this function
@@ -597,30 +597,30 @@ function aria_create_competition($entry, $form) {
 	}
 	else {
 		wp_die('No form currently exists that allows the festival chairman to create a new music competition');
-	} 
+	}
 }
 
 /**
- * Trying to rename confirmation message. 
+ * Trying to rename confirmation message.
  */
 function aria_update_create_competition_validation($entry, $form) {
-  // get the meta information obtained via creating a competition 
-  $field_mapping = aria_get_competition_entry_meta(); 
+  // get the meta information obtained via creating a competition
+  $field_mapping = aria_get_competition_entry_meta();
   $student_registration_form_name = $entry[$field_mapping['Name of Competition']];
   $student_registration_form_name .= ' Student Registration';
   $teacher_registration_form_name = $entry[$field_mapping['Name of Competition']];
   $teacher_registration_form_name .= ' Teacher Registration';
 
-  // generate the successful submission message 
+  // generate the successful submission message
   $create_competition_form_id = aria_get_create_competition_form_id();
-  $create_competition_form = GFAPI::get_form($create_competition_form_id); 
+  $create_competition_form = GFAPI::get_form($create_competition_form_id);
   $successful_submission_message = 'Congratulations! A new music competition has been created.';
   $successful_submission_message = 'There are now two new forms titled \'$student_registration_form_name\'';
   $successful_submission_message = 'and \'$teacher_registration_form_name\' that students and teachers can';
   $successful_submission_message = '(respectively) use to register.';
   $create_competition_form['confirmation']['type'] = 'message';
-  $create_competition_form['confirmation']['message'] = $successful_submission_message;  
-  
+  $create_competition_form['confirmation']['message'] = $successful_submission_message;
+
   // update the competition creation form
   $result = GFAPI::update_form($create_competition_form);
   if (is_wp_error($result)) {
@@ -636,7 +636,7 @@ function aria_update_create_competition_validation($entry, $form) {
  * included inside the Entry object is the infomation that was input by the user. This function
  * simply returns an associative array that can be used by other functions to offset into the
  * Entry object's user data, because otherwise, the offset all involves magic integers that
- * are otherwise not very descriptive. 
+ * are otherwise not very descriptive.
  *
  * @since 1.0.5
  * @author KREW
@@ -655,11 +655,11 @@ function aria_get_competition_entry_meta() {
     'Student Registration Start Date' => 10,
     'Student Registration End Date' => 11,
     'Teacher Registration Start Date' => 12,
-    'Teacher Registration Start Date' => 13 
+    'Teacher Registration Start Date' => 13
   );
 }
 
 // register with the correct hooks
 register_activation_hook(__FILE__, 'aria_create_competition_activation');
 add_action('gform_pre_submission_'. strval(aria_get_create_competition_form_id()), 'aria_update_create_competition_validation', 10, 2);
-add_action('gform_after_submission_' . strval(aria_get_create_competition_form_id()), 'aria_create_competition', 10, 2); 
+add_action('gform_after_submission_' . strval(aria_get_create_competition_form_id()), 'aria_create_competition', 10, 2);
