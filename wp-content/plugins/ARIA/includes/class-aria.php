@@ -78,6 +78,21 @@ class ARIA {
 
 	}
 
+	public function aria_create_teacher_and_student_forms($entry, $form) {
+    // make sure the create competition form is calling this function
+    if ($form['id'] === aria_get_create_competition_form_id()) {
+      wp_die("NICE!");
+      //aria_create_student_form($entry[$field_mapping['Name of Competition']]);
+      //aria_create_teacher_form($entry[$field_mapping['Name of Competition']]);
+    }
+    else {
+      wp_die('ERROR: No form currently exists that allows the festival chairman
+      to create a new music competition');
+    }
+  }
+
+
+
 	/**
 	 * Load the required dependencies for this plugin.
 	 *
@@ -125,10 +140,11 @@ class ARIA {
 
 		// Register all of the hooks needed by ARIA
 		/*
-$temp = new ARIA;
+    $temp = new ARIA;
 		add_action('gform_after_submission_' . strval(aria_get_create_competition_form_id()),
-			array(&$temp, 'ARIA_Create_Competition::aria_create_teacher_and_student_forms'));
-*/
+		array(&$temp, 'ARIA_Create_Competition::aria_create_teacher_and_student_forms'));
+		*/
+
 
 /*
 		$this->loader->add_action('gform_after_submission_' . strval(aria_get_create_competition_form_id()),
