@@ -18,7 +18,7 @@
 if (!is_plugin_active('gravityforms/gravityforms.php')) {
   wp_die("Error: ARIA requires the Gravity Forms plugin to be installed
   and enabled. Please enable the Gravity Forms plugin and reactivate
-  ARIA.", array(500, true, 'ltr'));
+  ARIA.");
 }
 
 /**
