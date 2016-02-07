@@ -63,7 +63,7 @@ class ARIA_Create_Competition {
   public static function aria_create_teacher_and_student_forms($entry, $form) {
     // make sure the create competition form is calling this function
     if ($form['id'] === aria_get_create_competition_form_id()) {
-      wp_die("NICE!");
+      wp_die("NICE! INSIDE CLASS");
       //aria_create_student_form($entry[$field_mapping['Name of Competition']]);
       //aria_create_teacher_form($entry[$field_mapping['Name of Competition']]);
     }
