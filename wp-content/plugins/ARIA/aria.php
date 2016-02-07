@@ -34,8 +34,8 @@ if ( ! defined( 'WPINC' ) ) {
  * The code that runs during plugin activation.
  * This action is documented in includes/class-plugin-name-activator.php
  */
-function activate_plugin_name() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name-activator.php';
+function activate_aria() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-aria-activator.php';
 	ARIA_Activator::activate();
 }
 
@@ -43,19 +43,19 @@ function activate_plugin_name() {
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-plugin-name-deactivator.php
  */
-function deactivate_plugin_name() {
+function deactivate_aria() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name-deactivator.php';
 	Plugin_Name_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_plugin_name' );
-register_deactivation_hook( __FILE__, 'deactivate_plugin_name' );
+register_activation_hook( __FILE__, 'activate_aria' );
+register_deactivation_hook( __FILE__, 'deactivate_aria' );
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name.php';
+require plugin_dir_path( __FILE__ ) . 'includes/class-aria.php';
 
 /**
  * Begins execution of the plugin.
@@ -66,10 +66,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name.php';
  *
  * @since    1.0.0
  */
-function run_plugin_name() {
+function run_aria() {
 
-	$plugin = new Plugin_Name();
+	$plugin = new ARIA();
 	$plugin->run();
 
 }
-run_plugin_name();
+run_aria();
