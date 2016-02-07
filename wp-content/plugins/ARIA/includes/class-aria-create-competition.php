@@ -83,7 +83,7 @@ class ARIA_Create_Competition {
    * @since 1.0.0
    * @author KREW
    */
-  public static function aria_create_competition_form() {
+  private static function aria_create_competition_form() {
     $competition_creation_form = new GF_Form("ARIA: Create a Competition", "");
 
     // name
@@ -105,7 +105,7 @@ class ARIA_Create_Competition {
     $competition_location_field->label = "Location of Competition";
     $competition_location_field->id = 3;
     $competition_location_field->isRequired = false;
-    $competition_location_field = aria_add_default_address_inputs($competition_location_field);
+    $competition_location_field = self::aria_add_default_address_inputs($competition_location_field);
 
     // student registration start date
     $student_registration_start_date_field = new GF_Field_Date();
@@ -160,30 +160,45 @@ class ARIA_Create_Competition {
     // add the new form to the festival chairman's dashboard
     $new_form_id = GFAPI::add_form($competition_creation_form->createFormArray());
 
-    // Make sure the new form was added without error
+    // make sure the new form was added without error
     if (is_wp_error($new_form_id)) {
       wp_die($new_form_id->get_error_message());
     }
+  }
 
-    /*
-    add a customized confirmation message
+  /**
+  * This function is responsible for adding some default address field values.
+  *
+  * This function is used to pre-populate the address fields of a gravity form
+  * with some generic, default values.
+  *
+  * @param Field Object $field  The name of field used for addressing
+  *
+  * @since 1.0.0
+  * @author KREW
+  */
+  private static function aria_add_default_address_inputs($field) {
+    $field->inputs = array(
+      array("id" => "{$field->id}.1",
+      			"label" => "Street Address",
+      			"name" => ""),
+      array("id" => "{$field->id}.2",
+      			"label" => "Address Line 2",
+      			"name" => ""),
+      array("id" => "{$field->id}.3",
+      			"label" => "City",
+      			"name" => ""),
+      array("id" => "{$field->id}.4",
+      			"label" => "State \/ Province",
+      			"name" => ""),
+      array("id" => "{$field->id}.5",
+      			"label" => "ZIP \/ Postal Code",
+      			"name" => ""),
+      array("id" => "{$field->id}.6",
+      			"label" => "Country",
+      			"name" => ""),
+    );
 
-    this is done after the form has been added so that the initial confirmation
-    hash has been added to the object
-    */
-    /*
-    $added_competition_creation_form = GFAPI::get_form(intval($new_form_id));
-    if (is_wp_error($added_competition_creation_form_id)) {
-    wp_die($added_competition_creation_form->get_error_message());
-    }
-
-    $added_competition_creation_form->confirmation['type'] = 'message';
-    $successful_submission_message = 'Congratulations! A new music competition has been created.';
-    $successful_submission_message .= ' There are now two new forms for students and teacher to use';
-    $successful_submission_message .= ' for registration. The name for each new form is prepended with';
-    $successful_submission_message .= ' the name of the new music competition previously created.';
-    $added_competition_creation_form->confirmation['message'] = $successful_submission_message;
-    GFAPI::update_form($added_competition_creation_form);
-    */
+    return $field;
   }
 }
