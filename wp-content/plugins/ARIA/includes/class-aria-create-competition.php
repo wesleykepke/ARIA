@@ -447,7 +447,7 @@ class ARIA_Create_Competition {
    * @since 1.0.0
    * @author KREW
    */
-  function aria_create_student_form( $competition_name ) {
+  private static function aria_create_student_form( $competition_name ) {
     $student_form = new GF_Form("{$competition_name} Student Registration", "");
     $field_id_array = self::aria_student_field_id_array();
 
