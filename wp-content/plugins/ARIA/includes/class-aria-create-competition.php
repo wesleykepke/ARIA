@@ -61,6 +61,8 @@ class ARIA_Create_Competition {
    * @author KREW
    */
   public static function aria_create_teacher_and_student_forms($entry, $form) {
+    $field_mapping = self::aria_get_competition_entry_meta();
+
     // make sure the create competition form is calling this function
     if ($form['id'] === aria_get_create_competition_form_id()) {
       self::aria_create_student_form($entry[$field_mapping['Name of Competition']]);
@@ -251,7 +253,7 @@ class ARIA_Create_Competition {
    */
    private static function aria_create_teacher_form($competition_name) {
     $teacher_form = new GF_Form("{$competition_name} Teacher Registration", "");
-    $field_id_arr = aria_teacher_field_id_array();
+    $field_id_arr = self::aria_teacher_field_id_array();
 
     // teacher name
     $teacher_name_field = new GF_Field_Name();
@@ -447,7 +449,7 @@ class ARIA_Create_Competition {
    */
   function aria_create_student_form( $competition_name ) {
     $student_form = new GF_Form("{$competition_name} Student Registration", "");
-    $field_id_array = aria_student_field_id_array();
+    $field_id_array = self::aria_student_field_id_array();
 
     // parent name
     $parent_name_field = new GF_Field_Name();
@@ -560,5 +562,38 @@ class ARIA_Create_Competition {
     if (is_wp_error($new_form_id)) {
       wp_die($new_form_id->get_error_message());
     }
+  }
+
+  /**
+   * This function will return an associative array with entry meta data for the
+   * competition form.
+   *
+   * Every time an entry is submitted using the form for creating a competition, the
+   * submission is an Entry object, which is an associative array that has a plethora
+   * of information. Also included inside the Entry object is the infomation that was
+   * input by the user. This function simply returns an associative array that can be
+   * used by other functions to offset into the Entry object's user data, because
+   * otherwise, the offset all involves magic integers that are otherwise not very
+   * descriptive.
+   *
+   * @since 1.0.5
+   * @author KREW
+   */
+  private static function aria_get_competition_entry_meta() {
+    return array(
+      'Name of Competition' => 1,
+      'Date of Competition' => 2,
+      'Location of Competition' => 3,
+      'Street Address' => 3.1,
+      'Address Line 2' => 3.2,
+      'City' => 3.3,
+      'State / Province / Region' => 3.4,
+      'Zip / Postal Code' => 3.5,
+      'Country' => 3.6,
+      'Student Registration Start Date' => 10,
+      'Student Registration End Date' => 11,
+      'Teacher Registration Start Date' => 12,
+      'Teacher Registration Start Date' => 13
+    );
   }
 }
