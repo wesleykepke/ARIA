@@ -126,7 +126,8 @@ class ARIA {
 		// Register all of the hooks needed by ARIA
 
 		add_action('gform_after_submission_' . strval(aria_get_create_competition_form_id()),
-			array($this, 'ARIA_Create_Competition::aria_create_teacher_and_student_forms'));
+		  $temp = new ARIA;
+			array(&$temp, 'ARIA_Create_Competition::aria_create_teacher_and_student_forms'));
 
 /*
 		$this->loader->add_action('gform_after_submission_' . strval(aria_get_create_competition_form_id()),
