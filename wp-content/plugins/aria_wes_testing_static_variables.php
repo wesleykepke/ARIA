@@ -12,10 +12,10 @@ Author URI: http://wkepke.com
 	 private $music_db_id;
 
   public static function getIdOfMusicDB() {
-		wp_die("Form ID: " . self::getIdOfMusicDB());
+		wp_die("Form ID: " . self::getIdOfMusicDB_Helper());
 	}
 
-	 private static function getIdOfMusicDB() {
+	 private static function getIdOfMusicDB_Helper() {
 		 $create_competition_form_name = 'ARIA: Create a Competition';
 	   $create_competition_form_id = NULL;
 	   $all_active_forms = GFAPI::get_forms();
