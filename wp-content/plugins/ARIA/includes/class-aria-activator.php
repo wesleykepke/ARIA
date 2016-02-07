@@ -46,4 +46,5 @@ class ARIA_Activator {
 			and enabled. Please enable the Gravity Forms plugin and reactivate
 			ARIA.");
 		}
+	}
 }
