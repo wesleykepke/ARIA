@@ -1565,13 +1565,13 @@ class GFForms {
 	}
 
 	//Displays message on Plugin's page
-	public static function plugin_row( $plugin_name ) {
+	public static function plugin_row( $aria ) {
 		$key          = GFCommon::get_key();
 		$version_info = GFCommon::get_version_info();
 
 		if ( ! rgar( $version_info, 'is_valid_key' ) ) {
 
-			$plugin_name = 'gravityforms/gravityforms.php';
+			$aria = 'gravityforms/gravityforms.php';
 
 			$new_version = version_compare( GFCommon::$version, $version_info['version'], '<' ) ? esc_html__( 'There is a new version of Gravity Forms available.', 'gravityforms' ) . ' <a class="thickbox" title="Gravity Forms" href="plugin-install.php?tab=plugin-information&plugin=gravityforms&TB_iframe=true&width=640&height=808">' . sprintf( esc_html__( 'View version %s Details', 'gravityforms' ), $version_info['version'] ) . '</a>. ' : '';
 
