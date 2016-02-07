@@ -8,20 +8,20 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              http://example.com
+ * @link              http://wesleykepke.github.io/ARIA/
  * @since             1.0.0
- * @package           Plugin_Name
+ * @package           ARIA
  *
  * @wordpress-plugin
- * Plugin Name:       WordPress Plugin Boilerplate
- * Plugin URI:        http://example.com/plugin-name-uri/
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Plugin Name:       ARIA (Administration, Registration, and Information Assistant)
+ * Plugin URI:        http://wesleykepke.github.io/ARIA/
+ * Description:       This plugin allows the NNMTA to create, schedule, and manage music competitions.
  * Version:           1.0.0
- * Author:            Your Name or Your Company
- * Author URI:        http://example.com/
+ * Author:            KREW (Kyle Lee, Renee Iinuna, Ernest Landrito, and Wesley Kepke)
+ * Author URI:        http://wesleykepke.github.io/ARIA/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       plugin-name
+ * Text Domain:       ARIA
  * Domain Path:       /languages
  */
 
@@ -36,7 +36,7 @@ if ( ! defined( 'WPINC' ) ) {
  */
 function activate_plugin_name() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name-activator.php';
-	Plugin_Name_Activator::activate();
+	ARIA_Activator::activate();
 }
 
 /**

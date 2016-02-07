@@ -1,16 +1,16 @@
 <?php
 
 /**
- * The file that defines the core plugin class
+ * The file that defines the core plugin class.
  *
  * A class definition that includes attributes and functions used across both the
  * public-facing side of the site and the admin area.
  *
- * @link       http://example.com
+ * @link       http://wesleykepke.github.io/ARIA/
  * @since      1.0.0
  *
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
+ * @package    ARIA
+ * @subpackage ARIA/includes
  */
 
 /**
@@ -23,11 +23,11 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
- * @author     Your Name <email@example.com>
+ * @package    ARIA
+ * @subpackage ARIA/includes
+ * @author     KREW
  */
-class Plugin_Name {
+class ARIA {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -68,7 +68,7 @@ class Plugin_Name {
 	 */
 	public function __construct() {
 
-		$this->plugin_name = 'plugin-name';
+		$this->plugin_name = 'ARIA';
 		$this->version = '1.0.0';
 
 		$this->load_dependencies();
@@ -100,7 +100,8 @@ class Plugin_Name {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-plugin-name-loader.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-aria-loader.php';
+		$this->loader = new ARIA_Loader();
 
 		/**
 		 * The class responsible for defining internationalization functionality
@@ -119,7 +120,14 @@ class Plugin_Name {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-plugin-name-public.php';
 
-		$this->loader = new Plugin_Name_Loader();
+		// Include all of the ARIA files needed as dependencies.
+		require_once("class-aria-create-competition.php");
+
+		// Register all of the hooks needed by ARIA
+		add_action('gform_after_submission_' . strval(aria_get_create_competition_form_id()), 'aria_create_competition', 10, 2);
+		$this->loader->add_action('gform_after_submission_' . strval(aria_get_create_competition_form_id(),
+															&$this, 'ARIA_Create_Competition::aria_create_teacher_and_student_forms',
+															10, 2));
 
 	}
 
