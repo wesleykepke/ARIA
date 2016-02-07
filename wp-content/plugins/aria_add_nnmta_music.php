@@ -17,7 +17,7 @@ Author URI: http://google.com
  * @since 1.0.0
  * @author KREW
  */
- /*
+
 function aria_get_song_upload_form_id() {
 	$upload_form_name = 'Modify Song List';
 	$upload_form_name_id = NULL;
@@ -35,7 +35,7 @@ function aria_get_song_upload_form_id() {
 
  	return $upload_form_name_id;
 }
-*/
+
 
 /**
  * This function will find the ID of the form used as the NNMTA music database.
@@ -46,7 +46,7 @@ function aria_get_song_upload_form_id() {
  * @since 1.0.0
  * @author KREW
  */
- /*
+
 function aria_get_nnmta_database_form_id() {
 	$nnmta_music_database_form_name = 'NNMTA Music Database';
 	$nnmta_music_database_form_id = NULL;
@@ -64,7 +64,7 @@ function aria_get_nnmta_database_form_id() {
 
 	return $nnmta_music_database_form_id;
 }
-*/
+
 
 /**
  * This function will find the file path of the csv music file that the user has uploaded.
@@ -80,7 +80,6 @@ function aria_get_nnmta_database_form_id() {
  * @since 1.0.0
  * @author KREW
  */
- /*
 function aria_get_music_csv_file_path($entry, $form) {
 	// find the field entry used to upload the csv file
 	$music_csv_field_name = 'CSV File';
@@ -103,7 +102,6 @@ function aria_get_music_csv_file_path($entry, $form) {
 	$csv_full_file_path .= $csv_file_url_atomic_strings[count($csv_file_url_atomic_strings) - 1];
 	return $csv_full_file_path;
 }
-*/
 
 /**
  * This function will parse the contents of the csv file and upload content to the NNMTA music database.
@@ -117,7 +115,7 @@ function aria_get_music_csv_file_path($entry, $form) {
  * @since 1.0.0
  * @author KREW
  */
- /*
+
 function aria_add_music_from_csv($entry, $form) {
 	$num_song_elements_no_image = 5;
 	$num_song_elements_with_image = 6;
@@ -155,7 +153,7 @@ function aria_add_music_from_csv($entry, $form) {
 					'5' => $single_song_data[4],
 					'6' => $single_song_data[5],
 				); */
-/*			}
+			}
 		}
 	}
 
@@ -170,7 +168,7 @@ function aria_add_music_from_csv($entry, $form) {
 	unlink($csv_music_file);
 	unset($all_songs);
 }
-*/
+
 
 /**
  * This function will remove all of the music from the NNMTA music database.
@@ -184,7 +182,6 @@ function aria_add_music_from_csv($entry, $form) {
  * @since 2.0.0
  * @author KREW
  */
- /*
 function aria_remove_all_music_from_nnmta_database() {
 	$nnmta_music_database_form_id = aria_get_nnmta_database_form_id();
 	$index = 0;
@@ -209,7 +206,7 @@ function aria_remove_all_music_from_nnmta_database() {
 		}
 	}
 */
-//}
+}
 
 // register with the correct form
 //$aria_song_upload_form_id = aria_get_song_upload_form_id();
