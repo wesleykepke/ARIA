@@ -13,6 +13,9 @@
  * @subpackage ARIA/includes
  */
 
+// Require the ARIA API
+require_once("class-aria-api.php");
+
 /**
  * The core plugin class.
  *
@@ -78,6 +81,10 @@ class ARIA {
 
 	}
 
+  /**
+	 * this shouldn't be here but i'm just testing scope
+	 */
+
 	public function aria_create_teacher_and_student_forms($entry, $form) {
     // make sure the create competition form is calling this function
     if ($form['id'] === aria_get_create_competition_form_id()) {
@@ -139,23 +146,16 @@ class ARIA {
 		require_once("class-aria-create-competition.php");
 
 		// Register all of the hooks needed by ARIA
-<<<<<<< HEAD
 		/*
     $temp = new ARIA;
 		add_action('gform_after_submission_' . strval(aria_get_create_competition_form_id()),
 		array(&$temp, 'ARIA_Create_Competition::aria_create_teacher_and_student_forms'));
 		*/
 
-
-=======
-		add_action('gform_after_submission_' . strval(aria_get_create_competition_form_id()),
-			array(&$this, 'ARIA_Create_Competition::aria_create_teacher_and_student_forms'));
->>>>>>> 879170ba8a16b982a532f038aa123c3ad3226af5
-/*
 		$this->loader->add_action('gform_after_submission_' . strval(aria_get_create_competition_form_id()),
-															$this, 'ARIA_Create_Competition::aria_create_teacher_and_student_forms',
+															$this, 'aria_create_teacher_and_student_forms',
 															10, 2);
-*/
+
 	}
 
 	/**
