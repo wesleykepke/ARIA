@@ -42,7 +42,7 @@ class ARIA_Create_Competition {
     // if the form for creating music competitions doesn't exist, create a new form
     $form_id = aria_get_create_competition_form_id();
     if ($form_id === -1) {
-      aria_create_competition_form();
+      self::aria_create_competition_form();
     }
   }
 
