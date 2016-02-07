@@ -8,14 +8,26 @@ Version: 1.0
 Author URI: http://wkepke.com
 */
 
- class scope_aria {
-	 private $music_db_id;
+global $form_id;
+$form_id = scope_aria::getIdOfMusicDB_Helper();
 
-  public static function getIdOfMusicDB() {
-		wp_die("Form ID: " . self::getIdOfMusicDB_Helper());
+function aria_outside_get_formid() {
+	global $form_id;
+	//wp_die("Form ID: " . $form_id);
+}
+
+class scope_aria {
+	private static $music_db_id;
+
+  public static function scope_aria_activation() {
+		//self::$music_db_id = self::getIdOfMusicDB_Helper();
 	}
 
-	 private static function getIdOfMusicDB_Helper() {
+  public static function getIdOfMusicDB() {
+		wp_die("Form ID: " . self::$music_db_id);
+	}
+
+	 public static function getIdOfMusicDB_Helper() {
 		 $create_competition_form_name = 'ARIA: Create a Competition';
 	   $create_competition_form_id = NULL;
 	   $all_active_forms = GFAPI::get_forms();
@@ -34,4 +46,7 @@ Author URI: http://wkepke.com
 	 }
  }
 
-add_action('gform_after_submission_15', 'getIdOfMusicDB', 10, 0);
+/*
+register_activation_hook(__FILE__, 'scope_aria::scope_aria_activation');
+add_action('gform_after_submission_15', 'aria_outside_get_formid', 10, 0);
+*/
