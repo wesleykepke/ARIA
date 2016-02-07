@@ -85,6 +85,7 @@ class ARIA {
 	 * this shouldn't be here but i'm just testing scope
 	 */
 
+/*
 	public function aria_create_teacher_and_student_forms($entry, $form) {
     // make sure the create competition form is calling this function
     if ($form['id'] === aria_get_create_competition_form_id()) {
@@ -97,7 +98,7 @@ class ARIA {
       to create a new music competition');
     }
   }
-
+*/
 
 
 	/**
@@ -153,7 +154,7 @@ class ARIA {
 		*/
 
 		$this->loader->add_action('gform_after_submission_' . strval(aria_get_create_competition_form_id()),
-															$this, 'aria_create_teacher_and_student_forms',
+															$this, 'ARIA_Create_Competition::aria_create_teacher_and_student_forms',
 															10, 2);
 
 	}
