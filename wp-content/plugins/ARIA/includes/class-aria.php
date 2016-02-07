@@ -125,11 +125,18 @@ class ARIA {
 
 		// Include all of the ARIA files needed as dependencies.
 		require_once("class-aria-create-competition.php");
+		require_once("class-aria-music.php");
 
 		// Register all of the hooks needed by ARIA
+
+		// Creating student and teacher forms
 		$this->loader->add_action('gform_after_submission_' . strval(aria_get_create_competition_form_id()),
-															'ARIA_Create_Competition', 'aria_create_teacher_and_student_forms',
-															10, 2);
+			'ARIA_Create_Competition', 'aria_create_teacher_and_student_forms', 10, 2);
+
+		// Adding music upload/download functionality
+		$this->loader->add_action('gform_after_submission_' . strval(aria_get_song_upload_form_id()),
+			'ARIA_Music', 'aria_add_music_from_csv', 10, 2);
+	);
 
 	}
 
