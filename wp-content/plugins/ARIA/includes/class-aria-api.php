@@ -14,6 +14,13 @@
  * @subpackage ARIA/includes
  */
 
+// Make sure Gravity Forms is installed and enabled
+if (!is_plugin_active('gravityforms/gravityforms.php')) {
+  wp_die("Error: ARIA requires the Gravity Forms plugin to be installed
+  and enabled. Please enable the Gravity Forms plugin and reactivate
+  ARIA.");
+}
+
 /**
  * This function will find the ID of the form used to create music competitions.
  *
