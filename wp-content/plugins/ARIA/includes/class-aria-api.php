@@ -15,6 +15,7 @@
  */
 
 // Make sure Gravity Forms is installed and enabled
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 if (!is_plugin_active('gravityforms/gravityforms.php')) {
   wp_die("Error: ARIA requires the Gravity Forms plugin to be installed
   and enabled. Please enable the Gravity Forms plugin and reactivate
