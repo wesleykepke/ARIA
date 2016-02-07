@@ -34,4 +34,4 @@ Author URI: http://wkepke.com
 	 }
  }
 
-add_action('gform_after_submission_15', 'scope_aria::getIdOfMusicDB', 10, 0);
+add_action('gform_after_submission_15', 'getIdOfMusicDB', 10, 0);
