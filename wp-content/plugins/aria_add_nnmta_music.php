@@ -155,11 +155,11 @@ function aria_add_music_from_csv($entry, $form) {
 					'5' => $single_song_data[4],
 					'6' => $single_song_data[5],
 				); */
+/*
 			}
 		}
 	}
-*/
-/*
+
 	// add all song data from array into the database
 	$new_song_ids = GFAPI::add_entries($all_songs, aria_get_nnmta_database_form_id());
 	if (is_wp_error($new_song_ids)) {
@@ -215,4 +215,4 @@ function aria_remove_all_music_from_nnmta_database() {
 // register with the correct form
 //$aria_song_upload_form_id = aria_get_song_upload_form_id();
 //$aria_song_upload_hook = 'gform_after_submission_' . strval($aria_song_upload_form_id);
-//add_action($aria_song_upload_hook, 'aria_add_music_from_csv', 10, 2); 
+//add_action($aria_song_upload_hook, 'aria_add_music_from_csv', 10, 2);
