@@ -234,7 +234,8 @@ class ARIA_Create_Competition {
       'theory_score' => 13,
       'alternate_theory' => 14,
       'competition_format' => 15,
-      'timing_of_pieces' => 16
+      'timing_of_pieces' => 16,
+      'is_judging' => 17 // !!!DO WE WANT TO CHANGE THIS NUMBER
     );
   }
 
@@ -276,12 +277,29 @@ class ARIA_Create_Competition {
     $teacher_phone_field->isRequired = true;
     $teacher_form->fields[] = $teacher_phone_field;
 
+    // !!!new field
+    // teacher is judging
+    $teacher_judging_field = new GF_Field_Radio();
+    $teacher_judging_field->label = "Are you scheduled to judge for the festival?";
+    $teacher_judging_field->id = $field_id_arr['is_judging']; 
+    $teacher_judging_field->isRequired = true;
+    $teacher_judging_field->choices = array(
+	array('text' => 'Yes', 'value' => 'Yes', 'isSelected' => false),
+	array('text' => 'No', 'value' => 'No', 'isSelected' => false)
+    );
+    $conditionalRules = array();
+    $conditionalRules[] = array(
+	'fieldId' => $field_id_arr['is_judging'],
+	'operator' => 'is',
+	'value' => 'No'
+    );
+
     // teacher volunteer preference
     $volunteer_preference_field = new GF_Field_Checkbox();
     $volunteer_preference_field->label = "Volunteer Preference";
     $volunteer_preference_field->id = $field_id_arr['volunteer_preference'];
     $volunteer_preference_field->isRequired = true;
-    $volunteer_preference_field->choices = array(
+    /*!!! $volunteer_preference_field->choices = array(
       array('text' => 'Section Proctor', 'value' => 'Section Proctor', 'isSelected' => false),
       array('text' => 'Posting Results', 'value' => 'Posting Results', 'isSelected' => false),
       array('text' => 'Information Table', 'value' => 'Information Table', 'isSelected' => false),
@@ -291,6 +309,25 @@ class ARIA_Create_Competition {
     $volunteer_preference_field->description = "Please check 1 time slot if you"
     ." have 1-3 students competing, 2 time slots if you have 4-6 students"
     ." competing, and 3 time slots if you have more than 6 students competing.";
+    */
+    $volunteer_preference_field->choices = array(
+      array('text' => 'Proctor sessions', 'value' => 'Proctor sessions', 'isSelected' => false),
+      array('text' => 'Monitor door during sessions', 'value' => 'Monitor door during sessions', 'isSelected' => false),
+      array('text' => 'Greet students and parents', 'value' => 'Greet students and parents', 'isSelected' => false),
+      array('text' => 'Prepare excellent ribbons', 'value' => 'Prepare excellent ribbons', 'isSelected' => false),
+      array('text' => 'Put seals on certificates', 'value' => 'Put seals on certificates', 'isSelected' => false),
+      array('text' => 'Early set up', 'value' => 'Early set up', 'isSelected' => false),
+      array('text' => 'Clean up', 'value' => 'Clean up', 'isSelected' => false),
+      array('text' => 'Help with food for judges and volunteers', 'value' => 'Help with food for judges and volunteers', 'isSelected' => false)
+    );
+    $volunteer_preference_field->description = "Please check at least two volunteer job"
+    ."preferences for this year's Festival. You will be notified by email of your"
+    ."volunteer assignments as Festival approaches.";
+   $volunteer_preference_field->conditionalLogic = array(
+	'actionType' => 'show',
+	'logicType' => 'all',
+	'rules' => $conditionalRules
+    );
     $teacher_form->fields[] = $volunteer_preference_field;
 
     // volunteer time
@@ -298,6 +335,13 @@ class ARIA_Create_Competition {
     $volunteer_time_field->label = "Times Available for Volunteering";
     $volunteer_time_field->id = $field_id_arr['volunteer_time'];
     $volunteer_time_field->isRequired = false;
+    $volunteer_time_field->description = "Please check at least two times you are"
+    ."available to volunteer during Festival weekend.";
+    $volunteer_time_field->conditionalLogic = array(
+	'actionType' => 'show',
+	'logicType' => 'all',
+	'rules' => $conditionalRules
+    );
     $teacher_form->fields[] = $volunteer_time_field;
 
     // student name
