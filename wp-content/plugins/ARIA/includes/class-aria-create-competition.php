@@ -351,6 +351,8 @@ class ARIA_Create_Competition {
     $student_name_field->isRequired = true;
     $teacher_form->fields[] = $student_name_field;
 
+    // !!!student level
+
     // student's first song period
     $song_one_period_field = new GF_Field_Select();
     $song_one_period_field->label = "Song 1 Period";
@@ -372,6 +374,10 @@ class ARIA_Create_Competition {
     $song_one_selection_field->isRequired = true;
     $teacher->form->fields[] = $song_one_selection_field;
 
+    // !!! need to add column E (conflict resolution)
+
+    // !!! if level is not 11
+
     // student's second song period
     $song_two_period_field = new GF_Field_Select();
     $song_two_period_field->label = "Song 2 Period";
@@ -392,6 +398,16 @@ class ARIA_Create_Competition {
     $song_two_selection_field->id = $field_id_arr['song_2_selection'];
     $song_two_selection_field->isRequired = true;
     $teacher->form->fields[] = $song_two_selection_field;
+    
+    // !!! need to add column E (conflict resolution)
+    
+    // if level is 11
+    // Composer
+    // Piece Title
+    // Key (e.g. D Major, F Minor)
+    // Movement number, if applicable (e.g. 1st, 2nd, 3rd, 4th)
+    // Movement description, if applicable (e.g. Adante, Presto, Rondo Allegro Comodo)
+    // Identifying number, if applicable (e.g. BWV, Opus, HOB, etc)
 
     // student's theory score
     $student_theory_score = new GF_Field_Number();
