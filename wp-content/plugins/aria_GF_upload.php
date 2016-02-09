@@ -3,7 +3,7 @@
 /*
 Plugin Name: Aria Modify GF Upload
 Plugin URI: http://google.com
-Description: Testing GF file upload. Successfully modifying file path. 
+Description: Testing GF file upload. Successfully modifying file path.
 Author: Renee
 Version: 1.1
 Author URI: http://wkepke.com
@@ -21,7 +21,7 @@ function aria_second_plugin_css() {
 		padding-$x: 15px;
 		padding-top: 5px;
 		margin: 0;
-		font-size: 18px; 
+		font-size: 18px;
 	}
 	</style>
 	";
