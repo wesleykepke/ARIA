@@ -284,14 +284,14 @@ class ARIA_Create_Competition {
     $teacher_judging_field->id = $field_id_arr['is_judging'];
     $teacher_judging_field->isRequired = true;
     $teacher_judging_field->choices = array(
-	array('text' => 'Yes', 'value' => 'Yes', 'isSelected' => false),
-	array('text' => 'No', 'value' => 'No', 'isSelected' => false)
+    	array('text' => 'Yes', 'value' => 'Yes', 'isSelected' => false),
+    	array('text' => 'No', 'value' => 'No', 'isSelected' => false)
     );
     $conditionalRules = array();
     $conditionalRules[] = array(
-	'fieldId' => $field_id_arr['is_judging'],
-	'operator' => 'is',
-	'value' => 'No'
+    	'fieldId' => $field_id_arr['is_judging'],
+    	'operator' => 'is',
+    	'value' => 'No'
     );
     $teacher_form->fields[] = $teacher_judging_field;
 
@@ -325,9 +325,9 @@ class ARIA_Create_Competition {
     ."preferences for this year's Festival. You will be notified by email of your"
     ."volunteer assignments as Festival approaches.";
    $volunteer_preference_field->conditionalLogic = array(
-	'actionType' => 'show',
-	'logicType' => 'all',
-	'rules' => $conditionalRules
+    	'actionType' => 'show',
+    	'logicType' => 'all',
+    	'rules' => $conditionalRules
     );
     $teacher_form->fields[] = $volunteer_preference_field;
 
@@ -339,9 +339,9 @@ class ARIA_Create_Competition {
     $volunteer_time_field->description = "Please check at least two times you are"
     ."available to volunteer during Festival weekend.";
     $volunteer_time_field->conditionalLogic = array(
-	'actionType' => 'show',
-	'logicType' => 'all',
-	'rules' => $conditionalRules
+    	'actionType' => 'show',
+    	'logicType' => 'all',
+    	'rules' => $conditionalRules
     );
     $teacher_form->fields[] = $volunteer_time_field;
 
@@ -359,21 +359,21 @@ class ARIA_Create_Competition {
     $song_one_period_field->label = "Song 1 Period";
     $song_one_period_field->id = $field_id_arr['song_1_period'];
     $song_one_period_field->isRequired = true;
-    $teacher->form->fields[] = $song_one_period_field;
+    $teacher_form->fields[] = $song_one_period_field;
 
     // student's first song composer
     $song_one_composer_field = new GF_Field_Select();
     $song_one_composer_field->label = "Song 1 Composer";
     $song_one_composer_field->id = $field_id_arr['song_1_composer'];
     $song_one_composer_field->isRequired = true;
-    $teacher->form->fields[] = $song_one_composer_field;
+    $teacher_form->fields[] = $song_one_composer_field;
 
     // student's first song selection
     $song_one_selection_field = new GF_Field_Select();
     $song_one_selection_field->label = "Song 1 Selection";
     $song_one_selection_field->id = $field_id_arr['song_1_selection'];
     $song_one_selection_field->isRequired = true;
-    $teacher->form->fields[] = $song_one_selection_field;
+    $teacher_form->fields[] = $song_one_selection_field;
 
     // !!! need to add column E (conflict resolution)
 
@@ -384,21 +384,21 @@ class ARIA_Create_Competition {
     $song_two_period_field->label = "Song 2 Period";
     $song_two_period_field->id = $field_id_arr['song_2_period'];
     $song_two_period_field->isRequired = true;
-    $teacher->form->fields[] = $song_two_period_field;
+    $teacher_form->fields[] = $song_two_period_field;
 
     // student's second song composer
     $song_two_composer_field = new GF_Field_Select();
     $song_two_composer_field->label = "Song 2 Composer";
     $song_two_composer_field->id = $field_id_arr['song_2_composer'];
     $song_two_composer_field->isRequired = true;
-    $teacher->form->fields[] = $song_two_composer_field;
+    $teacher_form->fields[] = $song_two_composer_field;
 
     // student's second song selection
     $song_two_selection_field = new GF_Field_Select();
     $song_two_selection_field->label = "Song 2 Selection";
     $song_two_selection_field->id = $field_id_arr['song_2_selection'];
     $song_two_selection_field->isRequired = true;
-    $teacher->form->fields[] = $song_two_selection_field;
+    $teacher_form->fields[] = $song_two_selection_field;
 
     // !!! need to add column E (conflict resolution)
 
@@ -517,13 +517,13 @@ class ARIA_Create_Competition {
     $parent_name_field->label = "Parent Name";
     $parent_name_field->id = $field_id_array['parent_name'];
     $parent_name_field->isRequired = true;
-    $parent_form->fields[] = $parent_name_field;
+    $student_form->fields[] = $parent_name_field;
 
     // parent email
     $parent_email_field = new GF_Field_Email();
     $parent_email_field->label = "Parent's Email";
     $parent_email_field->id = $field_id_array['parent_email'];
-    $parent_email_field->isRequired = true;
+    $parent_email_field->isRequired = tru_
     $student_form->fields[] = $parent_email_field;
 
     // student name
