@@ -293,6 +293,7 @@ class ARIA_Create_Competition {
 	'operator' => 'is',
 	'value' => 'No'
     );
+    $teacher_form->fields[] = $teacher_judging_field;
 
     // teacher volunteer preference
     $volunteer_preference_field = new GF_Field_Checkbox();
