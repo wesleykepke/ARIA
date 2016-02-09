@@ -137,8 +137,8 @@ class ARIA {
 		$this->loader->add_action('gform_after_submission_' . strval(aria_get_song_upload_form_id()),
 			'ARIA_Music', 'aria_add_music_from_csv', 10, 2);
 
-		// Modifying the upload path 
-		$this->loader_add_filter('gform_upload_path', 'ARIA_Music', 'aria_modify_upload', 10, 2);
+		// Modifying the upload path
+		$this->loader->add_filter('gform_upload_path', 'ARIA_Music', 'aria_modify_upload', 10, 2);
 
 	}
 
