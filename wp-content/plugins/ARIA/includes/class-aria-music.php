@@ -191,4 +191,17 @@ class ARIA_Music {
   private static function aria_remove_all_music_from_nnmta_database() {
     // to be implemented
   }
+
+  /**
+   * This function will change the default file path for uploaded files.
+   *
+   *
+   *
+   * @since 1.0.0
+   * @author KREW
+   */
+  private static function aria_modify_upload($path_info, $form_id){
+  	$path_info['path'] = '/var/www/html/wp-content/uploads/testpath/';
+  	return $path_info;
+  }
 }

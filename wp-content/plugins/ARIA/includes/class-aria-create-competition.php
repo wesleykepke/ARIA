@@ -281,7 +281,7 @@ class ARIA_Create_Competition {
     // teacher is judging
     $teacher_judging_field = new GF_Field_Radio();
     $teacher_judging_field->label = "Are you scheduled to judge for the festival?";
-    $teacher_judging_field->id = $field_id_arr['is_judging']; 
+    $teacher_judging_field->id = $field_id_arr['is_judging'];
     $teacher_judging_field->isRequired = true;
     $teacher_judging_field->choices = array(
 	array('text' => 'Yes', 'value' => 'Yes', 'isSelected' => false),
@@ -398,9 +398,9 @@ class ARIA_Create_Competition {
     $song_two_selection_field->id = $field_id_arr['song_2_selection'];
     $song_two_selection_field->isRequired = true;
     $teacher->form->fields[] = $song_two_selection_field;
-    
+
     // !!! need to add column E (conflict resolution)
-    
+
     // if level is 11
     // Composer
     // Piece Title
