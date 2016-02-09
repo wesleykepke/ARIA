@@ -72,8 +72,10 @@ function aria_get_song_upload_form_id() {
 	}
 
 	if (!isset($upload_form_name_id)) {
+    $upload_form_name_id = -1; 
+    /*
 		wp_die('Form ' . $upload_form_name . ' does not exist. Please create it and
-    try again.');
+    try again.'); */
 	}
 
  	return $upload_form_name_id;
@@ -100,8 +102,11 @@ function aria_get_nnmta_database_form_id() {
 	}
 
 	if (!isset($nnmta_music_database_form_id)) {
+    $nnmta_music_database_form_id = -1;
+    /*
 		wp_die('Form ' . $nnmta_music_database_form_name . ' does not exist.
     Please create it and try again.');
+    */
 	}
 
 	return $nnmta_music_database_form_id;

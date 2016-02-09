@@ -41,6 +41,12 @@ class ARIA_Music {
    * @author KREW
    */
   public static function aria_add_music_from_csv($entry, $form) {
+    // check if the form for uploading exists
+    $music_db_form_id = aria_get_nnmta_database_form_id();
+    if ($music_db_form_id === -1) {
+      self::aria_create_nnmta_music_form(); 
+    }
+
     $num_song_elements_no_image = 5;
     $num_song_elements_with_image = 6;
 
@@ -92,6 +98,82 @@ class ARIA_Music {
     unlink($csv_music_file);
     unset($all_songs);
   }
+
+  /**
+   * This function is responsible for creating the NNMTA music form if it does
+   * not previously exist.
+   *
+   * This function is intended to be used in the event where the festival
+   * chairman tries to upload music to the NNMTA database but no such form
+   * exists for adding music.
+   *
+   * @author KREW
+   * @since 1.0.0
+   */
+   private static function aria_create_nnmta_music_form() {
+     $nnmta_music_form_name = "NNMTA Music Database";
+     $nnmta_music_form = new GF_Form($nnmta_music_form_name, "");
+     $field_id_index = 1;
+
+     // NNMTA song id
+     $song_id_field = new GF_Field_Text();
+     $song_id_field->label = "NNMTA Song ID";
+     $song_id_field->id = field_id_index;
+     $field_id_index++;
+     $song_id_field->isRequired = true;
+     $nnmta_music_form->fields[] = $song_id_field;
+
+     // NNMTA song name
+     $song_name_field = new GF_Field_Text();
+     $song_name_field->label = "NNMTA Song Name";
+     $song_name_field->id = field_id_index;
+     $field_id_index++;
+     $song_name_field->isRequired = true;
+     $nnmta_music_form->fields[] = $song_name_field;
+
+     // NNMTA song composer
+     $song_composer_field = new GF_Field_Text();
+     $song_composer_field->label = "NNMTA Song Name";
+     $song_composer_field->id = field_id_index;
+     $field_id_index++;
+     $song_composer_field->isRequired = true;
+     $nnmta_music_form->fields[] = $song_composer_field;
+
+     // NNMTA song level
+     $song_level_field = new GF_Field_Text();
+     $song_level_field->label = "NNMTA Song Level";
+     $song_level_field->id = field_id_index;
+     $field_id_index++;
+     $song_level_field->isRequired = true;
+     $nnmta_music_form->fields[] = $song_level_field;
+
+     // NNMTA period level
+     $song_period_field = new GF_Field_Text();
+     $song_period_field->label = "NNMTA Song Period";
+     $song_period_field->id = field_id_index;
+     $field_id_index++;
+     $song_period_field->isRequired = true;
+     $nnmta_music_form->fields[] = $song_period_field;
+
+     // NNMTA song image
+     /*
+     Currently GF_Field_Text but might need to change
+     */
+     $song_song_img_field = new GF_Field_Text();
+     $song_song_img_field->label = "NNMTA Song Image";
+     $song_song_img_field->id = field_id_index;
+     $field_id_index++;
+     $song_song_img_field->isRequired = true;
+     $nnmta_music_form->fields[] = $song_song_img_field;
+
+     // add the new form to the festival chairman's dashboard
+     $new_form_id = GFAPI::add_form($nnmta_music_form->createFormArray());
+
+     // make sure the new form was added without error
+     if (is_wp_error($new_form_id)) {
+       wp_die($new_form_id->get_error_message());
+     }
+   }
 
   /**
    * This function will remove all of the music from the NNMTA music database.
