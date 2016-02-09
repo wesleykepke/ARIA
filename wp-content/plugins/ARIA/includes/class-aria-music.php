@@ -200,7 +200,7 @@ class ARIA_Music {
    * @since 1.0.0
    * @author KREW
    */
-  private static function aria_modify_upload($path_info, $form_id){
+  public static function aria_modify_upload($path_info, $form_id){
   	$path_info['path'] = '/var/www/html/wp-content/uploads/testpath/';
   	return $path_info;
   }
