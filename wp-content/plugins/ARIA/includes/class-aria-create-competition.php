@@ -337,7 +337,6 @@ class ARIA_Create_Competition {
       array('text' => 'Help with food for judges and volunteers', 'value' => 'Help with food for judges and volunteers', 'isSelected' => false)
     );
     $volunteer_preference_field->description = "Please check at least two volunteer job"
-<<<<<<< HEAD
     ." preferences for this year's Festival. You will be notified by email of your"
     ." volunteer assignments as Festival approaches.";
     $volunteer_preference_field->descriptionPlacement = 'above';
@@ -568,7 +567,7 @@ class ARIA_Create_Competition {
     $parent_email_field = new GF_Field_Email();
     $parent_email_field->label = "Parent's Email";
     $parent_email_field->id = $field_id_array['parent_email'];
-    $parent_email_field->isRequired = tru_
+    $parent_email_field->isRequired = true;
     $student_form->fields[] = $parent_email_field;
 
     // student name
