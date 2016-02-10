@@ -246,7 +246,8 @@ class ARIA_Create_Competition {
       'alternate_theory' => 14,
       'competition_format' => 15,
       'timing_of_pieces' => 16,
-      'is_judging' => 17 // !!!DO WE WANT TO CHANGE THIS NUMBER
+      'is_judging' => 17, // !!!DO WE WANT TO CHANGE THIS NUMBER
+      'student_level' => 18
     );
   }
 
@@ -351,10 +352,12 @@ class ARIA_Create_Competition {
     $volunteer_time_field->label = "Times Available for Volunteering";
     $volunteer_time_field->id = $field_id_arr['volunteer_time'];
     $volunteer_time_field->isRequired = false;
-    $volunteer_time_field->description = "Please check at least two times you are"
-    ." available to volunteer during Festival weekend.";
-    $volunteer_time_field->descriptionPlacement = 'above';
     $volunteer_time_options = $competition_entry[$field_mapping['Volunteer Times']];
+    $volunteer_time_field->description = "Please check at least two times you are"
+    ." available to volunteer during Festival weekend."
+    .	print_r($volunteer_time_options);
+    $volunteer_time_field->descriptionPlacement = 'above';
+    //$volunteer_time_options = $competition_entry[$field_mapping['Volunteer Times']];
     $volunteer_time_field->choices = $volunteer_time_options;
     $volunteer_time_field->conditionalLogic = array(
 	'actionType' => 'show',
@@ -371,6 +374,26 @@ class ARIA_Create_Competition {
     $teacher_form->fields[] = $student_name_field;
 
     // !!!student level
+    $student_level_field = new GF_Field_Select();
+    $student_level_field->label = "Student Level";
+    $student_level_field->id = $field_id_arr['student_level'];
+    $student_level_field->isRequired = true;
+    // !!! replace
+    $student_level_field->choices = array(
+	
+      array('text' => '1', 'value' => '1', 'isSelected' => false),
+      array('text' => '2', 'value' => '2', 'isSelected' => false),
+      array('text' => '3', 'value' => '3', 'isSelected' => false),
+      array('text' => '4', 'value' => '4', 'isSelected' => false),
+      array('text' => '5', 'value' => '5', 'isSelected' => false),
+      array('text' => '6', 'value' => '6', 'isSelected' => false),
+      array('text' => '7', 'value' => '7', 'isSelected' => false),
+      array('text' => '8', 'value' => '8', 'isSelected' => false),
+      array('text' => '9', 'value' => '9', 'isSelected' => false),
+      array('text' => '10', 'value' => '10', 'isSelected' => false),
+      array('text' => '11', 'value' => '11', 'isSelected' => false)
+    );
+    $teacher_form->fields[] = $student_level_field;
 
     // student's first song period
     $song_one_period_field = new GF_Field_Select();
@@ -677,7 +700,7 @@ class ARIA_Create_Competition {
       'Student Registration End Date' => 5,
       'Teacher Registration Start Date' => 6,
       'Teacher Registration Start Date' => 7,
-      'Volunteer Times' => 8
+      'Volunteer Times' => '8' // !!! String or int?
     );
   }
 }
