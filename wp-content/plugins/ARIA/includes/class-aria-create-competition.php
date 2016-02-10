@@ -61,12 +61,15 @@ class ARIA_Create_Competition {
    * @author KREW
    */
   public static function aria_create_teacher_and_student_forms($entry, $form) {
-    $field_mapping = self::aria_get_competition_entry_meta();
+    //$field_mapping = self::aria_get_competition_entry_meta();
 
     // make sure the create competition form is calling this function
     if ($form['id'] === aria_get_create_competition_form_id()) {
-      self::aria_create_student_form($entry[$field_mapping['Name of Competition']]);
-      self::aria_create_teacher_form($entry[$field_mapping['Name of Competition']]);
+      //self::aria_create_student_form($entry[$field_mapping['Name of Competition']]);
+      //self::aria_create_teacher_form($entry[$field_mapping['Name of Competition']]);
+    
+      self::aria_create_student_form($entry);
+      self::aria_create_teacher_form($entry);
     }
     else {
       wp_die('ERROR: No form currently exists that allows the festival chairman
@@ -140,6 +143,13 @@ class ARIA_Create_Competition {
     $teacher_registration_end_date_field->calendarIconType = 'calendar';
     $teacher_registration_end_date_field->dateType = 'datepicker';
 
+    // teacher volunteer options
+    $teacher_volunteer_times_field = new GF_Field_List();
+    $teacher_volunteer_times_field->label = "Volunteer Time Options for Teachers";
+    $teacher_volunteer_times_field->id = 8;
+    $teacher_volunteer_times_field->isRequired = false;
+    $teacher_volunteer_times_field->description = "E.g. Saturday (10am-4pm), Either Saturday or Sunday, etc.";
+    
     // assign all of the previous attributes to our newly created form
     $competition_creation_form->fields[] = $competition_name_field;
     $competition_creation_form->fields[] = $competition_date_field;
@@ -148,6 +158,7 @@ class ARIA_Create_Competition {
     $competition_creation_form->fields[] = $student_registration_end_date_field;
     $competition_creation_form->fields[] = $teacher_registration_start_date_field;
     $competition_creation_form->fields[] = $teacher_registration_end_date_field;
+    $competition_creation_form->fields[] = $teacher_volunteer_times_field;
 
     // custom submission message to let the festival chairman know the creation was
     // a success
@@ -247,12 +258,15 @@ class ARIA_Create_Competition {
    * that are necessary for music teachers to enter data about their students that are
    * competing.
    *
-   * @param   String  $competition_name The name of the newly created music competition
+   * @param   Entry  $competition_entry The entry of the newly created music competition
    *
    * @since 1.0.0
    * @author KREW
    */
-   private static function aria_create_teacher_form($competition_name) {
+   private static function aria_create_teacher_form($competition_entry) {
+    $field_mapping = self::aria_get_competition_entry_meta();
+
+    $competition_name = $competition_entry[$field_mapping['Name of Competition']];  
     $teacher_form = new GF_Form("{$competition_name} Teacher Registration", "");
     $field_id_arr = self::aria_teacher_field_id_array();
 
@@ -322,9 +336,10 @@ class ARIA_Create_Competition {
       array('text' => 'Help with food for judges and volunteers', 'value' => 'Help with food for judges and volunteers', 'isSelected' => false)
     );
     $volunteer_preference_field->description = "Please check at least two volunteer job"
-    ."preferences for this year's Festival. You will be notified by email of your"
-    ."volunteer assignments as Festival approaches.";
-   $volunteer_preference_field->conditionalLogic = array(
+    ." preferences for this year's Festival. You will be notified by email of your"
+    ." volunteer assignments as Festival approaches.";
+    $volunteer_preference_field->descriptionPlacement = 'above';
+    $volunteer_preference_field->conditionalLogic = array(
 	'actionType' => 'show',
 	'logicType' => 'all',
 	'rules' => $conditionalRules
@@ -337,7 +352,10 @@ class ARIA_Create_Competition {
     $volunteer_time_field->id = $field_id_arr['volunteer_time'];
     $volunteer_time_field->isRequired = false;
     $volunteer_time_field->description = "Please check at least two times you are"
-    ."available to volunteer during Festival weekend.";
+    ." available to volunteer during Festival weekend.";
+    $volunteer_time_field->descriptionPlacement = 'above';
+    $volunteer_time_options = $competition_entry[$field_mapping['Volunteer Times']];
+    $volunteer_time_field->choices = $volunteer_time_options;
     $volunteer_time_field->conditionalLogic = array(
 	'actionType' => 'show',
 	'logicType' => 'all',
@@ -359,21 +377,21 @@ class ARIA_Create_Competition {
     $song_one_period_field->label = "Song 1 Period";
     $song_one_period_field->id = $field_id_arr['song_1_period'];
     $song_one_period_field->isRequired = true;
-    $teacher->form->fields[] = $song_one_period_field;
+    $teacher_form->fields[] = $song_one_period_field;
 
     // student's first song composer
     $song_one_composer_field = new GF_Field_Select();
     $song_one_composer_field->label = "Song 1 Composer";
     $song_one_composer_field->id = $field_id_arr['song_1_composer'];
     $song_one_composer_field->isRequired = true;
-    $teacher->form->fields[] = $song_one_composer_field;
+    $teacher_form->fields[] = $song_one_composer_field;
 
     // student's first song selection
     $song_one_selection_field = new GF_Field_Select();
     $song_one_selection_field->label = "Song 1 Selection";
     $song_one_selection_field->id = $field_id_arr['song_1_selection'];
     $song_one_selection_field->isRequired = true;
-    $teacher->form->fields[] = $song_one_selection_field;
+    $teacher_form->fields[] = $song_one_selection_field;
 
     // !!! need to add column E (conflict resolution)
 
@@ -384,21 +402,21 @@ class ARIA_Create_Competition {
     $song_two_period_field->label = "Song 2 Period";
     $song_two_period_field->id = $field_id_arr['song_2_period'];
     $song_two_period_field->isRequired = true;
-    $teacher->form->fields[] = $song_two_period_field;
+    $teacher_form->fields[] = $song_two_period_field;
 
     // student's second song composer
     $song_two_composer_field = new GF_Field_Select();
     $song_two_composer_field->label = "Song 2 Composer";
     $song_two_composer_field->id = $field_id_arr['song_2_composer'];
     $song_two_composer_field->isRequired = true;
-    $teacher->form->fields[] = $song_two_composer_field;
+    $teacher_form->fields[] = $song_two_composer_field;
 
     // student's second song selection
     $song_two_selection_field = new GF_Field_Select();
     $song_two_selection_field->label = "Song 2 Selection";
     $song_two_selection_field->id = $field_id_arr['song_2_selection'];
     $song_two_selection_field->isRequired = true;
-    $teacher->form->fields[] = $song_two_selection_field;
+    $teacher_form->fields[] = $song_two_selection_field;
 
     // !!! need to add column E (conflict resolution)
 
@@ -437,7 +455,7 @@ class ARIA_Create_Competition {
     $competition_format_field->label = "Format of Competition";
     $competition_format_field->id = $field_id_arr['competition_format'];
     $competition_format_field->isRequired = false;
-    $competition_format_field->choices = $volunteer_preference_field->choices = array(
+    $competition_format_field->choices = array(
       array('text' => 'Traditional', 'value' => 'Traditional', 'isSelected' => false),
       array('text' => 'Competitive', 'value' => 'Competitive', 'isSelected' => false),
       array('text' => 'Master Class (if upper level)', 'value' => 'Master Class', 'isSelected' => false)
@@ -503,12 +521,15 @@ class ARIA_Create_Competition {
    * This function is responsible for creating and adding all of the associated fields
    * that are necessary for students to enter data about their upcoming music competition.
    *
-   * @param String  $competition_name The name of the newly created music competition
+   * @param Entry  $competition_entry The entry of the newly created music competition
    *
    * @since 1.0.0
    * @author KREW
    */
-  private static function aria_create_student_form( $competition_name ) {
+  private static function aria_create_student_form( $competition_entry ) {
+    $field_mapping = self::aria_get_competition_entry_meta();
+
+    $competition_name = $competition_entry[$field_mapping['Name of Competition']];  
     $student_form = new GF_Form("{$competition_name} Student Registration", "");
     $field_id_array = self::aria_student_field_id_array();
 
@@ -533,6 +554,7 @@ class ARIA_Create_Competition {
     "and last names and double check the spelling.  The way you type the name ".
     "here is the way it will appear on all awards and in the Command ".
     "Performance program.";
+    $student_name_field->descriptionPlacement = 'above';
     $student_name_field->id = $field_id_array['student_name'];
     $student_name_field->isRequired = true;
     $student_form->fields[] = $student_name_field;
@@ -651,10 +673,11 @@ class ARIA_Create_Competition {
       'State / Province / Region' => 3.4,
       'Zip / Postal Code' => 3.5,
       'Country' => 3.6,
-      'Student Registration Start Date' => 10,
-      'Student Registration End Date' => 11,
-      'Teacher Registration Start Date' => 12,
-      'Teacher Registration Start Date' => 13
+      'Student Registration Start Date' => 4,
+      'Student Registration End Date' => 5,
+      'Teacher Registration Start Date' => 6,
+      'Teacher Registration Start Date' => 7,
+      'Volunteer Times' => 8
     );
   }
 }
