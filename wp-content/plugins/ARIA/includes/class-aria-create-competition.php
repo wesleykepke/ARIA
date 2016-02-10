@@ -299,14 +299,14 @@ class ARIA_Create_Competition {
     $teacher_judging_field->id = $field_id_arr['is_judging'];
     $teacher_judging_field->isRequired = true;
     $teacher_judging_field->choices = array(
-	array('text' => 'Yes', 'value' => 'Yes', 'isSelected' => false),
-	array('text' => 'No', 'value' => 'No', 'isSelected' => false)
+    	array('text' => 'Yes', 'value' => 'Yes', 'isSelected' => false),
+    	array('text' => 'No', 'value' => 'No', 'isSelected' => false)
     );
     $conditionalRules = array();
     $conditionalRules[] = array(
-	'fieldId' => $field_id_arr['is_judging'],
-	'operator' => 'is',
-	'value' => 'No'
+    	'fieldId' => $field_id_arr['is_judging'],
+    	'operator' => 'is',
+    	'value' => 'No'
     );
     $teacher_form->fields[] = $teacher_judging_field;
 
@@ -337,6 +337,7 @@ class ARIA_Create_Competition {
       array('text' => 'Help with food for judges and volunteers', 'value' => 'Help with food for judges and volunteers', 'isSelected' => false)
     );
     $volunteer_preference_field->description = "Please check at least two volunteer job"
+<<<<<<< HEAD
     ." preferences for this year's Festival. You will be notified by email of your"
     ." volunteer assignments as Festival approaches.";
     $volunteer_preference_field->descriptionPlacement = 'above';
@@ -360,9 +361,9 @@ class ARIA_Create_Competition {
     //$volunteer_time_options = $competition_entry[$field_mapping['Volunteer Times']];
     $volunteer_time_field->choices = $volunteer_time_options;
     $volunteer_time_field->conditionalLogic = array(
-	'actionType' => 'show',
-	'logicType' => 'all',
-	'rules' => $conditionalRules
+    	'actionType' => 'show',
+    	'logicType' => 'all',
+    	'rules' => $conditionalRules
     );
     $teacher_form->fields[] = $volunteer_time_field;
 
@@ -561,13 +562,13 @@ class ARIA_Create_Competition {
     $parent_name_field->label = "Parent Name";
     $parent_name_field->id = $field_id_array['parent_name'];
     $parent_name_field->isRequired = true;
-    $parent_form->fields[] = $parent_name_field;
+    $student_form->fields[] = $parent_name_field;
 
     // parent email
     $parent_email_field = new GF_Field_Email();
     $parent_email_field->label = "Parent's Email";
     $parent_email_field->id = $field_id_array['parent_email'];
-    $parent_email_field->isRequired = true;
+    $parent_email_field->isRequired = tru_
     $student_form->fields[] = $parent_email_field;
 
     // student name
