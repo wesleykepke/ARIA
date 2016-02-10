@@ -30,7 +30,62 @@ class ARIA_Registration_Handler {
 
 	/**
 	 * Function for returning related forms.
+	 *
+	 * This function will return an associative array that maps the titles of
+	 * the associated forms in a music competition (student, student master,
+	 * teacher, and teacher master) to their respective form IDs.
+	 *
+	 * @param $prepended_title	String	The prepended portion of the competition title.
+	 *
+	 * @author KREW
+	 * @since 1.0.0
 	 */
+	private static function aria_find_related_forms_ids($prepended_title) {
+		// make sure to get all forms! check this
+
+		$form_ids = array(
+			"Student Form" => null,
+			"Student (Master) Form" => null,
+			"Teacher Form" => null,
+			"Teacher (Master) Form" => null
+		);
+		$student_form = $prepended_title + " Student Form";
+		$student_master_form = $prepended_title + " Student (Master) Form";
+		$teacher_form = $prepended_title + " Teacher Form";
+		$teacher_master_form = $prepended_title + " Teacher (Master) Form";
+		$all_forms = GFAPI::get_forms();
+
+		foreach ($all_forms as $form) {
+			switch ($form["title"]) {
+				case $student_form:
+					$form_ids["Student Form"] = $form["title"];
+					break;
+
+				case $student_master_form:
+					$form_ids["Student (Master) Form"] = $form["title"];
+					break;
+
+				case $teacher_form:
+						$form_ids["Teacher Form"] = $form["title"];
+					break;
+
+				case $teacher_master_form:
+					$form_ids["Teacher (Master) Form"] = $form["title"];
+					break;
+
+				default:
+					break;
+			}
+		}
+
+		// make sure all forms exist
+		foreach ($form_ids as $value) {
+			if (!isset($value)) {
+				wp_die('Error: ' . $value . ' does not exist!');
+			}
+		}
+		return $form_ids;
+	}
 
 	/**
 	 * Function for searching through student-master to find a student.
