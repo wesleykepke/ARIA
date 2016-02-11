@@ -253,7 +253,7 @@ class ARIA_Create_Master_Forms {
 	 * @since 1.0.0
 	 * @author KREW
 	 */
-  public static function aria_create_teacher_master_form(($competition_name) {
+  public static function aria_create_teacher_master_form($competition_name) {
     $teacher_master_form
         = new GF_Form($competition_name . " Teacher Master Form", "");
 
