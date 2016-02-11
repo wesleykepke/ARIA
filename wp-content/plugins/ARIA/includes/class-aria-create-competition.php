@@ -14,7 +14,7 @@
  */
 
 //!!! require_once("class-aria-api.php");
-require_once("class-aria-create-competition.php");
+require_once("class-aria-create-master-forms.php");
 
 /**
  * The create competition class.
