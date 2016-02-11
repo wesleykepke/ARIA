@@ -14,7 +14,7 @@
  */
 
 // Require the ARIA API
-require_once("class-aria-api.php");
+//require_once("class-aria-api.php");
 
 /**
  * The create competition class.
@@ -113,45 +113,46 @@ class ARIA_Music {
    private static function aria_create_nnmta_music_form() {
      $nnmta_music_form_name = "NNMTA Music Database";
      $nnmta_music_form = new GF_Form($nnmta_music_form_name, "");
-     $field_id_index = 1;
+     //!!!$field_id_index = 1;
+     $field_id_arr = self::aria_music_field_id_array();
 
      // NNMTA song id
      $song_id_field = new GF_Field_Text();
      $song_id_field->label = "NNMTA Song ID";
-     $song_id_field->id = $field_id_index;
-     $field_id_index++;
+     $song_id_field->id = $field_id_arr['song_id'];
+     //$field_id_index++;
      $song_id_field->isRequired = true;
      $nnmta_music_form->fields[] = $song_id_field;
 
      // NNMTA song name
      $song_name_field = new GF_Field_Text();
-     $song_name_field->label = "NNMTA Song Name";
-     $song_name_field->id = $field_id_index;
-     $field_id_index++;
+     $song_name_field->label = "Song Name";
+     $song_name_field->id = $field_id_arr['song_name'];
+     //$field_id_index++;
      $song_name_field->isRequired = true;
      $nnmta_music_form->fields[] = $song_name_field;
 
      // NNMTA song composer
      $song_composer_field = new GF_Field_Text();
-     $song_composer_field->label = "NNMTA Song Name";
-     $song_composer_field->id = $field_id_index;
-     $field_id_index++;
+     $song_composer_field->label = "Composer Name";
+     $song_composer_field->id = $field_id_arr['song_composer'];
+     //$field_id_index++;
      $song_composer_field->isRequired = true;
      $nnmta_music_form->fields[] = $song_composer_field;
 
      // NNMTA song level
      $song_level_field = new GF_Field_Text();
-     $song_level_field->label = "NNMTA Song Level";
-     $song_level_field->id = $field_id_index;
-     $field_id_index++;
+     $song_level_field->label = "Song Level";
+     $song_level_field->id = $field_id_arr['song_level'];
+     //$field_id_index++;
      $song_level_field->isRequired = true;
      $nnmta_music_form->fields[] = $song_level_field;
 
      // NNMTA period level
      $song_period_field = new GF_Field_Text();
-     $song_period_field->label = "NNMTA Song Period";
-     $song_period_field->id = $field_id_index;
-     $field_id_index++;
+     $song_period_field->label = "Song Period";
+     $song_period_field->id = $field_id_arr['song_period'];
+     //$field_id_index++;
      $song_period_field->isRequired = true;
      $nnmta_music_form->fields[] = $song_period_field;
 
@@ -160,9 +161,9 @@ class ARIA_Music {
      Currently GF_Field_Text but might need to change
      */
      $song_song_img_field = new GF_Field_Text();
-     $song_song_img_field->label = "NNMTA Song Image";
-     $song_song_img_field->id = $field_id_index;
-     $field_id_index++;
+     $song_song_img_field->label = "Song Image";
+     $song_song_img_field->id = $field_id_arr['song_image'];
+     //$field_id_index++;
      $song_song_img_field->isRequired = true;
      $nnmta_music_form->fields[] = $song_song_img_field;
 
@@ -204,4 +205,17 @@ class ARIA_Music {
   	$path_info['path'] = '/var/www/html/wp-content/uploads/testpath/';
   	return $path_info;
   }
+
+	// !!! New function
+	public static function aria_music_field_id_array() {
+		return array(
+			'song_id' => 1,
+			'song_name' => 2,
+			'song_composer' => 3,
+			'song_level' => 4,
+			'song_period' => 5,
+			'song_image' => 6
+		);
+	}
+
 }
