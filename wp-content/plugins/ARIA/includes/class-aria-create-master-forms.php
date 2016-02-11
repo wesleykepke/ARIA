@@ -12,7 +12,7 @@
  */
 
 // Require the ARIA API
-require_once("class-aria-api.php");
+//require_once("class-aria-api.php");
 
 /**
  * The create master forms class.
