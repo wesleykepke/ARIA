@@ -399,6 +399,12 @@ class ARIA_Create_Competition {
     $song_one_period_field = new GF_Field_Select();
     $song_one_period_field->label = "Song 1 Period";
     $song_one_period_field->id = $field_id_arr['song_1_period'];
+    $song_one_period_field->choices = array(
+      array('text' => 'Baroque', 'value' => '1', 'isSelected' => false),
+      array('text' => 'Classical', 'value' => '2', 'isSelected' => false),
+      array('text' => 'Romantic', 'value' => '3', 'isSelected' => false),
+      array('text' => 'Contemporary', 'value' => '4', 'isSelected' => false),
+   );
     $song_one_period_field->isRequired = true;
     $teacher_form->fields[] = $song_one_period_field;
 
@@ -425,6 +431,12 @@ class ARIA_Create_Competition {
     $song_two_period_field->label = "Song 2 Period";
     $song_two_period_field->id = $field_id_arr['song_2_period'];
     $song_two_period_field->isRequired = true;
+    $song_two_period_field->choices = array(
+      array('text' => 'Baroque', 'value' => '1', 'isSelected' => false),
+      array('text' => 'Classical', 'value' => '2', 'isSelected' => false),
+      array('text' => 'Romantic', 'value' => '3', 'isSelected' => false),
+      array('text' => 'Contemporary', 'value' => '4', 'isSelected' => false),
+    );
     $teacher_form->fields[] = $song_two_period_field;
 
     // student's second song composer

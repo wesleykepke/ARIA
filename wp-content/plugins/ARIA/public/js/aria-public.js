@@ -21,7 +21,7 @@ jQuery(document).ready(function($) {
 	}
 
 	// !!! get form ids
-	var teacher_form_id = '247';
+	var teacher_form_id = '252';
 	var music_form_id = '';
 
 	// get field ids
@@ -33,9 +33,10 @@ jQuery(document).ready(function($) {
 	
 	var st_level_field = input_pre + field_id_arr['student_level'];
 	var st_level;
+	alert(st_level_field);
 	$(st_level_field).live("change", function() {
 		st_level = $(st_level_field).val();
-			//alert( st_level );
+			alert( st_level );
 	});
 	// request for all songs of given level
 
