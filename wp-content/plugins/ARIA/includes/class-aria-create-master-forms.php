@@ -189,7 +189,11 @@ class ARIA_Create_Master_Forms {
       array('text' => 'Competitive', 'value' => 'Competitive', 'isSelected' => false),
       array('text' => 'Master Class (if upper level)', 'value' => 'Master Class', 'isSelected' => false)
     );
-		$volunteer_preference_field->choices = $competition_format_field->choices;
+		$volunteer_preference_field->choices = array(
+      array('text' => 'Traditional', 'value' => 'Traditional', 'isSelected' => false),
+      array('text' => 'Competitive', 'value' => 'Competitive', 'isSelected' => false),
+      array('text' => 'Master Class (if upper level)', 'value' => 'Master Class', 'isSelected' => false)
+    );
     $student_master_form->fields[] = $competition_format_field;
 
     // timing field
