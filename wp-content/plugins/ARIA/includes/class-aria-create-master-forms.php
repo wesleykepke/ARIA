@@ -184,11 +184,12 @@ class ARIA_Create_Master_Forms {
     $competition_format_field->label = "Format of Competition";
     $competition_format_field->id = $field_id_array['competition_format'];
     $competition_format_field->isRequired = false;
-    $competition_format_field->choices = $volunteer_preference_field->choices = array(
+    $competition_format_field->choices = array(
       array('text' => 'Traditional', 'value' => 'Traditional', 'isSelected' => false),
       array('text' => 'Competitive', 'value' => 'Competitive', 'isSelected' => false),
       array('text' => 'Master Class (if upper level)', 'value' => 'Master Class', 'isSelected' => false)
     );
+		$volunteer_preference_field->choices = $competition_format_field->choices;
     $student_master_form->fields[] = $competition_format_field;
 
     // timing field
@@ -260,9 +261,9 @@ class ARIA_Create_Master_Forms {
     $field_id_array = self::aria_master_teacher_field_id_array();
 
     // Students
-    $field = new GF_Field_List();
-    $field->label = "Students";
-    $field->id = $field_id_array['students'];
+    $parent_name_field = new GF_Field_List();
+    $parent_name_field->label = "Students";
+    $parent_name_field->id = $field_id_array['students'];
     $teacher_master_form->fields[] = $parent_name_field;
 
     // teacher name
