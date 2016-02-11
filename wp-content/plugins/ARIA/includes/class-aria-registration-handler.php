@@ -27,6 +27,9 @@ class ARIA_Registration_Handler {
 	/**
 	 * Function for sending emails.
 	 */
+	public static function aria_send_registration_emails() {
+
+	}
 
 	/**
 	 * Function for returning related forms.
@@ -81,7 +84,7 @@ class ARIA_Registration_Handler {
 		// make sure all forms exist
 		foreach ($form_ids as $value) {
 			if (!isset($value)) {
-				wp_die('Error: ' . $value . ' does not exist!');
+				wp_die('Error: The form titled ' . $value . " does not exist.");
 			}
 		}
 		return $form_ids;
@@ -170,7 +173,28 @@ class ARIA_Registration_Handler {
 
 	/**
 	 * Function to add an entry in student-master from the student.
+	 *
+	 * This function will add a student entry from the student competition forn 
+	 * to the student master form. 
+	 *
+	 * @param 	$student_entry 	Associative Array 	The student entry to add to the 
+	 * student master form
+	 * @param 	$prepended_title 	String 	The series of forms pertaining to the competition 	
+	 *
+	 * @author KREW 
+	 * @since 1.0.0
 	 */
+	private static function aria_add_student_to_student_master($student_entry, $prepended_title) {
+		$all_forms = self::aria_find_related_forms_ids($prepended_title);
+
+		// error checking to ensure $student_entry is indeed a student entry?
+
+		$student_entry_array = array($student_entry); 
+		$entries = GFAPI::add_entries($student_entry_array, $all_forms["Student Form"]);
+		if (is_wp_error($entries)) {
+			wp_die($entries->get_error_message()); 
+		}
+	}
 
 	/**
 	 * Function to check if student-teacher relationship exists based on link
@@ -190,9 +214,16 @@ class ARIA_Registration_Handler {
 
 	/**
 	 * Function to update student-master from student-public.
+	 *
+	 * This function is responsible for updating information in the student 
+	 * master form as new information regarding the student is determined.
+	 *
+	 * @param 	???
+	 *
+	 * @author KREW
+	 * @since 1.0.0
 	 */
+	private static function aria_update_student_master() {
 
-	/**
-	 * Function to update teacher-master from teacher-public.
-	 */
+	}
 }
