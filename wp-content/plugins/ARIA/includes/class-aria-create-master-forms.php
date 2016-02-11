@@ -32,14 +32,15 @@ class ARIA_Create_Master_Forms {
    * responsible for creating the student master form. This form is the absolute
    * source of truth for the students of any given competition. Entries in other
    * forms will update entries in this form.
+	 *
+	 * @param 	$competition_name 	String 	The competition name
    *
    * @since 1.0.0
    * @author KREW
    */
   public static function aria_create_student_master_form($competition_name) {
     $student_master_form
-        = new GF_Form("".$competition_name." Student Master Form", "");
-
+        = new GF_Form($competition_name . " Student Master Form", "");
     $field_id_array = self::aria_master_student_field_id_array();
 
     // parent name
@@ -200,47 +201,61 @@ class ARIA_Create_Master_Forms {
 
     return GFAPI::add_form($student_master_form->createFormArray());
   }
-}
 
-/**
- * This function defines an associative array used in the student form.
- *
- * This function returns an array that maps all of the names of the fields in the
- * student form to a unique integer so that they can be referenced. Moreover, this
- * array helps prevent the case where the names of these fields are modified from
- * the dashboard.
- *
- * @since 1.0.0
- * @author KREW
- */
- public static function aria_master_student_field_id_array() {
-  // CAUTION, This array is used as a source of truth. Changing these values may
-  // result in catastrophic failure. If you do not want to feel the bern,
-  // consult an aria developer before making changes to this portion of code.
-  return array(
-    'parent_name' => 1,
-    'parent_email' => 2,
-    'student_name' => 3,
-    'student_birthday' => 4,
-    'teacher_name' => 5,
-    'not_listed_teacher_name' => 6,
-    'available_festival_days' => 7,
-    'preferred_command_performance' => 8,
-    'song_1_period' => 9,
-    'song_1_composer' => 10,
-    'song_1_selection' => 11,
-    'song_2_period' => 12,
-    'song_2_composer' => 13,
-    'song_2_selection' => 14,
-    'theory_score' => 15,
-    'alternate_theory' => 16,
-    'competition_format' => 17,
-    'timing_of_pieces' => 18,
-  );
+	/**
+	 * This function defines an associative array used in the student form.
+	 *
+	 * This function returns an array that maps all of the names of the fields in the
+	 * student form to a unique integer so that they can be referenced. Moreover, this
+	 * array helps prevent the case where the names of these fields are modified from
+	 * the dashboard.
+	 *
+	 * @since 1.0.0
+	 * @author KREW
+	 */
+	public static function aria_master_student_field_id_array() {
+	  // CAUTION, This array is used as a source of truth. Changing these values may
+	  // result in catastrophic failure. If you do not want to feel the bern,
+	  // consult an aria developer before making changes to this portion of code.
+	  return array(
+	    'parent_name' => 1,
+	    'parent_email' => 2,
+	    'student_name' => 3,
+	    'student_birthday' => 4,
+	    'teacher_name' => 5,
+	    'not_listed_teacher_name' => 6,
+	    'available_festival_days' => 7,
+	    'preferred_command_performance' => 8,
+	    'song_1_period' => 9,
+	    'song_1_composer' => 10,
+	    'song_1_selection' => 11,
+	    'song_2_period' => 12,
+	    'song_2_composer' => 13,
+	    'song_2_selection' => 14,
+	    'theory_score' => 15,
+	    'alternate_theory' => 16,
+	    'competition_format' => 17,
+	    'timing_of_pieces' => 18,
+	  );
+	}
 
+	/**
+	 * This function will create the form that will be the source of truth for
+	 * a certain competitions teachers.
+	 *
+	 * This function is called in "class-aria-create-competition.php" and is
+	 * responsible for creating the teacher master form. This form is the absolute
+	 * source of truth for the teachers of any given competition. Entries in other
+	 * forms will update entries in this form.
+	 *
+	 * @param 	$competition_name 	String 	The competition name
+	 *
+	 * @since 1.0.0
+	 * @author KREW
+	 */
   public static function aria_create_teacher_master_form(($competition_name) {
     $teacher_master_form
-        = new GF_Form("".$competition_name." Teacher Master Form", "");
+        = new GF_Form($competition_name . " Teacher Master Form", "");
 
     $field_id_array = self::aria_master_teacher_field_id_array();
 
@@ -342,6 +357,18 @@ class ARIA_Create_Master_Forms {
     return GFAPI::add_form($teacher_master_form->createFormArray());
   }
 
+	/**
+	 * This function defines an associative array used in the student form.
+	 *
+	 * This function returns an array that maps all of the names of the fields in the
+	 * student form to a unique integer so that they can be referenced. Moreover, this
+	 * array helps prevent the case where the names of these fields are modified from
+	 * the dashboard.
+	 *
+	 * @since 1.0.0
+	 * @author KREW
+	 *
+	 */
   private static function aria_master_teacher_field_id_array() {
     // CAUTION, This array is used as a source of truth. Changing these values may
     // result in catastrophic failure. If you do not want to feel the bern,
@@ -355,5 +382,5 @@ class ARIA_Create_Master_Forms {
       'students' => 6,
       'is_judging' => 7
     );
-
+	}
 }

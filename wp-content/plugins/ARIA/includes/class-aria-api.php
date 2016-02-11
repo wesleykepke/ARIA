@@ -72,7 +72,7 @@ function aria_get_song_upload_form_id() {
 	}
 
 	if (!isset($upload_form_name_id)) {
-    $upload_form_name_id = -1; 
+    $upload_form_name_id = -1;
     /*
 		wp_die('Form ' . $upload_form_name . ' does not exist. Please create it and
     try again.'); */
@@ -140,8 +140,8 @@ function aria_get_music_csv_file_path($entry, $form) {
 
 	if (!isset($music_csv_field_id)) {
 		wp_die('Form named \'' . $form['title'] . '\' does not have a field named \''
-    . $music_csv_field_name . '\'. Please create this field and try uploading
-    music again.');
+                . $music_csv_field_name . '\'. Please create this field and try uploading
+                music again.');
 	}
 
 	// parse the url and obtain the file path for the csv file

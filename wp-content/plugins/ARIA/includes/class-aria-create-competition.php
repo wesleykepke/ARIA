@@ -13,8 +13,8 @@
  * @subpackage ARIA/includes
  */
 
-// Require the ARIA API
 //!!! require_once("class-aria-api.php");
+require_once("class-aria-create-competition.php");
 
 /**
  * The create competition class.
@@ -61,15 +61,17 @@ class ARIA_Create_Competition {
    * @author KREW
    */
   public static function aria_create_teacher_and_student_forms($entry, $form) {
-    //$field_mapping = self::aria_get_competition_entry_meta();
-
     // make sure the create competition form is calling this function
     if ($form['id'] === aria_get_create_competition_form_id()) {
-      //self::aria_create_student_form($entry[$field_mapping['Name of Competition']]);
-      //self::aria_create_teacher_form($entry[$field_mapping['Name of Competition']]);
-    
+			// create the student and teacher forms
       self::aria_create_student_form($entry);
       self::aria_create_teacher_form($entry);
+
+			// create the sutdent and teacher (master) forms
+			$field_mapping = self::aria_get_competition_entry_meta();
+			$competition_name = $entry[$field_mapping['Name of Competition']];
+			ARIA_Create_Master_Forms::aria_create_student_master_form($competition_name);
+			ARIA_Create_Master_Forms::aria_create_teacher_master_form($competition_name);
     }
     else {
       wp_die('ERROR: No form currently exists that allows the festival chairman
@@ -149,7 +151,7 @@ class ARIA_Create_Competition {
     $teacher_volunteer_times_field->id = 8;
     $teacher_volunteer_times_field->isRequired = false;
     $teacher_volunteer_times_field->description = "E.g. Saturday (10am-4pm), Either Saturday or Sunday, etc.";
-    
+
     // assign all of the previous attributes to our newly created form
     $competition_creation_form->fields[] = $competition_name_field;
     $competition_creation_form->fields[] = $competition_date_field;
@@ -267,7 +269,7 @@ class ARIA_Create_Competition {
    private static function aria_create_teacher_form($competition_entry) {
     $field_mapping = self::aria_get_competition_entry_meta();
 
-    $competition_name = $competition_entry[$field_mapping['Name of Competition']];  
+    $competition_name = $competition_entry[$field_mapping['Name of Competition']];
     $teacher_form = new GF_Form("{$competition_name} Teacher Registration", "");
     $field_id_arr = self::aria_teacher_field_id_array();
 
@@ -380,7 +382,7 @@ class ARIA_Create_Competition {
     $student_level_field->isRequired = true;
     // !!! replace
     $student_level_field->choices = array(
-	
+
       array('text' => '1', 'value' => '1', 'isSelected' => false),
       array('text' => '2', 'value' => '2', 'isSelected' => false),
       array('text' => '3', 'value' => '3', 'isSelected' => false),
@@ -564,7 +566,7 @@ class ARIA_Create_Competition {
   private static function aria_create_student_form( $competition_entry ) {
     $field_mapping = self::aria_get_competition_entry_meta();
 
-    $competition_name = $competition_entry[$field_mapping['Name of Competition']];  
+    $competition_name = $competition_entry[$field_mapping['Name of Competition']];
     $student_form = new GF_Form("{$competition_name} Student Registration", "");
     $field_id_array = self::aria_student_field_id_array();
 
@@ -697,7 +699,7 @@ class ARIA_Create_Competition {
    * @since 1.0.5
    * @author KREW
    */
-  private static function aria_get_competition_entry_meta() {
+  public static function aria_get_competition_entry_meta() {
     return array(
       'Name of Competition' => 1,
       'Date of Competition' => 2,
