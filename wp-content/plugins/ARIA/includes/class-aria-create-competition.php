@@ -63,6 +63,8 @@ class ARIA_Create_Competition {
   public static function aria_create_teacher_and_student_forms($entry, $form) {
     // make sure the create competition form is calling this function
     if ($form['id'] === aria_get_create_competition_form_id()) {
+      self::aria_update_page_ids(); 
+			/*
 			// create the student and teacher forms
       self::aria_create_student_form($entry);
       self::aria_create_teacher_form($entry);
@@ -72,6 +74,7 @@ class ARIA_Create_Competition {
 			$competition_name = $entry[$field_mapping['Name of Competition']];
 			ARIA_Create_Master_Forms::aria_create_student_master_form($competition_name);
 			ARIA_Create_Master_Forms::aria_create_teacher_master_form($competition_name);
+			*/
     }
     else {
       wp_die('ERROR: No form currently exists that allows the festival chairman
@@ -717,4 +720,12 @@ class ARIA_Create_Competition {
       'Volunteer Times' => '8' // !!! String or int?
     );
   }
+
+	/**
+	 * Function that tries to retrieve page IDs.
+	 */
+  public static function aria_update_page_ids() {
+    $student_form = get_page_by_title("NNMTA Music Database");
+		wp_die("DB id: " . $student_form->ID);
+	}
 }
