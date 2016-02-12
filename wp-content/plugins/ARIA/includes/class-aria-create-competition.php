@@ -62,8 +62,8 @@ class ARIA_Create_Competition {
    */
   public static function aria_create_teacher_and_student_forms($entry, $form) {
     // make sure the create competition form is calling this function
-    if ($form['id'] === aria_get_create_competition_form_id()) {
-      self::aria_update_page_ids(); 
+    if ($form['id'] === ARIA_API::aria_get_create_competition_form_id()) {
+      self::aria_update_page_ids();
 			/*
 			// create the student and teacher forms
       self::aria_create_student_form($entry);
