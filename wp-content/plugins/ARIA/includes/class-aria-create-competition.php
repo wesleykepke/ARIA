@@ -13,7 +13,7 @@
  * @subpackage ARIA/includes
  */
 
-//!!! require_once("class-aria-api.php");
+require_once("class-aria-api.php");
 require_once("class-aria-create-master-forms.php");
 
 /**
@@ -40,7 +40,7 @@ class ARIA_Create_Competition {
    */
   public static function aria_create_competition_activation() {
     // if the form for creating music competitions doesn't exist, create a new form
-    $form_id = aria_get_create_competition_form_id();
+    $form_id = ARIA_API::aria_get_create_competition_form_id();
     if ($form_id === -1) {
       self::aria_create_competition_form();
     }
