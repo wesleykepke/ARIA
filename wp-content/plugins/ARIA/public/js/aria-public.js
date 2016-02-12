@@ -2,6 +2,81 @@ jQuery(document).ready(function($) {
 //	alert("in public");
 	// ---- only load on specific page (if statement with student level?)
 	
+	/* Page load functions */
+
+	// get teacher  form id from current form
+	var teacher_form = $('.gform_fields').attr('id');
+	var teacher_form_id = teacher_form.split('_');
+	teacher_form_id = teacher_form_id[teacher_form_id.length -1];
+	
+	// get music DB form id from Gravity Forms
+	var music_form_id = get_music_form_id();
+
+	// get field ids
+        var field_id_arr = get_ids();
+
+	// get student level
+	var input_prefix = '#input_' + teacher_form_id + '_';
+	var st_level_field = input_prefix + field_id_arr['student_level'];
+	var st_level = $(st_level_field).val();
+	
+	// For testing purposes, allow change in level
+	$(st_level_field).live("change", function() {
+		st_level = $(st_level_field).val();
+//			alert( st_level );
+			get_songs(st_level, levelField);
+	});
+
+	// request for all songs of given level
+	var levelField = field_id_arr['song_level'];
+	var music = get_songs(st_level, levelField);
+
+	/* Song 1 Selection */
+	
+	// user selects period 
+	var period_field_1 = input_prefix + field_id_arr['song_1_period'];
+	var period_val_1 = $(period_field_1).val();
+	var period_text_1 = $(period_field_1).text();
+	$(period_field_1).live("change", function() {
+		period_val_1 = $(period_field_1).val();
+		//alert( "period val type: " + typeof(period_val_1) );
+		period_text_1 = $(period_field_1 + '  option:selected').text();
+		//alert( period_text_1 + period_val_1);
+		load_composers( period_val_1, '1' );
+		// if applicable, replace previous period in song 2
+		// remove period from song 2 options
+
+		// populate period composers
+
+		// disable song selection
+	});
+
+	// user selects composer
+	var composer_field_1 = input_prefix + field_id_arr['song_1_composer'];
+	var composer_val_1 = $(composer_field_1).val();
+	$(composer_field_1).live("change", function(){
+
+		composer_val_1 = $(composer_field_1).val();
+		// enable song selection
+		load_songs( composer_val_1, '1' );
+		// populate song selection
+
+	});
+	/* Song 2 Selection */
+
+	// user selects period
+
+		// if applicable, replace previous period in song 1
+		// remove period from song 1 options
+
+		// populate period composers
+
+		// disable song selection
+
+
+
+	/**** Function Definitions *****/
+	
 	// get field IDs function
         function get_ids(){
 		var idResult, temp;	
@@ -66,19 +141,6 @@ jQuery(document).ready(function($) {
 		else
 		{
 			search = {
-/*				field_filters : 
-				[
-					{
-					key: levelID,
-					operator: 'is',
-					value: 9
-					}
-					{
-					key: levelID,
-					operator: 'is',
-					value: 10
-					}
-				],*/				
 				field_filters : { 
 					mode: 'any', 
 					0:  
@@ -93,14 +155,13 @@ jQuery(document).ready(function($) {
 						operator: 'is',
 						value: 10
 						}
-					}
+				}
 			}
 		
 		}
 	
 		
 		var searchJSON = JSON.stringify( search );
-		alert( searchJSON );
 
 		//NOTE: paging requires &
 		//NOTE: max page size?
@@ -116,7 +177,6 @@ jQuery(document).ready(function($) {
 
 	            success: function(result) {
 	                test = result['response']['entries'];
-//			alert( "successful get" );
 	            }
 	        }).then( function(){
 	        	returnedValue = test;
@@ -164,36 +224,50 @@ jQuery(document).ready(function($) {
 	        });
 		return returnedValue;
 	}// end of get form id function
-
-	// !!! get form ids
-	var teacher_form = $('.gform_fields').attr('id');
-	var teacher_form_id = teacher_form.split('_');
-	teacher_form_id = teacher_form_id[teacher_form_id.length -1];
-//	alert( teacher_form_id ); //var teacher_form_id = '252';
 	
-	// !!! how to get this?
-	var music_form_id = get_music_form_id();
+	function load_composers( period, song ){
+		var html = '';
+		var composer_field = input_prefix + field_id_arr['song_' + song + '_composer'];
+		//alert( composer_field );
+		var data_composer_field   = '' +  field_id_arr['song_composer'];
+		var data_period_field = '' + field_id_arr['song_period'];
+		//var data_composer_field = data_composer_field_int.toString();
+		music.forEach( function(entry){
+			var composer = entry[ data_composer_field ];
+			//alert( composer );
+			if( entry[data_period_field] == period && html.indexOf( composer ) == -1 ){
+				//alert( composer );
+				html += '<option value="' + composer + '">' + toTitleCase(composer) + '</option>';
+			}
+		});
 
-	// get field ids
-        var field_id_arr = get_ids();
-		//alert( field_id_arr['name'] );
+		$(composer_field).empty();
+		$(composer_field).append(html);
+	}
 
-	// get student level
-	var input_pre = '#input_' + teacher_form_id + '_';
-	
-	var st_level_field = input_pre + field_id_arr['student_level'];
-	var st_level;
-//	alert(st_level_field);
-	$(st_level_field).live("change", function() {
-		st_level = $(st_level_field).val();
-//			alert( st_level );
-			get_songs(st_level, levelField);
-	});
+	function load_songs( composer, song_num ){
+		var html = '';
+		var song_field = input_prefix + field_id_arr['song_' + song_num + '_selection'];
+		//alert( composer_field );
+		var data_composer_field   = '' +  field_id_arr['song_composer'];
+		var data_song_field = '' + field_id_arr['song_name'];
+	//	alert(song_field);
+		//var data_composer_field = data_composer_field_int.toString();
+		music.forEach( function(entry){
+			var song  = entry[ data_song_field ];
+			//alert( composer );
+			if( entry[data_composer_field] == composer && html.indexOf( song ) == -1 ){
+				//alert( composer );
+				html += '<option value="' + song + '">' + toTitleCase(song) + '</option>';
+			}
+		});
 
-	// request for all songs of given level
-	var levelField = field_id_arr['song_level'];
-	var music = get_songs(st_level, levelField);
+		$(song_field).empty();
+		$(song_field).append(html);
+	}
 
-		// if level 11, request for 9 and 10
-		
+	function toTitleCase( str ){
+		return str.replace( /\w\S*/g, function(txt){
+			return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+	}
 });
