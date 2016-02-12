@@ -25,7 +25,6 @@ if (!is_plugin_active('gravityforms/gravityforms.php')) {
 // Start a new session if not previous started
 if (!session_id()) {
 	session_start();
-	$music_db_id =  NULL;
 }
 
 /**
