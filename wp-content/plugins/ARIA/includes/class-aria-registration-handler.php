@@ -202,6 +202,12 @@ class ARIA_Registration_Handler {
 		$all_forms = self::aria_find_related_forms_ids($prepended_title);
 
 		// TODO: Make this so it copies the fields from an entry to one that we searched.
+
+
+		// Create an entry with the entry data from the $student_entry. This will
+		// probably need to be done for every field.
+
+		// call GFAPI add entry.
 	}
 
 	/**
