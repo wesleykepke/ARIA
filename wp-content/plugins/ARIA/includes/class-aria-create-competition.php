@@ -725,7 +725,7 @@ class ARIA_Create_Competition {
 	 * Function that tries to retrieve page IDs.
 	 */
   public static function aria_update_page_ids() {
-    $student_form = get_page_by_title("NNMTA Music Database");
+    $student_form = get_page_by_title("Wes CC");
 		wp_die("DB id: " . $student_form->ID);
 	}
 }
