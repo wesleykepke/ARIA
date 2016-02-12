@@ -14,8 +14,6 @@
  * @subpackage ARIA/includes
  */
 
- $
-
 if (!session_id()) {
 	session_start();
 }
