@@ -22,6 +22,12 @@ if (!is_plugin_active('gravityforms/gravityforms.php')) {
   ARIA.");
 }
 
+// Start a new session if not previous started
+if (!session_id()) {
+	session_start();
+	$music_db_id =  NULL;
+}
+
 /**
  * This function will find the ID of the form used to create music competitions.
  *
@@ -98,6 +104,9 @@ function aria_get_nnmta_database_form_id() {
 	foreach ($all_active_forms as $form) {
 		if ($form['title'] === $nnmta_music_database_form_name) {
 			$nnmta_music_database_form_id = $form['id'];
+			if (!isset($_SESSION['music_db_id'])) {
+				$_SESSION['music_db_id'] = $nnmta_music_database_form_id;
+			}
 		}
 	}
 
