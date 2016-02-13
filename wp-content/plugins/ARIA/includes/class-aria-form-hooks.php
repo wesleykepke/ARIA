@@ -88,7 +88,7 @@ class ARIA_Form_Hooks {
 
     // Make a new student master entry with the student hash
     $new_student_master_entry = array();
-		$new_student_master_entry[] = array(
+    $new_student_master_entry[] = array(
       (string) $student_fields["parent_name"] => $entry[(string) $student_fields["parent_name"]],
       (string) $student_fields["parent_email"] => $entry[(string) $student_fields["parent_email"]],
       (string) $student_fields["student_name"] => $entry[(string) $student_fields["student_name"]],
