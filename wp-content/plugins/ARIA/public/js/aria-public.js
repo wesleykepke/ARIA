@@ -34,6 +34,14 @@ jQuery(document).ready(function($) {
 	/* Song 1 Selection */
 	
 	// user selects period 
+	var period_arr = {
+		selected_val: { 0: '', 1: '' },
+		selected_text: { 0: '', 1: '' },
+		stored_val: { 0: '', 1: '' },
+		stored_text: { 0: '', 1: '' }
+	};
+
+
 	var period_field_1 = input_prefix + field_id_arr['song_1_period'];
 	var period_val_1 = $(period_field_1).val();
 	var period_text_1 = $(period_field_1).text();
