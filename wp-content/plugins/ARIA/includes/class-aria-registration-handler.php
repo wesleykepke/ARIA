@@ -110,7 +110,7 @@ class ARIA_Registration_Handler {
        'field_filters' => array(
          'mode' => 'any',
          array(
-           'key' => $hash_field_id,
+           'key' => (string) $hash_field_id,
            'value' => $student_hash
          )
        )
@@ -136,7 +136,7 @@ class ARIA_Registration_Handler {
        'field_filters' => array(
          'mode' => 'any',
          array(
-           'key' => $hash_field_id,
+           'key' => (string) $hash_field_id,
            'value' => $teacher_hash
          )
        )
@@ -177,15 +177,17 @@ class ARIA_Registration_Handler {
 	/**
 	 * Function to get pre-populate values based on teacher-master.
 	 */
-	 public static function aria_get_teacher_pre_populate($prepended_title, $teacher_name) {
+	 public static function aria_get_teacher_pre_populate($prepended_title, $teacher_hash) {
 		 $all_forms = self::aria_find_related_forms_ids($prepended_title);
+
+		 $hash_field_id = ARIA_Create_Master_Forms::aria_master_teacher_field_id_array()['hash'];
 
 		 $search_criteria = array(
        'field_filters' => array(
          'mode' => 'any',
          array(
-           'key' => '1',
-           'value' => $teacher_name
+           'key' => (string) $hash_field_id,
+           'value' => $teacher_hash
          )
        )
 		 );
@@ -214,15 +216,17 @@ class ARIA_Registration_Handler {
 	/**
 	 * Function to get pre-populate values based on student-master.
 	 */
-	 public static function aria_get_teacher_pre_populate($prepended_title, $student_name) {
+	 public static function aria_get_student_pre_populate($prepended_title, $student_hash) {
 		 $all_forms = self::aria_find_related_forms_ids($prepended_title);
+
+		 $hash_field_id = ARIA_Create_Master_Forms::aria_master_student_field_id_array()['hash'];
 
 		 $search_criteria = array(
        'field_filters' => array(
          'mode' => 'any',
          array(
-           'key' => '1',
-           'value' => $student_name
+           'key' => (string) $hash_field_id,
+           'value' => $student_hash
          )
        )
 		 );

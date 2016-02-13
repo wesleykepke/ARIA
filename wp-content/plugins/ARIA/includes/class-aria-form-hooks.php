@@ -86,6 +86,10 @@ class ARIA_Form_Hooks {
       wp_redirect( home_url() );
       exit();
     }
+
+    // Do form prepopulation
+    $teacher_prepopulation_values = ARIA_Registration_Handler::aria_get_teacher_pre_populate($form['title'], $teacher_hash)
+    $student_prepopulation_values = ARIA_Registration_Handler::aria_get_student_pre_populate($form['title'], $student_hash)
   }
 
   public static function aria_after_teacher_submission($form, $entry) {
