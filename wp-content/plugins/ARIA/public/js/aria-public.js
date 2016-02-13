@@ -14,9 +14,17 @@ jQuery(document).ready(function($) {
 
 	// get field ids
         var field_id_arr = get_ids();
-
+	
 	// get student level
 	var input_prefix = '#input_' + teacher_form_id + '_';
+	var fields;
+
+	for( var field in field_id_arr ){
+		//alert( field );
+//		fields[ input_prefix + field ] = field_id_arr[field];
+	}
+
+
 	var st_level_field = input_prefix + field_id_arr['student_level'];
 	var st_level = $(st_level_field).val();
 	
@@ -35,28 +43,41 @@ jQuery(document).ready(function($) {
 	
 	// user selects period 
 	var period_arr = {
-		selected_val: { 0: '', 1: '' },
-		selected_text: { 0: '', 1: '' },
-		stored_val: { 0: '', 1: '' },
-		stored_text: { 0: '', 1: '' }
+		selected_val: { 1: '', 2: '' },
+		selected_text: { 1: '', 2: '' },
+		stored_val: { 1: '', 2: '' },
+		stored_text: { 1: '', 2: '' }
 	};
-
-
+	
 	var period_field_1 = input_prefix + field_id_arr['song_1_period'];
-	var period_val_1 = $(period_field_1).val();
-	var period_text_1 = $(period_field_1).text();
+	var period_field_2 = input_prefix + field_id_arr['song_2_period'];
+	var song_field_1 = input_prefix + field_id_arr['song_1_selection'];
+	var song_field_2 = input_prefix + field_id_arr['song_2_selection'];
+	
 	$(period_field_1).live("change", function() {
-		period_val_1 = $(period_field_1).val();
-		//alert( "period val type: " + typeof(period_val_1) );
-		period_text_1 = $(period_field_1 + '  option:selected').text();
-		//alert( period_text_1 + period_val_1);
-		load_composers( period_val_1, '1' );
+		
+		period_arr[ 'selected_val' ][1] = $(period_field_1).val();
+		period_arr[ 'selected_text' ][1] = $(period_field_1 + '  option:selected').text();
+		
 		// if applicable, replace previous period in song 2
+		if( period_arr[ 'stored_val' ][2] != '' )
+		{
+			//alert( "replacing " + period_arr['stored_text'][2]+ period_arr['stored_val'][2] + "into " + period_field_2);
+			$(period_field_2).append('<option value="' + period_arr['stored_val'][2] + '">'
+							+ period_arr['stored_text'][2] + '</option>');	
+		}
+	
 		// remove period from song 2 options
-
-		// populate period composers
+		$(period_field_2 + " option[value='" + period_arr['selected_val'][1]  + "']").remove( );
+		period_arr['stored_val'][2] = period_arr['selected_val'][1];
+		period_arr['stored_text'][2] = period_arr['selected_text'][1];
 
 		// disable song selection
+		$(song_field_1).empty();
+		$(song_field_1).attr('disabled', true);
+		
+		// populate period composers
+		load_composers( period_arr[ 'selected_val' ][1], '1' );
 	});
 
 	// user selects composer
@@ -68,7 +89,7 @@ jQuery(document).ready(function($) {
 		// enable song selection
 		load_songs( composer_val_1, '1' );
 		// populate song selection
-
+		$(song_field_1).removeAttr('disabled');
 	});
 	/* Song 2 Selection */
 
