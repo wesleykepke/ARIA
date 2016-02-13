@@ -62,30 +62,29 @@ class ARIA_Form_Hooks {
     $teacher_entry = ARIA_Registration_Handler::aria_find_teacher_entry($form["title"], $teacher_hash);
     $teacher_master_fields = ARIA_Create_Master_Forms::aria_master_teacher_field_id_array();
 
-		// If the teacher exists, add the student hash to the students array
-
+    // If the teacher exists, add the student hash to the students array
     if ($teacher_entry !== false) {
       $teacher_entry[(string) $teacher_master_fields["students"]][] = $student_hash;
     }
 
 		// If not make a new entry in the form
-		if (!$teacher_exists) {
+    if (!$teacher_exists) {
       $new_teacher_entry = array();
-			$new_teacher_entry[] = array (
+      $new_teacher_entry[] = array (
         (string) $teacher_master_fields["name"] => $entry[(string) $student_fields["not_listed_teacher_name"]],
-				(string) $teacher_master_fields["email"] => null,
-				(string) $teacher_master_fields["phone"] => null,
-				(string) $teacher_master_fields["volunteer_preference"] => null,
-				(string) $teacher_master_fields["volunteer_time"] => null,
-				(string) $teacher_master_fields["students"] => array($student_hash),
-				(string) $teacher_master_fields["is_judging"] => null,
-				(string) $teacher_master_fields["hash"] => null
+        (string) $teacher_master_fields["email"] => null,
+        (string) $teacher_master_fields["phone"] => null,
+        (string) $teacher_master_fields["volunteer_preference"] => null,
+        (string) $teacher_master_fields["volunteer_time"] => null,
+        (string) $teacher_master_fields["students"] => array($student_hash),
+        (string) $teacher_master_fields["is_judging"] => null,
+        (string) $teacher_master_fields["hash"] => null
       );
-			$teacher_result = GFAPI::add_entries($new_teacher_entry, $related_forms[ARIA_Registration_Handler::$TEACHER_FORM]);
-			if (is_wp_error($teacher_result)) {
+      $teacher_result = GFAPI::add_entries($new_teacher_entry, $related_forms[ARIA_Registration_Handler::$TEACHER_FORM]);
+      if (is_wp_error($teacher_result)) {
         wp_die($teacher_result->get_error_message());
       }
-		}
+    }
 
     // Make a new student master entry with the student hash
     $new_student_master_entry = array();
@@ -112,9 +111,9 @@ class ARIA_Form_Hooks {
     );
     $student_result = GFAPI::add_entries($new_student_master_entry,
                       $related_forms[ARIA_Registration_Handler::$STUDENT_MASTER]);
-		if (is_wp_error($student_result)) {
+    if (is_wp_error($student_result)) {
       wp_die($student_result->get_error_message());
-		}
+    }
   }
 
   public static function aria_before_teacher_render($form) {
