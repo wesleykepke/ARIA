@@ -48,6 +48,7 @@ class ARIA_Form_Hooks {
 
     // Find out the information associated with the $entry variable
 		$student_fields = ARIA_Create_Competition::aria_student_field_id_array();
+    $teacher_master_fields = ARIA_Create_Master_Forms::aria_master_teacher_field_id_array();
 
     // Hash for teacher (just has the teacher name)
 		$teacher_hash = hash("md5", $entry[$student_fields["teacher_name"]]);
@@ -58,20 +59,12 @@ class ARIA_Form_Hooks {
 		$student_hash = hash("md5", $student_name_and_entry);
 
     // Search through the teacher form to see if the teacher has an entry made
-		/*
-    CHECK PAGINATION!
-		*/
-		$teacher_exists = False;
-		$teacher_fields = ARIA_Create_Competition::aria_teacher_field_id_array(); 
-		$all_teacher_form_entries = GFAPI::get_entries($related_forms[ARIA_Registration_Handler::$TEACHER_FORM]);
-		foreach ($all_teacher_form_entries as $teacher_entry) {
-			// If the teacher exists, add the student hash to the students array
-			if ($teacher_entry[]) {
-				$teacher_exists = True;
-			}
-
+		$teacher_entry = ARIA_Registration_Handler::aria_find_teacher_entry($form["title"], $teacher_hash);
+		// If the teacher exists, add the student hash to the students array
+		if ($teacher_entry != false) {
+				$teacher_entry[(string) teacher_master_fields['students']][] = $student_hash;
 		}
-
+    
 		// If not make a new entry in the form
 		if (!$teacher_exists) {
 

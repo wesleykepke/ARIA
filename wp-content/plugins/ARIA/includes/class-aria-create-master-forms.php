@@ -199,6 +199,12 @@ class ARIA_Create_Master_Forms {
     $timing_of_pieces_field->numberFormat = "decimal_dot";
     $student_master_form->fields[] = $timing_of_pieces_field;
 
+    // student's hash
+    $student_hash_field = new GF_Field_Text();
+    $student_hash_field->id = $field_id_array['hash'];
+    $student_hash_field->isRequired = false;
+    $student_master_form->fields[] = $student_hash_field;
+
     return GFAPI::add_form($student_master_form->createFormArray());
   }
 
@@ -236,6 +242,7 @@ class ARIA_Create_Master_Forms {
 	    'alternate_theory' => 16,
 	    'competition_format' => 17,
 	    'timing_of_pieces' => 18,
+      'hash' => 19
 	  );
 	}
 
@@ -354,6 +361,12 @@ class ARIA_Create_Master_Forms {
     );
     $teacher_master_form->fields[] = $volunteer_time_field;
 
+    // student's hash
+    $teacher_hash_field = new GF_Field_Text();
+    $teacher_hash_field->id = $field_id_array['hash'];
+    $teacher_hash_field->isRequired = false;
+    $teacher_master_form->fields[] = $teacher_hash_field;
+
     return GFAPI::add_form($teacher_master_form->createFormArray());
   }
 
@@ -380,7 +393,8 @@ class ARIA_Create_Master_Forms {
       'volunteer_preference' => 4,
       'volunteer_time' => 5,
       'students' => 6,
-      'is_judging' => 7
+      'is_judging' => 7,
+      'hash' => 8
     );
 	}
 }
