@@ -13,6 +13,8 @@
 
 // Require the ARIA API
 //require_once("class-aria-api.php");
+require_once("class-aria-registration-handler.php");
+require_once("class-aria-create-competition.php");
 
 /**
  * The aria form hooks class.
@@ -33,20 +35,47 @@ class ARIA_Form_Hooks {
    * 'gform_after_submission_x', 'aria_after_student_submission', 10, 2
    * );
    *
+	 * @param	$form		GF Forms Object		The form this function is attached to.
+	 * @param $entry 	GF Entry Object 	The entry that is returned after form submission.
 	 *
    * @since 1.0.0
    * @author KREW
    */
   public static function aria_after_student_submission($form, $entry) {
     // Get the forms that are related to this form
+		$related_forms = ARIA_Registration_Handler::aria_find_related_forms_ids($form["title"]);
+		print_r($related_forms);
 
-    // Make hashes for teacher and student
-      // Hash for teacher (just has the teacher name)
-      // Hash for student (student name and entry date)
+    // Find out the information associated with the $entry variable
+		$student_fields = ARIA_Create_Competition::aria_student_field_id_array();
+
+    // Hash for teacher (just has the teacher name)
+		$teacher_hash = hash("md5", $entry[$student_fields["teacher_name"]]);
+
+    // Hash for student (student name and entry date)
+		$student_name_and_entry = $entry[$student_fields["student_name"]];
+		$student_name_and_entry .= $entry[$student_fields["date_created"]];
+		$student_hash = hash("md5", $student_name_and_entry);
 
     // Search through the teacher form to see if the teacher has an entry made
-      // If the teacher exists, add the student hash to the students array
-      // If not make a new entry in the form
+		/*
+    CHECK PAGINATION!
+		*/
+		$teacher_exists = False;
+		$teacher_fields = ARIA_Create_Competition::aria_teacher_field_id_array(); 
+		$all_teacher_form_entries = GFAPI::get_entries($related_forms[ARIA_Registration_Handler::$TEACHER_FORM]);
+		foreach ($all_teacher_form_entries as $teacher_entry) {
+			// If the teacher exists, add the student hash to the students array
+			if ($teacher_entry[]) {
+				$teacher_exists = True;
+			}
+
+		}
+
+		// If not make a new entry in the form
+		if (!$teacher_exists) {
+
+		}
 
     // Make a new student master entry with the student hash
   }
