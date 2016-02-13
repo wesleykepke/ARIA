@@ -175,24 +175,6 @@ class ARIA_Registration_Handler {
    }
 
 	/**
-	 * Function to add a student-teacher relationship in the teacher-master.
-	 */
-   public static function aria_add_student_teacher_relationship($prepended_title, $student_hash, $teacher_hash) {
-		 $related_forms = self::aria_find_related_forms_ids($prepended_tite);
-
-		 $students_field_id = ARIA_Create_Master_Forms::aria_master_teacher_field_id_array()['students'];
-
-     // Get the teacher entry
-     $teacher_entry = self::aria_find_teacher_entry($related_forms[self::$TEACHER_MASTER], $teacher_name);
-
-     // return if teacher entry does not exist.
-     if($teacher_entry == false) return false;
-
-     // Add student hash to the array of students
-     $teacher_entry[$students_field_id][] = $student_name;
-   }
-
-	/**
 	 * Function to get pre-populate values based on teacher-master.
 	 */
 	 public static function aria_get_teacher_pre_populate($prepended_title, $teacher_name) {

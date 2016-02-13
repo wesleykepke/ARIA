@@ -63,6 +63,7 @@ class ARIA_Form_Hooks {
     $teacher_master_fields = ARIA_Create_Master_Forms::aria_master_teacher_field_id_array();
 
 		// If the teacher exists, add the student hash to the students array
+
     if ($teacher_entry !== false) {
       $teacher_entry[(string) $teacher_master_fields["students"]][] = $student_hash;
     }
@@ -118,20 +119,73 @@ class ARIA_Form_Hooks {
 
   public static function aria_before_teacher_render($form) {
     // Get the query variables from the link
-      // If they dont exist redirect to home
+    $student_hash = get_query_var("student_hash", false);
+    $teacher_hash = get_query_var("teacher_hash", false);
 
-    // Get the forms that are related to this form
+    // If they dont exist redirect to home
+    if (!$student_hash || !$teacher_hash) {
+      wp_redirect( home_url() );
+      exit();
+    }
 
     // Check if the variables exist as a teacher-student combination
-      // If they dont exist redirect home.
+    // If they dont exist redirect home.
+    if (!ARIA_Registration_Handler::aria_check_student_teacher_relationship($form["title"], $student_hash, $teacher_hash)) {
+      wp_redirect( home_url() );
+      exit();
+    }
   }
 
   public static function aria_after_teacher_submission($form, $entry) {
-    // Get the forms that are related to this form
+    // Get the query variables from the link
+    $student_hash = get_query_var("student_hash", false);
+    $teacher_hash = get_query_var("teacher_hash", false);
+
+    // Get field id arrays
+    $student_master_field_ids = ARIA_Create_Master_Forms::aria_master_student_field_id_array();
+    $teacher_master_field_ids = ARIA_Create_Master_Forms::aria_master_teacher_field_id_array();
+    $teacher_public_field_ids = ARIA_Create_Competition::aria_master_teacher_field_id_array();
 
     // Update the teacher entry in the teacher master.
+    $teacher_master_entry = ARIA_Registration_Handler::aria_find_teacher_entry($form["title"], $teacher_hash);
+    if (!teacher_entry) {
+      wp_die("Error")
+    }
+    $teacher_master_entry[(string) $teacher_master_field_ids['name']] = $entry[(string) $teacher_public_field_ids['name']];
+    $teacher_master_entry[(string) $teacher_master_field_ids['email']] = $entry[(string) $teacher_public_field_ids['email']];
+    $teacher_master_entry[(string) $teacher_master_field_ids['phone']] = $entry[(string) $teacher_public_field_ids['phone']];
+    $teacher_master_entry[(string) $teacher_master_field_ids['volunteer_preference']] = $entry[(string) $teacher_public_field_ids['volunteer_preference']];
+    $teacher_master_entry[(string) $teacher_master_field_ids['volunteer_time']] = $entry[(string) $teacher_public_field_ids['volunteer_time']];
+    $teacher_master_entry[(string) $teacher_master_field_ids['is_judging']] = $entry[(string) $teacher_public_field_ids['is_judging']];
 
     // Update the student entry in the student master.
-  }
+    $student_master_entry = ARIA_Registration_Handler::aria_find_student_entry($form["title"], $student_hash);
+    if (!student_entry) {
+      wp_die("Error")
+    }
 
+    $student_master_entry[(string) $student_master_field_ids['student_name']] = $entry[(string) $teacher_public_field_ids['student_name']];
+    $student_master_entry[(string) $student_master_field_ids['song_1_period']] = $entry[(string) $teacher_public_field_ids['song_1_period']];
+    $student_master_entry[(string) $student_master_field_ids['song_1_composer']] = $entry[(string) $teacher_public_field_ids['song_1_composer']];
+    $student_master_entry[(string) $student_master_field_ids['song_1_selection']] = $entry[(string) $teacher_public_field_ids['song_1_selection']];
+    $student_master_entry[(string) $student_master_field_ids['song_2_period']] = $entry[(string) $teacher_public_field_ids['song_2_period']];
+    $student_master_entry[(string) $student_master_field_ids['song_2_composer']] = $entry[(string) $teacher_public_field_ids['song_2_composer']];
+    $student_master_entry[(string) $student_master_field_ids['song_2_selection']] = $entry[(string) $teacher_public_field_ids['song_2_selection']];
+    $student_master_entry[(string) $student_master_field_ids['theory_score']] = $entry[(string) $teacher_public_field_ids['theory_score']];
+    $student_master_entry[(string) $student_master_field_ids['alternate_theory']] = $entry[(string) $teacher_public_field_ids['alternate_theory']];
+    $student_master_entry[(string) $student_master_field_ids['competition_format']] = $entry[(string) $teacher_public_field_ids['competition_format']];
+    $student_master_entry[(string) $student_master_field_ids['timing_of_pieces']] = $entry[(string) $teacher_public_field_ids['timing_of_pieces']];
+
+    $teacher_result = GFAPI::update_entry( $teacher_master_entry );
+    $student_result = GFAPI::update_entry( $student_master_entry );
+  }
 }
+
+// In order to make use of query vals of these functions, this filter must be,
+// added to the query vars.
+function aria_add_query_vars_filter( $vars ){
+  $vars[] = "teacher_hash";
+  $vars[] .= "student_hash";
+  return $vars;
+}
+add_filter( 'query_vars', 'aria_add_query_vars_filter' );
