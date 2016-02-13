@@ -1,5 +1,7 @@
 <?php
 
+require('class-create-master-forms.php');
+
 /**
  * The file that defines the functionality for handling competition registration.
  *
@@ -99,23 +101,23 @@ class ARIA_Registration_Handler {
 	/**
 	 * Function for searching through student-master to find a student.
 	 */
-   public static function aria_find_student_entry($prepended_tite, $student_name) {
+   public static function aria_find_student_entry($prepended_tite, $student_hash) {
 		 $related_forms = self::aria_find_related_forms_ids($prepended_tite);
 
-     // 3 is the value of student name. Should import the fields id array to
-     // make this safer.
+		 $hash_field_id = ARIA_Create_Master_Forms::aria_master_student_field_id_array()['hash'];
+
      $search_criteria = array(
        'field_filters' => array(
          'mode' => 'any',
          array(
-           'key' => '3',
-           'value' => $student_name
+           'key' => (string) $hash_field_id,
+           'value' => $student_hash
          )
        )
      );
      $entries = GFAPI::get_entries($related_forms[self::$STUDENT_MASTER], $search_criteria);
 
-     if(count($entries) == 1 && rgar($entries[0], 3) == $student_name) {
+     if(count($entries) == 1 && rgar($entries[0], (string) $hash_field_id) == $student_hash) {
        return entries[0];
      }
 
@@ -125,21 +127,23 @@ class ARIA_Registration_Handler {
 	/**
 	 * Function for searching through teacher-master to find a teacher.
 	 */
-   public static function aria_find_teacher_entry($prepended_title, $teacher_name) {
+   public static function aria_find_teacher_entry($prepended_title, $teacher_hash) {
 		 $related_forms = self::aria_find_related_forms_ids($prepended_tite);
+
+		 $hash_field_id = ARIA_Create_Master_Forms::aria_master_teacher_field_id_array()['hash'];
 
      $search_criteria = array(
        'field_filters' => array(
          'mode' => 'any',
          array(
-           'key' => '1',
-           'value' => $teacher_name
+           'key' => (string) $hash_field_id,
+           'value' => $teacher_hash
          )
        )
      );
 
      $entries = GFAPI::get_entries($related_forms[self::$TEACHER_MASTER], $search_criteria);
-     if(count($entries) == 1 && rgar($entries[0], 1) == $teacher_name) {
+     if(count($entries) == 1 && rgar($entries[0], (string) $hash_field_id) == $teacher_name) {
        return entries[0];
      }
 
@@ -149,89 +153,41 @@ class ARIA_Registration_Handler {
 	/**
 	 * Function to check if a student is assigned to a teacher.
 	 */
-   public static function aria_check_student_teacher_relationship($prepended_title, $student_name, $teacher_name) {
+   public static function aria_check_student_teacher_relationship($prepended_title, $student_hash, $teacher_hash) {
 		 $related_forms = self::aria_find_related_forms_ids($prepended_tite);
 
+		 $students_field_id = ARIA_Create_Master_Forms::aria_master_teacher_field_id_array()['students'];
+
      // Get the teacher entry
-     $teacher_entry = self::aria_find_teacher_entry($related_forms[self::$TEACHER_MASTER], $teacher_name);
+     $teacher_entry = self::aria_find_teacher_entry($related_forms[self::$TEACHER_MASTER], $teacher_hash);
 
      // return if teacher entry does not exist.
      if($teacher_entry == false) return false;
 
      // get the array of students the teacher is assigned.
-     $students = rgar($teacher_entry, '6');
+     $students = rgar($teacher_entry, (string) $students_field_id);
 
      // find the student name in the array of students.
      foreach($students as $student) {
-       if ($student == $student_name) return true;
+       if ($student == $student_hash) return true;
      }
      return false;
    }
 
 	/**
-	 * Function to add a student-teacher relationship in the teacher-master.
-	 */
-   public static function aria_add_student_teacher_relationship($prepended_title, $student_name, $teacher_name) {
-		 $related_forms = self::aria_find_related_forms_ids($prepended_tite);
-
-     // Get the teacher entry
-     $teacher_entry = self::aria_find_teacher_entry($related_forms[self::$TEACHER_MASTER], $teacher_name);
-
-     // return if teacher entry does not exist.
-     if($teacher_entry == false) return false;
-
-     // find the student name in the array of students.
-     $teacher_entry['6'][] = $student_name;
-   }
-
-
-	/**
-	 * Function to add an entry in student-master from the student.
-	 *
-	 * This function will add a student entry from the student competition forn
-	 * to the student master form.
-	 *
-	 * @param 	$student_entry 	Associative Array 	The student entry to add to the
-	 * student master form
-	 * @param 	$prepended_title 	String 	The series of forms pertaining to the competition
-	 *
-	 * @author KREW
-	 * @since 1.0.0
-	 */
-	private static function aria_add_student_to_student_master($prepended_title, $student_entry) {
-		$all_forms = self::aria_find_related_forms_ids($prepended_title);
-
-		// TODO: Make this so it copies the fields from an entry to one that we searched.
-
-
-		// Create an entry with the entry data from the $student_entry. This will
-		// probably need to be done for every field.
-
-		// call GFAPI add entry.
-	}
-
-	/**
-	 * Function to check if student-teacher relationship exists based on link
-	 * variables.
-	 */
-   public static function aria_check_student_teacher_relationship_from_url($prepended_tite, $teacher_hash, $student_hash) {
-		 $related_forms = self::aria_find_related_forms_ids($prepended_tite);
-
-     return self::aria_check_student_teacher_relationship($related_forms[self::$TEACHER_MASTER], base64_decode($teacher_hash), base64_decode($student_hash));
-   }
-
-	/**
 	 * Function to get pre-populate values based on teacher-master.
 	 */
-	 public static function aria_get_teacher_pre_populate($prepended_title, $teacher_name) {
+	 public static function aria_get_teacher_pre_populate($prepended_title, $teacher_hash) {
 		 $all_forms = self::aria_find_related_forms_ids($prepended_title);
+
+		 $hash_field_id = ARIA_Create_Master_Forms::aria_master_teacher_field_id_array()['hash'];
 
 		 $search_criteria = array(
        'field_filters' => array(
          'mode' => 'any',
          array(
-           'key' => '1',
-           'value' => $teacher_name
+           'key' => (string) $hash_field_id,
+           'value' => $teacher_hash
          )
        )
 		 );
@@ -251,22 +207,26 @@ class ARIA_Registration_Handler {
 			'volunteer_preference' => rgar( entries[0], (string) $field_ids['volunteer_preference'] ),
 			'volunteer_time' => rgar( entries[0], (string) $field_ids['volunteer_time'] ),
 			'students' => rgar( entries[0], (string) $field_ids['students'] ),
-			'is_judging' => rgar( entries[0], (string) $field_ids['is_judging'] )
+			'is_judging' => rgar( entries[0], (string) $field_ids['is_judging'] ),
+			'hash' => rgar( $entries[0], (string) $field_ids['hash'])
+
 		);
 	 }
 
 	/**
 	 * Function to get pre-populate values based on student-master.
 	 */
-	 public static function aria_get_teacher_pre_populate($prepended_title, $student_name) {
+	 public static function aria_get_student_pre_populate($prepended_title, $student_hash) {
 		 $all_forms = self::aria_find_related_forms_ids($prepended_title);
+
+		 $hash_field_id = ARIA_Create_Master_Forms::aria_master_student_field_id_array()['hash'];
 
 		 $search_criteria = array(
        'field_filters' => array(
          'mode' => 'any',
          array(
-           'key' => '1',
-           'value' => $student_name
+           'key' => (string) $hash_field_id,
+           'value' => $student_hash
          )
        )
 		 );
@@ -298,21 +258,8 @@ class ARIA_Registration_Handler {
 	    'alternate_theory' =>  rgar( $entries[0], (string) $field_ids['alternate_theory']);
 	    'competition_format' =>  rgar( $entries[0], (string) $field_ids['competition_format']);
 	    'timing_of_pieces' =>  rgar( $entries[0], (string) $field_ids['timing_of_pieces']);
+			'hash' => rgar( $entries[0], (string) $field_ids['hash'])
 		);
-	 }
-
-	/**
-	 * Function to update student-master from student-public.
-	 *
-	 * This function is responsible for updating information in the student
-	 * master form as new information regarding the student is determined.
-	 *
-	 * @param 	???
-	 *
-	 * @author KREW
-	 * @since 1.0.0
-	 */
-	private static function aria_update_student_master() {
-
 	}
+
 }

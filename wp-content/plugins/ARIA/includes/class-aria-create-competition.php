@@ -537,7 +537,7 @@ class ARIA_Create_Competition {
    * @since 1.0.0
    * @author KREW
    */
-  private static function aria_student_field_id_array() {
+  public static function aria_student_field_id_array() {
     // CAUTION, This array is used as a source of truth. Changing these values may
     // result in catastrophic failure. If you do not want to feel the bern,
     // consult an aria developer before making changes to this portion of code.
