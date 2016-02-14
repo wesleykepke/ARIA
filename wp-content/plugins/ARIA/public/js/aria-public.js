@@ -15,24 +15,21 @@ jQuery(document).ready(function($) {
 	// get field ids
         var field_id_arr = get_ids();
 	
-	// get student level
 	var input_prefix = '#input_' + teacher_form_id + '_';
-	var fields;
+	var input_id_arr = [];
+	for( key in field_id_arr ){
+		input_id_arr[key] = input_prefix + field_id_arr[key];
+	//	alert( key + ':' + field_id_arr[key] + input_id_arr[key] );
 
-	for( var field in field_id_arr ){
-		//alert( field );
-//		fields[ input_prefix + field ] = field_id_arr[field];
 	}
 
+	// get student level
+	var st_level = $(input_id_arr['student_level']).val();
 
-	var st_level_field = input_prefix + field_id_arr['student_level'];
-	var st_level = $(st_level_field).val();
-	
 	// For testing purposes, allow change in level
-	$(st_level_field).live("change", function() {
-		st_level = $(st_level_field).val();
-//			alert( st_level );
-			get_songs(st_level, levelField);
+	$(input_id_arr['student_level']).live("change", function() {
+		st_level = $(input_id_arr['student_level']).val();
+		get_songs(st_level, levelField);
 	});
 
 	// request for all songs of given level
@@ -49,47 +46,46 @@ jQuery(document).ready(function($) {
 		stored_text: { 1: '', 2: '' }
 	};
 	
-	var period_field_1 = input_prefix + field_id_arr['song_1_period'];
-	var period_field_2 = input_prefix + field_id_arr['song_2_period'];
-	var song_field_1 = input_prefix + field_id_arr['song_1_selection'];
-	var song_field_2 = input_prefix + field_id_arr['song_2_selection'];
-	
-	$(period_field_1).live("change", function() {
-		
-		period_arr[ 'selected_val' ][1] = $(period_field_1).val();
-		period_arr[ 'selected_text' ][1] = $(period_field_1 + '  option:selected').text();
+	var period_html = store_periods();
+
+	$(input_id_arr['song_1_period']).live("change", function() {
+		period_arr[ 'selected_val' ][1] = $(input_id_arr['song_1_period']).val();
+		period_arr[ 'selected_text' ][1] = $(input_id_arr['song_1_period'] + '  option:selected').text();
 		
 		// if applicable, replace previous period in song 2
 		if( period_arr[ 'stored_val' ][2] != '' )
 		{
 			//alert( "replacing " + period_arr['stored_text'][2]+ period_arr['stored_val'][2] + "into " + period_field_2);
-			$(period_field_2).append('<option value="' + period_arr['stored_val'][2] + '">'
-							+ period_arr['stored_text'][2] + '</option>');	
+		//	$(input_id_arr['song_2_period']).append('<option value="' + period_arr['stored_val'][2] + '">'
+		//					+ period_arr['stored_text'][2] + '</option>');
+			load_periods('2', period_html);
+
+			// !!!restore selection	
+			$(input_id_arr['song_2_period']).val( '2');
 		}
 	
 		// remove period from song 2 options
-		$(period_field_2 + " option[value='" + period_arr['selected_val'][1]  + "']").remove( );
+		$(input_id_arr['song_2_period'] + " option[value='" + period_arr['selected_val'][1]  + "']").remove( );
 		period_arr['stored_val'][2] = period_arr['selected_val'][1];
 		period_arr['stored_text'][2] = period_arr['selected_text'][1];
 
 		// disable song selection
-		$(song_field_1).empty();
-		$(song_field_1).attr('disabled', true);
+		$(input_id_arr['song_1_selection']).empty();
+		$(input_id_arr['song_1_selection']).attr('disabled', true);
 		
 		// populate period composers
 		load_composers( period_arr[ 'selected_val' ][1], '1' );
 	});
 
 	// user selects composer
-	var composer_field_1 = input_prefix + field_id_arr['song_1_composer'];
-	var composer_val_1 = $(composer_field_1).val();
-	$(composer_field_1).live("change", function(){
+	var composer_val_1; // = $(input_id_arr['song_1_composer']).val();
+	$(input_id_arr['song_1_composer']).live("change", function(){
 
-		composer_val_1 = $(composer_field_1).val();
+		composer_val_1 = $(input_id_arr['song_1_composer']).val();
 		// enable song selection
 		load_songs( composer_val_1, '1' );
 		// populate song selection
-		$(song_field_1).removeAttr('disabled');
+		$(input_id_arr['song_1_selection']).removeAttr('disabled');
 	});
 	/* Song 2 Selection */
 
@@ -133,7 +129,6 @@ jQuery(document).ready(function($) {
 	}// end of CalcSig
 
 	function get_songs( level, levelID ){
-
         	var d = new Date,
 	        expiration = 3600,
         	unixtime = parseInt( d.getTime() / 1000 ),
@@ -253,9 +248,29 @@ jQuery(document).ready(function($) {
 	        });
 		return returnedValue;
 	}// end of get form id function
-	
-	function load_composers( period, song ){
+
+		
+	function store_periods(){
+		//alert( $(field_id_arr['song_1_period'] ).html() );
 		var html = '';
+		//!!! if placeholder $(input_id_arr['song_1_period'] + ' option:not(:first)' ).each(function() {
+		$(input_id_arr['song_1_period'] + ' option' ).each(function() {
+			html += '<option value="' + $(this).val() + '">' + $(this).text() + '</option>';
+		});
+		return html;
+		
+	}
+
+	function load_periods(song, periods){
+		//alert( $(field_id_arr['song_1_period'] ).html() );
+		$(input_id_arr['song_' + song + '_period']).empty();
+		$(input_id_arr['song_' + song + '_period']).append(periods);
+		
+	}
+		
+	function load_composers( period, song ){
+		// !!! Move to function
+		var html = create_placeholder( "Select Composer..." );
 		var composer_field = input_prefix + field_id_arr['song_' + song + '_composer'];
 		//alert( composer_field );
 		var data_composer_field   = '' +  field_id_arr['song_composer'];
@@ -272,10 +287,12 @@ jQuery(document).ready(function($) {
 
 		$(composer_field).empty();
 		$(composer_field).append(html);
+
+		//$(composer_field).val(  $(composer_field + ' option:first').val() );
 	}
 
 	function load_songs( composer, song_num ){
-		var html = '';
+		var html = create_placeholder( "Select Song..." );
 		var song_field = input_prefix + field_id_arr['song_' + song_num + '_selection'];
 		//alert( composer_field );
 		var data_composer_field   = '' +  field_id_arr['song_composer'];
@@ -298,5 +315,10 @@ jQuery(document).ready(function($) {
 	function toTitleCase( str ){
 		return str.replace( /\w\S*/g, function(txt){
 			return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+	}
+
+	function create_placeholder( str ){
+
+		return '<option class="gf_placeholder" selected="selected" value="">' + str + '</option>';
 	}
 });
