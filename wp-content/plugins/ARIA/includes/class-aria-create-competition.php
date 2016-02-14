@@ -252,7 +252,10 @@ class ARIA_Create_Competition {
       'competition_format' => 15,
       'timing_of_pieces' => 16,
       'is_judging' => 17, // !!!DO WE WANT TO CHANGE THIS NUMBER
-      'student_level' => 18
+      'student_level' => 18,
+      'alt_song_2_period' => 19,
+      'alt_song_2_composer' => 20, 
+      'alt_song_2_selection' => 21
     );
   }
 
@@ -359,11 +362,12 @@ class ARIA_Create_Competition {
     $volunteer_time_field->isRequired = false;
     $volunteer_time_options = $competition_entry[$field_mapping['Volunteer Times']];
     $volunteer_time_field->description = "Please check at least two times you are"
-    ." available to volunteer during Festival weekend."
-    .	print_r($volunteer_time_options);
+    ." available to volunteer during Festival weekend.";
+    //.	print_r($volunteer_time_options);
     $volunteer_time_field->descriptionPlacement = 'above';
-    //$volunteer_time_options = $competition_entry[$field_mapping['Volunteer Times']];
-    $volunteer_time_field->choices = $volunteer_time_options;
+    $volunteer_time_options = $competition_entry[$field_mapping['Volunteer Times']];
+    //foreach( $competition_entry[ $field_mapping['Volunteer Times']]
+    //$volunteer_time_field->choices = $volunteer_time_options['choices'];
     $volunteer_time_field->conditionalLogic = array(
     	'actionType' => 'show',
     	'logicType' => 'all',
@@ -430,7 +434,18 @@ class ARIA_Create_Competition {
     // !!! need to add column E (conflict resolution)
 
     // !!! if level is not 11
-
+     $is_11_rule = array();
+    $is_11_rule[] = array(
+    	'fieldId' => $field_id_arr['student_level'],
+    	'operator' => 'is',
+    	'value' => '11'
+    );
+    $is_not_11_rule = array();
+    $is_not_11_rule[] = array(
+    	'fieldId' => $field_id_arr['student_level'],
+    	'operator' => 'isnot',
+    	'value' => '11'
+    );
     // student's second song period
     $song_two_period_field = new GF_Field_Select();
     $song_two_period_field->label = "Song 2 Period";
@@ -442,6 +457,12 @@ class ARIA_Create_Competition {
       array('text' => 'Romantic', 'value' => '3', 'isSelected' => false),
       array('text' => 'Contemporary', 'value' => '4', 'isSelected' => false),
     );
+    $song_two_period_field->conditionalLogic = array(
+    	'actionType' => 'show',
+    	'logicType' => 'all',
+    	'rules' => $is_not_11_rule
+    );
+
     $teacher_form->fields[] = $song_two_period_field;
 
     // student's second song composer
@@ -449,6 +470,12 @@ class ARIA_Create_Competition {
     $song_two_composer_field->label = "Song 2 Composer";
     $song_two_composer_field->id = $field_id_arr['song_2_composer'];
     $song_two_composer_field->isRequired = true;
+    $song_two_composer_field->conditionalLogic = array(
+    	'actionType' => 'show',
+    	'logicType' => 'all',
+    	'rules' => $is_not_11_rule
+    );
+
     $teacher_form->fields[] = $song_two_composer_field;
 
     // student's second song selection
@@ -456,12 +483,29 @@ class ARIA_Create_Competition {
     $song_two_selection_field->label = "Song 2 Selection";
     $song_two_selection_field->id = $field_id_arr['song_2_selection'];
     $song_two_selection_field->isRequired = true;
+    $song_two_selection_field->conditionalLogic = array(
+    	'actionType' => 'show',
+    	'logicType' => 'all',
+    	'rules' => $is_not_11_rule
+    );
+
     $teacher_form->fields[] = $song_two_selection_field;
 
     // !!! need to add column E (conflict resolution)
 
     // if level is 11
     // Composer
+    $alt_song_two_composer_field = new GF_Field_Text();
+    $alt_song_two_composer_field->label = "Song 2 Composer";
+    $alt_song_two_composer_field->id = $field_id_arr['alt_song_2_composer'];
+    $alt_song_two_composer_field->isRequired = false;
+    $alt_song_two_composer_field->conditionalLogic = array(
+    	'actionType' => 'show',
+    	'logicType' => 'all',
+    	'rules' => $is_11_rule
+    );
+
+    $teacher_form->fields[] = $alt_song_two_composer_field;
     // Piece Title
     // Key (e.g. D Major, F Minor)
     // Movement number, if applicable (e.g. 1st, 2nd, 3rd, 4th)
