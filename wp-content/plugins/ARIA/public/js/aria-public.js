@@ -35,39 +35,29 @@ jQuery(document).ready(function($) {
 	// request for all songs of given level
 	var levelField = field_id_arr['song_level'];
 	var music = get_songs(st_level, levelField);
-
-	/* Song 1 Selection */
-	
-	// user selects period 
 	var period_arr = {
 		selected_val: { 1: '', 2: '' },
 		selected_text: { 1: '', 2: '' },
-		stored_val: { 1: '', 2: '' },
-		stored_text: { 1: '', 2: '' }
 	};
 	
 	var period_html = store_periods();
 
+
+	/* Song 1 Selection */
+	
+	// user selects period 
 	$(input_id_arr['song_1_period']).live("change", function() {
 		period_arr[ 'selected_val' ][1] = $(input_id_arr['song_1_period']).val();
 		period_arr[ 'selected_text' ][1] = $(input_id_arr['song_1_period'] + '  option:selected').text();
 		
-		// if applicable, replace previous period in song 2
-		if( period_arr[ 'stored_val' ][2] != '' )
-		{
-			//alert( "replacing " + period_arr['stored_text'][2]+ period_arr['stored_val'][2] + "into " + period_field_2);
-		//	$(input_id_arr['song_2_period']).append('<option value="' + period_arr['stored_val'][2] + '">'
-		//					+ period_arr['stored_text'][2] + '</option>');
-			load_periods('2', period_html);
-
-			// !!!restore selection	
-			$(input_id_arr['song_2_period']).val( '2');
+		// !!!restore selection
+		load_periods('2', period_html);
+		if( period_arr['selected_val'][2] != '' ){	
+			$(input_id_arr['song_2_period']).val( period_arr['selected_val'][2]);
 		}
 	
 		// remove period from song 2 options
 		$(input_id_arr['song_2_period'] + " option[value='" + period_arr['selected_val'][1]  + "']").remove( );
-		period_arr['stored_val'][2] = period_arr['selected_val'][1];
-		period_arr['stored_text'][2] = period_arr['selected_text'][1];
 
 		// disable song selection
 		$(input_id_arr['song_1_selection']).empty();
@@ -87,18 +77,42 @@ jQuery(document).ready(function($) {
 		// populate song selection
 		$(input_id_arr['song_1_selection']).removeAttr('disabled');
 	});
+
 	/* Song 2 Selection */
 
-	// user selects period
-
-		// if applicable, replace previous period in song 1
-		// remove period from song 1 options
-
-		// populate period composers
+	// user selects period 
+	$(input_id_arr['song_2_period']).live("change", function() {
+		period_arr[ 'selected_val' ][2] = $(input_id_arr['song_2_period']).val();
+		period_arr[ 'selected_text' ][2] = $(input_id_arr['song_2_period'] + '  option:selected').text();
+		
+		// !!!restore selection
+		load_periods('1', period_html);
+		if( period_arr['selected_val'][1] != '' ){	
+			$(input_id_arr['song_1_period']).val( period_arr['selected_val'][1]);
+		}
+	
+		// remove period from song 2 options
+		$(input_id_arr['song_1_period'] + " option[value='" + period_arr['selected_val'][2]  + "']").remove( );
 
 		// disable song selection
+		$(input_id_arr['song_2_selection']).empty();
+		$(input_id_arr['song_2_selection']).attr('disabled', true);
+		
+		// populate period composers
+		load_composers( period_arr[ 'selected_val' ][2], '2' );
+	});
 
+	// user selects composer
+	var composer_val_2; // = $(input_id_arr['song_1_composer']).val();
+	$(input_id_arr['song_2_composer']).live("change", function(){
 
+		composer_val_2 = $(input_id_arr['song_2_composer']).val();
+		// enable song selection
+		load_songs( composer_val_2, '2' );
+		// populate song selection
+		$(input_id_arr['song_2_selection']).removeAttr('disabled');
+	});
+	
 
 	/**** Function Definitions *****/
 	
