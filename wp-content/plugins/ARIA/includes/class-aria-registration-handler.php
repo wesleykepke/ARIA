@@ -61,6 +61,7 @@ class ARIA_Registration_Handler {
 			self::TEACHER_FORM => null,
 			self::TEACHER_MASTER => null
 		);
+
 		$student_form = $prepended_title + " Student Registration";
 		$student_master_form = $prepended_title + " Student Master";
 		$teacher_form = $prepended_title + " Teacher Registration";
@@ -91,9 +92,9 @@ class ARIA_Registration_Handler {
 		}
 
 		// make sure all forms exist
-		foreach ($form_ids as $value) {
+		foreach ($form_ids as $key => $value) {
 			if (!isset($value)) {
-				wp_die('Error: The form titled ' . $value . " does not exist.");
+				wp_die('Error: The form titled ' . $key . " does not exist.");
 			}
 		}
 		return $form_ids;
