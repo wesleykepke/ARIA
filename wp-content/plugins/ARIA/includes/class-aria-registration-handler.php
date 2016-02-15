@@ -118,7 +118,7 @@ class ARIA_Registration_Handler {
      $entries = GFAPI::get_entries($related_forms[self::STUDENT_MASTER], $search_criteria);
 
      if(count($entries) == 1 && rgar($entries[0], (string) $hash_field_id) == $student_hash) {
-       return entries[0];
+       return $entries[0];
      }
 
      return false;
@@ -144,7 +144,7 @@ class ARIA_Registration_Handler {
 
      $entries = GFAPI::get_entries($related_forms[self::TEACHER_MASTER], $search_criteria);
      if(count($entries) == 1 && rgar($entries[0], (string) $hash_field_id) == $teacher_name) {
-       return entries[0];
+       return $entries[0];
      }
 
      return false;
