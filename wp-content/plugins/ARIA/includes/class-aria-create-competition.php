@@ -84,6 +84,40 @@ class ARIA_Create_Competition {
     }
   }
 
+	/**
+   * This function will return an associative array with entry meta data for the
+   * competition form.
+   *
+   * Every time an entry is submitted using the form for creating a competition, the
+   * submission is an Entry object, which is an associative array that has a plethora
+   * of information. Also included inside the Entry object is the infomation that was
+   * input by the user. This function simply returns an associative array that can be
+   * used by other functions to offset into the Entry object's user data, because
+   * otherwise, the offset all involves magic integers that are otherwise not very
+   * descriptive.
+   *
+   * @since 1.0.5
+   * @author KREW
+   */
+  public static function aria_get_competition_entry_meta() {
+    return array(
+      'Name of Competition' => 1,
+      'Date of Competition' => 2,
+      'Location of Competition' => 3,
+      'Street Address' => 3.1,
+      'Address Line 2' => 3.2,
+      'City' => 3.3,
+      'State / Province / Region' => 3.4,
+      'Zip / Postal Code' => 3.5,
+      'Country' => 3.6,
+      'Student Registration Start Date' => 4,
+      'Student Registration End Date' => 5,
+      'Teacher Registration Start Date' => 6,
+      'Teacher Registration Start Date' => 7,
+      'Volunteer Times' => '8' // !!! String or int?
+    );
+  }
+
   /**
    * This function will create a new form for creating music competitions.
    *
@@ -589,8 +623,12 @@ class ARIA_Create_Competition {
     // consult an aria developer before making changes to this portion of code.
     return array(
       'parent_name' => 1,
+			'parent_first_name' => 1.1,
+			'parent_last_name' => 1.2,
       'parent_email' => 2,
       'student_name' => 3,
+			'student_first_name' => 3.1,
+			'student_last_name' => 3.2,
       'student_birthday' => 4,
       'teacher_name' => 5,
       'not_listed_teacher_name' => 6,
@@ -601,11 +639,11 @@ class ARIA_Create_Competition {
   }
 
   /**
-   * This function will create a new form for the students to use to register personal
-   * information.
+   * This function will create a new form for student registration.
    *
-   * This function is responsible for creating and adding all of the associated fields
-   * that are necessary for students to enter data about their upcoming music competition.
+   * This function is responsible for creating and adding all of the associated
+   * fields that are necessary for students to enter data about their upcoming
+   * music competition.
    *
    * @param Entry  $competition_entry The entry of the newly created music competition
    *
@@ -719,10 +757,10 @@ class ARIA_Create_Competition {
 
     // custom submission message to let the festival chairman know the creation was
     // a success
-    $successful_submission_message = 'Congratulations! You have just successfully registered';
-    $successful_submission_message .= ' your child.';
-    $competition_creation_form->confirmation['type'] = 'message';
-    $competition_creation_form->confirmation['message'] = $successful_submission_message;
+    $successful_submission_message = 'Congratulations! You have just';
+    $successful_submission_message .= ' successfully registered your child.';
+    $student_form->confirmation['type'] = 'message';
+    $student_form->confirmation['message'] = $successful_submission_message;
 
     // add the new form to the festival chairman's dashboard
     $new_form_id = GFAPI::add_form($student_form->createFormArray());
@@ -731,40 +769,6 @@ class ARIA_Create_Competition {
     if (is_wp_error($new_form_id)) {
       wp_die($new_form_id->get_error_message());
     }
-  }
-
-  /**
-   * This function will return an associative array with entry meta data for the
-   * competition form.
-   *
-   * Every time an entry is submitted using the form for creating a competition, the
-   * submission is an Entry object, which is an associative array that has a plethora
-   * of information. Also included inside the Entry object is the infomation that was
-   * input by the user. This function simply returns an associative array that can be
-   * used by other functions to offset into the Entry object's user data, because
-   * otherwise, the offset all involves magic integers that are otherwise not very
-   * descriptive.
-   *
-   * @since 1.0.5
-   * @author KREW
-   */
-  public static function aria_get_competition_entry_meta() {
-    return array(
-      'Name of Competition' => 1,
-      'Date of Competition' => 2,
-      'Location of Competition' => 3,
-      'Street Address' => 3.1,
-      'Address Line 2' => 3.2,
-      'City' => 3.3,
-      'State / Province / Region' => 3.4,
-      'Zip / Postal Code' => 3.5,
-      'Country' => 3.6,
-      'Student Registration Start Date' => 4,
-      'Student Registration End Date' => 5,
-      'Teacher Registration Start Date' => 6,
-      'Teacher Registration Start Date' => 7,
-      'Volunteer Times' => '8' // !!! String or int?
-    );
   }
 
 	/**
