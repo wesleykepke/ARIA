@@ -155,7 +155,7 @@ class ARIA_Form_Hooks {
     // Update the teacher entry in the teacher master.
     $teacher_master_entry = ARIA_Registration_Handler::aria_find_teacher_entry($form["title"], $teacher_hash);
     if (!teacher_entry) {
-      wp_die("Error")
+      wp_die("Error");
     }
     $teacher_master_entry[(string) $teacher_master_field_ids['name']] = $entry[(string) $teacher_public_field_ids['name']];
     $teacher_master_entry[(string) $teacher_master_field_ids['email']] = $entry[(string) $teacher_public_field_ids['email']];
@@ -167,7 +167,7 @@ class ARIA_Form_Hooks {
     // Update the student entry in the student master.
     $student_master_entry = ARIA_Registration_Handler::aria_find_student_entry($form["title"], $student_hash);
     if (!student_entry) {
-      wp_die("Error")
+      wp_die("Error");
     }
 
     $student_master_entry[(string) $student_master_field_ids['student_name']] = $entry[(string) $teacher_public_field_ids['student_name']];
