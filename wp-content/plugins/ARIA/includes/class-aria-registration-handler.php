@@ -67,6 +67,10 @@ class ARIA_Registration_Handler {
 		$teacher_form = $prepended_title . " Teacher Registration";
 		$teacher_master_form = $prepended_title . " Teacher Master";
 
+    if ($student_form === "Wesley 2/15/2016 Student Registration") {
+			wp_die("Same string");
+		}
+
 		foreach ($all_forms as $form) {
 			switch ($form["title"]) {
 				case $student_form:
@@ -91,7 +95,7 @@ class ARIA_Registration_Handler {
 			}
 		}
 
-		wp_die(); 
+		wp_die();
 
 		// make sure all forms exist
 		foreach ($form_ids as $key => $value) {
