@@ -1,7 +1,5 @@
 <?php
 
-require('class-aria-create-master-forms.php');
-
 /**
  * The file that defines the functionality for handling competition registration.
  *
@@ -15,6 +13,8 @@ require('class-aria-create-master-forms.php');
  * @package    ARIA
  * @subpackage ARIA/includes
  */
+
+require_once("class-aria-create-master-forms.php");
 
 /**
  * The competition registration handler class.
