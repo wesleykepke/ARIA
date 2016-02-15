@@ -202,7 +202,7 @@ class ARIA_API {
     $student = "Student Registration";
     $student_master = "Student Master";
     $teacher = "Teacher Registration";
-    $teacher_master = "Teacher Master"
+    $teacher_master = "Teacher Master";
     $found_match = false;
 
 		if (strpos($form_name, $student) !== false) {
@@ -226,6 +226,6 @@ class ARIA_API {
 			}
 		}
 
-		return $title; 
+		return $title;
 	}
 }
