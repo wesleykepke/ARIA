@@ -241,7 +241,7 @@ class ARIA_Registration_Handler {
 
 		return array(
 			'parent_name' => (rgar( $entries[0], (string) $field_ids['parent_name'])),
-	    'parent_email' => rgar( $entries[0], (string) $field_ids['parent_email']);
+	    'parent_email' => rgar( $entries[0], (string) $field_ids['parent_email']),
 	    'student_name' => rgar( $entries[0], (string) $field_ids['student_name']);
 	    'student_birthday' => rgar( $entries[0], (string) $field_ids['student_birthday']);
 	    'teacher_name' => rgar( $entries[0], (string) $field_ids['teacher_name']);
