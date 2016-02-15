@@ -126,6 +126,7 @@ class ARIA {
 		// Include all of the ARIA files needed as dependencies.
 		require_once("class-aria-create-competition.php");
 		require_once("class-aria-music.php");
+		require_once("class-aria-form-hooks.php"); 
 
 		// Register all of the hooks needed by ARIA
 
