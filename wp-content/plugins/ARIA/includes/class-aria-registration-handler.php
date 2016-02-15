@@ -1,6 +1,6 @@
 <?php
 
-require('class-create-master-forms.php');
+require('class-aria-create-master-forms.php');
 
 /**
  * The file that defines the functionality for handling competition registration.
