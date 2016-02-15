@@ -86,9 +86,12 @@ class ARIA_Registration_Handler {
 					break;
 
 				default:
+					echo $form["title"];
 					break;
 			}
 		}
+
+		wp_die(); 
 
 		// make sure all forms exist
 		foreach ($form_ids as $key => $value) {
