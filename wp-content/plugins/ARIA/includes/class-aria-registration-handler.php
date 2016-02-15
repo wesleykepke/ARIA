@@ -204,10 +204,10 @@ class ARIA_Registration_Handler {
 			'name' => rgar( $entries[0], (string) $field_ids['name'] ),
 			'email' => rgar( $entries[0], (string) $field_ids['email'] ),
 			'phone' => rgar( $entries[0], (string) $field_ids['phone'] ),
-			'volunteer_preference' => rgar( entries[0], (string) $field_ids['volunteer_preference'] ),
-			'volunteer_time' => rgar( entries[0], (string) $field_ids['volunteer_time'] ),
-			'students' => rgar( entries[0], (string) $field_ids['students'] ),
-			'is_judging' => rgar( entries[0], (string) $field_ids['is_judging'] ),
+			'volunteer_preference' => rgar( $entries[0], (string) $field_ids['volunteer_preference'] ),
+			'volunteer_time' => rgar( $entries[0], (string) $field_ids['volunteer_time'] ),
+			'students' => rgar( $entries[0], (string) $field_ids['students'] ),
+			'is_judging' => rgar( $entries[0], (string) $field_ids['is_judging'] ),
 			'hash' => rgar( $entries[0], (string) $field_ids['hash'])
 
 		);
