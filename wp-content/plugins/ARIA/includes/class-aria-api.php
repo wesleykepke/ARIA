@@ -174,7 +174,7 @@ class ARIA_API {
     $all_forms = GFAPI::get_forms();
 		$title = null;
 		foreach ($all_forms as $form) {
-      if ($form[id] == $form_id) {
+      if ($form["id"] == $form_id) {
 				$title = $form["title"];
 			}
 		}
@@ -183,6 +183,6 @@ class ARIA_API {
 			$title = -1;
 		}
 
-		return $title; 
+		return $title;
 	}
 }
