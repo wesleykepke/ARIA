@@ -240,24 +240,24 @@ class ARIA_Registration_Handler {
 		$field_ids = ARIA_Create_Master_Forms::aria_master_student_field_id_array();
 
 		return array(
-			'parent_name' => (rgar( $entries[0], (string) $field_ids['parent_name'])),
+			'parent_name' => rgar( $entries[0], (string) $field_ids['parent_name']),
 	    'parent_email' => rgar( $entries[0], (string) $field_ids['parent_email']),
-	    'student_name' => rgar( $entries[0], (string) $field_ids['student_name']);
-	    'student_birthday' => rgar( $entries[0], (string) $field_ids['student_birthday']);
-	    'teacher_name' => rgar( $entries[0], (string) $field_ids['teacher_name']);
-	    'not_listed_teacher_name' => rgar( $entries[0], (string) $field_ids['not_listed_teacher_name']);
-	    'available_festival_days' => rgar( $entries[0], (string) $field_ids['available_festival_days']);
-	    'preferred_command_performance' => rgar( $entries[0], (string) $field_ids['preferred_command_performance']);
-	    'song_1_period' => rgar( $entries[0], (string) $field_ids['song_1_period']);
-	    'song_1_composer' =>  rgar( $entries[0], (string) $field_ids['song_1_composer']);
-	    'song_1_selection' =>  rgar( $entries[0], (string) $field_ids['song_1_selection']);
-	    'song_2_period' =>  rgar( $entries[0], (string) $field_ids['song_2_period']);
-	    'song_2_composer' =>  rgar( $entries[0], (string) $field_ids['song_2_composer']);
-	    'song_2_selection' =>  rgar( $entries[0], (string) $field_ids['song_2_selection']);
-	    'theory_score' =>  rgar( $entries[0], (string) $field_ids['theory_score']);
-	    'alternate_theory' =>  rgar( $entries[0], (string) $field_ids['alternate_theory']);
-	    'competition_format' =>  rgar( $entries[0], (string) $field_ids['competition_format']);
-	    'timing_of_pieces' =>  rgar( $entries[0], (string) $field_ids['timing_of_pieces']);
+	    'student_name' => rgar( $entries[0], (string) $field_ids['student_name']),
+	    'student_birthday' => rgar( $entries[0], (string) $field_ids['student_birthday']),
+	    'teacher_name' => rgar( $entries[0], (string) $field_ids['teacher_name']),
+	    'not_listed_teacher_name' => rgar( $entries[0], (string) $field_ids['not_listed_teacher_name']),
+	    'available_festival_days' => rgar( $entries[0], (string) $field_ids['available_festival_days']),
+	    'preferred_command_performance' => rgar( $entries[0], (string) $field_ids['preferred_command_performance']),
+	    'song_1_period' => rgar( $entries[0], (string) $field_ids['song_1_period']),
+	    'song_1_composer' =>  rgar( $entries[0], (string) $field_ids['song_1_composer']),
+	    'song_1_selection' =>  rgar( $entries[0], (string) $field_ids['song_1_selection']),
+	    'song_2_period' =>  rgar( $entries[0], (string) $field_ids['song_2_period']),
+	    'song_2_composer' =>  rgar( $entries[0], (string) $field_ids['song_2_composer']),
+	    'song_2_selection' =>  rgar( $entries[0], (string) $field_ids['song_2_selection']),
+	    'theory_score' =>  rgar( $entries[0], (string) $field_ids['theory_score']),
+	    'alternate_theory' =>  rgar( $entries[0], (string) $field_ids['alternate_theory']),
+	    'competition_format' =>  rgar( $entries[0], (string) $field_ids['competition_format']),
+	    'timing_of_pieces' =>  rgar( $entries[0], (string) $field_ids['timing_of_pieces']),
 			'hash' => rgar( $entries[0], (string) $field_ids['hash'])
 		);
 	}
