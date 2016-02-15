@@ -40,7 +40,7 @@ class ARIA_Create_Master_Forms {
    */
   public static function aria_create_student_master_form($competition_name) {
     $student_master_form
-        = new GF_Form($competition_name . " Student Master Form", "");
+        = new GF_Form($competition_name . " Student Master", "");
     $field_id_array = self::aria_master_student_field_id_array();
 
     // parent name
@@ -262,7 +262,7 @@ class ARIA_Create_Master_Forms {
 	 */
   public static function aria_create_teacher_master_form($competition_name) {
     $teacher_master_form
-        = new GF_Form($competition_name . " Teacher Master Form", "");
+        = new GF_Form($competition_name . " Teacher Master", "");
 
     $field_id_array = self::aria_master_teacher_field_id_array();
 

@@ -53,6 +53,7 @@ class ARIA_Registration_Handler {
 	 */
 	public static function aria_find_related_forms_ids($prepended_title) {
 		// make sure to get all forms! check this
+		$all_forms = GFAPI::get_forms();
 
 		$form_ids = array(
 			self::STUDENT_FORM => null,
@@ -64,7 +65,7 @@ class ARIA_Registration_Handler {
 		$student_master_form = $prepended_title + " Student Master";
 		$teacher_form = $prepended_title + " Teacher Registration";
 		$teacher_master_form = $prepended_title + " Teacher Master";
-		$all_forms = GFAPI::get_forms();
+
 
 		foreach ($all_forms as $form) {
 			switch ($form["title"]) {
