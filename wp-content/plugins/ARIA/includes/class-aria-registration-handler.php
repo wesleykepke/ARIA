@@ -51,7 +51,7 @@ class ARIA_Registration_Handler {
 	 * @author KREW
 	 * @since 1.0.0
 	 */
-	private static function aria_find_related_forms_ids($prepended_title) {
+	public static function aria_find_related_forms_ids($prepended_title) {
 		// make sure to get all forms! check this
 
 		$form_ids = array(
