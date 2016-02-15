@@ -35,9 +35,9 @@ class ARIA_Registration_Handler {
 	/**
 	 * Function for sending emails.
 	 */
-	public static function aria_send_registration_emails() {
+  public static function aria_send_registration_emails() {
 
-	}
+  }
 
 	/**
 	 * Function for returning related forms.

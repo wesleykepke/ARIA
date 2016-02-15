@@ -101,7 +101,7 @@ class ARIA_Create_Competition {
     $competition_name_field = new GF_Field_Text();
     $competition_name_field->label = "Name of Competition";
     $competition_name_field->id = 1;
-    $competition_name_field->isRequired = true;
+    $competition_name_field->isRequired = false;
 
     // date of the competition
     $competition_date_field = new GF_Field_Date();
@@ -285,21 +285,21 @@ class ARIA_Create_Competition {
     $teacher_name_field = new GF_Field_Name();
     $teacher_name_field->label = "Name";
     $teacher_name_field->id = $field_id_arr['name'];
-    $teacher_name_field->isRequired = true;
+    $teacher_name_field->isRequired = false;
     $teacher_form->fields[] = $teacher_name_field;
 
     // teacher email
     $teacher_email_field = new GF_Field_Email();
     $teacher_email_field->label = "Email";
     $teacher_email_field->id = $field_id_arr['email'];
-    $teacher_email_field->isRequired = true;
+    $teacher_email_field->isRequired = false;
     $teacher_form->fields[] = $teacher_email_field;
 
     // teacher phone
     $teacher_phone_field = new GF_Field_Phone();
     $teacher_phone_field->label = "Phone";
     $teacher_phone_field->id = $field_id_arr['phone'];
-    $teacher_phone_field->isRequired = true;
+    $teacher_phone_field->isRequired = false;
     $teacher_form->fields[] = $teacher_phone_field;
 
     // !!!new field
@@ -307,7 +307,7 @@ class ARIA_Create_Competition {
     $teacher_judging_field = new GF_Field_Radio();
     $teacher_judging_field->label = "Are you scheduled to judge for the festival?";
     $teacher_judging_field->id = $field_id_arr['is_judging'];
-    $teacher_judging_field->isRequired = true;
+    $teacher_judging_field->isRequired = false;
     $teacher_judging_field->choices = array(
     	array('text' => 'Yes', 'value' => 'Yes', 'isSelected' => false),
     	array('text' => 'No', 'value' => 'No', 'isSelected' => false)
@@ -324,7 +324,7 @@ class ARIA_Create_Competition {
     $volunteer_preference_field = new GF_Field_Checkbox();
     $volunteer_preference_field->label = "Volunteer Preference";
     $volunteer_preference_field->id = $field_id_arr['volunteer_preference'];
-    $volunteer_preference_field->isRequired = true;
+    $volunteer_preference_field->isRequired = false;
     /*!!! $volunteer_preference_field->choices = array(
       array('text' => 'Section Proctor', 'value' => 'Section Proctor', 'isSelected' => false),
       array('text' => 'Posting Results', 'value' => 'Posting Results', 'isSelected' => false),
@@ -381,14 +381,14 @@ class ARIA_Create_Competition {
     $student_name_field = new GF_Field_Name();
     $student_name_field->label = "Student Name";
     $student_name_field->id = $field_id_arr['student_name'];
-    $student_name_field->isRequired = true;
+    $student_name_field->isRequired = false;
     $teacher_form->fields[] = $student_name_field;
 
     // !!!student level
     $student_level_field = new GF_Field_Select();
     $student_level_field->label = "Student Level";
     $student_level_field->id = $field_id_arr['student_level'];
-    $student_level_field->isRequired = true;
+    $student_level_field->isRequired = false;
     // !!! replace
     $student_level_field->choices = array(
 
@@ -416,21 +416,21 @@ class ARIA_Create_Competition {
       array('text' => 'Romantic', 'value' => '3', 'isSelected' => false),
       array('text' => 'Contemporary', 'value' => '4', 'isSelected' => false),
    );
-    $song_one_period_field->isRequired = true;
+    $song_one_period_field->isRequired = false;
     $teacher_form->fields[] = $song_one_period_field;
 
     // student's first song composer
     $song_one_composer_field = new GF_Field_Select();
     $song_one_composer_field->label = "Song 1 Composer";
     $song_one_composer_field->id = $field_id_arr['song_1_composer'];
-    $song_one_composer_field->isRequired = true;
+    $song_one_composer_field->isRequired = false;
     $teacher_form->fields[] = $song_one_composer_field;
 
     // student's first song selection
     $song_one_selection_field = new GF_Field_Select();
     $song_one_selection_field->label = "Song 1 Selection";
     $song_one_selection_field->id = $field_id_arr['song_1_selection'];
-    $song_one_selection_field->isRequired = true;
+    $song_one_selection_field->isRequired = false;
     $teacher_form->fields[] = $song_one_selection_field;
 
     // !!! need to add column E (conflict resolution)
@@ -452,7 +452,7 @@ class ARIA_Create_Competition {
     $song_two_period_field = new GF_Field_Select();
     $song_two_period_field->label = "Song 2 Period";
     $song_two_period_field->id = $field_id_arr['song_2_period'];
-    $song_two_period_field->isRequired = true;
+    $song_two_period_field->isRequired = false;
     $song_two_period_field->choices = array(
       array('text' => 'Baroque', 'value' => '1', 'isSelected' => false),
       array('text' => 'Classical', 'value' => '2', 'isSelected' => false),
@@ -471,7 +471,7 @@ class ARIA_Create_Competition {
     $song_two_composer_field = new GF_Field_Select();
     $song_two_composer_field->label = "Song 2 Composer";
     $song_two_composer_field->id = $field_id_arr['song_2_composer'];
-    $song_two_composer_field->isRequired = true;
+    $song_two_composer_field->isRequired = false;
     $song_two_composer_field->conditionalLogic = array(
     	'actionType' => 'show',
     	'logicType' => 'all',
@@ -484,7 +484,7 @@ class ARIA_Create_Competition {
     $song_two_selection_field = new GF_Field_Select();
     $song_two_selection_field->label = "Song 2 Selection";
     $song_two_selection_field->id = $field_id_arr['song_2_selection'];
-    $song_two_selection_field->isRequired = true;
+    $song_two_selection_field->isRequired = false;
     $song_two_selection_field->conditionalLogic = array(
     	'actionType' => 'show',
     	'logicType' => 'all',
@@ -623,14 +623,14 @@ class ARIA_Create_Competition {
     $parent_name_field = new GF_Field_Name();
     $parent_name_field->label = "Parent Name";
     $parent_name_field->id = $field_id_array['parent_name'];
-    $parent_name_field->isRequired = true;
+    $parent_name_field->isRequired = false;
     $student_form->fields[] = $parent_name_field;
 
     // parent email
     $parent_email_field = new GF_Field_Email();
     $parent_email_field->label = "Parent's Email";
     $parent_email_field->id = $field_id_array['parent_email'];
-    $parent_email_field->isRequired = true;
+    $parent_email_field->isRequired = false;
     $student_form->fields[] = $parent_email_field;
 
     // student name
@@ -642,14 +642,14 @@ class ARIA_Create_Competition {
     "Performance program.";
     $student_name_field->descriptionPlacement = 'above';
     $student_name_field->id = $field_id_array['student_name'];
-    $student_name_field->isRequired = true;
+    $student_name_field->isRequired = false;
     $student_form->fields[] = $student_name_field;
 
     // student birthday
     $student_birthday_date_field = new GF_Field_Date();
     $student_birthday_date_field->label = "Student Birthday";
     $student_birthday_date_field->id = $field_id_array['student_birthday'];
-    $student_birthday_date_field->isRequired = true;
+    $student_birthday_date_field->isRequired = false;
     $student_birthday_date_field->calendarIconType = 'calendar';
     $student_birthday_date_field->dateType = 'datepicker';
     $student_form->fields[] = $student_birthday_date_field;
@@ -674,7 +674,7 @@ class ARIA_Create_Competition {
     $available_times = new GF_Field_Checkbox();
     $available_times->label = "Available Festival Days (check all available times)";
     $available_times->id = $field_id_array['available_festival_days'];
-    $available_times->isRequired = true;
+    $available_times->isRequired = false;
     $available_times->description = "There is no guarantee that scheduling ".
     "requests will be honored.";
     $available_times->choices = array(
@@ -687,7 +687,7 @@ class ARIA_Create_Competition {
     $command_times = new GF_Field_Checkbox();
     $command_times->label = "Preferred Command Performance Time (check all available times)";
     $command_times->id = $field_id_array['preferred_command_performance'];
-    $command_times->isRequired = true;
+    $command_times->isRequired = false;
     $command_times->description = "Please check the Command Performance time ".
     "that you prefer in the event that your child receives a superior rating.";
     $command_times->choices = array(
@@ -700,7 +700,7 @@ class ARIA_Create_Competition {
     $compliance_field = new GF_Field_checkbox();
     $compliance_field->label = "Compliance Statement";
     $compliance_field->id = $field_id_array['compliance_statement'];
-    $compliance_field->isRequired = true;
+    $compliance_field->isRequired = false;
     $compliance_field->description = "As a parent, I understand and agree to ".
     "comply with all rules, regulations, and amendments as stated in the ".
     "Festival syllabus. I am in full compliance with the laws regarding ".
