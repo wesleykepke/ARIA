@@ -141,7 +141,7 @@ class ARIA {
 		/*
     note: these values are hardcoded for now
 		*/
-		$this->loader->add_action('gform_after_submission_284', 'ARIA_Form_Hooks',
+		$this->loader->add_action('gform_after_submission_288', 'ARIA_Form_Hooks',
       'aria_after_student_submission', 10, 2);
 
 		// Modifying the upload path
