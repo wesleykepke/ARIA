@@ -11,8 +11,8 @@
  * @subpackage ARIA/includes
  */
 
-// Require the ARIA API
-//require_once("class-aria-api.php");
+// Required files
+require_once("class-aria-api.php");
 require_once("class-aria-registration-handler.php");
 require_once("class-aria-create-competition.php");
 
@@ -43,8 +43,9 @@ class ARIA_Form_Hooks {
    */
   public static function aria_after_student_submission($form, $entry) {
     // Get the forms that are related to this form
-		wp_die(print_r($form));
-    $related_forms = ARIA_Registration_Handler::aria_find_related_forms_ids($form["title"]);
+		$title = ARIA_API::aria_find_form_title_from_id($form["form_id"]);
+		//wp_die(print_r($form));
+    $related_forms = ARIA_Registration_Handler::aria_find_related_forms_ids($title);
     wp_die(print_r($related_forms));
 
     // Find out the information associated with the $entry variable
