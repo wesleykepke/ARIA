@@ -63,8 +63,11 @@ class ARIA_Create_Competition {
   public static function aria_create_teacher_and_student_forms($entry, $form) {
     // make sure the create competition form is calling this function
     if ($form['id'] === ARIA_API::aria_get_create_competition_form_id()) {
-      self::aria_update_page_ids();
 			/*
+			Calls wp_die and returns a value of 86?
+      self::aria_update_page_ids();
+			*/
+
 			// create the student and teacher forms
       self::aria_create_student_form($entry);
       self::aria_create_teacher_form($entry);
@@ -74,7 +77,6 @@ class ARIA_Create_Competition {
 			$competition_name = $entry[$field_mapping['Name of Competition']];
 			ARIA_Create_Master_Forms::aria_create_student_master_form($competition_name);
 			ARIA_Create_Master_Forms::aria_create_teacher_master_form($competition_name);
-			*/
     }
     else {
       wp_die('ERROR: No form currently exists that allows the festival chairman
@@ -254,7 +256,7 @@ class ARIA_Create_Competition {
       'is_judging' => 17, // !!!DO WE WANT TO CHANGE THIS NUMBER
       'student_level' => 18,
       'alt_song_2_period' => 19,
-      'alt_song_2_composer' => 20, 
+      'alt_song_2_composer' => 20,
       'alt_song_2_selection' => 21
     );
   }

@@ -196,7 +196,9 @@ class ARIA_Music {
   /**
    * This function will change the default file path for uploaded files.
    *
-   *
+   * In order to upload music from a file, we need to know where the music
+	 * file resides. This function will set a pre-determined file path so
+	 * the music data can be read from. 
    *
    * @since 1.0.0
    * @author KREW
