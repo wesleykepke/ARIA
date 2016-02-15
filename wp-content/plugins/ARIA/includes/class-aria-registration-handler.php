@@ -62,11 +62,15 @@ class ARIA_Registration_Handler {
 			self::TEACHER_MASTER => null
 		);
 
+		wp_die("Prepended title: " . $prepended_title);
+
 		$student_form = $prepended_title + " Student Registration";
 		$student_master_form = $prepended_title + " Student Master";
 		$teacher_form = $prepended_title + " Teacher Registration";
 		$teacher_master_form = $prepended_title + " Teacher Master";
 
+		wp_die($student_form . " ... " . $student_master_form . "..."
+	   $teacher_form . "..." . $teacher_master_form);
 
 		foreach ($all_forms as $form) {
 			switch ($form["title"]) {
