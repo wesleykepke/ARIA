@@ -27,10 +27,10 @@ require('class-create-master-forms.php');
 class ARIA_Registration_Handler {
 
 	// ENUMERATING CONSTANTS
-	public static const $STUDENT_FORM = 1;
-	public static const $STUDENT_MASTER = 2;
-	public static const $TEACHER_FORM = 3;
-	public static const $TEACHER_MASTER = 4;
+	const STUDENT_FORM = 1;
+	const STUDENT_MASTER = 2;
+	const TEACHER_FORM = 3;
+	const TEACHER_MASTER = 4;
 
 	/**
 	 * Function for sending emails.
@@ -55,10 +55,10 @@ class ARIA_Registration_Handler {
 		// make sure to get all forms! check this
 
 		$form_ids = array(
-			self::$STUDENT_FORM => null,
-			self::$STUDENT_MASTER => null,
-			self::$TEACHER_FORM => null,
-			self::$TEACHER_MASTER => null
+			self::STUDENT_FORM => null,
+			self::STUDENT_MASTER => null,
+			self::TEACHER_FORM => null,
+			self::TEACHER_MASTER => null
 		);
 		$student_form = $prepended_title + " Student Registration";
 		$student_master_form = $prepended_title + " Student Master";
@@ -69,19 +69,19 @@ class ARIA_Registration_Handler {
 		foreach ($all_forms as $form) {
 			switch ($form["title"]) {
 				case $student_form:
-					$form_ids[self::$STUDENT_FORM] = $form["id"];
+					$form_ids[self::STUDENT_FORM] = $form["id"];
 					break;
 
 				case $student_master_form:
-					$form_ids[self::$STUDENT_MASTER] = $form["id"];
+					$form_ids[self::STUDENT_MASTER] = $form["id"];
 					break;
 
 				case $teacher_form:
-						$form_ids[self::$TEACHER_FORM] = $form["id"];
+						$form_ids[self::TEACHER_FORM] = $form["id"];
 					break;
 
 				case $teacher_master_form:
-					$form_ids[self::$TEACHER_MASTER] = $form["id"];
+					$form_ids[self::TEACHER_MASTER] = $form["id"];
 					break;
 
 				default:
@@ -115,7 +115,7 @@ class ARIA_Registration_Handler {
          )
        )
      );
-     $entries = GFAPI::get_entries($related_forms[self::$STUDENT_MASTER], $search_criteria);
+     $entries = GFAPI::get_entries($related_forms[self::STUDENT_MASTER], $search_criteria);
 
      if(count($entries) == 1 && rgar($entries[0], (string) $hash_field_id) == $student_hash) {
        return entries[0];
@@ -142,7 +142,7 @@ class ARIA_Registration_Handler {
        )
      );
 
-     $entries = GFAPI::get_entries($related_forms[self::$TEACHER_MASTER], $search_criteria);
+     $entries = GFAPI::get_entries($related_forms[self::TEACHER_MASTER], $search_criteria);
      if(count($entries) == 1 && rgar($entries[0], (string) $hash_field_id) == $teacher_name) {
        return entries[0];
      }
@@ -159,7 +159,7 @@ class ARIA_Registration_Handler {
 		 $students_field_id = ARIA_Create_Master_Forms::aria_master_teacher_field_id_array()['students'];
 
      // Get the teacher entry
-     $teacher_entry = self::aria_find_teacher_entry($related_forms[self::$TEACHER_MASTER], $teacher_hash);
+     $teacher_entry = self::aria_find_teacher_entry($related_forms[self::TEACHER_MASTER], $teacher_hash);
 
      // return if teacher entry does not exist.
      if($teacher_entry == false) return false;
@@ -192,7 +192,7 @@ class ARIA_Registration_Handler {
        )
 		 );
 
-		 $entries = GFAPI::get_entries($all_forms[self::$TEACHER_MASTER], $search_criteria);
+		 $entries = GFAPI::get_entries($all_forms[self::TEACHER_MASTER], $search_criteria);
 
 		 if (is_wp_error($entries)) {
  			wp_die($entries->get_error_message());
@@ -231,7 +231,7 @@ class ARIA_Registration_Handler {
        )
 		 );
 
-		 $entries = GFAPI::get_entries($all_forms[self::$STUDENT_MASTER], $search_criteria);
+		 $entries = GFAPI::get_entries($all_forms[self::STUDENT_MASTER], $search_criteria);
 
 		 if (is_wp_error($entries)) {
  			wp_die($entries->get_error_message());
