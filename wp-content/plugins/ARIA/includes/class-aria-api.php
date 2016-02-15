@@ -158,4 +158,31 @@ class ARIA_API {
 		$csv_full_file_path .= $csv_file_url_atomic_strings[count($csv_file_url_atomic_strings) - 1];
 		return $csv_full_file_path;
 	}
+
+	/**
+	 * This function will return the title of a form given its ID.
+	 *
+	 * This function will return the title of a form in the event where only
+	 * the form ID is known (gform_after_submission).
+	 *
+	 * @param   $form_id   Integer   The id of the form to search form_id
+	 *
+	 * @since 1.0.0
+	 * @author KREW
+	 */
+	public static function aria_find_form_title_from_id($form_id) {
+    $all_forms = GFAPI::get_forms();
+		$title = null;
+		foreach ($all_forms as $form) {
+      if ($form[id] == $form_id) {
+				$title = $form["title"];
+			}
+		}
+
+		if (!isset($title)) {
+			$title = -1;
+		}
+
+		return $title; 
+	}
 }
