@@ -137,6 +137,13 @@ class ARIA {
 		$this->loader->add_action('gform_after_submission_' . strval(ARIA_API::aria_get_song_upload_form_id()),
 			'ARIA_Music', 'aria_add_music_from_csv', 10, 2);
 
+    // For before/after student and teacher registration
+		/*
+    note: these values are hardcoded for now
+		*/
+		$this->loader->add_action('gform_after_submission_280', 'ARIA_Form_Hooks',
+      'aria_after_student_submission', 10, 2);
+
 		// Modifying the upload path
 		$this->loader->add_filter('gform_upload_path', 'ARIA_Music', 'aria_modify_upload', 10, 2);
 
