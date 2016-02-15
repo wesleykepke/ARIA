@@ -43,7 +43,7 @@ class ARIA_Form_Hooks {
    */
   public static function aria_after_student_submission($form, $entry) {
     // Get the forms that are related to this form
-		print_r($form);
+		wp_die(print_r($form));
     $related_forms = ARIA_Registration_Handler::aria_find_related_forms_ids($form["title"]);
     wp_die(print_r($related_forms));
 
