@@ -240,7 +240,7 @@ class ARIA_Registration_Handler {
 		$field_ids = ARIA_Create_Master_Forms::aria_master_student_field_id_array();
 
 		return array(
-			'parent_name' => rgar( $entries[0], (string) $field_ids['parent_name']);
+			'parent_name' => rgar( $entries[0], (string) $field_ids['parent_name']);,
 	    'parent_email' => rgar( $entries[0], (string) $field_ids['parent_email']);
 	    'student_name' => rgar( $entries[0], (string) $field_ids['student_name']);
 	    'student_birthday' => rgar( $entries[0], (string) $field_ids['student_birthday']);
