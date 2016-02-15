@@ -135,8 +135,8 @@ class ARIA_Form_Hooks {
     }
 
     // Do form prepopulation
-    $teacher_prepopulation_values = ARIA_Registration_Handler::aria_get_teacher_pre_populate($form['title'], $teacher_hash)
-    $student_prepopulation_values = ARIA_Registration_Handler::aria_get_student_pre_populate($form['title'], $student_hash)
+    $teacher_prepopulation_values = ARIA_Registration_Handler::aria_get_teacher_pre_populate($form['title'], $teacher_hash);
+    $student_prepopulation_values = ARIA_Registration_Handler::aria_get_student_pre_populate($form['title'], $student_hash);
 
 
 	// !!!RENEE HERE
