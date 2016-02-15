@@ -185,4 +185,47 @@ class ARIA_API {
 
 		return $title;
 	}
+
+	/**
+	 * This function will parse a form name for the competition title.
+	 *
+	 * In the event where only the entire title of a form is available, this
+	 * function will parse the form title and return the prepended title that
+	 * is unique to the student, student master, teacher, and teacher master form.
+	 *
+	 * @param   $form_name   String   The name of the form to parse.
+	 *
+	 * @since 1.0.0
+	 * @author KREW
+	 */
+	public static function aria_parse_form_name_for_title($form_name) {
+    $student = "Student Registration";
+    $student_master = "Student Master";
+    $teacher = "Teacher Registration";
+    $teacher_master = "Teacher Master"
+    $found_match = false;
+
+		if (strpos($form_name, $student) !== false) {
+			$found_match = true;
+		}
+		elseif (strpos($form_name, $student_master) !== false) {
+			$found_match = true;
+		}
+		elseif (strpos($form_name, $teacher) !== false) {
+			$found_match = true;
+		}
+		elseif (strpos($form_name, $teacher_master) !== false) {
+			$found_match = true;
+		}
+
+		if ($found_match) {
+			$words = explode(' ', $form_name);
+			$title = null;
+			for ($i = 0; $i < (count($words) - 2); $i++) {
+			  $title .= ($words[$i] . ' ');
+			}
+		}
+
+		return $title; 
+	}
 }
