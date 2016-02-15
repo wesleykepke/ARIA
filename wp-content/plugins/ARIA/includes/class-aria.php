@@ -126,7 +126,7 @@ class ARIA {
 		// Include all of the ARIA files needed as dependencies.
 		require_once("class-aria-create-competition.php");
 		require_once("class-aria-music.php");
-		require_once("class-aria-form-hooks.php"); 
+		require_once("class-aria-form-hooks.php");
 
 		// Register all of the hooks needed by ARIA
 
@@ -142,7 +142,7 @@ class ARIA {
 		/*
     note: these values are hardcoded for now
 		*/
-		$this->loader->add_action('gform_after_submission_288', 'ARIA_Form_Hooks',
+		$this->loader->add_action('gform_after_submission_292', 'ARIA_Form_Hooks',
       'aria_after_student_submission', 10, 2);
 
 		// Modifying the upload path
