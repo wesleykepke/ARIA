@@ -44,7 +44,7 @@ class ARIA_Form_Hooks {
   public static function aria_after_student_submission($form, $entry) {
     // Get the forms that are related to this form
 		$form_title = ARIA_API::aria_find_form_title_from_id($form["form_id"]);
-		$competition_title = ARIA:API::aria_parse_form_name_for_title($form_title);
+		$competition_title = ARIA_API::aria_parse_form_name_for_title($form_title);
 		//wp_die(print_r($form));
     $related_forms = ARIA_Registration_Handler::aria_find_related_forms_ids($competition_title);
     wp_die(print_r($related_forms));
