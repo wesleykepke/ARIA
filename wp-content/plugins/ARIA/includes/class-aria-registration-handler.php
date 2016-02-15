@@ -69,7 +69,7 @@ class ARIA_Registration_Handler {
 		$teacher_form = $prepended_title + " Teacher Registration";
 		$teacher_master_form = $prepended_title + " Teacher Master";
 
-		wp_die($student_form . " ... " . $student_master_form . "..."
+		wp_die($student_form . " ... " . $student_master_form . "..." .
 	   $teacher_form . "..." . $teacher_master_form);
 
 		foreach ($all_forms as $form) {
