@@ -68,22 +68,22 @@ class ARIA_Create_Competition {
 			Calls wp_die and returns a value of 86?
       self::aria_update_page_ids();
 			*/
+			$field_mapping = self::aria_get_competition_entry_meta();
+			$competition_name = $entry[$field_mapping['Name of Competition']];
 
 			// create the student and teacher forms
       $student_form_id = self::aria_create_student_form($entry);
       $teacher_form_id = self::aria_create_teacher_form($entry);
-      $student_form_url = self::aria_publish_form("{$entry} Student Registration", $student_form_id);
-      $teacher_form_url = self::aria_publish_form("{$entry} Teacher Registration", $teacher_form_id);
+      $student_form_url = self::aria_publish_form("{$competition_name} Student Registration", $student_form_id);
+      $teacher_form_url = self::aria_publish_form("{$competition_name} Teacher Registration", $teacher_form_id);
 
 			// create the sutdent and teacher (master) forms
-			$field_mapping = self::aria_get_competition_entry_meta();
-			$competition_name = $entry[$field_mapping['Name of Competition']];
 			ARIA_Create_Master_Forms::aria_create_student_master_form($competition_name);
 			ARIA_Create_Master_Forms::aria_create_teacher_master_form($competition_name);
 
-      $confirmation = "\n <a href={$student_form_url}>{$entry} Student Registration</a>";
+      $confirmation = "\n <a href={$student_form_url}>{$competition_name} Student Registration</a>";
       $confirmation = "was published.";
-      $confirmation = "\n <a href={$teacher_form_url}> {$entry} Teacher Registration </a>";
+      $confirmation = "\n <a href={$teacher_form_url}> {$competition_name} Teacher Registration </a>";
       $confirmation = "was published.";
 
       return $confirmation;
