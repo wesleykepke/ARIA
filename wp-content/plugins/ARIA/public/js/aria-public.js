@@ -3,12 +3,16 @@ jQuery(document).ready(function($) {
 	// ---- only load on specific page (if statement with student level?)
 	
 	/* Page load functions */
+	var form_name = $('.gform_title').text();
 
+	if( form_name.indexOf( "Teacher Registration" ) != -1 ){
+
+	//alert( $('.gform_title').text() );
 	// get teacher  form id from current form
 	var teacher_form = $('.gform_fields').attr('id');
 	var teacher_form_id = teacher_form.split('_');
 	teacher_form_id = teacher_form_id[teacher_form_id.length -1];
-	
+		
 	// get music DB form id from Gravity Forms
 	var music_form_id = get_music_form_id();
 
@@ -334,5 +338,6 @@ jQuery(document).ready(function($) {
 	function create_placeholder( str ){
 
 		return '<option class="gf_placeholder" selected="selected" value="">' + str + '</option>';
+	}
 	}
 });
