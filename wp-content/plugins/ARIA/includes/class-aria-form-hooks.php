@@ -57,8 +57,9 @@ class ARIA_Form_Hooks {
     $teacher_master_fields = ARIA_Create_Master_Forms::aria_master_teacher_field_id_array();
     //wp_die("Student first name: " . rgar($entry, strval($student_fields["student_first_name"])));
 
+/*
 		wp_die("Incoming Entry ID: " . print_r($entry) . " ... Student field ID array: " .
-		print_r($student_fields));
+		print_r($student_fields)); */
 
 /*
     wp_die("Teacher name: " . $entry[$student_fields["teacher_name"]],
