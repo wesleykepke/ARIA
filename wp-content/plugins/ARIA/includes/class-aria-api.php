@@ -222,7 +222,10 @@ class ARIA_API {
 			$words = explode(' ', $form_name);
 			$title = null;
 			for ($i = 0; $i < (count($words) - 2); $i++) {
-			  $title .= ($words[$i] . ' ');
+			  $title .= $words[$i];
+				if (($i + 1) !== (count($words) - 2)) {
+          $title .= ' ';
+				}
 			}
 		}
 
