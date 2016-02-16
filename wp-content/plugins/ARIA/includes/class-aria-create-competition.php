@@ -60,7 +60,7 @@ class ARIA_Create_Competition {
    * @since 1.0.0
    * @author KREW
    */
-  public static function aria_create_teacher_and_student_forms($confirmation, $entry, $form, $ajax) {
+  public static function aria_create_teacher_and_student_forms($confirmation, $form, $entry, $ajax) {
     // make sure the create competition form is calling this function
     // $competition_creation_form_id = ARIA_API::aria_get_create_competition_form_id();
     // if ($form['id'] === $competition_creation_form_id) {
@@ -69,8 +69,6 @@ class ARIA_Create_Competition {
       self::aria_update_page_ids();
 
 			*/
-
-      wp_die(json_encode($entry));
 			$field_mapping = self::aria_get_competition_entry_meta();
 			$competition_name = $entry[$field_mapping['Name of Competition']];
 
