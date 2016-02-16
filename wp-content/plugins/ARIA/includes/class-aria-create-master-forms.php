@@ -225,8 +225,12 @@ class ARIA_Create_Master_Forms {
 	  // consult an aria developer before making changes to this portion of code.
 	  return array(
 	    'parent_name' => 1,
+			'parent_first_name' => 1.1,
+			'parent_last_name' => 1.2,
 	    'parent_email' => 2,
 	    'student_name' => 3,
+			'student_first_name' => 3.1,
+			'student_last_name' => 3.2,
 	    'student_birthday' => 4,
 	    'teacher_name' => 5,
 	    'not_listed_teacher_name' => 6,
@@ -386,6 +390,14 @@ class ARIA_Create_Master_Forms {
     // CAUTION, This array is used as a source of truth. Changing these values may
     // result in catastrophic failure. If you do not want to feel the bern,
     // consult an aria developer before making changes to this portion of code.
+
+
+    /*
+
+    this needs to be checked, i don't think it's right 
+
+		*/
+
     return array(
       'name' => 1,
       'email' => 2,

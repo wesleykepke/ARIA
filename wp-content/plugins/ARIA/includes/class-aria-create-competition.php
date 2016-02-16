@@ -272,11 +272,15 @@ class ARIA_Create_Competition {
     // consult an aria developer before making changes to this portion of code.
     return array(
       'name' => 1,
+			'first_name' => 1.1,
+			'last_name' => 1.2,
       'email' => 2,
       'phone' => 3,
       'volunteer_preference' => 4,
       'volunteer_time' => 5,
       'student_name' => 6,
+			'student_first_name' => 6.1,
+			'student_last_name' => 6.2,
       'song_1_period' => 7,
       'song_1_composer' => 8,
       'song_1_selection' => 9,

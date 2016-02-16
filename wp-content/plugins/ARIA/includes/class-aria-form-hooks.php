@@ -45,13 +45,15 @@ class ARIA_Form_Hooks {
     // Get the forms that are related to this form
 		$form_title = ARIA_API::aria_find_form_title_from_id($form["form_id"]);
 		$competition_title = ARIA_API::aria_parse_form_name_for_title($form_title);
-		//wp_die(print_r($form));
     $related_forms = ARIA_Registration_Handler::aria_find_related_forms_ids($competition_title);
-    wp_die(print_r($related_forms));
+
+// tested and working to this point ($related_forms has the ids we need)
 
     // Find out the information associated with the $entry variable
     $student_fields = ARIA_Create_Competition::aria_student_field_id_array();
     $teacher_master_fields = ARIA_Create_Master_Forms::aria_master_teacher_field_id_array();
+
+    wp_die(print_r($entry)); 
 
     // Hash for teacher (just has the teacher name)
     $teacher_hash = hash("md5", $entry[$student_fields["teacher_name"]]);
