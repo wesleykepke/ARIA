@@ -192,6 +192,12 @@ class ARIA_API {
 	 * In the event where only the entire title of a form is available, this
 	 * function will parse the form title and return the prepended title that
 	 * is unique to the student, student master, teacher, and teacher master form.
+	 * For example, if the title is a form called "February Competition 2/16/16
+	 * Student Registration", then this function will simply return "February
+	 * Competition 2/16/16". However, if this function receives a string that
+	 * is not a valid competition name (doesn't contain "Student Registration",
+	 * "Student Master", "Teacher Registration", or "Teacher Master"), then this
+	 * function will simply return false.
 	 *
 	 * @param   $form_name   String   The name of the form to parse.
 	 *
@@ -205,24 +211,36 @@ class ARIA_API {
     $teacher_master = "Teacher Master";
     $found_match = false;
 
+    // check if the title contains "Student Registration"
 		if (strpos($form_name, $student) !== false) {
 			$found_match = true;
 		}
+
+		// check if the title contains "Student Master"
 		elseif (strpos($form_name, $student_master) !== false) {
 			$found_match = true;
 		}
+
+		// check if the title contains "Teacher Registration"
 		elseif (strpos($form_name, $teacher) !== false) {
 			$found_match = true;
 		}
+
+		// check if the title contains "Teacher Master"
 		elseif (strpos($form_name, $teacher_master) !== false) {
 			$found_match = true;
 		}
 
+    // check to see if there is a match
 		if ($found_match) {
 			$words = explode(' ', $form_name);
 			$title = null;
+
+			// iterate through the complete name and strip away the important part 
 			for ($i = 0; $i < (count($words) - 2); $i++) {
 			  $title .= $words[$i];
+
+				// don't add an extra space at the end of the last word
 				if (($i + 1) !== (count($words) - 2)) {
           $title .= ' ';
 				}
