@@ -43,17 +43,22 @@ class ARIA_Form_Hooks {
    */
   public static function aria_after_student_submission($form, $entry) {
     // Get the forms that are related to this form
-		$form_title = ARIA_API::aria_find_form_title_from_id($form["form_id"]);
-		$competition_title = ARIA_API::aria_parse_form_name_for_title($form_title);
+    $form_title = ARIA_API::aria_find_form_title_from_id($form["form_id"]);
+    $prepended_title = ARIA_API::aria_parse_form_name_for_title($form_title);
     $related_forms = ARIA_Registration_Handler::aria_find_related_forms_ids($competition_title);
 
 // tested and working to this point ($related_forms has the ids we need)
 
     // Find out the information associated with the $entry variable
+
+
+
     $student_fields = ARIA_Create_Competition::aria_student_field_id_array();
     $teacher_master_fields = ARIA_Create_Master_Forms::aria_master_teacher_field_id_array();
+    //wp_die("Student first name: " . rgar($entry, strval($student_fields["student_first_name"])));
 
-    wp_die("Student first name: " . rgar($entry, strval($student_fields["student_first_name"]))); 
+		wp_die("Incoming Entry ID: " . print_r($entry) . " ... Student field ID array: " .
+		print_r($student_fields));
 
 /*
     wp_die("Teacher name: " . $entry[$student_fields["teacher_name"]],
