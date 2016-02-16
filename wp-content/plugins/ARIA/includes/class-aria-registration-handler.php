@@ -66,6 +66,8 @@ class ARIA_Registration_Handler {
 		$student_master_form = $prepended_title . " Student Master";
 		$teacher_form = $prepended_title . " Teacher Registration";
 		$teacher_master_form = $prepended_title . " Teacher Master";
+		$all_competition_forms = array($student_form, $student_master_form,
+      $teacher_form, $teacher_master_form);
 
 		foreach ($all_forms as $form) {
 			switch ($form["title"]) {
@@ -93,7 +95,8 @@ class ARIA_Registration_Handler {
 		// make sure all forms exist
 		foreach ($form_ids as $key => $value) {
 			if (!isset($value)) {
-				wp_die('Error: The form titled ' . $form_ids[$key] . " does not exist.");
+				wp_die('Error: The form titled ' . $all_competition_forms[$key] .
+				" does not exist.");
 			}
 		}
 		return $form_ids;
