@@ -736,7 +736,7 @@ class ARIA_Create_Competition {
       array('text' => 'Thursday 5:30', 'value' => 'Saturday', 'isSelected' => false),
       array('text' => 'Thursday 7:30', 'value' => 'Sunday', 'isSelected' => false)
     );
-    $student_form->fields[] = $available_times;
+    $student_form->fields[] = $command_times;
 
     // the compliance field for parents
     $compliance_field = new GF_Field_checkbox();
