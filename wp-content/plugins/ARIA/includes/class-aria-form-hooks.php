@@ -53,7 +53,7 @@ class ARIA_Form_Hooks {
     $student_fields = ARIA_Create_Competition::aria_student_field_id_array();
     $teacher_master_fields = ARIA_Create_Master_Forms::aria_master_teacher_field_id_array();
 
-    wp_die("Student first name: " . rgar($entry, $student_fields["student_first_name"])); 
+    wp_die("Student first name: " . (string) rgar($entry, $student_fields["student_first_name"])); 
 
 /*
     wp_die("Teacher name: " . $entry[$student_fields["teacher_name"]],
