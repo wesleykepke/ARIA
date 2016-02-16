@@ -62,7 +62,7 @@ class ARIA_Create_Competition {
    */
   public static function aria_create_teacher_and_student_forms($confirmation, $form, $entry, $ajax) {
     // make sure the create competition form is calling this function
-    // $competition_creation_form_id = ARIA_API::aria_get_create_competition_form_id();
+    $competition_creation_form_id = ARIA_API::aria_get_create_competition_form_id();
     if ($form['id'] === $competition_creation_form_id) {
 			/*
 			Calls wp_die and returns a value of 86?
