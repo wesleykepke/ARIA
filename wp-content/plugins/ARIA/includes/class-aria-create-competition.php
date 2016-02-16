@@ -82,10 +82,14 @@ class ARIA_Create_Competition {
 			ARIA_Create_Master_Forms::aria_create_student_master_form($competition_name);
 			ARIA_Create_Master_Forms::aria_create_teacher_master_form($competition_name);
 
-      $confirmation = "\n <a href={$student_form_url}>{$competition_name} Student Registration</a>";
-      $confirmation = "was published.";
-      $confirmation = "\n <a href={$teacher_form_url}> {$competition_name} Teacher Registration </a>";
-      $confirmation = "was published.";
+      $confirmation = 'Congratulations! A new music competition has been created.';
+      $confirmation .= ' There are now two new forms for students and teacher to use';
+      $confirmation .= ' for registration. The name for each new form is prepended with';
+      $confirmation .= ' the name of the new music competition previously created.</br>';
+      $confirmation .= "<a href={$student_form_url}>{$competition_name} Student Registration</a>";
+      $confirmation .= " was published. </br>";
+      $confirmation .= "<a href={$teacher_form_url}> {$competition_name} Teacher Registration </a>";
+      $confirmation .= " was published.";
 
       return $confirmation;
     }
@@ -803,7 +807,8 @@ class ARIA_Create_Competition {
     $postarr = array(
       'post_title' => $form_title,
       'post_content' => "[gravityform id=\"{$form_id}\" title=\"true\" description=\"true\"]",
-      'post_status' => 'publish'
+      'post_status' => 'publish',
+      'post_type' => 'page'
     );
 
     // Force a wp_error to be returned on failure
@@ -814,7 +819,6 @@ class ARIA_Create_Competition {
 
     // If not a wp_error, get the url from the post and return.
     if(!is_wp_error($post_id)) {
-      wp_die(esc_url(get_permalink($post_id)));
       return esc_url(get_permalink($post_id));
     }
     return $post_id;
