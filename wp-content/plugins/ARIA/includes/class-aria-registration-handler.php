@@ -93,7 +93,7 @@ class ARIA_Registration_Handler {
 		// make sure all forms exist
 		foreach ($form_ids as $key => $value) {
 			if (!isset($value)) {
-				wp_die('Error: The form titled ' . $key . " does not exist.");
+				wp_die('Error: The form titled ' . $form_ids[$key] . " does not exist.");
 			}
 		}
 		return $form_ids;
