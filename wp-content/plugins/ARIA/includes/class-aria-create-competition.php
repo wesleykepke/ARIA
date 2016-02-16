@@ -60,7 +60,7 @@ class ARIA_Create_Competition {
    * @since 1.0.0
    * @author KREW
    */
-  public static function aria_create_teacher_and_student_forms($entry, $form) {
+  public static function aria_create_teacher_and_student_forms($confirmation, $entry, $form, $ajax) {
     // make sure the create competition form is calling this function
     if ($form['id'] === ARIA_API::aria_get_create_competition_form_id()) {
 			/*
@@ -69,14 +69,23 @@ class ARIA_Create_Competition {
 			*/
 
 			// create the student and teacher forms
-      self::aria_create_student_form($entry);
-      self::aria_create_teacher_form($entry);
+      $student_form_id = self::aria_create_student_form($entry);
+      $teacher_form_id = self::aria_create_teacher_form($entry);
+      $student_form_url = self::aria_publish_form("{$entry} Student Registration", $student_form_id);
+      $teacher_form_url = self::aria_publish_form("{$entry} Teacher Registration", $teacher_form_id);
 
 			// create the sutdent and teacher (master) forms
 			$field_mapping = self::aria_get_competition_entry_meta();
 			$competition_name = $entry[$field_mapping['Name of Competition']];
 			ARIA_Create_Master_Forms::aria_create_student_master_form($competition_name);
 			ARIA_Create_Master_Forms::aria_create_teacher_master_form($competition_name);
+
+      $confirmation = "\n <a href={$student_form_url}>{$entry} Student Registration</a>";
+      $confirmation = "was published.";
+      $confirmation = "\n <a href={$teacher_form_url}> {$entry} Teacher Registration </a>";
+      $confirmation = "was published.";
+
+      return $confirmation;
     }
     else {
       wp_die('ERROR: No form currently exists that allows the festival chairman
@@ -608,6 +617,8 @@ class ARIA_Create_Competition {
     if (is_wp_error($new_form_id)) {
       wp_die($new_form_id->get_error_message());
     }
+
+    return $new_form_id;
   }
 
   /**
@@ -773,6 +784,8 @@ class ARIA_Create_Competition {
     if (is_wp_error($new_form_id)) {
       wp_die($new_form_id->get_error_message());
     }
+
+    return $new_form_id;
   }
 
 	/**
@@ -782,4 +795,24 @@ class ARIA_Create_Competition {
     $student_form = get_page_by_title("Wes CC");
 		wp_die("DB id: " . $student_form->ID);
 	}
+
+  public static function aria_publish_form($form_title, $form_id){
+    // Set Parameters for the form
+    $postarr = array(
+      'post_title' => $form_title,
+      'post_content' => "[gravityform id={$form_id} title="true" description="true"]",
+    )
+
+    // Force a wp_error to be returned on failure
+    $return_wp_error_on_failure = true;
+
+    // Create a wp_post
+    $form_id = wp_insert_post($postarr, $return_wp_error_on_failure);
+
+    // If not a wp_error, get the url from the post and return.
+    if(!is_wp_error($form_id)) {
+      return esc_url(get_permalink($form_id))
+    }
+    return $form_id;
+  }
 }
