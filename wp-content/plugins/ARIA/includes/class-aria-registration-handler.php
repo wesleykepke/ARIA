@@ -67,9 +67,13 @@ class ARIA_Registration_Handler {
 		$teacher_form = $prepended_title . " Teacher Registration";
 		$teacher_master_form = $prepended_title . " Teacher Master";
 
+    wp_die($student_form . "..." . "Wesley 2/15/2016 Student Registration"); 
+
+    /*
     if ($student_form === "Wesley 2/15/2016 Student Registration") {
 			wp_die("Same string");
 		}
+		*/
 
 		foreach ($all_forms as $form) {
 			switch ($form["title"]) {
