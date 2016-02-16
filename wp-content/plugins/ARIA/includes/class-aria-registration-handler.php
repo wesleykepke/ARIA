@@ -67,7 +67,7 @@ class ARIA_Registration_Handler {
 		$teacher_form = $prepended_title . " Teacher Registration";
 		$teacher_master_form = $prepended_title . " Teacher Master";
 
-    wp_die(count($student_form) . "..." . count("Wesley 2/15/2016 Student Registration")); 
+    wp_die(strlen($student_form) . "..." . strlen("Wesley 2/15/2016 Student Registration")); 
 
     /*
     if ($student_form === "Wesley 2/15/2016 Student Registration") {
