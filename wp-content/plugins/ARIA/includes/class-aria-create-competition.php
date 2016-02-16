@@ -802,21 +802,20 @@ class ARIA_Create_Competition {
     // Set Parameters for the form
     $postarr = array(
       'post_title' => $form_title,
-      'post_content' => '[gravityform id={$form_id} title="true" description="true"]'
+      'post_content' => '[gravityform id={$form_id} title="true" description="true"]',
+      'post_status' => 'publish'
     );
 
     // Force a wp_error to be returned on failure
     $return_wp_error_on_failure = true;
 
     // Create a wp_post
-    $form_id = wp_insert_post($postarr, $return_wp_error_on_failure);
-
-    wp_die(print_r($form_id));
+    $post_id = wp_insert_post($postarr, $return_wp_error_on_failure);
 
     // If not a wp_error, get the url from the post and return.
-    if(!is_wp_error($form_id)) {
-      return esc_url(get_permalink($form_id));
+    if(!is_wp_error($post_id)) {
+      return esc_url(get_permalink($post_id));
     }
-    return $form_id;
+    return $post_id;
   }
 }
