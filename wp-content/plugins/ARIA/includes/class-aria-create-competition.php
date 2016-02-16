@@ -63,7 +63,7 @@ class ARIA_Create_Competition {
   public static function aria_create_teacher_and_student_forms($confirmation, $form, $entry, $ajax) {
     // make sure the create competition form is calling this function
     // $competition_creation_form_id = ARIA_API::aria_get_create_competition_form_id();
-    // if ($form['id'] === $competition_creation_form_id) {
+    if ($form['id'] === $competition_creation_form_id) {
 			/*
 			Calls wp_die and returns a value of 86?
       self::aria_update_page_ids();
@@ -88,11 +88,11 @@ class ARIA_Create_Competition {
       $confirmation = "was published.";
 
       return $confirmation;
-    // }
-    // else {
-    //   wp_die("ERROR: No form currently exists that allows the festival chairman
-    //   to create a new music competition \n FormID: {$form[id]} \n func_call {$competition_creation_form_id}");
-    // }
+    }
+    else {
+      wp_die("ERROR: No form currently exists that allows the festival chairman
+      to create a new music competition \n FormID: {$form[id]} \n func_call {$competition_creation_form_id}");
+    }
   }
 
 	/**
@@ -810,6 +810,8 @@ class ARIA_Create_Competition {
 
     // Create a wp_post
     $form_id = wp_insert_post($postarr, $return_wp_error_on_failure);
+
+    wp_die(print_r($form_id));
 
     // If not a wp_error, get the url from the post and return.
     if(!is_wp_error($form_id)) {
