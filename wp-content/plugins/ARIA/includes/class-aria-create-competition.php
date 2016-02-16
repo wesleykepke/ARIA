@@ -82,10 +82,14 @@ class ARIA_Create_Competition {
 			ARIA_Create_Master_Forms::aria_create_student_master_form($competition_name);
 			ARIA_Create_Master_Forms::aria_create_teacher_master_form($competition_name);
 
-      $confirmation = "\n <a href={$student_form_url}>{$competition_name} Student Registration</a>";
-      $confirmation .= "was published.";
-      $confirmation .= "\n <a href={$teacher_form_url}> {$competition_name} Teacher Registration </a>";
-      $confirmation .= "was published.";
+      $confirmation = 'Congratulations! A new music competition has been created.';
+      $confirmation .= ' There are now two new forms for students and teacher to use';
+      $confirmation .= ' for registration. The name for each new form is prepended with';
+      $confirmation .= ' the name of the new music competition previously created.</br>';
+      $confirmation .= "<a href={$student_form_url}>{$competition_name} Student Registration</a>";
+      $confirmation .= " was published. </br>";
+      $confirmation .= "<a href={$teacher_form_url}> {$competition_name} Teacher Registration </a>";
+      $confirmation .= " was published.";
 
       return $confirmation;
     }
