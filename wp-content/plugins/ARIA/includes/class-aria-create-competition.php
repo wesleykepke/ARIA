@@ -67,7 +67,10 @@ class ARIA_Create_Competition {
 			/*
 			Calls wp_die and returns a value of 86?
       self::aria_update_page_ids();
+
 			*/
+
+      wp_die(json_encode($entry));
 			$field_mapping = self::aria_get_competition_entry_meta();
 			$competition_name = $entry[$field_mapping['Name of Competition']];
 
