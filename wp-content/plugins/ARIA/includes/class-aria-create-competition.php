@@ -800,7 +800,7 @@ class ARIA_Create_Competition {
     // Set Parameters for the form
     $postarr = array(
       'post_title' => $form_title,
-      'post_content' => "[gravityform id={$form_id} title="true" description="true"]",
+      'post_content' => '[gravityform id={$form_id} title="true" description="true"]'
     )
 
     // Force a wp_error to be returned on failure
