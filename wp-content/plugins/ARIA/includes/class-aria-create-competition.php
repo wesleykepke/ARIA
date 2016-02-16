@@ -811,7 +811,7 @@ class ARIA_Create_Competition {
 
     // If not a wp_error, get the url from the post and return.
     if(!is_wp_error($form_id)) {
-      return esc_url(get_permalink($form_id))
+      return esc_url(get_permalink($form_id));
     }
     return $form_id;
   }
