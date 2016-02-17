@@ -426,7 +426,7 @@ class ARIA_Create_Competition {
     $volunteer_time_field->choices = array();
     foreach( $volunteer_time_options_array as $volunteer_time ) {
       $volunteer_time_field->choices[]
-        = array('text' => $volunteer_time, 'value' => $volunteer_time, 'isSelected' = false);
+        = array('text' => $volunteer_time, 'value' => $volunteer_time, 'isSelected' => false);
     }
     //foreach( $competition_entry[ $field_mapping['Volunteer Times']]
     //$volunteer_time_field->choices = $volunteer_time_options['choices'];
