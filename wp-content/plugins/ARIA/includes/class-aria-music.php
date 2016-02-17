@@ -51,7 +51,7 @@ class ARIA_Music {
     $num_song_elements_with_catalog = $num_song_elements_no_catalog + 1;
 
     // locate the full path of the csv file
-    $csv_music_file = aria_get_music_csv_file_path($entry, $form);
+    $csv_music_file = ARIA_API::aria_get_music_csv_file_path($entry, $form);
 
     // parse csv file and add all music data to an array
     $all_songs = array();
