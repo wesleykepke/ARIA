@@ -759,6 +759,7 @@ class ARIA_Create_Competition {
       array('text' => 'Saturday', 'value' => 'Saturday', 'isSelected' => false),
       array('text' => 'Sunday', 'value' => 'Sunday', 'isSelected' => false)
     );
+    $available_times->inputs = array();
     $available_times = self::aria_add_checkbox_input( $available_times, 'Saturday' );
     $available_times = self::aria_add_checkbox_input( $available_times, 'Sunday' );
     $student_form->fields[] = $available_times;
@@ -774,6 +775,7 @@ class ARIA_Create_Competition {
       array('text' => 'Thursday 5:30', 'value' => 'Thursday 5:30', 'isSelected' => false),
       array('text' => 'Thursday 7:30', 'value' => 'Sunday', 'isSelected' => false)
     );
+    $command_times->inputs = array();
     $command_times = self::aria_add_checkbox_input( $command_times, 'Thursday 5:30' );
     $command_times = self::aria_add_checkbox_input( $command_times, 'Thursday 7:30' );
     $student_form->fields[] = $command_times;
@@ -797,6 +799,7 @@ class ARIA_Create_Competition {
       'value' => 'Agree',
       'isSelected' => false),
     );
+    $compliance_field->inputs = array();
     $compliance_field = self::aria_add_checkbox_input( $compliance_field, 'I have read and agree with the following statement:' );
     $student_form->fields[] = $compliance_field;
 
