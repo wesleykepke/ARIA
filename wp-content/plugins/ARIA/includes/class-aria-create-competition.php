@@ -70,16 +70,12 @@ class ARIA_Create_Competition {
 
 			*/
 
-      $test_entry = json_encode($entry);
-
-      wp_die("TEST ENTRY {$test_entry}");
-
 			$field_mapping = self::aria_get_competition_entry_meta();
 			$competition_name = $entry[$field_mapping['Name of Competition']];
 
 			// create the student and teacher forms
       $student_form_id = self::aria_create_student_form($entry);
-      $teacher_form_id = self::aria_create_teacher_form($entry);
+      $teacher_form_id = self::aria_create_teacher_form($entry, unserialize($entry[(string) $field_mapping['Volunteer Times']]));
       $student_form_url = self::aria_publish_form("{$competition_name} Student Registration", $student_form_id);
       $teacher_form_url = self::aria_publish_form("{$competition_name} Teacher Registration", $teacher_form_id);
 
@@ -134,7 +130,7 @@ class ARIA_Create_Competition {
       'Student Registration End Date' => 5,
       'Teacher Registration Start Date' => 6,
       'Teacher Registration Start Date' => 7,
-      'Volunteer Times' => '8' // !!! String or int?
+      'Volunteer Times' => 8
     );
   }
 
@@ -332,7 +328,7 @@ class ARIA_Create_Competition {
    * @since 1.0.0
    * @author KREW
    */
-   private static function aria_create_teacher_form($competition_entry) {
+   private static function aria_create_teacher_form($competition_entry, $volunteer_time_options_array) {
     $field_mapping = self::aria_get_competition_entry_meta();
 
     $competition_name = $competition_entry[$field_mapping['Name of Competition']];
@@ -420,12 +416,14 @@ class ARIA_Create_Competition {
     $volunteer_time_field->label = "Times Available for Volunteering";
     $volunteer_time_field->id = $field_id_arr['volunteer_time'];
     $volunteer_time_field->isRequired = false;
-    $volunteer_time_options = $competition_entry[$field_mapping['Volunteer Times']];
     $volunteer_time_field->description = "Please check at least two times you are"
     ." available to volunteer during Festival weekend.";
-    //.	print_r($volunteer_time_options);
     $volunteer_time_field->descriptionPlacement = 'above';
-    $volunteer_time_options = $competition_entry[$field_mapping['Volunteer Times']];
+    $volunteer_time_field->choices = array();
+    foreach( $volunteer_time_options_array as $volunteer_time ) {
+      $volunteer_time_field->choices[]
+        = array('text' => $volunteer_time, 'value' => $volunteer_time, 'isSelected' => false);
+    }
     //foreach( $competition_entry[ $field_mapping['Volunteer Times']]
     //$volunteer_time_field->choices = $volunteer_time_options['choices'];
     $volunteer_time_field->conditionalLogic = array(
