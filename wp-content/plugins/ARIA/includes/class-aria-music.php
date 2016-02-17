@@ -87,7 +87,7 @@ class ARIA_Music {
     }
 
     // add all song data from array into the database
-    $new_song_ids = GFAPI::add_entries($all_songs, aria_get_nnmta_database_form_id());
+    $new_song_ids = GFAPI::add_entries($all_songs, ARIA_API::aria_get_nnmta_database_form_id());
     if (is_wp_error($new_song_ids)) {
       wp_die($new_song_ids->get_error_message());
     }
