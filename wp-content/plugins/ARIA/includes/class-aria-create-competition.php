@@ -71,7 +71,7 @@ class ARIA_Create_Competition {
 			*/
 
       $test_fields = json_encode(GFAPI::get_form(348));
-      $test_entry = json_encode($entry);
+      $test_entry = json_encode($entry['8']);
 
       wp_die("TEST FIELDS {$test_fields} </br> TEST ENTRY {$test_entry}");
 
