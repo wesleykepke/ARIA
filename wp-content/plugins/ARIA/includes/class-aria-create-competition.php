@@ -272,6 +272,7 @@ class ARIA_Create_Competition {
   }
 
   public static function aria_add_default_name_inputs($field) {
+    $field->nameFormat = 'advanced';
     $field->inputs = array(
       array(
         "id"=>"{$field->id}.2",
