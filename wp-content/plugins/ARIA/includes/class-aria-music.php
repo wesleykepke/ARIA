@@ -49,9 +49,11 @@ class ARIA_Music {
 
     $num_song_elements_no_catalog = 5;
     $num_song_elements_with_catalog = $num_song_elements_no_catalog + 1;
+		$num_songs = 0;
 
     // locate the full path of the csv file
     $csv_music_file = ARIA_API::aria_get_music_csv_file_path($entry, $form);
+		//wp_die("Music file path: " . $csv_music_file);
 
     // parse csv file and add all music data to an array
     $all_songs = array();
@@ -61,6 +63,13 @@ class ARIA_Music {
 
       // add new music
       while (($single_song_data = fgetcsv($file_ptr, 1000, ",")) !== FALSE) {
+				$single_song = array();
+        for ($i = 1; $i <= count($single_song_data); $i++) {
+          $single_song[strval($i)] = $single_song_data[$i - 1];
+				}
+        $all_songs[] = $single_song;
+
+/*
         // no catalog
         if (count($single_song_data) === $num_song_elements_no_catalog) {
           $all_songs[] = array (
@@ -83,11 +92,14 @@ class ARIA_Music {
             '6' => $single_song_data[5],
           );
         }
+*/
       }
     }
 		else {
 			wp_die("Error: File named " . $csv_music_file . " does not exist.");
 		}
+
+    //wp_die(print_r($all_songs));
 
     // add all song data from array into the database
     $new_song_ids = GFAPI::add_entries($all_songs, ARIA_API::aria_get_nnmta_database_form_id());
@@ -205,10 +217,10 @@ class ARIA_Music {
    */
 	public static function aria_music_field_id_array() {
 		return array(
-			'song_name' => 1,
-			'song_composer' => 2,
-			'song_level' => 3,
-			'song_period' => 4,
+			'song_name' => 4,
+			'song_composer' => 3,
+			'song_level' => 1,
+			'song_period' => 2,
 			'song_catalog' => 5
 		);
 	}
