@@ -85,6 +85,9 @@ class ARIA_Music {
         }
       }
     }
+		else {
+			wp_die("Error: File named " . $csv_music_file . " does not exist.");
+		}
 
     // add all song data from array into the database
     $new_song_ids = GFAPI::add_entries($all_songs, ARIA_API::aria_get_nnmta_database_form_id());
