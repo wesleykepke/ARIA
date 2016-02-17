@@ -271,6 +271,84 @@ class ARIA_Create_Competition {
     return $field;
   }
 
+  private static function aria_add_default_name_inputs($field) {
+    $field->inputs = array(
+      array(
+        "id"=>"{$field->id}.2",
+        "label"=>"Prefix",
+        "name"=>"",
+        "choices"=> array(
+          array(
+            "text"=>"Mr.",
+            "value"=>"Mr.",
+            "isSelected"=>false,
+            "price"=>""
+          ),
+          array(
+            "text"=>"Mrs.",
+            "value"=>"Mrs.",
+            "isSelected"=>false,
+            "price"=>""
+          ),
+          array(
+            "text"=>"Miss",
+            "value"=>"Miss",
+            "isSelected"=>false,
+            "price"=>""
+          ),
+          array(
+            "text"=>"Ms.",
+            "value"=>"Ms.",
+            "isSelected"=>false,
+            "price"=>""
+          ),
+          array(
+            "text"=>"Dr.",
+            "value"=>"Dr.",
+            "isSelected"=>false,
+            "price"=>""
+          ),
+          array(
+            "text"=>"Prof.",
+            "value"=>"Prof.",
+            "isSelected"=>false,
+            "price"=>""
+          ),
+          array(
+            "text"=>"Rev.",
+            "value"=>"Rev.",
+            "isSelected"=>false,
+            "price"=>""
+          )
+        ),
+        "isHidden"=>true,
+        "inputType"=>"radio"
+      ),
+      array(
+        "id"=>"{$field->id}.3",
+        "label"=>"First",
+        "name"=>""
+      ),
+      array(
+        "id"=>"{$field->id}.4",
+        "label"=>"Middle",
+        "name"=>"",
+        "isHidden"=>true
+      ),
+      array(
+        "id"=>"{$field->id}.6",
+        "label"=>"Last",
+        "name"=>""
+      ),
+      array(
+        "id"=>"{$field->id}.8",
+        "label"=>"Suffix",
+        "name"=>"",
+        "isHidden"=>true
+      )
+    );
+  }
+
 
   /**
 
@@ -355,6 +433,7 @@ class ARIA_Create_Competition {
     $teacher_name_field->label = "Name";
     $teacher_name_field->id = $field_id_arr['name'];
     $teacher_name_field->isRequired = false;
+    $teacher_name_field = self::aria_add_default_name_inputs($teacher_name_field);
     $teacher_form->fields[] = $teacher_name_field;
 
     // teacher email
@@ -454,6 +533,7 @@ class ARIA_Create_Competition {
     $student_name_field->label = "Student Name";
     $student_name_field->id = $field_id_arr['student_name'];
     $student_name_field->isRequired = false;
+    $student_name_field = self::aria_add_default_name_inputs($student_name_field);
     $teacher_form->fields[] = $student_name_field;
 
     // !!!student level
@@ -702,6 +782,7 @@ class ARIA_Create_Competition {
     $parent_name_field->label = "Parent Name";
     $parent_name_field->id = $field_id_array['parent_name'];
     $parent_name_field->isRequired = false;
+    $parent_name_field = self::aria_add_default_name_inputs($parent_name_field);
     $student_form->fields[] = $parent_name_field;
 
     // parent email
@@ -721,6 +802,7 @@ class ARIA_Create_Competition {
     $student_name_field->descriptionPlacement = 'above';
     $student_name_field->id = $field_id_array['student_name'];
     $student_name_field->isRequired = false;
+    $student_name_field = self::aria_add_default_name_inputs($student_name_field);
     $student_form->fields[] = $student_name_field;
 
     // student birthday
