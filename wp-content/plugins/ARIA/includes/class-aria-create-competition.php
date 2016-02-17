@@ -415,6 +415,7 @@ class ARIA_Create_Competition {
       array('text' => 'Clean up', 'value' => 'Clean up', 'isSelected' => false),
       array('text' => 'Help with food for judges and volunteers', 'value' => 'Help with food for judges and volunteers', 'isSelected' => false)
     );
+    //self::aria_add_checkbox_input( $volunteer_preference_field, 'Proctor sessions' );
     $volunteer_preference_field->description = "Please check at least two volunteer job"
     ." preferences for this year's Festival. You will be notified by email of your"
     ." volunteer assignments as Festival approaches.";
@@ -758,6 +759,8 @@ class ARIA_Create_Competition {
       array('text' => 'Saturday', 'value' => 'Saturday', 'isSelected' => false),
       array('text' => 'Sunday', 'value' => 'Sunday', 'isSelected' => false)
     );
+    self::aria_add_checkbox_input( $available_times, 'Saturday' );
+    self::aria_add_checkbox_input( $available_times, 'Sunday' );
     $student_form->fields[] = $available_times;
 
     // student's available times to compete for command performance
@@ -768,9 +771,11 @@ class ARIA_Create_Competition {
     $command_times->description = "Please check the Command Performance time ".
     "that you prefer in the event that your child receives a superior rating.";
     $command_times->choices = array(
-      array('text' => 'Thursday 5:30', 'value' => 'Saturday', 'isSelected' => false),
+      array('text' => 'Thursday 5:30', 'value' => 'Thursday 5:30', 'isSelected' => false),
       array('text' => 'Thursday 7:30', 'value' => 'Sunday', 'isSelected' => false)
     );
+    self::aria_add_checkbox_input( $command_times, 'Thursday 5:30' );
+    self::aria_add_checkbox_input( $command_times, 'Thursday 7:30' );
     $student_form->fields[] = $command_times;
 
     // the compliance field for parents
@@ -792,6 +797,7 @@ class ARIA_Create_Competition {
       'value' => 'Agree',
       'isSelected' => false),
     );
+    self::aria_add_checkbox_input( $compliance_field, 'I have read and agree with the following statement:' );
     $student_form->fields[] = $compliance_field;
 
     // custom submission message to let the festival chairman know the creation was
