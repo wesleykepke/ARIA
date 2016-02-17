@@ -282,7 +282,7 @@ class ARIA_Create_Master_Forms {
     $teacher_name_field = new GF_Field_Name();
     $teacher_name_field->label = "Name";
     $teacher_name_field->id = $field_id_array['name'];
-    $teacher_name_field->isRequired = false
+    $teacher_name_field->isRequired = false;
     $teacher_name_field = ARIA_Create_Competition::aria_add_default_name_inputs($teacher_name_field);
     $teacher_master_form->fields[] = $teacher_name_field;
 
