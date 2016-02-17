@@ -47,8 +47,8 @@ class ARIA_Music {
       self::aria_create_nnmta_music_form();
     }
 
-    $num_song_elements_no_image = 5;
-    $num_song_elements_with_image = 6;
+    $num_song_elements_no_catalog = 5;
+    $num_song_elements_with_catalog = $num_song_elements_no_catalog + 1;
 
     // locate the full path of the csv file
     $csv_music_file = aria_get_music_csv_file_path($entry, $form);
@@ -61,8 +61,8 @@ class ARIA_Music {
 
       // add new music
       while (($single_song_data = fgetcsv($file_ptr, 1000, ",")) !== FALSE) {
-        // no image
-        if (count($single_song_data) === $num_song_elements_no_image) {
+        // no catalog
+        if (count($single_song_data) === $num_song_elements_no_catalog) {
           $all_songs[] = array (
             '1' => $single_song_data[0],
             '2' => $single_song_data[1],
@@ -72,9 +72,8 @@ class ARIA_Music {
           );
         }
 
-        // image
-        elseif (count($single_song_data) === $num_song_elements_with_image) {
-          /*
+        // with catalog
+        elseif (count($single_song_data) === $num_song_elements_with_catalog) {
           $all_songs[] = array (
             '1' => $single_song_data[0],
             '2' => $single_song_data[1],
@@ -82,7 +81,7 @@ class ARIA_Music {
             '4' => $single_song_data[3],
             '5' => $single_song_data[4],
             '6' => $single_song_data[5],
-          ); */
+          );
         }
       }
     }
