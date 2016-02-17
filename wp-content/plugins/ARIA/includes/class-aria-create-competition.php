@@ -70,7 +70,7 @@ class ARIA_Create_Competition {
 
 			*/
 
-      $test_entry = json_encode(unserialize($entry['3']));
+      $test_entry = json_encode($entry['3']);
 
       wp_die("TEST ENTRY {$test_entry}");
 
