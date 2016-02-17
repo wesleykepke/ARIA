@@ -110,10 +110,8 @@ class ARIA_API {
 
 		if (!isset($nnmta_music_database_form_id)) {
 	    $nnmta_music_database_form_id = -1;
-	    /*
 			wp_die('Form ' . $nnmta_music_database_form_name . ' does not exist.
 	    Please create it and try again.');
-	    */
 		}
 
 		return $nnmta_music_database_form_id;
@@ -236,7 +234,7 @@ class ARIA_API {
 			$words = explode(' ', $form_name);
 			$title = null;
 
-			// iterate through the complete name and strip away the important part 
+			// iterate through the complete name and strip away the important part
 			for ($i = 0; $i < (count($words) - 2); $i++) {
 			  $title .= $words[$i];
 
