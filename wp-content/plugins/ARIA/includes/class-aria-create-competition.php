@@ -765,7 +765,7 @@ class ARIA_Create_Competition {
     $compliance_field = new GF_Field_checkbox();
     $compliance_field->label = "Compliance Statement";
     $compliance_field->id = $field_id_array['compliance_statement'];
-    $compliance_field->isRequired = true;
+    $compliance_field->isRequired = false;
     $compliance_field->description = "As a parent, I understand and agree to ".
     "comply with all rules, regulations, and amendments as stated in the ".
     "Festival syllabus. I am in full compliance with the laws regarding ".
