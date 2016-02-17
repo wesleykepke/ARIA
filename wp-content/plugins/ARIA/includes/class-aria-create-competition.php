@@ -266,6 +266,21 @@ class ARIA_Create_Competition {
     return $field;
   }
 
+
+  /**
+
+  */
+  private static function aria_add_checkbox_input($field, $new_input) {
+    $next_input = count( $field->inputs ) + 1;
+
+    $field->inputs[] = array(
+          "id" => "{$field->id}.{$next_input}",
+          "label" => $new_input,
+          "name" => ""
+        );
+    return $field;
+  }
+
   /**
    * This function defines an associative array used in the teacher form.
    *
