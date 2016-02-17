@@ -146,7 +146,7 @@ class ARIA {
       'aria_after_student_submission', 10, 2);
 
 		// Modifying the upload path
-		$this->loader->add_filter('gform_upload_path', 'ARIA_Music', 'aria_modify_upload', 10, 2);
+		$this->loader->add_filter('gform_upload_path', 'ARIA_Music', 'aria_modify_upload_path', 10, 2);
 
 	}
 
