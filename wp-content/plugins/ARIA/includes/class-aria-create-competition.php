@@ -348,6 +348,7 @@ class ARIA_Create_Competition {
         "isHidden"=>true
       )
     );
+    return $field;
   }
 
 
@@ -516,9 +517,11 @@ class ARIA_Create_Competition {
     ." available to volunteer during Festival weekend.";
     $volunteer_time_field->descriptionPlacement = 'above';
     $volunteer_time_field->choices = array();
-    foreach( $volunteer_time_options_array as $volunteer_time ) {
-      $volunteer_time_field->choices[]
-        = array('text' => $volunteer_time, 'value' => $volunteer_time, 'isSelected' => false);
+    if (is_array($volunteer_time_options_array)) {
+      foreach( $volunteer_time_options_array as $volunteer_time ) {
+        $volunteer_time_field->choices[]
+          = array('text' => $volunteer_time, 'value' => $volunteer_time, 'isSelected' => false);
+      }
     }
     //foreach( $competition_entry[ $field_mapping['Volunteer Times']]
     //$volunteer_time_field->choices = $volunteer_time_options['choices'];
