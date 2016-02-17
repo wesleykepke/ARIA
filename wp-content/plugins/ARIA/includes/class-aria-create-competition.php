@@ -69,12 +69,13 @@ class ARIA_Create_Competition {
       self::aria_update_page_ids();
 
 			*/
+
 			$field_mapping = self::aria_get_competition_entry_meta();
 			$competition_name = $entry[$field_mapping['Name of Competition']];
 
 			// create the student and teacher forms
       $student_form_id = self::aria_create_student_form($entry);
-      $teacher_form_id = self::aria_create_teacher_form($entry);
+      $teacher_form_id = self::aria_create_teacher_form($entry, unserialize($entry[(string) $field_mapping['Volunteer Times']]));
       $student_form_url = self::aria_publish_form("{$competition_name} Student Registration", $student_form_id);
       $teacher_form_url = self::aria_publish_form("{$competition_name} Teacher Registration", $teacher_form_id);
 
@@ -82,10 +83,14 @@ class ARIA_Create_Competition {
 			ARIA_Create_Master_Forms::aria_create_student_master_form($competition_name);
 			ARIA_Create_Master_Forms::aria_create_teacher_master_form($competition_name);
 
-      $confirmation = "\n <a href={$student_form_url}>{$competition_name} Student Registration</a>";
-      $confirmation = "was published.";
-      $confirmation = "\n <a href={$teacher_form_url}> {$competition_name} Teacher Registration </a>";
-      $confirmation = "was published.";
+      $confirmation = 'Congratulations! A new music competition has been created.';
+      $confirmation .= ' There are now two new forms for students and teacher to use';
+      $confirmation .= ' for registration. The name for each new form is prepended with';
+      $confirmation .= ' the name of the new music competition previously created.</br>';
+      $confirmation .= "<a href={$student_form_url}>{$competition_name} Student Registration</a>";
+      $confirmation .= " was published. </br>";
+      $confirmation .= "<a href={$teacher_form_url}> {$competition_name} Teacher Registration </a>";
+      $confirmation .= " was published.";
 
       return $confirmation;
     }
@@ -125,7 +130,7 @@ class ARIA_Create_Competition {
       'Student Registration End Date' => 5,
       'Teacher Registration Start Date' => 6,
       'Teacher Registration Start Date' => 7,
-      'Volunteer Times' => '8' // !!! String or int?
+      'Volunteer Times' => 8
     );
   }
 
@@ -338,7 +343,7 @@ class ARIA_Create_Competition {
    * @since 1.0.0
    * @author KREW
    */
-   private static function aria_create_teacher_form($competition_entry) {
+   private static function aria_create_teacher_form($competition_entry, $volunteer_time_options_array) {
     $field_mapping = self::aria_get_competition_entry_meta();
 
     $competition_name = $competition_entry[$field_mapping['Name of Competition']];
@@ -426,12 +431,14 @@ class ARIA_Create_Competition {
     $volunteer_time_field->label = "Times Available for Volunteering";
     $volunteer_time_field->id = $field_id_arr['volunteer_time'];
     $volunteer_time_field->isRequired = false;
-    $volunteer_time_options = $competition_entry[$field_mapping['Volunteer Times']];
     $volunteer_time_field->description = "Please check at least two times you are"
     ." available to volunteer during Festival weekend.";
-    //.	print_r($volunteer_time_options);
     $volunteer_time_field->descriptionPlacement = 'above';
-    $volunteer_time_options = $competition_entry[$field_mapping['Volunteer Times']];
+    $volunteer_time_field->choices = array();
+    foreach( $volunteer_time_options_array as $volunteer_time ) {
+      $volunteer_time_field->choices[]
+        = array('text' => $volunteer_time, 'value' => $volunteer_time, 'isSelected' => false);
+    }
     //foreach( $competition_entry[ $field_mapping['Volunteer Times']]
     //$volunteer_time_field->choices = $volunteer_time_options['choices'];
     $volunteer_time_field->conditionalLogic = array(
@@ -770,7 +777,7 @@ class ARIA_Create_Competition {
     $compliance_field = new GF_Field_checkbox();
     $compliance_field->label = "Compliance Statement";
     $compliance_field->id = $field_id_array['compliance_statement'];
-    $compliance_field->isRequired = true;
+    $compliance_field->isRequired = false;
     $compliance_field->description = "As a parent, I understand and agree to ".
     "comply with all rules, regulations, and amendments as stated in the ".
     "Festival syllabus. I am in full compliance with the laws regarding ".
@@ -817,8 +824,9 @@ class ARIA_Create_Competition {
     // Set Parameters for the form
     $postarr = array(
       'post_title' => $form_title,
-      'post_content' => '[gravityform id={$form_id} title="true" description="true"]',
-      'post_status' => 'publish'
+      'post_content' => "[gravityform id=\"{$form_id}\" title=\"true\" description=\"true\"]",
+      'post_status' => 'publish',
+      'post_type' => 'page'
     );
 
     // Force a wp_error to be returned on failure
@@ -829,7 +837,6 @@ class ARIA_Create_Competition {
 
     // If not a wp_error, get the url from the post and return.
     if(!is_wp_error($post_id)) {
-      wp_die(esc_url(get_permalink($post_id)));
       return esc_url(get_permalink($post_id));
     }
     return $post_id;

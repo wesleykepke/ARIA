@@ -64,11 +64,14 @@ class ARIA_Music {
         // no image
         if (count($single_song_data) === $num_song_elements_no_image) {
           $all_songs[] = array (
-            '1' => $single_song_data[0],
-            '2' => $single_song_data[1],
-            '3' => $single_song_data[2],
-            '4' => $single_song_data[3],
+            '1' => $single_song_data[2],
+            '2' => $single_song_data[3],
+            '3' => $single_song_data[1],
+            '4' => $single_song_data[0],
             '5' => $single_song_data[4],
+            '6' => $single_song_data[5],
+            '7' => $single_song_data[6],
+
           );
         }
 
@@ -116,6 +119,7 @@ class ARIA_Music {
      //!!!$field_id_index = 1;
      $field_id_arr = self::aria_music_field_id_array();
 
+     /*
      // NNMTA song id
      $song_id_field = new GF_Field_Text();
      $song_id_field->label = "NNMTA Song ID";
@@ -123,6 +127,7 @@ class ARIA_Music {
      //$field_id_index++;
      $song_id_field->isRequired = true;
      $nnmta_music_form->fields[] = $song_id_field;
+     */
 
      // NNMTA song name
      $song_name_field = new GF_Field_Text();
@@ -198,7 +203,7 @@ class ARIA_Music {
    *
    * In order to upload music from a file, we need to know where the music
 	 * file resides. This function will set a pre-determined file path so
-	 * the music data can be read from. 
+	 * the music data can be read from.
    *
    * @since 1.0.0
    * @author KREW
