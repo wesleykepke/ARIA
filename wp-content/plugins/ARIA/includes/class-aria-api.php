@@ -77,9 +77,8 @@ class ARIA_API {
 
 		if (!isset($upload_form_name_id)) {
 	    $upload_form_name_id = -1;
-	    /*
 			wp_die('Form ' . $upload_form_name . ' does not exist. Please create it and
-	    try again.'); */
+	    try again.'); 
 		}
 
 	 	return $upload_form_name_id;

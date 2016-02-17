@@ -14,7 +14,7 @@
  */
 
 // Require the ARIA API
-//require_once("class-aria-api.php");
+require_once("class-aria-api.php");
 
 /**
  * The create competition class.
@@ -42,7 +42,7 @@ class ARIA_Music {
    */
   public static function aria_add_music_from_csv($entry, $form) {
     // check if the form for uploading exists
-    $music_db_form_id = aria_get_nnmta_database_form_id();
+    $music_db_form_id = ARIA_API::aria_get_nnmta_database_form_id();
     if ($music_db_form_id === -1) {
       self::aria_create_nnmta_music_form();
     }
