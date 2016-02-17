@@ -759,8 +759,8 @@ class ARIA_Create_Competition {
       array('text' => 'Saturday', 'value' => 'Saturday', 'isSelected' => false),
       array('text' => 'Sunday', 'value' => 'Sunday', 'isSelected' => false)
     );
-    self::aria_add_checkbox_input( $available_times, 'Saturday' );
-    self::aria_add_checkbox_input( $available_times, 'Sunday' );
+    $available_times = self::aria_add_checkbox_input( $available_times, 'Saturday' );
+    $available_times = self::aria_add_checkbox_input( $available_times, 'Sunday' );
     $student_form->fields[] = $available_times;
 
     // student's available times to compete for command performance
@@ -774,15 +774,15 @@ class ARIA_Create_Competition {
       array('text' => 'Thursday 5:30', 'value' => 'Thursday 5:30', 'isSelected' => false),
       array('text' => 'Thursday 7:30', 'value' => 'Sunday', 'isSelected' => false)
     );
-    self::aria_add_checkbox_input( $command_times, 'Thursday 5:30' );
-    self::aria_add_checkbox_input( $command_times, 'Thursday 7:30' );
+    $command_times = self::aria_add_checkbox_input( $command_times, 'Thursday 5:30' );
+    $command_times = self::aria_add_checkbox_input( $command_times, 'Thursday 7:30' );
     $student_form->fields[] = $command_times;
 
     // the compliance field for parents
     $compliance_field = new GF_Field_checkbox();
     $compliance_field->label = "Compliance Statement";
     $compliance_field->id = $field_id_array['compliance_statement'];
-    $compliance_field->isRequired = false;
+    $compliance_field->isRequired = true;
     $compliance_field->description = "As a parent, I understand and agree to ".
     "comply with all rules, regulations, and amendments as stated in the ".
     "Festival syllabus. I am in full compliance with the laws regarding ".
@@ -797,7 +797,7 @@ class ARIA_Create_Competition {
       'value' => 'Agree',
       'isSelected' => false),
     );
-    self::aria_add_checkbox_input( $compliance_field, 'I have read and agree with the following statement:' );
+    $compliance_field = self::aria_add_checkbox_input( $compliance_field, 'I have read and agree with the following statement:' );
     $student_form->fields[] = $compliance_field;
 
     // custom submission message to let the festival chairman know the creation was
