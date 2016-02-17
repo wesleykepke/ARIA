@@ -271,7 +271,7 @@ class ARIA_Create_Competition {
     return $field;
   }
 
-  private static function aria_add_default_name_inputs($field) {
+  public static function aria_add_default_name_inputs($field) {
     $field->inputs = array(
       array(
         "id"=>"{$field->id}.2",
