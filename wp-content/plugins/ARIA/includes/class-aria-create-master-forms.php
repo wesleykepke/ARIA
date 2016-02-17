@@ -48,6 +48,7 @@ class ARIA_Create_Master_Forms {
     $parent_name_field->label = "Parent Name";
     $parent_name_field->id = $field_id_array['parent_name'];
     $parent_name_field->isRequired = false;
+    $parent_name_field = ARIA_Create_Competition::aria_add_default_name_inputs($parent_name_field);
     $student_master_form->fields[] = $parent_name_field;
 
     // parent email
@@ -62,6 +63,7 @@ class ARIA_Create_Master_Forms {
     $student_name_field->label = "Student Name";
     $student_name_field->id = $field_id_array['student_name'];
     $student_name_field->isRequired = false;
+    $student_name_field = ARIA_Create_Competition::aria_add_default_name_inputs($student_name_field);
     $student_master_form->fields[] = $student_name_field;
 
     // student birthday
@@ -280,7 +282,8 @@ class ARIA_Create_Master_Forms {
     $teacher_name_field = new GF_Field_Name();
     $teacher_name_field->label = "Name";
     $teacher_name_field->id = $field_id_array['name'];
-    $teacher_name_field->isRequired = false;
+    $teacher_name_field->isRequired = false
+    $teacher_name_field = ARIA_Create_Competition::aria_add_default_name_inputs($teacher_name_field);
     $teacher_master_form->fields[] = $teacher_name_field;
 
     // teacher email
