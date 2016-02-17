@@ -102,16 +102,14 @@ class ARIA_API {
 		foreach ($all_active_forms as $form) {
 			if ($form['title'] === $nnmta_music_database_form_name) {
 				$nnmta_music_database_form_id = $form['id'];
-				if (!isset($_SESSION['music_db_id'])) {
-					$_SESSION['music_db_id'] = $nnmta_music_database_form_id;
-				}
 			}
 		}
 
 		if (!isset($nnmta_music_database_form_id)) {
 	    $nnmta_music_database_form_id = -1;
+			/*
 			wp_die('Form ' . $nnmta_music_database_form_name . ' does not exist.
-	    Please create it and try again.');
+	    Please create it and try again.'); */
 		}
 
 		return $nnmta_music_database_form_id;
