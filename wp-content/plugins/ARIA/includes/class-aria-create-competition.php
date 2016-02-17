@@ -70,9 +70,9 @@ class ARIA_Create_Competition {
 
 			*/
 
-      $test_entry = json_encode(unserialize($entry['8']));
+      $test_entry = json_encode(unserialize($entry['3']));
 
-      wp_die("TEST FIELDS {$test_fields} </br> TEST ENTRY {$test_entry}");
+      wp_die("TEST ENTRY {$test_entry}");
 
 			$field_mapping = self::aria_get_competition_entry_meta();
 			$competition_name = $entry[$field_mapping['Name of Competition']];
