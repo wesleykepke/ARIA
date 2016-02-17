@@ -274,77 +274,14 @@ class ARIA_Create_Competition {
   public static function aria_add_default_name_inputs($field) {
     $field->inputs = array(
       array(
-        "id"=>"{$field->id}.2",
-        "label"=>"Prefix",
-        "name"=>"",
-        "choices"=> array(
-          array(
-            "text"=>"Mr.",
-            "value"=>"Mr.",
-            "isSelected"=>false,
-            "price"=>""
-          ),
-          array(
-            "text"=>"Mrs.",
-            "value"=>"Mrs.",
-            "isSelected"=>false,
-            "price"=>""
-          ),
-          array(
-            "text"=>"Miss",
-            "value"=>"Miss",
-            "isSelected"=>false,
-            "price"=>""
-          ),
-          array(
-            "text"=>"Ms.",
-            "value"=>"Ms.",
-            "isSelected"=>false,
-            "price"=>""
-          ),
-          array(
-            "text"=>"Dr.",
-            "value"=>"Dr.",
-            "isSelected"=>false,
-            "price"=>""
-          ),
-          array(
-            "text"=>"Prof.",
-            "value"=>"Prof.",
-            "isSelected"=>false,
-            "price"=>""
-          ),
-          array(
-            "text"=>"Rev.",
-            "value"=>"Rev.",
-            "isSelected"=>false,
-            "price"=>""
-          )
-        ),
-        "isHidden"=>true,
-        "inputType"=>"radio"
-      ),
-      array(
         "id"=>"{$field->id}.3",
         "label"=>"First",
         "name"=>""
       ),
       array(
-        "id"=>"{$field->id}.4",
-        "label"=>"Middle",
-        "name"=>"",
-        "isHidden"=>true
-      ),
-      array(
         "id"=>"{$field->id}.6",
         "label"=>"Last",
         "name"=>""
-      ),
-      array(
-        "id"=>"{$field->id}.8",
-        "label"=>"Suffix",
-        "name"=>"",
-        "isHidden"=>true
       )
     );
   }
