@@ -16,4 +16,3 @@
 
 // competitions
 define("CREATE_COMPETITION_FORM_NAME", "ARIA: Create a Competition");
- 
