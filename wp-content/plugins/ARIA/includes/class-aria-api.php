@@ -15,14 +15,12 @@
  */
 
 // Make sure Gravity Forms is installed and enabled
-/*
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 if (!is_plugin_active('gravityforms/gravityforms.php')) {
   wp_die("Error: ARIA requires the Gravity Forms plugin to be installed
   and enabled. Please enable the Gravity Forms plugin and reactivate
   ARIA.");
 }
-*/
 
 class ARIA_API {
 
@@ -78,7 +76,7 @@ class ARIA_API {
 		if (!isset($upload_form_name_id)) {
 	    $upload_form_name_id = -1;
 			wp_die('Form ' . $upload_form_name . ' does not exist. Please create it and
-	    try again.'); 
+	    try again.');
 		}
 
 	 	return $upload_form_name_id;
