@@ -15,12 +15,14 @@
  */
 
 // Make sure Gravity Forms is installed and enabled
-include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 if (!is_plugin_active('gravityforms/gravityforms.php')) {
   wp_die("Error: ARIA requires the Gravity Forms plugin to be installed
   and enabled. Please enable the Gravity Forms plugin and reactivate
   ARIA.");
 }
+
+require_once("aria-constants.php");
 
 class ARIA_API {
 
@@ -35,22 +37,17 @@ class ARIA_API {
 	 * @author KREW
 	 */
 	public static function aria_get_create_competition_form_id() {
-	  $create_competition_form_name = 'ARIA: Create a Competition';
-	  $create_competition_form_id = NULL;
-	  $all_active_forms = GFAPI::get_forms();
+    $create_competition_form_id = -1;
+    $all_active_forms = GFAPI::get_forms();
 
-	  foreach ($all_active_forms as $form) {
-	    if ($form['title'] === $create_competition_form_name) {
+    foreach ($all_active_forms as $form) {
+      if ($form['title'] === CREATE_COMPETITION_FORM_NAME) {
 	      $create_competition_form_id = $form['id'];
-	    }
-	  }
+      }
+    }
 
-	  if (!isset($create_competition_form_id)) {
-	    $create_competition_form_id = -1;
-	  }
-
-	  return $create_competition_form_id;
-	}
+		return $create_competition_form_id;
+  }
 
 	/**
 	 * This function will find the ID of the form used to upload songs to the
