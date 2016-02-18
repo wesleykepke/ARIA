@@ -131,6 +131,15 @@ class ARIA {
 		// Register all of the hooks needed by ARIA
 
 		// Creating student and teacher forms
+
+		/*
+
+		!!!
+    like below, this might not work if aria_get_create_competition_form_id returns
+		a value of -1.
+    !!!
+
+		*/
 		$this->loader->add_action('gform_confirmation_' . strval(ARIA_API::aria_get_create_competition_form_id()),
 			'ARIA_Create_Competition', 'aria_create_teacher_and_student_forms', 10, 4);
 
@@ -141,9 +150,14 @@ class ARIA {
     // For before/after student and teacher registration
 		/*
     note: these values are hardcoded for now
+
+		can't do this here because we do not know the form ID of the student form
+		before the create competition functionality is invoked
 		*/
+		/*
 		$this->loader->add_action('gform_after_submission_292', 'ARIA_Form_Hooks',
       'aria_after_student_submission', 10, 2);
+		*/
 
 		// Modifying the upload path
 		$this->loader->add_filter('gform_upload_path', 'ARIA_Music', 'aria_modify_upload_path', 10, 2);
