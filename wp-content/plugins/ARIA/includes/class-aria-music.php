@@ -8,25 +8,21 @@
  *
  * @link       http://wesleykepke.github.io/ARIA/
  * @since      1.0.0
- *
- * @package    ARIA
- * @subpackage ARIA/includes
  */
 
 // Require the ARIA API
-require_once("class-aria-api.php");
+require_once 'class-aria-api.php';
 
 /**
  * The create competition class.
  *
  * @since      1.0.0
- * @package    ARIA
- * @subpackage ARIA/includes
+ *
  * @author     KREW
  */
-class ARIA_Music {
-
-  /**
+class ARIA_Music
+{
+    /**
    * This function will parse the contents of the csv file and upload content to
    * the NNMTA music database.
    *
@@ -38,36 +34,38 @@ class ARIA_Music {
    * @param Form Object   $form   The form object that contains $entry.
    *
    * @since 1.0.0
+   *
    * @author KREW
    */
-  public static function aria_add_music_from_csv($entry, $form) {
-    // check if the form for uploading exists
+  public static function aria_add_music_from_csv($entry, $form)
+  {
+      // check if the form for uploading exists
     $music_db_form_id = ARIA_API::aria_get_nnmta_database_form_id();
-    if ($music_db_form_id === -1) {
-      self::aria_create_nnmta_music_form();
-    }
+      if ($music_db_form_id === -1) {
+          self::aria_create_nnmta_music_form();
+      }
 
-    $num_song_elements_no_catalog = 5;
-    $num_song_elements_with_catalog = $num_song_elements_no_catalog + 1;
-		$num_songs = 0;
+      $num_song_elements_no_catalog = 5;
+      $num_song_elements_with_catalog = $num_song_elements_no_catalog + 1;
+      $num_songs = 0;
 
     // locate the full path of the csv file
     $csv_music_file = ARIA_API::aria_get_music_csv_file_path($entry, $form);
-		//wp_die("Music file path: " . $csv_music_file);
+        //wp_die("Music file path: " . $csv_music_file);
 
     // parse csv file and add all music data to an array
     $all_songs = array();
-    if (($file_ptr = fopen($csv_music_file, "r")) !== FALSE) {
-      // remove all data that is already in the database
+      if (($file_ptr = fopen($csv_music_file, 'r')) !== false) {
+          // remove all data that is already in the database
       //aria_remove_all_music_from_nnmta_database();
 
       // add new music
-      while (($single_song_data = fgetcsv($file_ptr, 1000, ",")) !== FALSE) {
-				$single_song = array();
-        for ($i = 1; $i <= count($single_song_data); $i++) {
-          $single_song[strval($i)] = $single_song_data[$i - 1];
-				}
-        $all_songs[] = $single_song;
+      while (($single_song_data = fgetcsv($file_ptr, 1000, ',')) !== false) {
+          $single_song = array();
+          for ($i = 1; $i <= count($single_song_data); ++$i) {
+              $single_song[strval($i)] = $single_song_data[$i - 1];
+          }
+          $all_songs[] = $single_song;
 
 /*
         // no catalog
@@ -94,82 +92,83 @@ class ARIA_Music {
         }
 */
       }
-    }
-		else {
-			wp_die("Error: File named " . $csv_music_file . " does not exist.");
-		}
+      } else {
+          wp_die('Error: File named '.$csv_music_file.' does not exist.');
+      }
 
     //wp_die(print_r($all_songs));
 
     // add all song data from array into the database
     $new_song_ids = GFAPI::add_entries($all_songs, ARIA_API::aria_get_nnmta_database_form_id());
-    if (is_wp_error($new_song_ids)) {
-      wp_die($new_song_ids->get_error_message());
-    }
+      if (is_wp_error($new_song_ids)) {
+          wp_die($new_song_ids->get_error_message());
+      }
 
     // remove filename from upload folder
     //print_r($all_songs);
     unlink($csv_music_file);
-    unset($all_songs);
+      unset($all_songs);
   }
 
-  /**
-   * This function is responsible for creating the NNMTA music form if it does
-   * not previously exist.
-   *
-   * This function is intended to be used in the event where the festival
-   * chairman tries to upload music to the NNMTA database but no such form
-   * exists for adding music.
-   *
-   * @author KREW
-   * @since 1.0.0
-   */
-   private static function aria_create_nnmta_music_form() {
-     $nnmta_music_form_name = "NNMTA Music Database";
-     $nnmta_music_form = new GF_Form($nnmta_music_form_name, "");
-     $field_id_arr = self::aria_music_field_id_array();
+   /**
+    * This function is responsible for creating the NNMTA music form if it does
+    * not previously exist.
+    *
+    * This function is intended to be used in the event where the festival
+    * chairman tries to upload music to the NNMTA database but no such form
+    * exists for adding music.
+    *
+    * @author KREW
+    *
+    * @since 1.0.0
+    */
+   private static function aria_create_nnmta_music_form()
+   {
+       $nnmta_music_form_name = 'NNMTA Music Database';
+       $nnmta_music_form = new GF_Form($nnmta_music_form_name, '');
+       $field_id_arr = self::aria_music_field_id_array();
 
      // NNMTA song name
      $song_name_field = new GF_Field_Text();
-     $song_name_field->label = "Song Name";
-     $song_name_field->id = $field_id_arr['song_name'];
-     $song_name_field->isRequired = true;
-     $nnmta_music_form->fields[] = $song_name_field;
+       $song_name_field->label = 'Song Name';
+       $song_name_field->id = $field_id_arr['song_name'];
+       $song_name_field->isRequired = true;
+       $nnmta_music_form->fields[] = $song_name_field;
 
      // NNMTA song composer
      $song_composer_field = new GF_Field_Text();
-     $song_composer_field->label = "Composer Name";
-     $song_composer_field->id = $field_id_arr['song_composer'];
-     $song_composer_field->isRequired = true;
-     $nnmta_music_form->fields[] = $song_composer_field;
+       $song_composer_field->label = 'Composer Name';
+       $song_composer_field->id = $field_id_arr['song_composer'];
+       $song_composer_field->isRequired = true;
+       $nnmta_music_form->fields[] = $song_composer_field;
 
      // NNMTA song level
      $song_level_field = new GF_Field_Text();
-     $song_level_field->label = "Song Level";
-     $song_level_field->id = $field_id_arr['song_level'];
-     $song_level_field->isRequired = true;
-     $nnmta_music_form->fields[] = $song_level_field;
+       $song_level_field->label = 'Song Level';
+       $song_level_field->id = $field_id_arr['song_level'];
+       $song_level_field->isRequired = true;
+       $nnmta_music_form->fields[] = $song_level_field;
 
      // NNMTA period level
      $song_period_field = new GF_Field_Text();
-     $song_period_field->label = "Song Period";
-     $song_period_field->id = $field_id_arr['song_period'];
-     $song_period_field->isRequired = true;
-     $nnmta_music_form->fields[] = $song_period_field;
+       $song_period_field->label = 'Song Period';
+       $song_period_field->id = $field_id_arr['song_period'];
+       $song_period_field->isRequired = true;
+       $nnmta_music_form->fields[] = $song_period_field;
 
      // NNMTA song catalog
-		 $song_catalog_field = new GF_Field_Text();
-     $song_catalog_field->label = "Song Catalog";
-     $song_catalog_field->id = $field_id_arr['song_catalog'];
-     $song_catalog_field->isRequired = false;
-     $nnmta_music_form->fields[] = $song_catalog_field;
+         $song_catalog_field = new GF_Field_Text();
+       $song_catalog_field->label = 'Song Catalog';
+       $song_catalog_field->id = $field_id_arr['song_catalog'];
+       $song_catalog_field->isRequired = false;
+       $nnmta_music_form->fields[] = $song_catalog_field;
 
      // add the new form to the festival chairman's dashboard
      $new_form_id = GFAPI::add_form($nnmta_music_form->createFormArray());
 
      // make sure the new form was added without error
      if (is_wp_error($new_form_id)) {
-       wp_die($new_form_id->get_error_message());
+         wp_die($new_form_id->get_error_message());
      }
    }
 
@@ -184,44 +183,51 @@ class ARIA_Music {
    * data.
    *
    * @since 1.0.0
+   *
    * @author KREW
    */
-  private static function aria_remove_all_music_from_nnmta_database() {
-    // to be implemented
+  private static function aria_remove_all_music_from_nnmta_database()
+  {
+      // to be implemented
   }
 
   /**
    * This function will change the default file path for uploaded files.
    *
    * In order to upload music from a file, we need to know where the music
-	 * file resides. This function will set a pre-determined file path so
-	 * the music data can be read from.
+   * file resides. This function will set a pre-determined file path so
+   * the music data can be read from.
    *
    * @since 1.0.0
+   *
    * @author KREW
    */
-  public static function aria_modify_upload_path($path_info, $form_id){
-  	$path_info['path'] = '/var/www/html/wp-content/uploads/testpath/';
-  	return $path_info;
+  public static function aria_modify_upload_path($path_info, $form_id)
+  {
+      $path_info['path'] = '/var/www/html/wp-content/uploads/testpath/';
+
+      return $path_info;
   }
 
-	/**
-   * This function will change the default file path for uploaded files.
-   *
-   * In order to upload music from a file, we need to know where the music
-	 * file resides. This function will set a pre-determined file path so
-	 * the music data can be read from.
-   *
-   * @since 1.0.0
-   * @author KREW
-   */
-	public static function aria_music_field_id_array() {
-		return array(
-			'song_name' => 4,
-			'song_composer' => 3,
-			'song_level' => 1,
-			'song_period' => 2,
-			'song_catalog' => 5
-		);
-	}
+    /**
+     * This function will change the default file path for uploaded files.
+     *
+     * In order to upload music from a file, we need to know where the music
+     * file resides. This function will set a pre-determined file path so
+     * the music data can be read from.
+     *
+     * @since 1.0.0
+     *
+     * @author KREW
+     */
+    public static function aria_music_field_id_array()
+    {
+        return array(
+            'song_name' => 4,
+            'song_composer' => 3,
+            'song_level' => 1,
+            'song_period' => 2,
+            'song_catalog' => 5,
+        );
+    }
 }

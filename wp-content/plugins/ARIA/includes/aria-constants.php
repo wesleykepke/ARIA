@@ -9,10 +9,7 @@
  *
  * @link       http://wesleykepke.github.io/ARIA/
  * @since      1.0.0
- *
- * @package    ARIA
- * @subpackage ARIA/includes
  */
 
 // competitions
-define("CREATE_COMPETITION_FORM_NAME", "ARIA: Create a Competition");
+define('CREATE_COMPETITION_FORM_NAME', 'ARIA: Create a Competition');
