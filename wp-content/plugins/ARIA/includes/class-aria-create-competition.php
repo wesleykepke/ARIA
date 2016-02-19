@@ -53,6 +53,10 @@ class ARIA_Create_Competition {
       add_action('gform_confirmation_' . strval($form_id),
 	      array('ARIA_Create_Competition', 'aria_create_teacher_and_student_forms'),
 	      10, 1);
+      wp_die('hook added');
+    }
+    else {
+      wp_die('hook has already been added');
     }
   }
 
