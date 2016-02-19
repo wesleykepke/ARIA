@@ -140,8 +140,11 @@ class ARIA {
     !!!
 
 		*/
+
+    /*
 		$this->loader->add_action('gform_confirmation_' . strval(ARIA_API::aria_get_create_competition_form_id()),
 			'ARIA_Create_Competition', 'aria_create_teacher_and_student_forms', 10, 4);
+    */
 
 		// Adding music upload/download functionality
 		$this->loader->add_action('gform_after_submission_' . strval(ARIA_API::aria_get_song_upload_form_id()),
