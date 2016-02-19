@@ -42,7 +42,7 @@ class ARIA_Create_Competition {
     // if the form for creating music competitions doesn't exist, create a new form
     $form_id = ARIA_API::aria_get_create_competition_form_id();
     if ($form_id === -1) {
-      self::aria_create_competition_form();
+      $form_id = self::aria_create_competition_form();
     }
 
     // add functionality to create new student and teacher forms once a new
@@ -245,6 +245,9 @@ class ARIA_Create_Competition {
     // make sure the new form was added without error
     if (is_wp_error($new_form_id)) {
       wp_die($new_form_id->get_error_message());
+    }
+    else {
+      return $new_form_id;
     }
   }
 
