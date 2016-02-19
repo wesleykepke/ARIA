@@ -44,6 +44,16 @@ class ARIA_Create_Competition {
     if ($form_id === -1) {
       self::aria_create_competition_form();
     }
+
+    // add functionality to create new student and teacher forms once a new
+    // competition is created
+    $hook = ('gform_confirmation_' . strval($form_id));
+    $function = 'aria_create_teacher_and_student_forms';
+    if (has_action($hook, $function) !== 1) { // 1 is the priority on this hook
+      add_action('gform_confirmation_' . strval($form_id),
+	      array('ARIA_Create_Competition', 'aria_create_teacher_and_student_forms'),
+	      10, 1);
+    }
   }
 
   /**
@@ -83,10 +93,9 @@ class ARIA_Create_Competition {
 			ARIA_Create_Master_Forms::aria_create_student_master_form($competition_name);
 			ARIA_Create_Master_Forms::aria_create_teacher_master_form($competition_name);
 
-      $confirmation = 'Congratulations! A new music competition has been created.';
-      $confirmation .= ' There are now two new forms for students and teacher to use';
-      $confirmation .= ' for registration. The name for each new form is prepended with';
-      $confirmation .= ' the name of the new music competition previously created.</br>';
+      $confirmation = 'Congratulations! A new music competition has been ';
+      $confirmation .= 'created. The following forms are now available for ';
+      $confirmation .= ' students and teachers to use for registration: </br>';
       $confirmation .= "<a href={$student_form_url}>{$competition_name} Student Registration</a>";
       $confirmation .= " was published. </br>";
       $confirmation .= "<a href={$teacher_form_url}> {$competition_name} Teacher Registration </a>";
