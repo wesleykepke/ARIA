@@ -64,8 +64,9 @@ class ARIA_Music {
       // add new music
       while (($single_song_data = fgetcsv($file_ptr, 1000, ",")) !== FALSE) {
 				$single_song = array();
-        for ($i = 1; $i <= count($single_song_data); $i++) {
-          $single_song[strval($i)] = $single_song_data[$i - 1];
+        for ($i = 1; $i <= 5; $i++){ //count($single_song_data); $i++) {
+          	
+		$single_song[strval($i)] = $single_song_data[$i - 1];
 				}
         $all_songs[] = $single_song;
 
