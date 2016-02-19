@@ -1,8 +1,8 @@
 <?php
 
 /**
- * The file that defines create master forms functionality. Master forms will
- * serve as the systems source of truth for each competition.
+ * The file that defines the functionality that should take place after
+ * particular forms are submitted by students and teachers.
  *
  * @link       http://wesleykepke.github.io/ARIA/
  * @since      1.0.0
@@ -32,11 +32,10 @@ class ARIA_Form_Hooks {
    *
    * This can be used as such:
    * add_action(
-   * 'gform_after_submission_x', 'aria_after_student_submission', 10, 2
-   * );
+   * 'gform_after_submission_x', 'aria_after_student_submission', 10, 2);
    *
-   * @param  $form   GF Forms Object   The form this function is attached to.
-   * @param  $entry   GF Entry Object  The entry that is returned after form submission.
+   * @param		$form		GF Forms Object		The form this function is attached to.
+   * @param		$entry	GF Entry Object		The entry that is returned after form submission.
    *
    * @since 1.0.0
    * @author KREW
