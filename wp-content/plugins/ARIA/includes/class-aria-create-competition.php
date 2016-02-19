@@ -49,7 +49,7 @@ class ARIA_Create_Competition {
     // competition is created
     $hook = ('gform_confirmation_' . strval($form_id));
     $function = 'aria_create_teacher_and_student_forms';
-    if (has_action($hook, $function) !== 1) { // 1 is the priority on this hook
+    if (!has_action($hook, $function)) { // 1 is the priority on this hook
       add_action('gform_confirmation_' . strval($form_id),
 	      array('ARIA_Create_Competition', 'aria_create_teacher_and_student_forms'),
 	      10, 1);
