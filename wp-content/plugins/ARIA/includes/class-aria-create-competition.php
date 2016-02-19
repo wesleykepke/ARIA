@@ -51,8 +51,7 @@ class ARIA_Create_Competition {
     $function = 'aria_create_teacher_and_student_forms';
     if (!has_action($hook)) { // 1 is the priority on this hook
       add_action($hook,
-	      array('ARIA_Create_Competition', 'aria_create_teacher_and_student_forms'),
-	      10, 1);
+	      array(&$this, 'aria_create_teacher_and_student_forms'), 10, 1);
       wp_die('added function named: ' . $function . " to " . $hook);
     }
     else {
