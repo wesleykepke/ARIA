@@ -51,14 +51,14 @@ class ARIA_Create_Competition {
     $function = 'aria_create_teacher_and_student_forms';
     if (!has_action($hook)) { // 1 is the priority on this hook
       $loader = new ARIA_Loader();
-      $loader->add_action('gform_confirmation_' . $form_id,
-	      'ARIA_Create_Competition', 'aria_create_teacher_and_student_forms', 10, 4);
+      $loader->add_action($hook,
+	      'ARIA_Create_Competition', $function, 10, 4);
       $loader->run();
 
       /*
       add_action($hook,
 	      array(&$this, 'aria_create_teacher_and_student_forms'), 10, 4); */
-      //wp_die('added function named: ' . $function . " to " . $hook);
+      wp_die('added function named: ' . $function . " to " . $hook);
     }
     else {
       wp_die('hook has already been added');
