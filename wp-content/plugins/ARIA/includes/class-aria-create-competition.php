@@ -50,10 +50,10 @@ class ARIA_Create_Competition {
     $hook = ('gform_confirmation_' . strval($form_id));
     $function = 'aria_create_teacher_and_student_forms';
     if (!has_action($hook)) { // 1 is the priority on this hook
-      add_action('gform_confirmation_' . strval($form_id),
+      add_action($hook,
 	      array('ARIA_Create_Competition', 'aria_create_teacher_and_student_forms'),
 	      10, 1);
-      //wp_die('hook added to: ' . $hook);
+      wp_die('added function named: ' . $function . " to " . $hook);
     }
     else {
       wp_die('hook has already been added');
