@@ -60,23 +60,16 @@ class ARIA_API {
 	 * @author KREW
 	 */
 	public static function aria_get_song_upload_form_id() {
-		$upload_form_name = 'Modify Song List';
-		$upload_form_name_id = NULL;
-		$all_active_forms = GFAPI::get_forms();
+    $upload_form_name_id = -1;
+    $all_active_forms = GFAPI::get_forms();
 
-		foreach ($all_active_forms as $form) {
-			if ($form['title'] === $upload_form_name) {
-				$upload_form_name_id = $form['id'];
-			}
-		}
+    foreach ($all_active_forms as $form) {
+      if ($form['title'] === MUSIC_UPLOAD_FORM_NAME) {
+        $upload_form_name_id = $form['id'];
+      }
+    }
 
-		if (!isset($upload_form_name_id)) {
-	    $upload_form_name_id = -1;
-			wp_die('Form ' . $upload_form_name . ' does not exist. Please create it and
-	    try again.');
-		}
-
-	 	return $upload_form_name_id;
+    return $upload_form_name_id;
 	}
 
 	/**
@@ -89,71 +82,59 @@ class ARIA_API {
 	 * @author KREW
 	 */
 	public static function aria_get_nnmta_database_form_id() {
-		$nnmta_music_database_form_name = 'NNMTA Music Database';
-		$nnmta_music_database_form_id = NULL;
-		$all_active_forms = GFAPI::get_forms();
+    $nnmta_music_database_form_id = -1;
+    $all_active_forms = GFAPI::get_forms();
 
-		foreach ($all_active_forms as $form) {
-			if ($form['title'] === $nnmta_music_database_form_name) {
-				$nnmta_music_database_form_id = $form['id'];
-			}
-		}
+    foreach ($all_active_forms as $form) {
+      if ($form['title'] === NNMTA_MUSIC_DATABASE_NAME) {
+        $nnmta_music_database_form_id = $form['id'];
+      }
+    }
 
-		if (!isset($nnmta_music_database_form_id)) {
-	    $nnmta_music_database_form_id = -1;
-			/*
-			wp_die('Form ' . $nnmta_music_database_form_name . ' does not exist.
-	    Please create it and try again.'); */
-		}
-
-		return $nnmta_music_database_form_id;
+    return $nnmta_music_database_form_id;
 	}
 
 	/**
-	 * This function will find the file path of the csv music file that the user has
-	 * uploaded.
+	 * This function will find the file path of the uploaded csv music file.
 	 *
-	 * This function will extract the name of the csv file that the user has
-	 * uploaded using the form that was specified in the
-	 * 'aria_get_song_upload_form_id' function. This csv file contains all of the
-	 * NNMTA music data. Finally, this function will return the file path so it can
-	 * be used in another function.
+	 * This function will extract the name of the csv file containing the music
+   * and return the file path so that it can be used in other functions.
 	 *
-	 * @param Entry Object  $entry  The entry object from the upload form.
-	 * @param Form Object   $form   The form object that contains $entry.
+	 * @param		Entry Object	$entry	The entry object from the upload form.
+	 * @param		Form Object		$form		The form object that contains $entry.
 	 *
 	 * @since 1.0.0
 	 * @author KREW
 	 */
 	public static function aria_get_music_csv_file_path($entry, $form) {
-		// find the field entry used to upload the csv file
-		$music_csv_field_name = 'CSV File';
-		$music_csv_field_id = NULL;
-		foreach ($form['fields'] as $field) {
-			if ($field['label'] === $music_csv_field_name) {
-				$music_csv_field_id = $field['id'];
-			}
-		}
+    // find the field entry used to upload the csv file
+    $music_csv_field_id = NULL;
+    foreach ($form['fields'] as $field) {
+      if ($field['label'] === CSV_UPLOAD_FIELD_NAME) {
+        $music_csv_field_id = $field['id'];
+      }
+    }
 
-		if (!isset($music_csv_field_id)) {
-			wp_die('Form named \'' . $form['title'] . '\' does not have a field named \''
-	                . $music_csv_field_name . '\'. Please create this field and try uploading
-	                music again.');
-		}
+    if (!isset($music_csv_field_id)) {
+      wp_die('Form named \'' . $form['title'] . '\' does not have a field named \''
+      . CSV_UPLOAD_FIELD_NAME . '\'. Please create this field and try uploading
+      music again.');
+    }
 
-		// parse the url and obtain the file path for the csv file
-		$csv_file_url = $entry[strval($music_csv_field_id)];
-		$csv_file_url_atomic_strings = explode('/', $csv_file_url);
-		$csv_full_file_path = '/var/www/html/wp-content/uploads/testpath/'; // this may need to change
-		$csv_full_file_path .= $csv_file_url_atomic_strings[count($csv_file_url_atomic_strings) - 1];
-		return $csv_full_file_path;
+    // parse the url and obtain the file path for the csv file
+    $csv_file_url = $entry[strval($music_csv_field_id)];
+    $csv_file_url_atomic_strings = explode('/', $csv_file_url);
+    $csv_full_file_path = '/var/www/html/wp-content/uploads/testpath/'; // this may need to change
+    $csv_full_file_path .= $csv_file_url_atomic_strings[count($csv_file_url_atomic_strings) - 1];
+    return $csv_full_file_path;
 	}
 
 	/**
 	 * This function will return the title of a form given its ID.
 	 *
 	 * This function will return the title of a form in the event where only
-	 * the form ID is known (gform_after_submission).
+	 * the form ID is known (gform_after_submission). If no such form exists for
+   * the given ID, the function will return -1.
 	 *
 	 * @param   $form_id   Integer   The id of the form to search form_id
 	 *
@@ -163,6 +144,7 @@ class ARIA_API {
 	public static function aria_find_form_title_from_id($form_id) {
     $all_forms = GFAPI::get_forms();
 		$title = null;
+
 		foreach ($all_forms as $form) {
       if ($form["id"] == $form_id) {
 				$title = $form["title"];
@@ -195,43 +177,39 @@ class ARIA_API {
 	 * @author KREW
 	 */
 	public static function aria_parse_form_name_for_title($form_name) {
-    $student = "Student Registration";
-    $student_master = "Student Master";
-    $teacher = "Teacher Registration";
-    $teacher_master = "Teacher Master";
     $found_match = false;
 
     // check if the title contains "Student Registration"
-		if (strpos($form_name, $student) !== false) {
+		if (strpos($form_name, STUDENT_REG) !== false) {
 			$found_match = true;
 		}
 
 		// check if the title contains "Student Master"
-		elseif (strpos($form_name, $student_master) !== false) {
+		elseif (strpos($form_name, STUDENT_MASTER) !== false) {
 			$found_match = true;
 		}
 
 		// check if the title contains "Teacher Registration"
-		elseif (strpos($form_name, $teacher) !== false) {
+		elseif (strpos($form_name, TEACHER_REG) !== false) {
 			$found_match = true;
 		}
 
 		// check if the title contains "Teacher Master"
-		elseif (strpos($form_name, $teacher_master) !== false) {
+		elseif (strpos($form_name, TEACHER_MASTER) !== false) {
 			$found_match = true;
 		}
 
     // check to see if there is a match
 		if ($found_match) {
-			$words = explode(' ', $form_name);
+			$form_words = explode(' ', $form_name);
 			$title = null;
 
 			// iterate through the complete name and strip away the important part
-			for ($i = 0; $i < (count($words) - 2); $i++) {
-			  $title .= $words[$i];
+			for ($i = 0; $i < (count($form_words) - 2); $i++) {
+			  $title .= $form_words[$i];
 
 				// don't add an extra space at the end of the last word
-				if (($i + 1) !== (count($words) - 2)) {
+				if (($i + 1) !== (count($form_words) - 2)) {
           $title .= ' ';
 				}
 			}
