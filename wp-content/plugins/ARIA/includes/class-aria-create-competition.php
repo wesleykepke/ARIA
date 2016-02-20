@@ -80,7 +80,6 @@ class ARIA_Create_Competition {
    * @author KREW
    */
   public static function aria_create_teacher_and_student_forms($confirmation, $form, $entry, $ajax) {
-    wp_die("I'm getting called.");
 
     // make sure the create competition form is calling this function
     $competition_creation_form_id = ARIA_API::aria_get_create_competition_form_id();
@@ -101,8 +100,36 @@ class ARIA_Create_Competition {
       $teacher_form_url = self::aria_publish_form("{$competition_name} Teacher Registration", $teacher_form_id);
 
 			// create the sutdent and teacher (master) forms
-			ARIA_Create_Master_Forms::aria_create_student_master_form($competition_name);
-			ARIA_Create_Master_Forms::aria_create_teacher_master_form($competition_name);
+			$student_master_form_id =
+      ARIA_Create_Master_Forms::aria_create_student_master_form($competition_name);
+			$teacher_master_form_id =
+      ARIA_Create_Master_Forms::aria_create_teacher_master_form($competition_name);
+
+      $related_forms = array(
+        'student_public_form_id' => $student_form_id,
+        'teacher_public_form_id' => $teacher_form_id,
+        'student_master_form_id' => $student_master_form_id,
+        'teacher_master_form_id' => $teacher_master_form_id,
+        'student_public_form_url' => $student_form_url,
+        'teacher_public_form_url' => $teacher_form_url
+      );
+
+      $student_public_form = GFAPI::get_form($student_form_id);
+      $teacher_public_form = GFAPI::get_form($teacher_form_id);
+      $student_master_form = GFAPI::get_form($student_master_form_id);
+      $teacher_master_form = GFAPI::get_form($teacher_master_form_id);
+
+      $student_public_form['aria_relations'] = $related_forms;
+      $teacher_public_form['aria_relations'] = $related_forms;
+      $student_master_form['aria_relations'] = $related_forms;
+      $teacher_master_form['aria_relations'] = $related_forms;
+
+      GFAPI::update_form($student_public_form);
+      GFAPI::update_form($teacher_public_form);
+      GFAPI::update_form($student_master_form);
+      GFAPI::update_form($teacher_master_form);
+
+      $teacher_public_form = GFAPI::get_form($teacher_form_id);
 
       $confirmation = 'Congratulations! A new music competition has been ';
       $confirmation .= 'created. The following forms are now available for ';
@@ -406,8 +433,8 @@ class ARIA_Create_Competition {
     // consult an aria developer before making changes to this portion of code.
     return array(
       'name' => 1,
-			'first_name' => 1.1,
-			'last_name' => 1.2,
+			'first_name' => 1.3,
+			'last_name' => 1.6,
       'email' => 2,
       'phone' => 3,
       'volunteer_preference' => 4,
@@ -742,8 +769,11 @@ class ARIA_Create_Competition {
     $competition_creation_form->confirmation['type'] = 'message';
     $competition_creation_form->confirmation['message'] = $successful_submission_message;
 
+    $teacher_form_array = $teacher_form->createFormArray();
+    $teacher_form_array['isTeacherPublicForm'] = true;
+
     // add the new form to the festival chairman's dashboard
-    $new_form_id = GFAPI::add_form($teacher_form->createFormArray());
+    $new_form_id = GFAPI::add_form($teacher_form_array);
 
     // make sure the new form was added without error
     if (is_wp_error($new_form_id)) {
@@ -774,8 +804,8 @@ class ARIA_Create_Competition {
 			'parent_last_name' => 1.2,
       'parent_email' => 2,
       'student_name' => 3,
-			'student_first_name' => 3.1,
-			'student_last_name' => 3.2,
+			'student_first_name' => 3.3,
+			'student_last_name' => 3.6,
       'student_birthday' => 4,
       'teacher_name' => 5,
       'not_listed_teacher_name' => 6,
@@ -828,7 +858,7 @@ class ARIA_Create_Competition {
     "Performance program.";
     $student_name_field->descriptionPlacement = 'above';
     $student_name_field->id = $field_id_array['student_name'];
-    $student_name_field->isRequired = false;
+    $student_name_field->isRequired = true;
     $student_name_field = self::aria_add_default_name_inputs($student_name_field);
     $student_form->fields[] = $student_name_field;
 
@@ -845,8 +875,12 @@ class ARIA_Create_Competition {
     $piano_teachers_field = new GF_Field_Select();
     $piano_teachers_field->label = "Piano Teacher's Name";
     $piano_teachers_field->id = $field_id_array['teacher_name'];
-    $piano_teachers_field->isRequired = false;
+    $piano_teachers_field->isRequired = true;
     $piano_teachers_field->description = "TBD";
+    $piano_teachers_field->choices = array(
+      array('text' => 'Test 1', 'value' => 'Tim', 'isSelected' => false),
+      array('text' => 'Test 2', 'value' => 'Jim', 'isSelected' => false)
+    );
     $student_form->fields[] = $piano_teachers_field;
 
     // student's piano teacher does not exist
@@ -919,8 +953,11 @@ class ARIA_Create_Competition {
     $student_form->confirmation['type'] = 'message';
     $student_form->confirmation['message'] = $successful_submission_message;
 
+    $student_form_arr = $student_form->createFormArray();
+    $student_form_arr['isStudentPublicForm'] = true;
+
     // add the new form to the festival chairman's dashboard
-    $new_form_id = GFAPI::add_form($student_form->createFormArray());
+    $new_form_id = GFAPI::add_form($student_form_arr);
 
     // make sure the new form was added without error
     if (is_wp_error($new_form_id)) {
