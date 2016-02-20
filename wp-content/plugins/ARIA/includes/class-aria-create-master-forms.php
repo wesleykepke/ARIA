@@ -203,11 +203,15 @@ class ARIA_Create_Master_Forms {
 
     // student's hash
     $student_hash_field = new GF_Field_Text();
+    $student_hash_field->label = "Hash ID";
     $student_hash_field->id = $field_id_array['hash'];
     $student_hash_field->isRequired = false;
     $student_master_form->fields[] = $student_hash_field;
 
-    return GFAPI::add_form($student_master_form->createFormArray());
+    $student_master_form_array = $student_master_form->createFormArray();
+    $student_master_form_array['isStudentMasterForm'] = true;
+
+    return GFAPI::add_form($student_master_form_array);
   }
 
 	/**
@@ -374,7 +378,10 @@ class ARIA_Create_Master_Forms {
     $teacher_hash_field->isRequired = false;
     $teacher_master_form->fields[] = $teacher_hash_field;
 
-    return GFAPI::add_form($teacher_master_form->createFormArray());
+    $teacher_master_form_array = $teacher_master_form->createFormArray();
+    $teacher_master_form_array['isTeacherMasterForm'] = true;
+
+    return GFAPI::add_form($teacher_master_form_array);
   }
 
 	/**
